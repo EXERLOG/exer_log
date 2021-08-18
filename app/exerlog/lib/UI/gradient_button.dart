@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'global.dart';
 
-class RaisedGradientButton extends StatelessWidget {
+class RaisedGradientButton extends StatefulWidget {
   final Widget child;
   final Gradient gradient;
   final double width;
@@ -9,7 +9,6 @@ class RaisedGradientButton extends StatelessWidget {
   final Function onPressed;
   final double radius;
   final double borderSize;
-
   const RaisedGradientButton({
     required this.child,
     required this.gradient,
@@ -20,6 +19,27 @@ class RaisedGradientButton extends StatelessWidget {
     required this.borderSize
   });
 
+  @override
+  _RaisedGradientButtonState createState() => _RaisedGradientButtonState(child: child, width: width, height: height, radius: radius, borderSize: borderSize, onPressed: onPressed, gradient: gradient);
+}
+
+class _RaisedGradientButtonState extends State<RaisedGradientButton> {
+  final Widget child;
+  final Gradient gradient;
+  final double width;
+  final double height;
+  final Function onPressed;
+  final double radius;
+  final double borderSize;
+  _RaisedGradientButtonState({
+    required this.child,
+    required this.gradient,
+    this.width = double.infinity,
+    this.height = 50.0,
+    required this.onPressed,
+    required this.radius,
+    required this.borderSize
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,7 +60,12 @@ class RaisedGradientButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-            onTap: onPressed(),
+            borderRadius: BorderRadius.circular(radius),
+            onTap: (){
+              setState(() {
+                onPressed();
+              });
+            },
             child: Center(
               child: child,
             )),

@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'gradient_button.dart';
 import 'global.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
+  const LoginForm({ Key? key }) : super(key: key);
+
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,8 +36,8 @@ class LoginForm extends StatelessWidget {
                     BoxShadow(
                         color: Color.fromRGBO(0, 0, 0, 0.2),
                         offset: Offset(0, 3),
-                        blurRadius: 5,
-                        spreadRadius: 5)
+                        blurRadius: 10,
+                        spreadRadius: 10)
                   ]),
             ),
             Positioned(
@@ -41,9 +48,9 @@ class LoginForm extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                 ), 
-                onPressed: (){
-                  print("Pressed!");
-                }
+                onPressed: () {
+                  print("Hello");
+                },
               ),
               right: 60,
               left: 60,
