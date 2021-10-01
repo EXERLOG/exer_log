@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "122654432640",
+    "project_id": "exerlog-2495b",
+    "storage_bucket": "exerlog-2495b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122654432640:android:284d3877200a42fb46f565",
+        "android_client_info": {
+          "package_name": "com.hallden.exerlog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122654432640-9nn32j0nsjoj4144ed8mqjrfjad7rlts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvFwhUdxsEG4iaaG_M4lCvfMRxlHf3Aw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122654432640-9nn32j0nsjoj4144ed8mqjrfjad7rlts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.exerlog">
+    package="com.hallden.exerlog">
    <application
         android:label="exerlog"
         android:icon="@mipmap/ic_launcher">

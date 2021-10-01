@@ -1,6 +1,6 @@
-import 'package:exerlog/UI/login_page.dart';
 import 'package:flutter/material.dart';
-import '/UI/login_page.dart';
+// import '/UI/login_page.dart';
+import 'UI/test.dart';
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginForm(),
+      home: LoginForm('0'),
       color: Colors.blue,
     );
   }

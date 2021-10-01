@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'global.dart';
 
 class RaisedGradientButton extends StatefulWidget {
-  final Widget child;
+  Widget child;
   final Gradient gradient;
   final double width;
   final double height;
   final Function onPressed;
   final double radius;
   final double borderSize;
-  const RaisedGradientButton({
+  RaisedGradientButton({
     required this.child,
     required this.gradient,
     this.width = double.infinity,
     this.height = 50.0,
     required this.onPressed,
     required this.radius,
-    required this.borderSize
+    required this.borderSize,
   });
 
   @override
@@ -24,13 +24,13 @@ class RaisedGradientButton extends StatefulWidget {
 }
 
 class _RaisedGradientButtonState extends State<RaisedGradientButton> {
-  final Widget child;
-  final Gradient gradient;
-  final double width;
-  final double height;
-  final Function onPressed;
-  final double radius;
-  final double borderSize;
+  Widget child;
+  Gradient gradient;
+  double width;
+  double height;
+  Function onPressed;
+  double radius;
+  double borderSize;
   _RaisedGradientButtonState({
     required this.child,
     required this.gradient,
@@ -40,6 +40,11 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
     required this.radius,
     required this.borderSize
   });
+  void changeChild(Widget newChild) {
+    setState(() {
+      child = newChild;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +57,6 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
           blurRadius: 5,
           spreadRadius: 5
         ),
-        
       ],
       borderRadius: BorderRadius.circular(radius),
       border: Border.all(width: borderSize, color: backgroundColor)
