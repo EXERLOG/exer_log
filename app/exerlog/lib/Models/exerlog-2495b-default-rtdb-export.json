@@ -1,0 +1,40 @@
+{
+  "maxes" : {
+    "kalle" : {
+      "bb bench press" : {
+        "10102021" : {
+          "reps" : 10,
+          "sets" : 1,
+          "weight" : 100
+        }
+      }
+    }
+  },
+  "users" : {
+    "kalle" : {
+      "exercises" : [ "bb bench press", "squat" ],
+      "height" : 130,
+      "name" : "Kalle",
+      "weight" : 80,
+      "workouts" : [ 10102021 ]
+    }
+  },
+  "workouts" : {
+    "kalle" : {
+      "10102021" : {
+        "exercises" : [ {
+          "name" : "bb bench press",
+          "sets" : [ {
+            "reps" : 10,
+            "rest" : 60,
+            "weight" : 100
+          } ]
+        } ],
+        "notes" : "none",
+        "rating" : "good",
+        "time" : 120,
+        "type" : "strength"
+      }
+    }
+  }
+}

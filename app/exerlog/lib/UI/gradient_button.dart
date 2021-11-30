@@ -1,3 +1,12 @@
+import 'package:exerlog/Bloc/exercise_bloc.dart';
+import 'package:exerlog/Bloc/max_bloc.dart';
+import 'package:exerlog/Bloc/user_bloc.dart';
+import 'package:exerlog/Bloc/workout_bloc.dart';
+import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/sets.dart';
+import 'package:exerlog/Models/user.dart';
+import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/main.dart';
 import 'package:flutter/material.dart';
 import 'global.dart';
 
@@ -66,6 +75,15 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
         child: InkWell(
             borderRadius: BorderRadius.circular(radius),
             onTap: (){
+              // Workout workout = Workout([], 'notes', 'good', 120, 'strength');
+              // Sets set1 = Sets(15, 120, 50, 1);
+              // Sets set2 = Sets(8, 120, 80, 1);
+              // Sets set3 = Sets(5, 120, 90, 1);
+              // Exercise exercise = Exercise("Deadlift", [set1, set2, set3]);
+              // checkMax(exercise);
+              // workout.exercises.add(exercise);
+              // saveWorkout(workout);
+              //createUser(UserClass("kallehallden", 178, 80, [], [], 27, "example@example.com", "Kalle", "Hallden", [], "metric", ''));
               setState(() {
                 onPressed();
               });

@@ -1,6 +1,8 @@
+import 'package:exerlog/UI/workout/workout_builder.dart';
 import 'package:flutter/material.dart';
 import 'gradient_button.dart';
 import 'global.dart';
+import 'maxes/max_builder.dart';
 
 class LoginForm extends StatefulWidget {
   LoginForm(this.title, {Key? key}) : super(key: key);
@@ -15,6 +17,14 @@ class _LoginFormState extends State<LoginForm> {
   List<Tab> tabs = <Tab>[
     Tab(child: Text("Login", style: loginOptionTextStyle,),),
     Tab(child: Text("Sign up", style: loginOptionTextStyle,)),
+  ];
+  int id = 0; 
+
+  List workoutList = [
+    "U4EwfqTt0X8evCK0PsoY",
+    "nT0sNrqFfUjNnK3h02ty",
+    "oQF0dF6VCcPCRrxlFLqj",
+    "ouEYVKFHFTR3PGsQVII0"
   ];
 
   @override
@@ -71,7 +81,8 @@ class _LoginFormState extends State<LoginForm> {
                               child: TabBarView(
                                 children: [
                                   Container(
-                                    color: Colors.black,
+                                    color: Colors.white,
+                                    child: MaxInformation(id: 'BB Bench Pres'),
                                   ),
                                   Container(
                                     color: Colors.red,
@@ -92,6 +103,13 @@ class _LoginFormState extends State<LoginForm> {
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                   ), 
                   onPressed: () {
+                    setState(() {
+                      if (id == workoutList.length -1) {
+                          id = 0;
+                        } else {
+                          id ++;
+                      }
+                    });
                     if (index > 0) {
                       print("Index is one");
                     }

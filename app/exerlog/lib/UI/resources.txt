@@ -1,0 +1,3 @@
+https://www.raywenderlich.com/7426050-firebase-tutorial-for-flutter-getting-started
+
+https://blog.codemagic.io/firebase-authentication-google-sign-in-using-flutter/
