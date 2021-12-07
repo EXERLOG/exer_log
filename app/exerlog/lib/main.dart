@@ -4,6 +4,7 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/UI/workout_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import '/UI/login_page.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: LoginForm('0'),
+            home: WorkoutPage(),//LoginForm('1'),
             color: Colors.blue,
           );
         }

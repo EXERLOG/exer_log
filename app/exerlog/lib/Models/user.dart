@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserClass {
   String username;
   double weight;
@@ -23,6 +25,7 @@ class UserClass {
       "lastname" : lastname,
       "email" : email,
       "system" : system,
+      "joined" : FieldValue.serverTimestamp()
       };
   }
 

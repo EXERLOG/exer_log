@@ -1,3 +1,7 @@
+import 'package:exerlog/Bloc/workout_bloc.dart';
+import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/sets.dart';
+import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/workout/workout_builder.dart';
 import 'package:flutter/material.dart';
 import 'gradient_button.dart';
@@ -82,7 +86,7 @@ class _LoginFormState extends State<LoginForm> {
                                 children: [
                                   Container(
                                     color: Colors.white,
-                                    child: MaxInformation(id: 'BB Bench Pres'),
+                                    child:  Text('Hello')//MaxInformation(id: 'BB Bench Pres'),
                                   ),
                                   Container(
                                     color: Colors.red,
@@ -103,6 +107,12 @@ class _LoginFormState extends State<LoginForm> {
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                   ), 
                   onPressed: () {
+                    Sets set1 = Sets(10, 120, 60, 1);
+                    Sets set2 = Sets(5, 120, 80, 1);
+                    Sets set3 = Sets(4, 120, 100, 1);
+                    Exercise exercise = new Exercise("BB Bench Press", [set1, set2, set3], ["chest"]);
+                    Workout workout = Workout([exercise], 'notes', 'good', 120, 'Strength', 'chest workout');
+                    saveWorkout(workout);
                     setState(() {
                       if (id == workoutList.length -1) {
                           id = 0;

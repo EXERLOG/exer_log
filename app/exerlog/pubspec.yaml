@@ -31,9 +31,10 @@ dependencies:
   firebase_core: ^1.7.0
   firebase_analytics: ^8.3.3
   firebase_auth: ^3.1.2
-  cloud_firestore: ^2.5.3
-  flutter_bloc: ^7.3.1
+  cloud_firestore: ^3.1.1
+  flutter_bloc: ^8.0.0
   firebase_database: "^8.0.0"
+  dropdown_search: ^2.0.1
 
 dev_dependencies:
   flutter_test:

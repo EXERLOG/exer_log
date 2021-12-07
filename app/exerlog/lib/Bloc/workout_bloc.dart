@@ -14,9 +14,11 @@ deleteWorkout() {}
 
 
 Future<Workout> getSpecificWorkout(String id) async {
-  final data = await FirebaseFirestore.instance.collection('users').doc(userID).collection('workouts').doc(id).get();
-  print(data['date']);
-  Workout workout = Workout(data['exercises'], data['notes'], data['rating'], data['time'], data['type']);
+   final data = FirebaseFirestore.instance.collection('users').doc(userID).collection('exercises').doc(id).withConverter<Workout>(
+      fromFirestore: (snapshot, _) => Workout.fromJson(snapshot.data()!),
+      toFirestore: (workout, _) => workout.toJson(),
+    );
+  Workout workout = await data.get().then((value) => value.data()!);
   return workout;
 }
   

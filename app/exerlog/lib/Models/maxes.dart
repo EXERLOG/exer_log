@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Max {
   String date;
   int reps;
@@ -9,7 +11,7 @@ class Max {
   Max( this.weight, this.reps, this.sets, this.date, this.exercise);
 
   Map<String, dynamic> toJson() {
-    return { "date": date, "reps": reps, "sets": sets, "weight": weight, "exercise": exercise };
+    return { "date": FieldValue.serverTimestamp(), "reps": reps, "sets": sets, "weight": weight, "exercise": exercise };
   }
 
   Max.fromJson(Map<String, Object?> max) :
