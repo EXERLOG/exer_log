@@ -79,8 +79,17 @@ class _WorkoutPageState extends State<WorkoutPage> {
                   radius: 30,
                   borderSize: 0,
                   onPressed: () {
-                    Sets sets = workoutData.workout.exercises[0].sets[0];
-                    if (sets.reps > 0) {
+                    for (Exercise exercise in workoutData.workout.exercises) {
+                      for (Sets sets in exercise.sets) {
+                        if (sets.reps == 0) {
+                          exercise.sets.remove(sets);
+                        }
+                      }
+                      if (exercise.sets.length == 0) {
+                        workoutData.workout.exercises.remove(exercise);
+                      }
+                    }
+                    if (workoutData.workout.exercises.length > 0) {
                       saveWorkout(workoutData.workout);
                       setState(() {
                         workoutData =
