@@ -11,19 +11,20 @@ import 'package:flutter/material.dart';
 
 class ExerciseCard extends StatefulWidget {
   final String name;
+  final Exercise exercise;
   Function(Exercise) addExercise;
+  Function(Exercise) updateExisitingExercise;
 
-  ExerciseCard({required this.name, required this.addExercise});
+  ExerciseCard({required this.name, required this.exercise, required this.addExercise, required this.updateExisitingExercise});
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
 
 }
 
 class _ExerciseCardState extends State<ExerciseCard> {
-  Exercise exercise = new Exercise('', [], []);
   int index = 0;
   List<SetWidget> setList = [];
-  double height = 150;
+  double height = 160;
   TotalsData totalData = new TotalsData([
     '0 sets',
     '0 reps',
@@ -34,8 +35,8 @@ class _ExerciseCardState extends State<ExerciseCard> {
 
   @override
   void initState() {
-    exercise.sets.add(new Sets(0, 0, 0, 0));
-    setList.add(new SetWidget(name: widget.name, exercise: exercise, addNewSet: addNewSet, id: 0));
+    widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+    setList.add(new SetWidget(name: widget.name, exercise: widget.exercise, addNewSet: addNewSet, id: 0));
     super.initState();
   }
 
@@ -68,14 +69,53 @@ class _ExerciseCardState extends State<ExerciseCard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(widget.name, style: smallTitleStyleWhite,),
+                            Text(widget.name, style: mediumTitleStyleWhite,),
                             totalWidget
                           ],
                         ),
                       ),
                       Divider(thickness: 1, color: Colors.white.withOpacity(0.2),),
                       Column(
-                        children: setList,
+                        children: [
+                          Container(
+                            height: 15,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 40,
+                                ),
+                                Container(
+                                  child: Center(
+                                    child: Text("Reps", style: smallTitleStyleWhite,),
+                                  ),
+                                  width: 60,
+                                ),
+                                Container(
+                                  child: Center(
+                                    child: Text("Sets", style: smallTitleStyleWhite,),
+                                  ),
+                                  width: 60,
+                                ),
+                                Container(
+                                  child: Center(
+                                    child: Text("Weight", style: smallTitleStyleWhite,),
+                                  ),
+                                  width: 60,
+                                ),
+                                Container(
+                                  child: Center(
+                                    child: Text("Rest", style: smallTitleStyleWhite,),
+                                  ),
+                                  width: 60,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: setList,
+                          )
+                        ],
                       )
                     ],
                   ),
@@ -100,9 +140,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
                           onPressed: () {
                             setState(() {
                               height += 40;
-                              setList.add(new SetWidget(name: widget.name, exercise: exercise, addNewSet: addNewSet, id: exercise.sets.length));
-                              exercise.sets.add(new Sets(0,0,0,0));
-                              widget.addExercise(exercise);
+                              setList.add(new SetWidget(name: widget.name, exercise: widget.exercise, addNewSet: addNewSet, id: widget.exercise.sets.length));
+                              widget.exercise.sets.add(new Sets(0,0,0,0));
+                              widget.addExercise(widget.exercise);
                             });
                           },
                       ),
@@ -115,8 +155,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
   }
 
   addNewSet(newSet, id) {
+    widget.updateExisitingExercise(widget.exercise);
     setState(() {
-      exercise.sets[id] = newSet;
+      widget.exercise.sets[id] = newSet;
       setTotals();
     });
   }
@@ -126,7 +167,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
     int totalSets = 0;
     int totalReps = 0;
     double totalKgs = 0;
-    for (Sets sets in exercise.sets) {
+    for (Sets sets in widget.exercise.sets) {
       totalSets += sets.sets;
       int reps = sets.sets > 0 ? sets.sets * sets.reps : sets.reps;
       totalReps += reps;

@@ -1,6 +1,7 @@
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/exercise_card.dart';
@@ -72,6 +73,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 borderSize: 0,
                 onPressed: () { 
                   saveWorkout(workoutData.workout);
+                  setState(() {
+                    workoutData = new WorkoutData(new Workout([], '','',0, '', ''));
+                  });
                  },
                 child: Container(
                   height: 50,
@@ -136,9 +140,17 @@ class WorkoutData {
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
     for (Exercise exercise in workout.exercises) {
-      exerciseWidgets.add(new ExerciseCard(name: exercise.name, addExercise: addExercise)); 
+      exerciseWidgets.add(new ExerciseCard(name: exercise.name, exercise: exercise, addExercise: addExercise, updateExisitingExercise: updateExisitingExercise)); 
     }
     return exerciseWidgets;
+  }
+
+  updateExisitingExercise(exercise) {
+    for (Exercise oldexercise in workout.exercises) {
+      if (oldexercise.name == exercise.name) {
+        oldexercise = exercise;
+      }
+    }
   }
 
   addExercise(exercise) {
