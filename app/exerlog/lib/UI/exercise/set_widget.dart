@@ -117,6 +117,9 @@ class _SetWidgetState extends State<SetWidget> {
           sets.sets = getInfo(setsController.text, 0);
           sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
+          if (sets.sets == 0.0) {
+            sets.sets = 1;
+          }
           widget.addNewSet(sets, widget.id);
       },
       onEditingComplete: () {
@@ -124,6 +127,9 @@ class _SetWidgetState extends State<SetWidget> {
           sets.sets = getInfo(setsController.text, 0);
           sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
+          if (sets.sets == 0.0) {
+            sets.sets = 1;
+          }
           widget.addNewSet(sets, widget.id);
       },
     );

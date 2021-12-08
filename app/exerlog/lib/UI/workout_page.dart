@@ -71,11 +71,14 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 ),
                 radius: 30,
                 borderSize: 0,
-                onPressed: () { 
-                  saveWorkout(workoutData.workout);
-                  setState(() {
-                    workoutData = new WorkoutData(new Workout([], '','',0, '', ''));
-                  });
+                onPressed: () {
+                  Sets sets = workoutData.workout.exercises[0].sets[0];
+                  if (sets.reps > 0) {
+                    saveWorkout(workoutData.workout);
+                    setState(() {
+                      workoutData = new WorkoutData(new Workout([], '','',0, '', ''));
+                    });
+                  } 
                  },
                 child: Container(
                   height: 50,
