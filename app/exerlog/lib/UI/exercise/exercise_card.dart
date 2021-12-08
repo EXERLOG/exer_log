@@ -126,18 +126,17 @@ class _ExerciseCardState extends State<ExerciseCard> {
     int totalSets = 0;
     int totalReps = 0;
     double totalKgs = 0;
-    print("Length: " + exercise.sets.length.toString());
     for (Sets sets in exercise.sets) {
       totalSets += sets.sets;
       int reps = sets.sets > 0 ? sets.sets * sets.reps : sets.reps;
       totalReps += reps;
       totalKgs += reps * sets.weight;
     }
-    double avgKgs = totalKgs/totalReps;
+    double avgKgs = (totalKgs/totalReps).roundToDouble();
     returnTotals[0] = totalSets.toString() + " sets";
     returnTotals[1] = totalReps.toString() + " reps";
     returnTotals[2] = totalKgs.toString() + " kgs";
-    returnTotals[3] = avgKgs.toInt().toString() + " kg/rep";
+    returnTotals[3] = avgKgs.toString() + " kg/rep";
     setState(() {
       totalData = new TotalsData(returnTotals);
       totalWidget = new TotalsWidget(totalData, index);

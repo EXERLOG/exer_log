@@ -17,13 +17,16 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
-  Workout workout = new Workout([], '', '', 0, '', '');
-  List<Widget> exerciseWidgets = [];
-  Exercise exercise = new Exercise('', [], []);
+  WorkoutData workoutData = new WorkoutData(new Workout([], '', '', 0, '', ''));
+  String exerciseName = '';
+
 
   @override
   Widget build(BuildContext context) {
-    exerciseWidgets = exerciseWidgets;
+    for (Exercise exercise in workoutData.workout.exercises) {
+      print("Name " + exercise.name);
+    }
+    workoutData = new WorkoutData(workoutData.workout);
     return Material(
       child: Container(
         color: backgroundColor,
@@ -34,7 +37,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
             Container(
               height: 500,
               child: ListView(
-                children: exerciseWidgets,
+                children: workoutData.exerciseWidgets,
               ),
             ),
             Container(
@@ -48,7 +51,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 borderSize: 3,
                 onPressed: () { 
                   // create new exercise
-                  print("Length: " + exerciseWidgets.length.toString());
                   showAlertDialog(context);
                  },
                 child: Container(
@@ -69,7 +71,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 radius: 30,
                 borderSize: 0,
                 onPressed: () { 
-                  saveWorkout(workout);
+                  saveWorkout(workoutData.workout);
                  },
                 child: Container(
                   height: 50,
@@ -84,18 +86,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
-  addExercise(exercise) {
-    for (Exercise existingExercise in workout.exercises) {
-      if (existingExercise.name == exercise.name) {
-        existingExercise  = exercise;
-        return;
-      }
-    }
-    workout.exercises.add(exercise);
-  }
-
   setExercisename(name) {
-    exercise = new Exercise(name, [], []);
+    exerciseName = name;
   }
 
   showAlertDialog(BuildContext context) {
@@ -103,10 +95,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
     Widget okButton = TextButton(
       child: Text("add"),
       onPressed: () {
-        if (exercise.name != '') {
+        if (exerciseName != '') {
           setState(() {
-            workout.exercises.add(exercise);
-            exerciseWidgets.add(new ExerciseCard(name: exercise.name, addExercise: addExercise));
+            workoutData.addExercise(new Exercise(exerciseName, [], []));
+            workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
         }
@@ -116,7 +108,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Add new exercise"),
-      content: ExerciseNameSelectionWidget(exercise: exercise, setExercisename: setExercisename),
+      content: ExerciseNameSelectionWidget(setExercisename: setExercisename),
       actions: [
         okButton,
       ],
@@ -129,5 +121,35 @@ class _WorkoutPageState extends State<WorkoutPage> {
         return alert;
       },
     );
+  }
+}
+
+class WorkoutData {
+  Workout workout;
+  List<ExerciseCard> exerciseWidgets = [];
+
+  WorkoutData(this.workout) {
+    workout = this.workout;
+    setExerciseWidgets();
+  }
+
+  List<ExerciseCard> setExerciseWidgets() {
+    exerciseWidgets = [];
+    for (Exercise exercise in workout.exercises) {
+      exerciseWidgets.add(new ExerciseCard(name: exercise.name, addExercise: addExercise)); 
+    }
+    return exerciseWidgets;
+  }
+
+  addExercise(exercise) {
+    for (Exercise existingExercise in workout.exercises) {
+      if (existingExercise.name == exercise.name) {
+        existingExercise = exercise;
+        return;
+      }
+    }
+    if (exercise.name != '') {
+      workout.exercises.add(exercise);
+    }
   }
 }

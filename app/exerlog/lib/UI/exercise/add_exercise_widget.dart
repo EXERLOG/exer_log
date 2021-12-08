@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class ExerciseNameSelectionWidget extends StatefulWidget {
-  Exercise exercise;
   Function(String) setExercisename;
 
-  ExerciseNameSelectionWidget({required this.setExercisename, required this.exercise,}) {
-    exercise = this.exercise;
+  ExerciseNameSelectionWidget({required this.setExercisename,}) {
     setExercisename = this.setExercisename;
   }
   @override

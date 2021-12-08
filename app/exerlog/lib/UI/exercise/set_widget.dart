@@ -45,10 +45,24 @@ class _SetWidgetState extends State<SetWidget> {
           if (snapshot.hasError) {
             print(snapshot.error);
             return Center(
-              child: Text("Error"),
+              child: getSetWidget(snapshot),
+            );
+          }
+          if (!snapshot.hasData) {
+            print("No data");
+            return Center(
+              child: getSetWidget(snapshot),
             );
           } else {
-            return Container(
+            return getSetWidget(snapshot);
+          }
+        }
+      },
+    );
+  }
+
+  Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
+    return Container(
               height: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,10 +90,6 @@ class _SetWidgetState extends State<SetWidget> {
                 ],
               ),
             );
-          }
-        }
-      },
-    );
   }
 
   TextField getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
