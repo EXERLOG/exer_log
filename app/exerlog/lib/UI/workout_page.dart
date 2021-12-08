@@ -21,7 +21,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
   WorkoutData workoutData = new WorkoutData(new Workout([], '', '', 0, '', ''));
   String exerciseName = '';
 
-
   @override
   Widget build(BuildContext context) {
     for (Exercise exercise in workoutData.workout.exercises) {
@@ -29,65 +28,79 @@ class _WorkoutPageState extends State<WorkoutPage> {
     }
     workoutData = new WorkoutData(workoutData.workout);
     return Material(
-      child: Container(
-        color: backgroundColor,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(),
-            Container(
-              height: 500,
-              child: ListView(
-                children: workoutData.exerciseWidgets,
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 350,
-              child: GradientBorderButton(
-                gradient: LinearGradient(
-                  colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                ),
-                radius: 30,
-                borderSize: 3,
-                onPressed: () { 
-                  // create new exercise
-                  showAlertDialog(context);
-                 },
-                child: Container(
-                  height: 50,
-                  width: 200,
-                  child: Center(child: Text("Add New Exercise", style: greenButtonTextThin,)),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: Container(
+          color: backgroundColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(),
+              Container(
+                height: 500,
+                child: ListView(
+                  children: workoutData.exerciseWidgets,
                 ),
               ),
-            ),
-            Container(
-              height: 40,
-              width: 350,
-              margin: EdgeInsets.only(bottom: 30),
-              child: RaisedGradientButton(
-                gradient: LinearGradient(
-                  colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                ),
-                radius: 30,
-                borderSize: 0,
-                onPressed: () {
-                  Sets sets = workoutData.workout.exercises[0].sets[0];
-                  if (sets.reps > 0) {
-                    saveWorkout(workoutData.workout);
-                    setState(() {
-                      workoutData = new WorkoutData(new Workout([], '','',0, '', ''));
-                    });
-                  } 
-                 },
-                child: Container(
-                  height: 50,
-                  width: 200,
-                  child: Center(child: Text("Save", style: buttonText,)),
+              Container(
+                height: 50,
+                width: 350,
+                child: GradientBorderButton(
+                  gradient: LinearGradient(
+                    colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+                  ),
+                  radius: 30,
+                  borderSize: 3,
+                  onPressed: () {
+                    // create new exercise
+                    showAlertDialog(context);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 200,
+                    child: Center(
+                        child: Text(
+                      "Add New Exercise",
+                      style: greenButtonTextThin,
+                    )),
+                  ),
                 ),
               ),
-            )
-          ],
+              Container(
+                height: 40,
+                width: 350,
+                margin: EdgeInsets.only(bottom: 30),
+                child: RaisedGradientButton(
+                  gradient: LinearGradient(
+                    colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+                  ),
+                  radius: 30,
+                  borderSize: 0,
+                  onPressed: () {
+                    Sets sets = workoutData.workout.exercises[0].sets[0];
+                    if (sets.reps > 0) {
+                      saveWorkout(workoutData.workout);
+                      setState(() {
+                        workoutData =
+                            new WorkoutData(new Workout([], '', '', 0, '', ''));
+                      });
+                    }
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 200,
+                    child: Center(
+                        child: Text(
+                      "Save",
+                      style: buttonText,
+                    )),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -143,7 +156,11 @@ class WorkoutData {
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
     for (Exercise exercise in workout.exercises) {
-      exerciseWidgets.add(new ExerciseCard(name: exercise.name, exercise: exercise, addExercise: addExercise, updateExisitingExercise: updateExisitingExercise)); 
+      exerciseWidgets.add(new ExerciseCard(
+          name: exercise.name,
+          exercise: exercise,
+          addExercise: addExercise,
+          updateExisitingExercise: updateExisitingExercise));
     }
     return exerciseWidgets;
   }

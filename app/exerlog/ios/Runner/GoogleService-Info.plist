@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>122654432640-tnmhp7ieu057vgivbs0c6lgh6timqarl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.122654432640-tnmhp7ieu057vgivbs0c6lgh6timqarl</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBme3leEU5l0tmJCR_Hz9eFHld-CqsnJdw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>122654432640</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hallden.exerlog</string>
+	<key>PROJECT_ID</key>
+	<string>exerlog-2495b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>exerlog-2495b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:122654432640:ios:474e27adc6173b5d46f565</string>
+	<key>DATABASE_URL</key>
+	<string>https://exerlog-2495b-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
