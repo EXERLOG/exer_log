@@ -206,9 +206,6 @@ class WorkoutData {
       }
     totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
     }
-    print("UPDATE!");
-    print(totals.sets);
-    print(exercise.sets[0].sets);
     updateTotals();
   }
 

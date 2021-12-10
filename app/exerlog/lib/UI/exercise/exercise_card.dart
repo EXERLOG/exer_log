@@ -89,7 +89,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: screenWidth*0.09,
+                          width: screenWidth*0.08,
                         ),
                         Container(
                           child: Center(
@@ -126,6 +126,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
                             ),
                           ),
                           width: screenWidth*0.15,
+                        ),
+                        Container(
+                          width: screenWidth*0.1,
                         ),
                       ],
                     ),

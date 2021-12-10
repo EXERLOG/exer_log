@@ -24,6 +24,7 @@ class SetWidget extends StatefulWidget {
 }
 
 class _SetWidgetState extends State<SetWidget> {
+  double percent = 0.0;
   Sets sets = new Sets(0, 0, 0, 0);
   TextEditingController setsController = new TextEditingController();
   TextEditingController repsController = new TextEditingController();
@@ -72,24 +73,32 @@ class _SetWidgetState extends State<SetWidget> {
               "#" + (widget.id + 1).toString(),
               style: setStyle,
             )),
-            width: screenWidth * 0.09,
+            width: screenWidth * 0.08,
           ),
           Container(
             child: getTextField(0, snapshot),
-            width: screenWidth * 0.15,
+            width: screenWidth * 0.145,
           ),
           Container(
             child: getTextField(1, snapshot),
-            width: screenWidth * 0.15,
+            width: screenWidth * 0.145,
           ),
           Container(
             child: getTextField(2, snapshot),
-            width: screenWidth * 0.15,
+            width: screenWidth * 0.145,
           ),
           Container(
             child: getTextField(3, snapshot),
-            width: screenWidth * 0.15,
-          )
+            width: screenWidth * 0.145,
+          ),
+          Container(
+            child: Center(
+                child: Text(
+               (percent * 100).round().toString() + "%",
+              style: setStyle,
+            )),
+            width: screenWidth * 0.11,
+          ),
         ],
       ),
     );
@@ -129,12 +138,17 @@ class _SetWidgetState extends State<SetWidget> {
             });
           });
         }
-          // sets.weight = getInfo(weightController.text, 1);
+          sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
           if (sets.sets == 0.0) {
             sets.sets = 1;
           }
           widget.addNewSet(sets, widget.id);
+          setPercentageOfMax(sets.weight).then((value) {
+            setState(() {
+              percent = value;
+            });
+          });
       },
       onEditingComplete: () {
         sets.reps = getInfo(repsController.text, 0);
@@ -164,6 +178,21 @@ class _SetWidgetState extends State<SetWidget> {
       }
     }
   }
+  Future<double> setPercentageOfMax(double weight) async {
+    print("UPDATING");
+    var result = await getSpecificMax(widget.name, 1);
+    if (result.length < 1) {
+      print("Hello");
+      double count = 0;
+      while (result.length < 1 || count > 20) {
+        result = await getSpecificMax(widget.name, count);
+        count++;
+      }
+      return (weight / (result[0].weight / maxTable[(count - 1).toInt()]));
+    }
+    return (weight / result[0].weight)
+        .roundToDouble();
+  }
 
   Future<double> getWeightFromMax(String percentage) async {
     var result = await getSpecificMax(widget.name, 1);
@@ -173,7 +202,7 @@ class _SetWidgetState extends State<SetWidget> {
         result = await getSpecificMax(widget.name, count);
         count++;
       }
-      return (result[0].weight * maxTable[(count - 1).toInt()]).roundToDouble();
+      return (result[0].weight / maxTable[(count - 1).toInt()]).roundToDouble();
     }
     print(result);
     return (result[0].weight * (double.parse(percentage) / 100))
