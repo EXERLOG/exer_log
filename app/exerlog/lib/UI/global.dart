@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// height and width of screen
+double screenHeight = 0.0;
+double screenWidth = 0.0;
+
 // colors
 Color backgroundColor = Color(0xFF2D2B41);
 Color textColorLoginForm = Color(0xFFACACB4);

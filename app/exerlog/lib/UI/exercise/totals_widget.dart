@@ -3,24 +3,24 @@ import 'package:exerlog/UI/gradient_button.dart';
 import 'package:exerlog/UI/gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 
-class TotalsWidget extends StatefulWidget {
+class ExerciseTotalsWidget extends StatefulWidget {
   TotalsData totals;
   int index;
 
-  TotalsWidget(this.totals, this.index) {
+  ExerciseTotalsWidget(this.totals, this.index) {
     totals = this.totals;
     index = this.index;
   }
   @override
-  _TotalsWidgetState createState() => _TotalsWidgetState();
+  _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();
 }
 
-class _TotalsWidgetState extends State<TotalsWidget> {
+class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35,
-      width: 150,
+      height: screenHeight*0.04,
+      width: screenWidth*0.3,
       child: RaisedGradientButton(
           child: Text(
             widget.totals.total[widget.index],

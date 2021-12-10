@@ -7,6 +7,7 @@ import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/workout_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'UI/global.dart';
 // import '/UI/login_page.dart';
 import 'Models/user.dart';
 import 'UI/test.dart';
@@ -18,8 +19,7 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-
+class MyApp extends StatelessWidget { 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   // This widget is the root of your application.
   @override

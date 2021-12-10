@@ -27,10 +27,10 @@ class ExerciseCard extends StatefulWidget {
 class _ExerciseCardState extends State<ExerciseCard> {
   int index = 0;
   List<SetWidget> setList = [];
-  double height = 180;
+  double height = screenHeight*0.23;
   TotalsData totalData =
       new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
-  late TotalsWidget totalWidget;
+  late ExerciseTotalsWidget totalWidget;
 
   @override
   void initState() {
@@ -45,9 +45,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
 
   @override
   Widget build(BuildContext context) {
-    totalWidget = new TotalsWidget(totalData, index);
+    totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
-      height: height + 40,
+      height: height + screenHeight*0.05,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -84,12 +84,12 @@ class _ExerciseCardState extends State<ExerciseCard> {
               Column(
                 children: [
                   Container(
-                    height: 20,
+                    height: screenHeight*0.04,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: 40,
+                          width: screenWidth*0.09,
                         ),
                         Container(
                           child: Center(
@@ -98,7 +98,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: 60,
+                          width: screenWidth*0.15,
                         ),
                         Container(
                           child: Center(
@@ -107,7 +107,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: 60,
+                          width: screenWidth*0.15,
                         ),
                         Container(
                           child: Center(
@@ -116,7 +116,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: 60,
+                          width: screenWidth*0.15,
                         ),
                         Container(
                           child: Center(
@@ -125,7 +125,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: 60,
+                          width: screenWidth*0.15,
                         ),
                       ],
                     ),
@@ -139,11 +139,11 @@ class _ExerciseCardState extends State<ExerciseCard> {
           ),
         ),
         Positioned(
-          right: 170,
-          left: 170,
+          right: screenWidth*0.43,
+          left: screenWidth*0.43,
           top: height - 15,
           child: Container(
-            height: 50,
+            height: screenHeight*0.07,
             child: DecoratedBox(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -160,7 +160,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                 ),
                 onPressed: () {
                   setState(() {
-                    height += 40;
+                    height += screenHeight*0.05;
                     setList.add(new SetWidget(
                         name: widget.name,
                         exercise: widget.exercise,
@@ -179,9 +179,9 @@ class _ExerciseCardState extends State<ExerciseCard> {
   }
 
   addNewSet(newSet, id) {
-    widget.updateExisitingExercise(widget.exercise);
     setState(() {
       widget.exercise.sets[id] = newSet;
+      widget.updateExisitingExercise(widget.exercise);
       setTotals();
     });
   }
@@ -204,7 +204,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
     returnTotals[3] = avgKgs.toString() + " kg/rep";
     setState(() {
       totalData = new TotalsData(returnTotals);
-      totalWidget = new TotalsWidget(totalData, index);
+      totalWidget = new ExerciseTotalsWidget(totalData, index);
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/UI/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -31,18 +32,48 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
             );
           } else {
             return Center(
-              child: Autocomplete<String>(
-                onSelected: (value) {
-                  widget.setExercisename(value);
-                },
-                optionsBuilder: (TextEditingValue textEditingValue) 
-                { 
-                    widget.setExercisename(textEditingValue.text);
-                  return snapshot.data!.where((String name) => name.toLowerCase()
-                  .startsWith(textEditingValue.text.toLowerCase())
-                  );
-                 },
+              child: Theme(
+                data: ThemeData(
+                  // backgroundColor: backgroundColor,
+                  // cardColor: backgroundColor,
+                  // focusColor: backgroundColor,
+                  // highlightColor: backgroundColor,
+                  // hoverColor: backgroundColor,
+                  // selectedRowColor: backgroundColor,
+                  // dialogBackgroundColor: backgroundColor,
+                  inputDecorationTheme: new InputDecorationTheme(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: greenTextColor),
+                      //  when the TextFormField in unfocused 
+                    ) ,
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: greenTextColor),
+                      //  when the TextFormField in focused 
+                    ) ,
+                    border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: greenTextColor)
+                    )
+                  ),
+                  textTheme: TextTheme(
+                    subtitle1: setStyle,
+                  ) 
                 ),
+                child: Container(
+                  child: Autocomplete<String>(
+                    optionsMaxHeight: 100,
+                    onSelected: (value) {
+                      widget.setExercisename(value);
+                    },
+                    optionsBuilder: (TextEditingValue textEditingValue) 
+                    { 
+                        widget.setExercisename(textEditingValue.text);
+                      return snapshot.data!.where((String name) => name.toLowerCase()
+                      .startsWith(textEditingValue.text.toLowerCase())
+                      );
+                     },
+                    ),
+                ),
+              ),
             );
           }
         }

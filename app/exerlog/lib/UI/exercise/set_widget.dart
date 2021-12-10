@@ -63,29 +63,29 @@ class _SetWidgetState extends State<SetWidget> {
 
   Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
     return Container(
-              height: 40,
+              height: screenHeight*0.05,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     child: Center(child: Text("#" + (widget.id +1).toString(), style: setStyle,)),
-                    width: 40,
+                    width: screenWidth*0.09,
                   ),
                   Container(
                     child: getTextField(0, snapshot),
-                    width: 60,
+                    width: screenWidth*0.15,
                   ),
                   Container(
                     child: getTextField(1, snapshot),
-                    width: 60,
+                    width: screenWidth*0.15,
                   ),
                   Container(
                     child: getTextField(2, snapshot),
-                    width: 60,
+                    width: screenWidth*0.15,
                   ),
                   Container(
                     child: getTextField(3, snapshot),
-                    width: 60,
+                    width: screenWidth*0.15,
                   )
                 ],
               ),
