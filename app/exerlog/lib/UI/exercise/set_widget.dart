@@ -7,6 +7,7 @@ import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SetWidget extends StatefulWidget {
   final String name;
@@ -24,7 +25,9 @@ class SetWidget extends StatefulWidget {
 }
 
 class _SetWidgetState extends State<SetWidget> {
-  double percent = 0.0;
+  late ValueNotifier<String> percentage;
+  int percent = 0;
+  double oneRepMax = 0.0;
   Sets sets = new Sets(0, 0, 0, 0);
   TextEditingController setsController = new TextEditingController();
   TextEditingController repsController = new TextEditingController();
@@ -32,6 +35,19 @@ class _SetWidgetState extends State<SetWidget> {
   TextEditingController restController = new TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest'];
   List setList = [0, 0, 0.0, 0.0];
+
+  @override
+  void initState() {
+    percentage = ValueNotifier<String>('0%');
+    getOneRepMax().then((value) {
+      setState(() {
+        oneRepMax = value;
+      });
+    });
+    //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Exercise>(
@@ -91,14 +107,16 @@ class _SetWidgetState extends State<SetWidget> {
             child: getTextField(3, snapshot),
             width: screenWidth * 0.145,
           ),
+          ValueListenableBuilder(valueListenable: percentage, builder: (context, value, child) => 
           Container(
             child: Center(
                 child: Text(
-               (percent * 100).round().toString() + "%",
+               value.toString(),
               style: setStyle,
             )),
             width: screenWidth * 0.11,
           ),
+      )
         ],
       ),
     );
@@ -135,6 +153,7 @@ class _SetWidgetState extends State<SetWidget> {
             setState(() {
               sets.weight = result;
               weightController.text = result.toString();
+              percentage.value = ((sets.weight / oneRepMax)*100).round().toString() + '%';
             });
           });
         }
@@ -144,22 +163,19 @@ class _SetWidgetState extends State<SetWidget> {
             sets.sets = 1;
           }
           widget.addNewSet(sets, widget.id);
-          setPercentageOfMax(sets.weight).then((value) {
-            setState(() {
-              percent = value;
-            });
-          });
+          percentage.value = ((sets.weight / oneRepMax) * 100).toInt().toString() + '%' ;
+          //percent = (sets.weight / oneRepMax).round();
       },
       onEditingComplete: () {
-        sets.reps = getInfo(repsController.text, 0);
-        sets.sets = getInfo(setsController.text, 0);
-        sets.weight = getInfo(weightController.text, 1);
-        sets.rest = getInfo(restController.text, 1);
-        if (sets.sets == 0.0) {
-          sets.sets = 1;
-        }
-        widget.addNewSet(sets, widget.id);
-      },
+         sets.reps = getInfo(repsController.text, 0);
+         sets.sets = getInfo(setsController.text, 0);
+         sets.weight = getInfo(weightController.text, 1);
+         sets.rest = getInfo(restController.text, 1);
+         if (sets.sets == 0.0) {
+           sets.sets = 1;
+         }
+         widget.addNewSet(sets, widget.id);
+       },
     );
   }
 
@@ -178,20 +194,20 @@ class _SetWidgetState extends State<SetWidget> {
       }
     }
   }
-  Future<double> setPercentageOfMax(double weight) async {
-    print("UPDATING");
+  Future<double> getOneRepMax() async {
     var result = await getSpecificMax(widget.name, 1);
     if (result.length < 1) {
-      print("Hello");
       double count = 0;
       while (result.length < 1 || count > 20) {
         result = await getSpecificMax(widget.name, count);
         count++;
       }
-      return (weight / (result[0].weight / maxTable[(count - 1).toInt()]));
+      if (result.length < 1) {
+        return 0.0;
+      }
+      return result[0].weight / maxTable[(count-1).toInt()];
     }
-    return (weight / result[0].weight)
-        .roundToDouble();
+    return result[0].weight;
   }
 
   Future<double> getWeightFromMax(String percentage) async {

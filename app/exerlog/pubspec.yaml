@@ -35,6 +35,7 @@ dependencies:
   flutter_bloc: ^8.0.0
   firebase_database: ^9.0.1
   dropdown_search: ^2.0.1
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
