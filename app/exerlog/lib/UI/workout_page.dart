@@ -27,14 +27,17 @@ class _WorkoutPageState extends State<WorkoutPage> {
   @override
   void initState() {
     // TODO: implement initState
-    workoutData = new WorkoutData(new Workout([], '', '', 0, '', ''), new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
+    workoutData = new WorkoutData(new Workout([], '', '', 0, '', ''),
+        new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    workoutData = new WorkoutData(workoutData.workout, workoutData.totals, updateTotals);
+    workoutData =
+        new WorkoutData(workoutData.workout, workoutData.totals, updateTotals);
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return Material(
       child: GestureDetector(
@@ -47,16 +50,19 @@ class _WorkoutPageState extends State<WorkoutPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(),
-              WorkoutTotalsWidget(totals: workoutData.totals,),
+              WorkoutTotalsWidget(
+                totals: workoutData.totals,
+              ),
               Container(
                 height: screenHeight * 0.5,
                 child: ListView(
+                  addAutomaticKeepAlives: true,
                   children: workoutData.exerciseWidgets,
                 ),
               ),
               Container(
-                height: screenHeight*0.065,
-                width: screenWidth*0.9,
+                height: screenHeight * 0.065,
+                width: screenWidth * 0.9,
                 child: GradientBorderButton(
                   gradient: LinearGradient(
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
@@ -68,7 +74,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                     showAlertDialog(context);
                   },
                   child: Container(
-                    width: screenWidth*0.6,
+                    width: screenWidth * 0.6,
                     child: Center(
                         child: Text(
                       "Add New Exercise",
@@ -78,8 +84,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 ),
               ),
               Container(
-                height: screenHeight*0.065,
-                width: screenWidth*0.9,
+                height: screenHeight * 0.065,
+                width: screenWidth * 0.9,
                 margin: EdgeInsets.only(bottom: 30),
                 child: RaisedGradientButton(
                   gradient: LinearGradient(
@@ -101,8 +107,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
                     if (workoutData.workout.exercises.length > 0) {
                       saveWorkout(workoutData.workout);
                       setState(() {
-                        workoutData =
-                            new WorkoutData(new Workout([], '', '', 0, '', ''), new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
+                        workoutData = new WorkoutData(
+                            new Workout([], '', '', 0, '', ''),
+                            new WorkoutTotals(0, 0, 0, 0, 0),
+                            updateTotals);
                       });
                     }
                   },
@@ -127,22 +135,25 @@ class _WorkoutPageState extends State<WorkoutPage> {
   }
 
   updateTotals() {
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   showAlertDialog(BuildContext context) {
-
-    ExerciseNameSelectionWidget exerciseNameSelectionWidget = new ExerciseNameSelectionWidget(setExercisename: setExercisename,);
+    ExerciseNameSelectionWidget exerciseNameSelectionWidget =
+        new ExerciseNameSelectionWidget(
+      setExercisename: setExercisename,
+    );
     // set up the button
     RaisedGradientButton okButton = RaisedGradientButton(
       gradient: LinearGradient(
-                    colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                  ),
-                  radius: 30,
-                  borderSize: 0,
-      child: Text("ADD", style: buttonTextSmall,),
+        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+      ),
+      radius: 30,
+      borderSize: 0,
+      child: Text(
+        "ADD",
+        style: buttonTextSmall,
+      ),
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
@@ -155,7 +166,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
 
     // set up the AlertDialog
-    AddExerciseAlert alert = AddExerciseAlert(okButton, exerciseNameSelectionWidget);
+    AddExerciseAlert alert =
+        AddExerciseAlert(okButton, exerciseNameSelectionWidget);
 
     // show the dialog
     showDialog(
@@ -187,7 +199,7 @@ class WorkoutData {
           addExercise: addExercise,
           updateExisitingExercise: updateExisitingExercise));
     }
-    updateTotals();
+    //updateTotals();
     return exerciseWidgets;
   }
 
@@ -204,7 +216,7 @@ class WorkoutData {
         totals.weight += reps_set * sets.weight;
         totals.reps += reps_set;
       }
-    totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
+      totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
     }
     updateTotals();
   }
@@ -230,26 +242,24 @@ class AddExerciseAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: EdgeInsets.all(15),
-        height: screenHeight*0.4,
+        height: screenHeight * 0.4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("New Exercise",
+            Text(
+              "New Exercise",
               style: mediumTitleStyleWhite,
               textAlign: TextAlign.center,
             ),
             Container(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: nameWidget
-            ),
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: nameWidget),
             Container(
-              height: screenHeight*0.05,
-              width: screenWidth*0.5,
+              height: screenHeight * 0.05,
+              width: screenWidth * 0.5,
               child: addExercise,
             ),
           ],

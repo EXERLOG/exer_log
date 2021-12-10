@@ -24,10 +24,11 @@ class ExerciseCard extends StatefulWidget {
   _ExerciseCardState createState() => _ExerciseCardState();
 }
 
-class _ExerciseCardState extends State<ExerciseCard> {
+class _ExerciseCardState extends State<ExerciseCard>
+    with AutomaticKeepAliveClientMixin {
   int index = 0;
   List<SetWidget> setList = [];
-  double height = screenHeight*0.23;
+  double height = screenHeight * 0.23;
   TotalsData totalData =
       new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
   late ExerciseTotalsWidget totalWidget;
@@ -47,7 +48,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
   Widget build(BuildContext context) {
     totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
-      height: height + screenHeight*0.05,
+      height: height + screenHeight * 0.05,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -84,12 +85,12 @@ class _ExerciseCardState extends State<ExerciseCard> {
               Column(
                 children: [
                   Container(
-                    height: screenHeight*0.04,
+                    height: screenHeight * 0.04,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: screenWidth*0.08,
+                          width: screenWidth * 0.08,
                         ),
                         Container(
                           child: Center(
@@ -98,7 +99,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: screenWidth*0.15,
+                          width: screenWidth * 0.15,
                         ),
                         Container(
                           child: Center(
@@ -107,7 +108,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: screenWidth*0.15,
+                          width: screenWidth * 0.15,
                         ),
                         Container(
                           child: Center(
@@ -116,7 +117,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: screenWidth*0.15,
+                          width: screenWidth * 0.15,
                         ),
                         Container(
                           child: Center(
@@ -125,10 +126,10 @@ class _ExerciseCardState extends State<ExerciseCard> {
                               style: smallTitleStyleWhite,
                             ),
                           ),
-                          width: screenWidth*0.15,
+                          width: screenWidth * 0.15,
                         ),
                         Container(
-                          width: screenWidth*0.1,
+                          width: screenWidth * 0.1,
                         ),
                       ],
                     ),
@@ -142,11 +143,11 @@ class _ExerciseCardState extends State<ExerciseCard> {
           ),
         ),
         Positioned(
-          right: screenWidth*0.43,
-          left: screenWidth*0.43,
+          right: screenWidth * 0.43,
+          left: screenWidth * 0.43,
           top: height - 15,
           child: Container(
-            height: screenHeight*0.07,
+            height: screenHeight * 0.07,
             child: DecoratedBox(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -163,7 +164,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                 ),
                 onPressed: () {
                   setState(() {
-                    height += screenHeight*0.05;
+                    height += screenHeight * 0.05;
                     setList.add(new SetWidget(
                         name: widget.name,
                         exercise: widget.exercise,
@@ -210,4 +211,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
       totalWidget = new ExerciseTotalsWidget(totalData, index);
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

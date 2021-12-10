@@ -24,7 +24,8 @@ class SetWidget extends StatefulWidget {
   _SetWidgetState createState() => _SetWidgetState();
 }
 
-class _SetWidgetState extends State<SetWidget> {
+class _SetWidgetState extends State<SetWidget>
+    with AutomaticKeepAliveClientMixin {
   late ValueNotifier<String> percentage;
   int percent = 0;
   double oneRepMax = 0.0;
@@ -40,14 +41,13 @@ class _SetWidgetState extends State<SetWidget> {
   void initState() {
     percentage = ValueNotifier<String>('0%');
     getOneRepMax().then((value) {
-      setState(() {
-        oneRepMax = value;
-      });
+      oneRepMax = value;
     });
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Exercise>(
@@ -107,16 +107,17 @@ class _SetWidgetState extends State<SetWidget> {
             child: getTextField(3, snapshot),
             width: screenWidth * 0.145,
           ),
-          ValueListenableBuilder(valueListenable: percentage, builder: (context, value, child) => 
-          Container(
-            child: Center(
-                child: Text(
-               value.toString(),
-              style: setStyle,
-            )),
-            width: screenWidth * 0.11,
-          ),
-      )
+          ValueListenableBuilder(
+            valueListenable: percentage,
+            builder: (context, value, child) => Container(
+              child: Center(
+                  child: Text(
+                value.toString(),
+                style: setStyle,
+              )),
+              width: screenWidth * 0.11,
+            ),
+          )
         ],
       ),
     );
@@ -153,29 +154,31 @@ class _SetWidgetState extends State<SetWidget> {
             setState(() {
               sets.weight = result;
               weightController.text = result.toString();
-              percentage.value = ((sets.weight / oneRepMax)*100).round().toString() + '%';
+              percentage.value =
+                  ((sets.weight / oneRepMax) * 100).round().toString() + '%';
             });
           });
         }
-          sets.weight = getInfo(weightController.text, 1);
-          sets.rest = getInfo(restController.text, 1);
-          if (sets.sets == 0.0) {
-            sets.sets = 1;
-          }
-          widget.addNewSet(sets, widget.id);
-          percentage.value = ((sets.weight / oneRepMax) * 100).toInt().toString() + '%' ;
-          //percent = (sets.weight / oneRepMax).round();
+        sets.weight = getInfo(weightController.text, 1);
+        sets.rest = getInfo(restController.text, 1);
+        if (sets.sets == 0.0) {
+          sets.sets = 1;
+        }
+        widget.addNewSet(sets, widget.id);
+        percentage.value =
+            ((sets.weight / oneRepMax) * 100).toInt().toString() + '%';
+        //percent = (sets.weight / oneRepMax).round();
       },
-      onEditingComplete: () {
-         sets.reps = getInfo(repsController.text, 0);
-         sets.sets = getInfo(setsController.text, 0);
-         sets.weight = getInfo(weightController.text, 1);
-         sets.rest = getInfo(restController.text, 1);
-         if (sets.sets == 0.0) {
-           sets.sets = 1;
-         }
-         widget.addNewSet(sets, widget.id);
-       },
+      // onEditingComplete: () {
+      //   sets.reps = getInfo(repsController.text, 0);
+      //   sets.sets = getInfo(setsController.text, 0);
+      //   sets.weight = getInfo(weightController.text, 1);
+      //   sets.rest = getInfo(restController.text, 1);
+      //   if (sets.sets == 0.0) {
+      //     sets.sets = 1;
+      //   }
+      //   widget.addNewSet(sets, widget.id);
+      // },
     );
   }
 
@@ -194,6 +197,7 @@ class _SetWidgetState extends State<SetWidget> {
       }
     }
   }
+
   Future<double> getOneRepMax() async {
     var result = await getSpecificMax(widget.name, 1);
     if (result.length < 1) {
@@ -205,7 +209,7 @@ class _SetWidgetState extends State<SetWidget> {
       if (result.length < 1) {
         return 0.0;
       }
-      return result[0].weight / maxTable[(count-1).toInt()];
+      return result[0].weight / maxTable[(count - 1).toInt()];
     }
     return result[0].weight;
   }
@@ -232,4 +236,8 @@ class _SetWidgetState extends State<SetWidget> {
     } catch (Exception) {}
     return returnText;
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
