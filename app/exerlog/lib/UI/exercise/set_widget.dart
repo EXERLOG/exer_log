@@ -14,10 +14,13 @@ class SetWidget extends StatefulWidget {
   Function(Sets, int) addNewSet;
   int id;
 
-  SetWidget({required this.name, required this.exercise, required this.addNewSet, required this.id});
+  SetWidget(
+      {required this.name,
+      required this.exercise,
+      required this.addNewSet,
+      required this.id});
   @override
   _SetWidgetState createState() => _SetWidgetState();
-
 }
 
 class _SetWidgetState extends State<SetWidget> {
@@ -27,12 +30,7 @@ class _SetWidgetState extends State<SetWidget> {
   TextEditingController weightController = new TextEditingController();
   TextEditingController restController = new TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest'];
-  List setList = [
-    0,
-    0,
-    0.0,
-    0.0
-  ];
+  List setList = [0, 0, 0.0, 0.0];
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Exercise>(
@@ -64,33 +62,37 @@ class _SetWidgetState extends State<SetWidget> {
 
   Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
     return Container(
-              height: screenHeight*0.05,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Center(child: Text("#" + (widget.id +1).toString(), style: setStyle,)),
-                    width: screenWidth*0.09,
-                  ),
-                  Container(
-                    child: getTextField(0, snapshot),
-                    width: screenWidth*0.15,
-                  ),
-                  Container(
-                    child: getTextField(1, snapshot),
-                    width: screenWidth*0.15,
-                  ),
-                  Container(
-                    child: getTextField(2, snapshot),
-                    width: screenWidth*0.15,
-                  ),
-                  Container(
-                    child: getTextField(3, snapshot),
-                    width: screenWidth*0.15,
-                  )
-                ],
-              ),
-            );
+      height: screenHeight * 0.05,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            child: Center(
+                child: Text(
+              "#" + (widget.id + 1).toString(),
+              style: setStyle,
+            )),
+            width: screenWidth * 0.09,
+          ),
+          Container(
+            child: getTextField(0, snapshot),
+            width: screenWidth * 0.15,
+          ),
+          Container(
+            child: getTextField(1, snapshot),
+            width: screenWidth * 0.15,
+          ),
+          Container(
+            child: getTextField(2, snapshot),
+            width: screenWidth * 0.15,
+          ),
+          Container(
+            child: getTextField(3, snapshot),
+            width: screenWidth * 0.15,
+          )
+        ],
+      ),
+    );
   }
 
   TextField getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
@@ -100,47 +102,49 @@ class _SetWidgetState extends State<SetWidget> {
       weightController,
       restController
     ];
-    return TextField(  
+    return TextField(
       cursorColor: Colors.white,
       style: setStyle,
       textAlign: TextAlign.center,
-      keyboardType: TextInputType.number,
+      keyboardType: type == 2 ? TextInputType.text : TextInputType.number,
       controller: controllers[type],
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-        ),  
-        hintText: getHintText(snapshot, type), 
+          borderSide: BorderSide(color: Colors.white),
+        ),
+        hintText: getHintText(snapshot, type),
         hintStyle: setHintStyle,
       ),
       onChanged: (value) {
-          sets.reps = getInfo(repsController.text, 0);
-          sets.sets = getInfo(setsController.text, 0);
-          if (weightController.text.contains('%')) {
-            // set weight to be percentage of max
-            var regex = new RegExp(r'\D');
-            getWeightFromMax(weightController.text.replaceAll(regex, '')).then((result) {
-              setState(() {
-                sets.weight = result;
-                weightController.text = result.toString();
-              });
+        sets.reps = getInfo(repsController.text, 0);
+        sets.sets = getInfo(setsController.text, 0);
+        if (weightController.text.contains('%')) {
+          // set weight to be percentage of max
+          var regex = new RegExp(r'\D');
+          getWeightFromMax(weightController.text.replaceAll(regex, ''))
+              .then((result) {
+            setState(() {
+              sets.weight = result;
+              weightController.text = result.toString();
             });
+          });
           sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
           if (sets.sets == 0.0) {
             sets.sets = 1;
           }
           widget.addNewSet(sets, widget.id);
-      }},
+        }
+      },
       onEditingComplete: () {
-          sets.reps = getInfo(repsController.text, 0);
-          sets.sets = getInfo(setsController.text, 0);
-          sets.weight = getInfo(weightController.text, 1);
-          sets.rest = getInfo(restController.text, 1);
-          if (sets.sets == 0.0) {
-            sets.sets = 1;
-          }
-          widget.addNewSet(sets, widget.id);
+        sets.reps = getInfo(repsController.text, 0);
+        sets.sets = getInfo(setsController.text, 0);
+        sets.weight = getInfo(weightController.text, 1);
+        sets.rest = getInfo(restController.text, 1);
+        if (sets.sets == 0.0) {
+          sets.sets = 1;
+        }
+        widget.addNewSet(sets, widget.id);
       },
     );
   }
@@ -161,31 +165,26 @@ class _SetWidgetState extends State<SetWidget> {
     }
   }
 
-Future<double> getWeightFromMax(String percentage) async {
-  var result = await getSpecificMax(widget.name, 1);
-  if (result.isEmpty) {
-      return double.parse(percentage);
+  Future<double> getWeightFromMax(String percentage) async {
+    var result = await getSpecificMax(widget.name, 1);
+    if (result.length < 1) {
+      double count = 2;
+      while (result.length < 1 || count > 20) {
+        result = await getSpecificMax(widget.name, count);
+        count++;
+      }
+      return (result[0].weight * maxTable[(count - 1).toInt()]).roundToDouble();
     }
-  if (result.length < 1) {
-    double count = 2;
-    while(result.length < 1 || count > 20) {
-      result = await getSpecificMax(widget.name, count);
-      count++;
-    }
-    return (result[0].weight * maxTable[(count-1).toInt()]).roundToDouble(); 
+    print(result);
+    return (result[0].weight * (double.parse(percentage) / 100))
+        .roundToDouble();
   }
-  print(result);  
-  return (result[0].weight * (double.parse(percentage)/100)).roundToDouble();
-}
 
   String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {
     String returnText = '';
     try {
       returnText = snapshot.data?.sets[widget.id][types[type]].toString() ?? '';
-    } catch (Exception) {
-    }
+    } catch (Exception) {}
     return returnText;
-
   }
-
 }
