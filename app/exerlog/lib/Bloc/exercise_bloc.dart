@@ -46,6 +46,7 @@ Future<Exercise> getExerciseByName(String exercise) async {
   .doc(userID)
   .collection('exercises')
   .where('name', isEqualTo: exercise)
+  .orderBy('created', descending: false)
   .get();
   
   final data = FirebaseFirestore.instance.collection('users').doc(userID).collection('exercises').doc(ref.docs.last.id).withConverter<Exercise>(

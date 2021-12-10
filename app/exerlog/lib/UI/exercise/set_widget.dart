@@ -167,7 +167,7 @@ Future<double> getWeightFromMax(String percentage) async {
       return double.parse(percentage);
     }
   if (result.length < 1) {
-    double count = 2;
+    double count = 1;
     while(result.length < 1 || count > 20) {
       result = await getSpecificMax(widget.name, count);
       count++;
