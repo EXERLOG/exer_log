@@ -40,6 +40,7 @@ void saveMax(Max max) {
   }); 
 }
 
+
 void checkMax(Exercise exercise) async {
   // check if max already exists otherwise save
   final ref = await FirebaseFirestore.instance
@@ -68,8 +69,7 @@ void checkMax(Exercise exercise) async {
       }
     }
     for (Sets set in setList) {
-      String date = DateTime.now().millisecondsSinceEpoch.toString();
-      Max max = Max(set.weight, set.reps, set.sets, date, exercise.name);
+      Max max = Max(set.weight, set.reps, set.sets, exercise.name);
       saveMax(max);
     }
   } else {
@@ -94,8 +94,7 @@ void checkMax(Exercise exercise) async {
       }
     }
     for (Sets set in setList) {
-      String date = DateTime.now().millisecondsSinceEpoch.toString();
-      Max max = Max(set.weight, set.reps, set.sets, date, exercise.name);
+      Max max = Max(set.weight, set.reps, set.sets, exercise.name);
       saveMax(max);
     }
   }

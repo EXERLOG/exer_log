@@ -64,3 +64,38 @@ TextStyle smallTitleStyleWhite = TextStyle(
     fontFamily: "Avenir",
     fontWeight: FontWeight.bold,
     fontSize: 12);
+
+
+// one rep max calculation table
+List<double> maxTable = [
+  1.0,
+  0.97,
+  0.94,
+  0.92,
+  0.89,
+  0.86,
+  0.83,
+  0.81,
+  0.78,
+  0.75,
+  0.73,
+  0.71,
+  0.70,
+  0.68,
+  0.67,
+  0.65,
+  0.64,
+  0.63,
+  0.61,
+  0.60,
+  0.59,
+  0.58,
+  0.57,
+  0.56,
+  0.55,
+  0.54,
+  0.53,
+  0.52,
+  0.51,
+  0.5
+];

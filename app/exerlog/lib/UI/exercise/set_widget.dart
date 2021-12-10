@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Bloc/exercise_bloc.dart';
+import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
@@ -115,13 +116,22 @@ class _SetWidgetState extends State<SetWidget> {
       onChanged: (value) {
           sets.reps = getInfo(repsController.text, 0);
           sets.sets = getInfo(setsController.text, 0);
+          if (weightController.text.contains('%')) {
+            // set weight to be percentage of max
+            var regex = new RegExp(r'\D');
+            getWeightFromMax(weightController.text.replaceAll(regex, '')).then((result) {
+              setState(() {
+                sets.weight = result;
+                weightController.text = result.toString();
+              });
+            });
           sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
           if (sets.sets == 0.0) {
             sets.sets = 1;
           }
           widget.addNewSet(sets, widget.id);
-      },
+      }},
       onEditingComplete: () {
           sets.reps = getInfo(repsController.text, 0);
           sets.sets = getInfo(setsController.text, 0);
@@ -150,6 +160,23 @@ class _SetWidgetState extends State<SetWidget> {
       }
     }
   }
+
+Future<double> getWeightFromMax(String percentage) async {
+  var result = await getSpecificMax(widget.name, 1);
+  if (result.isEmpty) {
+      return double.parse(percentage);
+    }
+  if (result.length < 1) {
+    double count = 2;
+    while(result.length < 1 || count > 20) {
+      result = await getSpecificMax(widget.name, count);
+      count++;
+    }
+    return (result[0].weight * maxTable[(count-1).toInt()]).roundToDouble(); 
+  }
+  print(result);  
+  return (result[0].weight * (double.parse(percentage)/100)).roundToDouble();
+}
 
   String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {
     String returnText = '';
