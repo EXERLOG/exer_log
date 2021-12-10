@@ -125,13 +125,14 @@ class _SetWidgetState extends State<SetWidget> {
                 weightController.text = result.toString();
               });
             });
+          }
           sets.weight = getInfo(weightController.text, 1);
           sets.rest = getInfo(restController.text, 1);
           if (sets.sets == 0.0) {
             sets.sets = 1;
           }
           widget.addNewSet(sets, widget.id);
-      }},
+      },
       onEditingComplete: () {
           sets.reps = getInfo(repsController.text, 0);
           sets.sets = getInfo(setsController.text, 0);

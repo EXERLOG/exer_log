@@ -56,12 +56,6 @@ Future<Exercise> getExerciseByName(String exercise) async {
   return await data.get().then((value) => value.data()!);
 }
 
-//void getExercise() async {
-
- // final data = await FirebaseFirestore.instance.collection('users').doc('pbAyI1OvjxxfL5TjReGZ').get();
-  //print(data);
-//}
-  
 Future<String> saveExercise(Exercise exercise) async {
   checkMax(exercise);
   Map<String, Object?> jsonExercise = exercise.toJson();
