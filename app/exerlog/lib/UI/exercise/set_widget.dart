@@ -13,13 +13,17 @@ class SetWidget extends StatefulWidget {
   final String name;
   final Exercise exercise;
   Function(Sets, int) addNewSet;
+  Function(Sets, int) createNewSet;
+  final bool isTemplate;
   int id;
 
   SetWidget(
       {required this.name,
       required this.exercise,
       required this.addNewSet,
-      required this.id});
+      required this.createNewSet,
+      required this.id,
+      required this.isTemplate});
   @override
   _SetWidgetState createState() => _SetWidgetState();
 }
@@ -130,6 +134,10 @@ class _SetWidgetState extends State<SetWidget>
       weightController,
       restController
     ];
+    if (widget.isTemplate) {
+      controllers[type].text = getHintText(snapshot, type);
+      widget.createNewSet(sets, widget.id);
+    }
     return TextField(
       cursorColor: Colors.white,
       style: setStyle,

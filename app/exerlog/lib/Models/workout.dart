@@ -9,20 +9,32 @@ class Workout {
   double time;
   String type;
   String name;
-  
-  Workout(this.exercises, this.notes, this.rating, this.time, this.type, this.name);
- 
+  bool template;
+
+  Workout(this.exercises, this.notes, this.rating, this.time, this.type,
+      this.name, this.template);
+
   Map<String, dynamic> toJson() {
-    return { "date" : FieldValue.serverTimestamp(), "exercises": exercises, "notes": notes, "rating": rating, "time": time, "type": type };
+    return {
+      "date": FieldValue.serverTimestamp(),
+      "exercises": exercises,
+      "notes": notes,
+      "rating": rating,
+      "time": time,
+      "type": type,
+      "template": template,
+      "name": name
+    };
   }
 
-  Workout.fromJson(Map<String, Object?> workout) :
-      this.exercises = workout['exercises']! as List,
-      this.notes = workout['notes']! as String,
-      this.rating = workout['rating']! as String,
-      this.time = workout['time']! as double,
-      this.name = workout['name']! as String,
-      this.type = workout['type']! as String;
+  Workout.fromJson(Map<String, Object?> workout)
+      : this.exercises = workout['exercises']! as List,
+        this.notes = workout['notes']! as String,
+        this.rating = workout['rating']! as String,
+        this.time = workout['time']! as double,
+        this.name = workout['name']! as String,
+        this.type = workout['type']! as String,
+        this.template = workout['template']! as bool;
   // getVolume()
   // getLoad()
 }
