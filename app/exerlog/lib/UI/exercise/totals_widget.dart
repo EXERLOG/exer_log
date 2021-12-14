@@ -19,8 +19,8 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenHeight*0.04,
-      width: screenWidth*0.3,
+      height: screenHeight * 0.04,
+      width: screenWidth * 0.3,
       child: RaisedGradientButton(
           child: Text(
             widget.totals.total[widget.index],

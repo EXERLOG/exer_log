@@ -2,6 +2,7 @@ import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
@@ -15,13 +16,17 @@ class ExerciseCard extends StatefulWidget {
   Function(Exercise) addExercise;
   Function(Exercise) updateExisitingExercise;
   final bool isTemplate;
+  List<SetWidget> setList;
+  WorkoutData workoutData;
 
   ExerciseCard(
       {required this.name,
       required this.exercise,
       required this.addExercise,
       required this.updateExisitingExercise,
-      required this.isTemplate});
+      required this.isTemplate,
+      required this.setList,
+      required this.workoutData});
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
 }
@@ -29,7 +34,6 @@ class ExerciseCard extends StatefulWidget {
 class _ExerciseCardState extends State<ExerciseCard>
     with AutomaticKeepAliveClientMixin {
   int index = 0;
-  List<SetWidget> setList = [];
   double height = screenHeight * 0.23;
   TotalsData totalData =
       new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
@@ -37,15 +41,19 @@ class _ExerciseCardState extends State<ExerciseCard>
 
   @override
   void initState() {
-    widget.exercise.sets.add(new Sets(0, 0, 0, 0));
-    setList.add(new SetWidget(
-      name: widget.name,
-      exercise: widget.exercise,
-      addNewSet: addNewSet,
-      createNewSet: createNewSet,
-      id: 0,
-      isTemplate: widget.isTemplate,
-    ));
+    // widget.workoutData.addNewSet = addTheNewSet;
+    if (widget.setList.length < 1) {
+      widget.setList.add(new SetWidget(
+        name: widget.name,
+        exercise: widget.exercise,
+        addNewSet: widget.workoutData.addNewSet,
+        //createNewSet: createNewSet,
+        id: 0,
+        isTemplate: widget.isTemplate,
+      ));
+      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+    }
+    height += (screenHeight * 0.05) * (widget.setList.length - 1);
     super.initState();
   }
 
@@ -53,7 +61,7 @@ class _ExerciseCardState extends State<ExerciseCard>
   Widget build(BuildContext context) {
     totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
-      height: height + screenHeight * 0.05,
+      height: height + screenHeight * 0.06,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -79,7 +87,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                       widget.name,
                       style: mediumTitleStyleWhite,
                     ),
-                    totalWidget
+                    widget.exercise.totalWidget
                   ],
                 ),
               ),
@@ -140,7 +148,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                     ),
                   ),
                   Column(
-                    children: setList,
+                    children: widget.setList,
                   )
                 ],
               )
@@ -170,11 +178,11 @@ class _ExerciseCardState extends State<ExerciseCard>
                 onPressed: () {
                   setState(() {
                     height += screenHeight * 0.05;
-                    setList.add(new SetWidget(
+                    widget.setList.add(new SetWidget(
                       name: widget.name,
                       exercise: widget.exercise,
-                      addNewSet: addNewSet,
-                      createNewSet: createNewSet,
+                      addNewSet: widget.workoutData.addSet,
+                      //createNewSet: createNewSet,
                       id: widget.exercise.sets.length,
                       isTemplate: false,
                     ));
@@ -188,58 +196,6 @@ class _ExerciseCardState extends State<ExerciseCard>
         )
       ]),
     );
-  }
-
-  createNewSet(newSet, id) {
-    if (id >= setList.length) {
-      height += screenHeight * 0.05;
-      //widget.exercise.sets[id] = newSet;
-      widget.addExercise(widget.exercise);
-      setList.add(new SetWidget(
-        name: widget.name,
-        exercise: widget.exercise,
-        addNewSet: addNewSet,
-        createNewSet: createNewSet,
-        id: widget.exercise.sets.length,
-        isTemplate: true,
-      ));
-    } else {
-      addExistingSet(newSet, id);
-    }
-    setTotals();
-  }
-
-  void addExistingSet(Sets newSet, int id) {
-    widget.exercise.sets[id] = newSet;
-    widget.addExercise(widget.exercise);
-  }
-
-  addNewSet(newSet, id) {
-    setState(() {
-      widget.exercise.sets[id] = newSet;
-      widget.updateExisitingExercise(widget.exercise);
-      setTotals();
-    });
-  }
-
-  void setTotals() {
-    List<String> returnTotals = totalData.total;
-    int totalSets = 0;
-    int totalReps = 0;
-    double totalKgs = 0;
-    for (Sets sets in widget.exercise.sets) {
-      totalSets += sets.sets;
-      int reps = sets.sets > 0 ? sets.sets * sets.reps : sets.reps;
-      totalReps += reps;
-      totalKgs += reps * sets.weight;
-    }
-    double avgKgs = (totalKgs / totalReps).roundToDouble();
-    returnTotals[0] = totalSets.toString() + " sets";
-    returnTotals[1] = totalReps.toString() + " reps";
-    returnTotals[2] = totalKgs.toString() + " kgs";
-    returnTotals[3] = avgKgs.toString() + " kg/rep";
-    totalData = new TotalsData(returnTotals);
-    totalWidget = new ExerciseTotalsWidget(totalData, index);
   }
 
   @override

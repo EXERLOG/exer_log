@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 class SetWidget extends StatefulWidget {
   final String name;
   final Exercise exercise;
-  Function(Sets, int) addNewSet;
-  Function(Sets, int) createNewSet;
+  Function(Exercise, Sets, int) addNewSet;
+  //Function(Sets, int) createNewSet;
   final bool isTemplate;
   int id;
 
@@ -21,7 +21,7 @@ class SetWidget extends StatefulWidget {
       {required this.name,
       required this.exercise,
       required this.addNewSet,
-      required this.createNewSet,
+      //required this.createNewSet,
       required this.id,
       required this.isTemplate});
   @override
@@ -134,9 +134,18 @@ class _SetWidgetState extends State<SetWidget>
       weightController,
       restController
     ];
-    if (widget.isTemplate) {
+    if (widget.isTemplate && controllers[type].text == '') {
       controllers[type].text = getHintText(snapshot, type);
-      widget.createNewSet(sets, widget.id);
+      double weight = snapshot.data?.sets[widget.id][types[2]];
+      try {
+        getOneRepMax().then((value) {
+          percentage.value = ((weight / value) * 100).toInt().toString() + '%';
+        });
+      } catch (Exception) {
+        print("Percentage error");
+      }
+
+      //widget.addNewSet(sets, widget.id);
     }
     return TextField(
       cursorColor: Colors.white,
@@ -159,12 +168,10 @@ class _SetWidgetState extends State<SetWidget>
           var regex = new RegExp(r'\D');
           getWeightFromMax(weightController.text.replaceAll(regex, ''))
               .then((result) {
-            setState(() {
-              sets.weight = result;
-              weightController.text = result.toString();
-              percentage.value =
-                  ((sets.weight / oneRepMax) * 100).round().toString() + '%';
-            });
+            sets.weight = result;
+            weightController.text = result.toString();
+            percentage.value =
+                ((sets.weight / oneRepMax) * 100).round().toString() + '%';
           });
         }
         sets.weight = getInfo(weightController.text, 1);
@@ -172,21 +179,16 @@ class _SetWidgetState extends State<SetWidget>
         if (sets.sets == 0.0) {
           sets.sets = 1;
         }
-        widget.addNewSet(sets, widget.id);
-        percentage.value =
-            ((sets.weight / oneRepMax) * 100).toInt().toString() + '%';
+        widget.addNewSet(widget.exercise, sets, widget.id);
+        try {
+          percentage.value =
+              ((sets.weight / oneRepMax) * 100).toInt().toString() + '%';
+        } catch (Exception) {
+          print("Percentage exception:");
+          print(Exception);
+        }
         //percent = (sets.weight / oneRepMax).round();
       },
-      // onEditingComplete: () {
-      //   sets.reps = getInfo(repsController.text, 0);
-      //   sets.sets = getInfo(setsController.text, 0);
-      //   sets.weight = getInfo(weightController.text, 1);
-      //   sets.rest = getInfo(restController.text, 1);
-      //   if (sets.sets == 0.0) {
-      //     sets.sets = 1;
-      //   }
-      //   widget.addNewSet(sets, widget.id);
-      // },
     );
   }
 

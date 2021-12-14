@@ -30,13 +30,25 @@ class _WorkoutPageState extends State<WorkoutPage> {
   late WorkoutData workoutData;
   String exerciseName = '';
   late bool firstLoad;
+  late Workout workout;
 
   @override
   void initState() {
+    print("init");
     firstLoad = true;
+    workout = new Workout(
+      [],
+      '',
+      '',
+      0,
+      '',
+      '',
+      false,
+    );
     // TODO: implement initState
-    workoutData = new WorkoutData(new Workout([], '', '', 0, '', '', false),
-        new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
+    workoutData = new WorkoutData(
+        workout, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+
     super.initState();
   }
 
@@ -47,8 +59,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     }
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    workoutData =
-        new WorkoutData(workoutData.workout, workoutData.totals, updateTotals);
+    //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return Material(
       child: firstLoad
@@ -146,11 +157,12 @@ class _WorkoutPageState extends State<WorkoutPage> {
     workoutData.workout.template = template;
   }
 
-  updateTotals(workout) {
+  updateTotals(new_workout) {
     setState(() {
       firstLoad = false;
-      print(workoutData.workout.exercises[0].toJson());
-      workoutData.workout = workout;
+      //workoutData.workout = new_workout;
+      //workout = new_workout;
+      //print(workoutData.exerciseWidgets[0].setList.length);
     });
   }
 
@@ -194,6 +206,12 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
+  addNewSet(exercise, newSet, id) {
+    workoutData.addSet(exercise, newSet, id);
+  }
+
+  createNewSet(sets, id) {}
+
   showSaveWorkoutAlertDialog(BuildContext context) {
     RaisedGradientButton okButton = RaisedGradientButton(
       gradient: LinearGradient(
@@ -212,7 +230,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
           workoutData = new WorkoutData(
               new Workout([], '', '', 0, '', '', false),
               new WorkoutTotals(0, 0, 0, 0, 0),
-              updateTotals);
+              updateTotals,
+              addNewSet);
         });
         Navigator.pop(context);
       },
@@ -234,27 +253,15 @@ class _WorkoutPageState extends State<WorkoutPage> {
     workoutData.workout.name = name;
   }
 
-  addExercises(workout) async {
-    List<Sets> setList = [];
-    workoutData.workout = workout;
-    int i = 0;
-    for (String exercise_id in workout.exercises) {
-      await getSpecificExercise(exercise_id).then((value) async => {
-            await getExerciseByName(value.name).then((exercise) => {
-                  setList = [],
-                  for (var sets in exercise.sets)
-                    {
-                      setList.add(new Sets(sets['reps'], sets['rest'],
-                          sets['weight'], sets['sets']))
-                    },
-                  workoutData.workout.exercises[i] =
-                      new Exercise(exercise.name, setList, exercise.bodyParts),
-                  workoutData.workout.template = true,
-                }),
-            i++
-          });
-    }
-    updateTotals(workoutData.workout);
+  addExercises(new_workout) {
+    setState(() {
+      WorkoutData newWorkoutData = new WorkoutData(new_workout,
+          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+      firstLoad = false;
+      workoutData = newWorkoutData;
+      workout = newWorkoutData.workout;
+      //print(workoutData.workout.exercises[0]);
+    });
   }
 
   showAlertDialogWorkout(BuildContext context) {

@@ -1,3 +1,16 @@
 TODO:
 
-- create pseudo json for the database
+- save workout
+    - give it a name
+    - save as template?
+        - name of template
+- start a new workout
+- new or from template?
+    - new
+        -create new workout
+    -template
+        - load templates
+        - start workout
+- redo a previous workout?
+    - get workouts
+    - start selected workout
