@@ -26,7 +26,7 @@ Future<List<Workout>> getWorkoutTemplates() async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(userID)
-      .collection('workouts')
+      .collection("workouts")
       .where('template', isEqualTo: true)
       .get();
   List<Workout> workoutTemplates = [];
