@@ -1,93 +1,59 @@
+import 'package:exerlog/Bloc/authentication.dart';
+import 'package:exerlog/Bloc/email_signup.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
+import 'package:exerlog/Bloc/workout_bloc.dart';
+import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/sets.dart';
+import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/UI/login_screen/google_signin_button.dart';
+import 'package:exerlog/UI/login_screen/login_data.dart';
+import 'package:exerlog/UI/login_screen/login_form.dart';
+import 'package:exerlog/UI/login_screen/signup_form.dart';
+import 'package:exerlog/UI/workout/workout_builder.dart';
 import 'package:flutter/material.dart';
 import '../gradient_button.dart';
 import '../global.dart';
+import '../maxes/max_builder.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({ Key? key }) : super(key: key);
-
+class LoginPage extends StatefulWidget {
+  LoginPage(this.title, {Key? key}) : super(key: key);
+  String title = "0";
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginPageState extends State<LoginPage> {
+  LoginData loginData = new LoginData('', '');
   bool login = true;
+  int index = 0;
+  List<Tab> tabs = <Tab>[
+    Tab(
+      child: Text(
+        "Login",
+        style: loginOptionTextStyle,
+      ),
+    ),
+    Tab(
+        child: Text(
+      "Sign up",
+      style: loginOptionTextStyle,
+    )),
+  ];
+  int id = 0;
+
+  
+
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Material(
-      child: Container(
-          padding: EdgeInsets.only(left: 10, top: 200, right: 10, bottom: 200),
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF322F4A),
-                    backgroundColor,
-                    backgroundColor
-                  ],
-                  begin: Alignment(-1.0, -1),
-                  end: Alignment(-1.0, 1),
-                  stops: [0.0, 0.3, 1.0])),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: <Widget>[
+        color: backgroundColor,
+        child: Container(
+          padding: EdgeInsets.only(top: height*0.25, bottom: height*0.3, left: 30, right: 30),
+          child: Container(
+            child: Stack(children: [
               Container(
-                child: Container(
-                  margin: EdgeInsets.all(15),
-                  child: Column(children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          TextButton(
-                            onPressed: (){
-                              setState(() {
-                                login = true;
-                              });
-                            },
-                            child: Container(
-                              child: Text("LOGIN", style: login ? loginOptionTextStyleSelected : loginOptionTextStyle,),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                login = false;
-                              });
-                            },
-                            child: Container(
-                              child: Text("SIGN UP", style: login ? loginOptionTextStyle : loginOptionTextStyleSelected),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Stack(
-                      children: [
-                        Divider(
-                          thickness: 0.8,
-                          indent: 10,
-                          endIndent: 10,
-                          color: Colors.white.withOpacity(0.3),
-                        ),
-                        Container(
-                          child: AnimatedAlign(
-                            alignment: login ? Alignment.centerLeft : Alignment.centerRight,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.fastOutSlowIn,
-                            child: Container(
-                              height: 3,
-                              width: 50,
-                              margin: EdgeInsets.only(left: 70, right: 84, top: 6),
-                              color: Color(0xFF31A6DC),
-                            ),
-                          ),
-                        ) 
-                      ],
-                    )
-                  ],
-                  ),
-                ),
-                height: 250,
+                height: height*0.42,
                 decoration: BoxDecoration(
                     color: Color(0xFF2E2C42),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -98,24 +64,87 @@ class _LoginFormState extends State<LoginForm> {
                           blurRadius: 10,
                           spreadRadius: 10)
                     ]),
+                child: DefaultTabController(
+                    length: tabs.length,
+                    // The Builder widget is used to have a different BuildContext to access
+                    // closest DefaultTabController.
+                    child: Builder(builder: (BuildContext context) {
+                      final TabController tabController =
+                          DefaultTabController.of(context)!;
+                      tabController.addListener(() {
+                        if (!tabController.indexIsChanging) {
+                          setState(() {
+                            index = tabController.index;
+                            print(index);
+                          });
+                          // Your code goes here.
+                          // To get index of current tab use tabController.index
+                        }
+                      });
+                      return Column(
+                        children: [
+                          Container(
+                            height: 30,
+                            child: AppBar(
+                              backgroundColor: Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              flexibleSpace: TabBar(
+                                tabs: tabs,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: height*0.34,
+                            child: TabBarView(
+                              children: [
+                                LoginForm(loginData),
+                                SignupForm(loginData)
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    })),
               ),
               Positioned(
                 child: RaisedGradientButton(
                   radius: 30,
-                  child: Text("Log In", style: buttonText), 
+                  child: Text(index > 0 ? "Sign up" : "Login", style: buttonText),
                   gradient: LinearGradient(
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                  ), 
+                  ),
                   onPressed: () {
-                    print("Hello");
+                    if (index == 0) {
+                      // login with email and password
+                      if (loginData.password != '' && loginData.email != '') {
+                        EmailSignup.signInWithEmailAndPassword(loginData.email, loginData.password);
+                      }
+                    }
+                    else {
+                      // signup with email and password
+                      if (loginData.password != '' && loginData.email != '') {
+                        EmailSignup.registerWithEmail(loginData.email, loginData.password);
+                      }
+                    }
                   },
                 ),
                 right: 60,
                 left: 60,
-                bottom: 80,
-              ),
-            ],
-          )),
-    );
+                bottom: 0,
+              )
+            ]),
+          ),
+        ));
   }
 }
+
+//   child: DefaultTabController(
+//   length: tabs.length,
+//   initialIndex: 0,
+//     child: TabBar(
+//       indicatorColor: textColorBlue,
+//       tabs:tabs
+//       ),
+// ),
+// )

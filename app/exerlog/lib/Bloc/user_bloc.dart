@@ -7,8 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final firestoreInstance = FirebaseFirestore.instance;
 
-void createUser(UserClass user) {
-  firestoreInstance.collection("users").add(
+void createUser(UserClass user, String id) {
+  firestoreInstance.collection("users").doc(id).set(
   {
     "username" : user.username,
     "firstname" : user.firstname,
@@ -17,10 +17,6 @@ void createUser(UserClass user) {
     "email" : user.email,
     "height" : user.height,
     "weight" : user.weight,
-    "system" : user.system,
-  }).then((value){
-    print(value.id);
-    user.setUserID(value.id);
   });
 }
 
