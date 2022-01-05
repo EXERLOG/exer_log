@@ -4,9 +4,9 @@ import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/workout/workout_builder.dart';
 import 'package:flutter/material.dart';
-import 'gradient_button.dart';
-import 'global.dart';
-import 'maxes/max_builder.dart';
+import '../gradient_button.dart';
+import '../global.dart';
+import '../maxes/max_builder.dart';
 
 class LoginForm extends StatefulWidget {
   LoginForm(this.title, {Key? key}) : super(key: key);
@@ -32,13 +32,6 @@ class _LoginFormState extends State<LoginForm> {
     )),
   ];
   int id = 0;
-
-  List workoutList = [
-    "U4EwfqTt0X8evCK0PsoY",
-    "nT0sNrqFfUjNnK3h02ty",
-    "oQF0dF6VCcPCRrxlFLqj",
-    "ouEYVKFHFTR3PGsQVII0"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -110,33 +103,13 @@ class _LoginFormState extends State<LoginForm> {
               ),
               Positioned(
                 child: RaisedGradientButton(
-                  borderSize: 8,
                   radius: 30,
-                  child: Text(index.toString(), style: buttonText),
+                  child: Text(index > 0 ? "Sign up" : "Login", style: buttonText),
                   gradient: LinearGradient(
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                   ),
                   onPressed: () {
-                    Sets set1 = Sets(10, 120, 60, 1);
-                    Sets set2 = Sets(5, 120, 80, 1);
-                    Sets set3 = Sets(4, 120, 100, 1);
-                    Exercise exercise = new Exercise(
-                        "BB Bench Press", [set1, set2, set3], ["chest"]);
-                    Workout workout = Workout([exercise], 'notes', 'good', 120,
-                        'Strength', 'chest workout', false);
-                    saveWorkout(workout);
-                    setState(() {
-                      if (id == workoutList.length - 1) {
-                        id = 0;
-                      } else {
-                        id++;
-                      }
-                    });
-                    if (index > 0) {
-                      print("Index is one");
-                    } else {
-                      print("Index is zero");
-                    }
+                    
                   },
                 ),
                 right: 60,

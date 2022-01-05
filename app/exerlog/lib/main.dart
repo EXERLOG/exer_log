@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'UI/global.dart';
 // import '/UI/login_page.dart';
 import 'Models/user.dart';
-import 'UI/test.dart';
+import 'UI/login_screen/test.dart';
 
 String userID = "KGjuifVkeop9CFHmTIHU";
 UserClass user;
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: WorkoutPage(), //LoginForm('1'),
+            home:  LoginForm('1'),
             color: Colors.blue,
           );
         }

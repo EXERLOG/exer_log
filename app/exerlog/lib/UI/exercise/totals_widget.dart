@@ -37,8 +37,7 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
               }
             });
           },
-          radius: 30,
-          borderSize: 0),
+          radius: 30,),
     );
   }
 }

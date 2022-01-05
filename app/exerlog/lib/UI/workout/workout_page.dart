@@ -115,7 +115,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
                           colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                         ),
                         radius: 30,
-                        borderSize: 0,
                         onPressed: () {
                           for (Exercise exercise
                               in workoutData.workout.exercises) {
@@ -177,7 +176,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
         colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
       ),
       radius: 30,
-      borderSize: 0,
       child: Text(
         "ADD",
         style: buttonTextSmall,
@@ -218,7 +216,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
         colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
       ),
       radius: 30,
-      borderSize: 0,
       child: Text(
         "SAVE",
         style: buttonTextSmall,
@@ -274,7 +271,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
         colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
       ),
       radius: 30,
-      borderSize: 0,
       child: Text(
         "START",
         style: buttonTextSmall,

@@ -1,7 +1,7 @@
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
-import 'gradient_button.dart';
-import 'global.dart';
+import '../gradient_button.dart';
+import '../global.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({ Key? key }) : super(key: key);
@@ -101,7 +101,6 @@ class _LoginFormState extends State<LoginForm> {
               ),
               Positioned(
                 child: RaisedGradientButton(
-                  borderSize: 8,
                   radius: 30,
                   child: Text("Log In", style: buttonText), 
                   gradient: LinearGradient(

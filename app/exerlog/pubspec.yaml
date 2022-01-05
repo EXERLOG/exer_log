@@ -36,6 +36,11 @@ dependencies:
   firebase_database: ^9.0.1
   dropdown_search: ^2.0.1
   provider: ^6.0.1
+  google_sign_in: ^5.2.1
+  font_awesome_flutter: ^9.2.0
+  google_fonts: ^2.2.0
+
+
 
 dev_dependencies:
   flutter_test:
