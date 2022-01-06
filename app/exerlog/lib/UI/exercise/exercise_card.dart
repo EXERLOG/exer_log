@@ -168,6 +168,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                   ),
                   borderRadius: BorderRadius.circular(30)),
               child: FloatingActionButton(
+                heroTag: null,
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 child: Icon(

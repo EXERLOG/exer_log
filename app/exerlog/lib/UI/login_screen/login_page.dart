@@ -46,9 +46,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return Material(
-        color: backgroundColor,
-        child: Container(
+    return Scaffold(
+        backgroundColor: backgroundColor,
+        body: Container(
           padding: EdgeInsets.only(top: height*0.25, bottom: height*0.3, left: 30, right: 30),
           child: Container(
             child: Stack(children: [

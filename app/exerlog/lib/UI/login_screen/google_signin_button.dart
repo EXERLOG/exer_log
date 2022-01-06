@@ -1,4 +1,6 @@
 import 'package:exerlog/Bloc/authentication.dart';
+import 'package:exerlog/Bloc/user_bloc.dart';
+import 'package:exerlog/Models/user.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,6 +39,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 User? user =
                   await Authentication.signInWithGoogle(context: context).then((value) {
                     userID = value?.uid;
+                    return value;
                   });
 
                 setState(() {
@@ -44,14 +47,19 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
+                  print("USER IS NOT NULL");
                   userID = user.uid;
                   the_user = user;
-                  Navigator.of(context).pushReplacement(
+                  createUser(new UserClass('', 0, 0, 0, '', '', '', 'metric', ''), user.uid);
+                  setState(() {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => WorkoutPage(
                       ),
                     ),
                   );
+                  });                 
                 }
               },
               child: Padding(

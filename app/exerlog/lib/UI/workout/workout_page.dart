@@ -61,8 +61,8 @@ class _WorkoutPageState extends State<WorkoutPage> {
     screenWidth = MediaQuery.of(context).size.width;
     //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
-    return Material(
-      child: firstLoad
+    return Scaffold(
+      body: firstLoad
           ? Container(
               color: backgroundColor,
             )

@@ -16,27 +16,19 @@ class Authentication {
     required BuildContext context,
   }) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-    FirebaseAuth.instance.currentUser!.delete();
+    // FirebaseAuth.instance.currentUser?.delete();
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      createUser(new UserClass('', 0, 0, 0, '', '', '', 'metric', ''), user.uid);
+      print("USER EXISTS");
       userID = user.uid;
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => WorkoutPage(
-          ),
-        ),
-      );
-    } else {
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => LoginPage('1'),
-        )
-      );
-    }
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (context) => WorkoutPage(
+      //     ),
+      //   ),
+      // );
+    } 
 
     return firebaseApp;
   }
