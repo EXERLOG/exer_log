@@ -239,6 +239,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
 
     // show the dialog
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return alert;
@@ -289,6 +290,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
 
     // show the dialog
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return alert;
