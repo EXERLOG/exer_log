@@ -12,7 +12,21 @@ Future<Workout> getSpecificWorkout(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')
       .doc(userID)
-      .collection('exercises')
+      .collection('workouts')
+      .doc(id)
+      .withConverter<Workout>(
+        fromFirestore: (snapshot, _) => Workout.fromJson(snapshot.data()!),
+        toFirestore: (workout, _) => workout.toJson(),
+      );
+  Workout workout = await data.get().then((value) => value.data()!);
+  return workout;
+}
+
+Future<Workout> getSpecificWorkoutToReplace(String id) async {
+  final data = FirebaseFirestore.instance
+      .collection('users')
+      .doc("KGjuifVkeop9CFHmTIHU")
+      .collection('workouts')
       .doc(id)
       .withConverter<Workout>(
         fromFirestore: (snapshot, _) => Workout.fromJson(snapshot.data()!),
@@ -47,6 +61,25 @@ Future<List<Workout>> getWorkoutTemplates() async {
     }
   }
   return workoutTemplates;
+}
+
+void replaceWorkouts() async {
+  final ref = await FirebaseFirestore.instance
+      .collection('users')
+      .doc("KGjuifVkeop9CFHmTIHU")
+      .collection('workouts')
+      .get();
+  List<Workout> workoutList = [];
+  for (int i = 0; i < ref.docs.length; i++) {
+    List<Exercise> exerciseList = [];
+    Workout workout = await getSpecificWorkoutToReplace(ref.docs[i].id);
+    for (int i = 0; i < workout.exercises.length; i++) {
+      exerciseList.add(await getSpecificExerciseToReplace(workout.exercises[i]));
+      print(exerciseList[i].name);
+    }
+    workout.exercises = exerciseList;
+    saveWorkout(workout);
+  }
 }
 
 void saveWorkout(Workout workout) async {

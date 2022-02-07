@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 
 import '../main.dart';
@@ -21,6 +22,25 @@ Future<Exercise> getSpecificExercise(String id) async {
   Exercise exercise = await data.get().then((value) => value.data()!);
   return exercise;
 }
+Future<Exercise> getSpecificExerciseToReplace(String id) async {
+  final data = FirebaseFirestore.instance
+      .collection('users')
+      .doc("KGjuifVkeop9CFHmTIHU")
+      .collection('exercises')
+      .doc(id)
+      .withConverter<Exercise>(
+        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
+        toFirestore: (exercise, _) => exercise.toJson(),
+      );
+  Exercise exercise = await data.get().then((value) => value.data()!);
+  List<Sets> setList = [];
+  for (int i = 0; i < exercise.sets.length; i++) {
+    setList.add(Sets.fromString(exercise.sets[i]));
+  }
+  exercise.sets = setList;
+  return exercise;
+}
+
 
 Future<List<String>> getExerciseNames() async {
   final ref = await FirebaseFirestore.instance

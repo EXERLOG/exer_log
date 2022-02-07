@@ -1,4 +1,5 @@
 import 'package:exerlog/Bloc/user_bloc.dart';
+import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/user.dart';
 import 'package:exerlog/UI/login_screen/login_page.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
@@ -16,12 +17,15 @@ class Authentication {
     required BuildContext context,
   }) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-    // FirebaseAuth.instance.currentUser?.delete();
+    //FirebaseAuth.instance.currentUser?.delete();
+    // User? user;
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
       print("USER EXISTS");
+      print(user.uid);
       userID = user.uid;
+      //replaceWorkouts();
       // Navigator.of(context).push(
       //   MaterialPageRoute(
       //     builder: (context) => WorkoutPage(
