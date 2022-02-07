@@ -31,18 +31,9 @@ Future<List<String>> getExerciseNames() async {
   List<String> exerciseNames = [];
 
   for (int i = 0; i < ref.docs.length; i++) {
-    final data = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('exercises')
-        .doc(ref.docs[i].id)
-        .withConverter<Exercise>(
-          fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
-          toFirestore: (max, _) => max.toJson(),
-        );
-    Exercise exercise = await data.get().then((value) => value.data()!);
-    if (!exerciseNames.contains(exercise.name)) {
-      exerciseNames.add(exercise.name);
+    String name = ref.docs[i].get("name");
+    if (!exerciseNames.contains(name)) {
+      exerciseNames.add(name);
     }
   }
   return exerciseNames;
