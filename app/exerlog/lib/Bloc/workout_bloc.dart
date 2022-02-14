@@ -22,6 +22,20 @@ Future<Workout> getSpecificWorkout(String id) async {
   return workout;
 }
 
+Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDate) async {
+  final ref = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userID)
+      .collection('workouts')
+      .where('date', isGreaterThanOrEqualTo: startDate).where('date', isLessThanOrEqualTo: endDate).get();
+      print(ref.docs.length);
+
+      for (int i = 0; i < ref.docs.length; i++) {
+        
+      }
+  return ref.docs;
+}
+
 Future<Workout> getSpecificWorkoutToReplace(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')

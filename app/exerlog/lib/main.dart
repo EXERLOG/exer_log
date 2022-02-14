@@ -5,6 +5,7 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/UI/calendar/calendar_page.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: WorkoutPage(),
+            home: CalendarPage(),
             color: Colors.blue,
           );
           } else {

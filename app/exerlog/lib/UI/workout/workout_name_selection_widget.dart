@@ -18,7 +18,7 @@ class WorkoutTemplateSelectionWidget extends StatefulWidget {
 
 class _WorkoutNameSelectionWidgetState
     extends State<WorkoutTemplateSelectionWidget> {
-  String dropDownValue = 'test';
+  String? dropDownValue;
   Map workoutMap = {};
   @override
   Widget build(BuildContext context) {
@@ -75,6 +75,7 @@ class _WorkoutNameSelectionWidgetState
                         snapshot.data!.map<DropdownMenuItem<String>>((element) {
                       dropDownValue = element.name;
                       workoutMap[element.name] = element;
+                      print("NAME " + element.name);
                       return DropdownMenuItem<String>(
                         value: element.name,
                         child: Text(element.name),
