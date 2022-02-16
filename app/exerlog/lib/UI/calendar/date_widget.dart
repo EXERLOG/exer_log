@@ -1,12 +1,13 @@
+import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class DateWidget extends StatefulWidget {
   final DateTime date;
-  final String workoutId;
+  final Workout? workout;
 
-  DateWidget(this.date, this.workoutId);
+  DateWidget(this.date, this.workout);
 
   @override 
   _DateWidgetState createState() => _DateWidgetState();
@@ -16,7 +17,7 @@ class DateWidget extends StatefulWidget {
 class _DateWidgetState extends State<DateWidget> {
   @override
   Widget build(BuildContext context) {
-    return widget.workoutId.length > 0 ? 
+    return widget.workout != null ? 
     Container(
       padding: EdgeInsets.only(top: 5),
       height: 40,

@@ -1,3 +1,4 @@
+import 'package:exerlog/UI/global.dart';
 import 'package:flutter/material.dart';
 import 'calendar_widget.dart';
 
@@ -14,7 +15,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top:30, left: 20, right: 20),
-        color: Colors.blue,
+        color: backgroundColor,
         child: Column(
           children: [
             CalendarWidget(),

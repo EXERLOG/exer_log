@@ -28,12 +28,14 @@ Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDat
       .doc(userID)
       .collection('workouts')
       .where('date', isGreaterThanOrEqualTo: startDate).where('date', isLessThanOrEqualTo: endDate).get();
-      print(ref.docs.length);
-
-      for (int i = 0; i < ref.docs.length; i++) {
-        
-      }
-  return ref.docs;
+      print(ref.docs[1]['name']);
+  
+  List<Workout> workoutList = [];
+  for (int i = 0; i < ref.docs.length; i++) {
+    Workout workout = Workout.fromJsonQuery(ref.docs[i]);
+    workoutList.add(workout);
+  }
+  return workoutList;
 }
 
 Future<Workout> getSpecificWorkoutToReplace(String id) async {
