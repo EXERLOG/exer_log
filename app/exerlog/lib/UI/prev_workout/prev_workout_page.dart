@@ -1,7 +1,9 @@
+
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/prev_workout_data.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
@@ -12,33 +14,35 @@ import 'package:exerlog/UI/exercise/exercise_card.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
 import 'package:exerlog/UI/workout/add_new_workout_alert.dart';
+import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
+import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:flutter/material.dart';
 import '../gradient_button.dart';
 import '../global.dart';
 
-class WorkoutPage extends StatefulWidget {
-  Workout? workout;
-  WorkoutPage(this.workout);
+class PrevWorkoutPage extends StatefulWidget {
+  Workout workout;
+  PrevWorkoutPage(this.workout);
 
   @override
-  _WorkoutPageState createState() => _WorkoutPageState();
+  _PrevWorkoutPageState createState() => _PrevWorkoutPageState();
 }
 
-class _WorkoutPageState extends State<WorkoutPage> {
+class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
   late WorkoutTotalsWidget workoutTotalsWidget;
-  late WorkoutData workoutData;
+  late PrevWorkoutData workoutData;
   String exerciseName = '';
   late bool firstLoad;
+  late Workout workout;
 
   @override
   void initState() {
-print("init");
-    if (widget.workout == null) {
-      firstLoad = true;
-       widget.workout = new Workout(
+    print("init");
+    firstLoad = true;
+    workout = new Workout(
       [],
       '',
       '',
@@ -46,18 +50,10 @@ print("init");
       '',
       '',
       false,
-      
     );
-    workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
-    } else {
-      firstLoad = false;
-      workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
-      addExercises(widget.workout);
-    }
     // TODO: implement initState
-  
+    workoutData = new PrevWorkoutData(
+        workout, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
 
     super.initState();
   }
@@ -72,6 +68,21 @@ print("init");
     //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CalendarPage(
+                        ),
+                      ),
+                    );
+          },
+          color: greenTextColor
+        ), 
+      ),
       body: firstLoad
           ? Container(
               color: backgroundColor,
@@ -82,28 +93,7 @@ print("init");
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(top: screenHeight*0.03),
-                      height: screenHeight *0.05,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [BackButton(
-                          onPressed: () {
-                            print("hello");
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CalendarPage(
-                                ),
-                              ),
-                            );
-                          },
-                          color: greenTextColor,
-                        ),
-                        Container()
-                        ]
-                      ),
-                    ),
+                    Container(),
                     WorkoutTotalsWidget(
                       totals: workoutData.totals,
                     ),
@@ -117,60 +107,8 @@ print("init");
                     Container(
                       height: screenHeight * 0.065,
                       width: screenWidth * 0.9,
-                      child: GradientBorderButton(
-                        addButton: true,
-                        gradient: LinearGradient(
-                          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                        ),
-                        radius: 30,
-                        borderSize: 3,
-                        onPressed: () {
-                          // create new exercise
-                          showAlertDialogExercise(context);
-                        },
-                        child: Container(
-                          width: screenWidth * 0.6,
-                          child: Center(
-                              child: Text(
-                            "Add New Exercise",
-                            style: greenButtonTextThin,
-                          )),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.065,
-                      width: screenWidth * 0.9,
                       margin: EdgeInsets.only(bottom: 30),
-                      child: RaisedGradientButton(
-                        gradient: LinearGradient(
-                          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                        ),
-                        radius: 30,
-                        onPressed: () {
-                          for (Exercise exercise
-                              in workoutData.workout.exercises) {
-                            for (Sets sets in exercise.sets) {
-                              if (sets.reps == 0) {
-                                exercise.sets.remove(sets);
-                              }
-                            }
-                            if (exercise.sets.length == 0) {
-                              workoutData.workout.exercises.remove(exercise);
-                            }
-                          }
-                          if (workoutData.workout.exercises.length > 0) {
-                            showSaveWorkoutAlertDialog(context);
-                          }
-                        },
-                        child: Container(
-                          child: Center(
-                              child: Text(
-                            "Save",
-                            style: buttonText,
-                          )),
-                        ),
-                      ),
+                      
                     )
                   ],
                 ),
@@ -256,7 +194,7 @@ print("init");
         saveWorkout(workoutData.workout);
         setState(() {
           firstLoad = true;
-          workoutData = new WorkoutData(
+          workoutData = new PrevWorkoutData(
               new Workout([], '', '', 0, '', '', false),
               new WorkoutTotals(0, 0, 0, 0, 0),
               updateTotals,
@@ -285,40 +223,57 @@ print("init");
 
   addExercises(new_workout) {
     setState(() {
-      WorkoutData newWorkoutData = new WorkoutData(new_workout,
+      PrevWorkoutData newWorkoutData = new PrevWorkoutData(new_workout,
           new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
       firstLoad = false;
       workoutData = newWorkoutData;
-      widget.workout = newWorkoutData.workout;
+      workout = newWorkoutData.workout;
       //print(workoutData.workout.exercises[0]);
     });
   }
 
   showAlertDialogWorkout(BuildContext context) {
-    WorkoutTemplateSelectionWidget workoutTemplateSelectionWidget =
-        new WorkoutTemplateSelectionWidget(
-      setWorkout: addExercises,
-    );
-    RaisedGradientButton okButton = RaisedGradientButton(
+    RaisedGradientButton viewButton = RaisedGradientButton(
       gradient: LinearGradient(
         colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
       ),
       radius: 30,
       child: Text(
-        "START",
+        "VIEW",
         style: buttonTextSmall,
       ),
       onPressed: () {
-        setState(() {
-          firstLoad = false;
-        });
+        addExercises(widget.workout);
         Navigator.pop(context);
       },
     );
 
+    GradientBorderButton redoButton = GradientBorderButton(
+      addButton: false,
+      borderSize: 2,
+      gradient: LinearGradient(
+        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+      ),
+      radius: 30,
+      child: Text(
+        "REDO",
+        style: whiteTextStyleSmall,
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.of(context).pop();
+          Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WorkoutPage(widget.workout!
+                      ),
+                    ),
+                  );
+      },
+    );
+
     // set up the AlertDialog
-    AddWorkoutAlert alert =
-        AddWorkoutAlert(okButton, workoutTemplateSelectionWidget);
+    RedoWorkoutAlert alert =
+        RedoWorkoutAlert(viewButton, redoButton);
 
     // show the dialog
     showDialog(

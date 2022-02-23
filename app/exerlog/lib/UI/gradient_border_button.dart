@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class GradientBorderButton extends StatefulWidget {
   Widget child;
+  bool addButton;
   final Gradient gradient;
   final double width;
   final double height;
@@ -19,6 +20,7 @@ class GradientBorderButton extends StatefulWidget {
     required this.onPressed,
     required this.radius,
     required this.borderSize,
+    required this.addButton
   });
   @override
   _GradientBorderButtonState createState() => _GradientBorderButtonState();
@@ -28,24 +30,10 @@ class GradientBorderButton extends StatefulWidget {
 class _GradientBorderButtonState extends State<GradientBorderButton> {
   @override
   Widget build(BuildContext context) {
-    return 
-      DecoratedBox(
-        decoration: BoxDecoration(
-            gradient: widget.gradient,
-            borderRadius: BorderRadius.circular(widget.radius)
-          ),
-        child: Container(
-          padding: EdgeInsets.all(widget.borderSize),
-          child: TextButton(
-            onPressed: () {widget.onPressed();}, 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 30,
-                ),
-                widget.child,
-                Container(
+    Container cont;
+    Container cont2;
+    if (widget.addButton) {
+      cont = Container(
                   width: 30,
                   height: 30,
                   padding: EdgeInsets.all(widget.borderSize),
@@ -59,7 +47,28 @@ class _GradientBorderButtonState extends State<GradientBorderButton> {
                       color: backgroundColor,
                       borderRadius: BorderRadius.circular(widget.radius)),
                   )
-                )
+                );
+                cont2 = Container(width: 30,);
+    } else {
+      cont = Container();
+      cont2 = Container();
+    }
+    return 
+      DecoratedBox(
+        decoration: BoxDecoration(
+            gradient: widget.gradient,
+            borderRadius: BorderRadius.circular(widget.radius)
+          ),
+        child: Container(
+          padding: EdgeInsets.all(widget.borderSize),
+          child: TextButton(
+            onPressed: () {widget.onPressed();}, 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                cont2,
+                widget.child,
+                cont
               ],
             ),
             style: ButtonStyle(

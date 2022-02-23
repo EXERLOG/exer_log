@@ -59,6 +59,26 @@ Future<List<String>> getExerciseNames() async {
   return exerciseNames;
 }
 
+Future<Exercise> loadExercise(String id) async {
+  final data = FirebaseFirestore.instance
+      .collection('users')
+      .doc(userID)
+      .collection('exercises')
+      .doc(id)
+      .withConverter<Exercise>(
+        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
+        toFirestore: (exercise, _) => exercise.toJson(),
+      );
+  Exercise exercise = await data.get().then((value) => value.data()!);
+  List<Sets> setList = [];
+  for (int i = 0; i < exercise.sets.length; i++) {
+    Sets set_ = Sets.fromString(exercise.sets[i]);
+    setList.add(set_);
+  }
+  exercise.sets = setList;
+  return exercise;
+}
+
 Future<Exercise> getExerciseByName(String exercise) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')

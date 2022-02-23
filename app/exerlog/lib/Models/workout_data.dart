@@ -17,7 +17,7 @@ class WorkoutData {
   WorkoutData(this.workout, this.totals, this.updateTotals, this.addNewSet) {
     workout = this.workout;
     if (this.workout.template) {
-      loadWorkout().then((value) {
+      loadWorkoutData().then((value) {
         workout = value;
         setExerciseWidgets();
         for (Exercise exercise in this.workout.exercises) {
@@ -55,7 +55,7 @@ class WorkoutData {
     updateExisitingExercise(exercise);
   }
 
-  Future<Workout> loadWorkout() async {
+  Future<Workout> loadWorkoutData() async {
     Workout loaded_workout =
         new Workout(workout.exercises, '', '', 0, '', '', true);
     List<Sets> setList = [];
@@ -167,7 +167,6 @@ class WorkoutData {
         workout.exercises.add(exercise);
       }
     } catch (Exception) {
-      print("Helloooo");
       print(Exception);
     }
     updateTotals(workout);

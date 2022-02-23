@@ -38,6 +38,16 @@ Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDat
   return workoutList;
 }
 
+Future<Workout> loadWorkout(Workout workout) async {
+  List<Exercise> exerciseList = [];
+  for (int i = 0; i < workout.exercises.length; i++) {
+    Exercise exercise = await loadExercise(workout.exercises[i]);
+    exerciseList.add(exercise);
+  }
+  workout.exercises = exerciseList;
+  return workout;
+}
+
 Future<Workout> getSpecificWorkoutToReplace(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')

@@ -134,8 +134,8 @@ class _SetWidgetState extends State<SetWidget>
       weightController,
       restController
     ];
+    controllers[type].text = getHintText(snapshot, type);
     if (widget.isTemplate && controllers[type].text == '') {
-      controllers[type].text = getHintText(snapshot, type);
       double weight = snapshot.data?.sets[widget.id][types[2]];
       try {
         getOneRepMax().then((value) {
