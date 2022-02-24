@@ -87,7 +87,9 @@ print("init");
                       height: screenHeight *0.05,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [BackButton(
+                        children: [
+                          
+                          BackButton(
                           onPressed: () {
                             print("hello");
                             Navigator.of(context).pop();
@@ -254,15 +256,13 @@ print("init");
       ),
       onPressed: () {
         saveWorkout(workoutData.workout);
-        setState(() {
-          firstLoad = true;
-          workoutData = new WorkoutData(
-              new Workout([], '', '', 0, '', '', false),
-              new WorkoutTotals(0, 0, 0, 0, 0),
-              updateTotals,
-              addNewSet);
-        });
-        Navigator.pop(context);
+        Navigator.of(context).pop();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CalendarPage(
+            ),
+          ),
+        );
       },
     );
 

@@ -6,6 +6,7 @@ import 'package:exerlog/UI/exercise/exercise_card.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/prev_workout/prev_exercise_card.dart';
+import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 
 class PrevWorkoutData {
@@ -104,10 +105,10 @@ class PrevWorkoutData {
   List<PrevExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
     for (Exercise exercise in workout.exercises) {
-      List<SetWidget> setList = [];
+      List<PrevSetWidget> setList = [];
       int i = 0;
       for (Sets sets in exercise.sets) {
-        setList.add(new SetWidget(
+        setList.add(new PrevSetWidget(
             name: exercise.name,
             exercise: exercise,
             addNewSet: addSet,

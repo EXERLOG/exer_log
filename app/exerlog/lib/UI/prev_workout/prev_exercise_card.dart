@@ -8,6 +8,7 @@ import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
+import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class PrevExerciseCard extends StatefulWidget {
   Function(Exercise) addExercise;
   Function(Exercise) updateExisitingExercise;
   final bool isTemplate;
-  List<SetWidget> setList;
+  List<PrevSetWidget> setList;
   PrevWorkoutData prevworkoutData;
 
   PrevExerciseCard(
@@ -44,7 +45,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
   void initState() {
     // widget.workoutData.addNewSet = addTheNewSet;
     if (widget.setList.length < 1) {
-      widget.setList.add(new SetWidget(
+      widget.setList.add(new PrevSetWidget(
         name: widget.name,
         exercise: widget.exercise,
         addNewSet: widget.prevworkoutData.addNewSet,

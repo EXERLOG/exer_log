@@ -35,6 +35,41 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   return maxList;
 }
 
+Future<Max> getOneRepMax(String exercise) async {
+  int reps = 1;
+  QuerySnapshot<Map<String, dynamic>>? ref;
+  while (reps < 21) {
+      ref = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('maxes')
+        .where('exercise', isEqualTo: exercise)
+        .where('reps', isEqualTo: reps)
+        .orderBy('weight', descending: true)
+        .get();
+    if (ref.docs.length > 0) {
+      reps = 21;
+    }
+    reps += 1;
+  }
+  Max returnMax;
+  if (ref != null) {
+    final data = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('maxes')
+        .doc(ref.docs.first.id)
+        .withConverter<Max>(
+          fromFirestore: (snapshot, _) => Max.fromJson(snapshot.data()!),
+          toFirestore: (max, _) => max.toJson(),
+        );
+    returnMax = await data.get().then((value) => value.data()!);
+  } else {
+    returnMax = new Max(0, 0, 0, '');
+  }
+  return returnMax;
+}
+
 void saveMax(Max max) {
   Map<String, Object?> jsonMax = max.toJson();
   firestoreInstance
