@@ -33,7 +33,7 @@ class _MaxInformationState extends State<MaxInformation> {
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("Error"),
+              child: Text(text, style: setStyle,),
             );
           } else { 
             oneRepMax = snapshot.data!.weight / maxTable[snapshot.data!.reps -1];

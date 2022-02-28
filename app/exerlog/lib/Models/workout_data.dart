@@ -153,6 +153,8 @@ class WorkoutData {
         }
       }
 
+      List exercises = workout.exercises;
+
       if (exercise.name != '') {
         await getExerciseByName(exercise.name).then((value) => {
           workout.exercises.add(value),
@@ -161,6 +163,10 @@ class WorkoutData {
       }
     } catch (Exception) {
       print(Exception);
+      if (exercise.name != '') { 
+        workout.exercises.add(exercise);
+        setExerciseWidgets();
+      }
     }
     updateTotals(workout);
   }

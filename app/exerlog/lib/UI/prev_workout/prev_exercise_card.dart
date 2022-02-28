@@ -43,6 +43,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
 
   @override
   void initState() {
+    height += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
     if (widget.setList.length < 1) {
       widget.setList.add(new PrevSetWidget(
@@ -85,9 +86,13 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.name,
-                      style: mediumTitleStyleWhite,
+                    Container(
+                      height: getHeight(),
+                      width: screenWidth *0.45,
+                      child: Text(
+                        widget.name,
+                        style: mediumTitleStyleWhite,
+                      ),
                     ),
                     widget.exercise.totalWidget
                   ],
@@ -161,6 +166,17 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
       )
     );
   }
+
+  double getHeight() {
+    print("REMAINDER " + widget.name + (widget.exercise.name.length).toString());
+    double length = (widget.exercise.name.length/17);
+    if (length.toInt() == 0 || length == 1.0) {
+      return 25;
+    } else {
+      return (length.toInt() + 1) * 25;
+    }
+  }
+
 
   @override
   bool get wantKeepAlive => true;

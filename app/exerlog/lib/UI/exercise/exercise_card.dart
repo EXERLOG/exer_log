@@ -41,6 +41,9 @@ class _ExerciseCardState extends State<ExerciseCard>
 
   @override
   void initState() {
+    height += getHeight() - 20;
+    print("LENGTH " + widget.exercise.name + ": " + widget.exercise.name.length.toString());
+    
     // widget.workoutData.addNewSet = addTheNewSet;
     if (widget.setList.length < 1) {
       widget.setList.add(new SetWidget(
@@ -83,9 +86,13 @@ class _ExerciseCardState extends State<ExerciseCard>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.name,
-                      style: mediumTitleStyleWhite,
+                    Container(
+                      height: getHeight(),
+                      width: screenWidth *0.45,
+                      child: Text(
+                        widget.name,
+                        style: mediumTitleStyleWhite,
+                      ),
                     ),
                     widget.exercise.totalWidget
                   ],
@@ -197,6 +204,15 @@ class _ExerciseCardState extends State<ExerciseCard>
         )
       ]),
     );
+  }
+
+  double getHeight() {
+    double length = (widget.exercise.name.length/16);
+    if (length.toInt() == 0 || length == 1.0) {
+      return 25;
+    } else {
+      return (length.toInt() + 1) * 25;
+    }
   }
 
   @override
