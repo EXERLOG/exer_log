@@ -16,17 +16,14 @@ class WorkoutData {
 
   WorkoutData(this.workout, this.totals, this.updateTotals, this.addNewSet) {
     workout = this.workout;
-    if (this.workout.template) {
+  
       loadWorkoutData().then((value) {
         workout = value;
         setExerciseWidgets();
-        for (Exercise exercise in this.workout.exercises) {
+        for (Exercise exercise in workout.exercises) {
           updateExisitingExercise(exercise);
         }
       });
-    } else {
-      setExerciseWidgets();
-    }
   }
 
   addSet(exercise, newSet, id) {
@@ -58,10 +55,8 @@ class WorkoutData {
   Future<Workout> loadWorkoutData() async {
     Workout loaded_workout =
         new Workout(workout.exercises, '', '', 0, '', '', true);
-    List<Sets> setList = [];
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
-    Exercise newExercise;
     try {
       for (String exercise_id in workout.exercises) {
         await getSpecificExercise(exercise_id)
@@ -75,21 +70,16 @@ class WorkoutData {
       double avgKgs = 0;
       for (Exercise exercise in exerciseList) {
         await getExerciseByName(exercise.name).then((newexercise) => {
-              setList = [],
-              for (var sets in newexercise.sets)
+              for (Sets sets in newexercise.sets)
                 {
-                  setList.add(new Sets(sets['reps'], sets['rest'],
-                      sets['weight'], sets['sets'])),
-                  totalSets += sets['sets']! as int,
-                  reps = sets['sets'] * sets['reps'],
+                  totalSets += sets.sets,
+                  reps = sets.sets * sets.reps,
                   totalReps += reps,
-                  totalKgs += reps * sets['weight']
+                  totalKgs += reps * sets.weight
                 },
-              newExercise =
-                  new Exercise(exercise.name, setList, exercise.bodyParts),
               avgKgs = (totalKgs / totalReps).roundToDouble(),
-              setTotals(newExercise),
-              newExerciseList.add(newExercise),
+              setTotals(newexercise),
+              newExerciseList.add(newexercise)
             });
       }
       loaded_workout.exercises = newExerciseList;
@@ -154,7 +144,7 @@ class WorkoutData {
     }
   }
 
-  addExercise(exercise) {
+  addExercise(exercise) async {
     try {
       for (Exercise existingExercise in workout.exercises) {
         if (existingExercise.name == exercise.name) {
@@ -164,7 +154,10 @@ class WorkoutData {
       }
 
       if (exercise.name != '') {
-        workout.exercises.add(exercise);
+        await getExerciseByName(exercise.name).then((value) => {
+          workout.exercises.add(value),
+          setExerciseWidgets()
+        });
       }
     } catch (Exception) {
       print(Exception);

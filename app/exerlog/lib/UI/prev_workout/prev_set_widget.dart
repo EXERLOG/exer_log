@@ -51,34 +51,10 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Exercise>(
-      future: getExerciseByName(widget.name),
-      builder: (BuildContext context, AsyncSnapshot<Exercise> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            print(snapshot.error);
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          }
-          if (!snapshot.hasData) {
-            print("No data");
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          } else {
-            return getSetWidget(snapshot);
-          }
-        }
-      },
-    );
+    return getSetWidget();
   }
 
-  Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
+  Container getSetWidget() {
     return Container(
       height: screenHeight * 0.05,
       child: Row(
@@ -93,23 +69,23 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
             width: screenWidth * 0.08,
           ),
           Container(
-            child: getText(0, snapshot),
+            child: getText(0),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getText(1, snapshot),
+            child: getText(1),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getText(2, snapshot),
+            child: getText(2),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getText(3, snapshot),
+            child: getText(3),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getText(4, snapshot),
+            child: getText(4),
             width: screenWidth * 0.08,
           ),
         ],
@@ -117,21 +93,20 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
     );
   }
 
-  Widget getText(int type, AsyncSnapshot<Exercise> snapshot) {
+  Widget getText(int type) {
     List controllers = [
-      repsController,
-      setsController,
-      weightController,
-      restController,
+      widget.exercise.sets[widget.id].reps.toString(),
+      widget.exercise.sets[widget.id].sets.toString(),
+      widget.exercise.sets[widget.id].weight.toString(),
+      widget.exercise.sets[widget.id].rest.toString(),
       percentageController
     ];
     if (types[type] == '') {
       print("HelloMax");
-      double weight = snapshot.data?.sets[widget.id][types[2]];
-      return MaxInformation(id: snapshot.data!.name, weight: weight);
+      double weight = widget.exercise.sets[widget.id].weight;
+      return MaxInformation(id: widget.exercise.name, weight: weight);
       //widget.addNewSet(sets, widget.id);
     } else {
-      controllers[type] = getHintText(snapshot, type);
       return Center(
       child: Text(
         controllers[type],
@@ -139,16 +114,6 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
       ),
     );
     }
-  }
-
-  
-
-  String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {
-    String returnText = '';
-    try {
-      returnText = snapshot.data?.sets[widget.id][types[type]].toString() ?? '';
-    } catch (Exception) {}
-    return returnText;
   }
 
   @override

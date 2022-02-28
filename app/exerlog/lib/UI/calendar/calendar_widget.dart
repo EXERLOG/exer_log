@@ -111,7 +111,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
       DateTime day_to_add = prev_month.add(Duration(days: current_day + 1));
       week_list[j].add(day_to_add);
-      print(day_to_add.day);
       bool workoutAdded = false;
       for (int i = 0; i < workout_list.length; i++) {
         if (day_to_add.month == workout_list[i].date?.month && day_to_add.day == workout_list[i].date?.day)  {
@@ -122,8 +121,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       j++;
       current_day++;
     }
-
-    print(finalWorkoutList);
 
     for (int i = 0; i < 7; i++) {
       List<Widget> dates = [];

@@ -218,7 +218,7 @@ print("init");
         if (exerciseName != '') {
           setState(() {
             workoutData.addExercise(new Exercise(exerciseName, [], []));
-            workoutData.setExerciseWidgets();
+            // workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
         }

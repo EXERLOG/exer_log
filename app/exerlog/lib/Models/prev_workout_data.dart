@@ -61,40 +61,31 @@ class PrevWorkoutData {
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
     Exercise newExercise;
+    int totalSets = 0;
+    int totalReps = 0;
+    double totalKgs = 0;
+    int reps = 0;
+    double avgKgs = 0;
     try {
       for (String exercise_id in workout.exercises) {
-        await getSpecificExercise(exercise_id)
-            .then((value) async => {exerciseList.add(value)});
-      }
-      Future.delayed(Duration(seconds: 3));
-      int totalSets = 0;
-      int totalReps = 0;
-      double totalKgs = 0;
-      int reps = 0;
-      double avgKgs = 0;
-      for (Exercise exercise in exerciseList) {
-        await getExerciseByName(exercise.name).then((newexercise) => {
-              setList = [],
-              for (var sets in newexercise.sets)
+        await loadExercise(exercise_id)
+            .then((value) async => {
+              exerciseList.add(value),
+              for (Sets sets in value.sets)
                 {
-                  setList.add(new Sets(sets['reps'], sets['rest'],
-                      sets['weight'], sets['sets'])),
-                  totalSets += sets['sets']! as int,
-                  reps = sets['sets'] * sets['reps'],
+                  totalSets += sets.sets,
+                  reps = sets.reps * sets.sets,
                   totalReps += reps,
-                  totalKgs += reps * sets['weight']
+                  totalKgs += reps * sets.weight,
                 },
-              newExercise =
-                  new Exercise(exercise.name, setList, exercise.bodyParts),
               avgKgs = (totalKgs / totalReps).roundToDouble(),
-              setTotals(newExercise),
-              newExerciseList.add(newExercise),
-            });
+              setTotals(value),
+              });
       }
-      loaded_workout.exercises = newExerciseList;
+      loaded_workout.exercises = exerciseList;
+
       //workout = loaded_workout;
     } catch (Exception) {
-      print("Helloooo");
       print(Exception);
     }
     return loaded_workout;

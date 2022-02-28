@@ -41,7 +41,6 @@ class _SetWidgetState extends State<SetWidget>
   TextEditingController weightController = new TextEditingController();
   TextEditingController restController = new TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest', ''];
-  List setList = [0, 0, 0.0, 0.0];
   MaxInformation? maxinfoWidget;
   ValueNotifier<double> _notifier = ValueNotifier(0.0);
 
@@ -49,40 +48,16 @@ class _SetWidgetState extends State<SetWidget>
   void initState() {
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
     // TODO: implement initState
+    _notifier.value = widget.exercise.sets[widget.id].weight;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Exercise>(
-      future: getExerciseByName(widget.name),
-      builder: (BuildContext context, AsyncSnapshot<Exercise> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            print(snapshot.error);
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          }
-          if (!snapshot.hasData) {
-            print("No data");
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          } else {
-            _notifier.value = snapshot.data!.sets[widget.id][types[2]];
-            return getSetWidget(snapshot);
-          }
-        }
-      },
-    );
+    return getSetWidget();
   }
 
-  Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
+  Container getSetWidget() {
     return Container(
       height: screenHeight * 0.05,
       child: Row(
@@ -97,19 +72,19 @@ class _SetWidgetState extends State<SetWidget>
             width: screenWidth * 0.08,
           ),
           Container(
-            child: getTextField(0, snapshot),
+            child: getTextField(0),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getTextField(1, snapshot),
+            child: getTextField(1),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getTextField(2, snapshot),
+            child: getTextField(2),
             width: screenWidth * 0.145,
           ),
           Container(
-            child: getTextField(3, snapshot),
+            child: getTextField(3),
             width: screenWidth * 0.145,
           ),
           Container(
@@ -130,7 +105,7 @@ class _SetWidgetState extends State<SetWidget>
     oneRepMax = max;
   }
 
-  Widget getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
+  Widget getTextField(int type) {
     List controllers = [
       repsController,
       setsController,
@@ -139,7 +114,7 @@ class _SetWidgetState extends State<SetWidget>
     ];
 
 
-      controllers[type].text = getHintText(snapshot, type);
+      controllers[type].text = getHintText(type);
       return TextField(
       cursorColor: Colors.white,
       style: setStyle,
@@ -150,7 +125,7 @@ class _SetWidgetState extends State<SetWidget>
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        hintText: getHintText(snapshot, type),
+        hintText: getHintText(type),
         hintStyle: setHintStyle,
       ),
       onChanged: (value) {
@@ -206,10 +181,17 @@ class _SetWidgetState extends State<SetWidget>
     return (result * the_percent).roundToDouble();
   }
 
-  String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {
+  String getHintText(int type) {
+    List listType = [
+      widget.exercise.sets[widget.id].reps,
+      widget.exercise.sets[widget.id].sets,
+      widget.exercise.sets[widget.id].weight,
+      widget.exercise.sets[widget.id].rest,
+    ];
     String returnText = '';
+    print("TEXT: " + listType[type].toString());
     try {
-      returnText = snapshot.data?.sets[widget.id][types[type]].toString() ?? '';
+      returnText = listType[type].toString();
     } catch (Exception) {}
     return returnText;
   }

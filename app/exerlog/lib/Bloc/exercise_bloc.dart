@@ -88,16 +88,14 @@ Future<Exercise> getExerciseByName(String exercise) async {
       .orderBy('created', descending: false)
       .get();
 
-  final data = FirebaseFirestore.instance
-      .collection('users')
-      .doc(userID)
-      .collection('exercises')
-      .doc(ref.docs.last.id)
-      .withConverter<Exercise>(
-        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
-        toFirestore: (max, _) => max.toJson(),
-      );
-  return await data.get().then((value) => value.data()!);
+  Exercise the_exercise = Exercise.fromJson(ref.docs.last.data());
+  List<Sets> setList = [];
+  for (int i = 0; i < the_exercise.sets.length; i++) {
+    Sets set_ = Sets.fromString(the_exercise.sets[i]);
+    setList.add(set_);
+  }
+  the_exercise.sets = setList;
+  return the_exercise;
 }
 
 Future<String> saveExercise(Exercise exercise) async {

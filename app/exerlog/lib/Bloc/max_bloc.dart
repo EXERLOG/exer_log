@@ -21,16 +21,8 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
       .get();
   List<Max> maxList = [];
   for (int i = 0; i < ref.docs.length; i++) {
-    final data = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('maxes')
-        .doc(ref.docs[i].id)
-        .withConverter<Max>(
-          fromFirestore: (snapshot, _) => Max.fromJson(snapshot.data()!),
-          toFirestore: (max, _) => max.toJson(),
-        );
-    maxList.add(await data.get().then((value) => value.data()!));
+    Max max = Max.fromJson(ref.docs[i].data());
+    maxList.add(max);
   }
   return maxList;
 }
@@ -54,16 +46,7 @@ Future<Max> getOneRepMax(String exercise) async {
   }
   Max returnMax;
   if (ref != null) {
-    final data = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('maxes')
-        .doc(ref.docs.first.id)
-        .withConverter<Max>(
-          fromFirestore: (snapshot, _) => Max.fromJson(snapshot.data()!),
-          toFirestore: (max, _) => max.toJson(),
-        );
-    returnMax = await data.get().then((value) => value.data()!);
+    returnMax = Max.fromJson(ref.docs.first.data());
   } else {
     returnMax = new Max(0, 0, 0, '');
   }
