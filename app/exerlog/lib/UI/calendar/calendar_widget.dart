@@ -81,10 +81,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     int weekday = DateTime.now().weekday;
     DateTime now = DateTime.now();
     
-    print(today);
-    print(month);
-    print(year);
-    print(weekday);
     List week_list = [[],[],[],[],[],[],[]];
     List<Widget> dates = [];
     // month could span 4-6 weeks which is 4-6 columns

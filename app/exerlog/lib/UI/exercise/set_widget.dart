@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/UI/maxes/max_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,24 +31,22 @@ class SetWidget extends StatefulWidget {
 }
 
 class _SetWidgetState extends State<SetWidget>
-    with AutomaticKeepAliveClientMixin {
-  late ValueNotifier<String> percentage;
+  with AutomaticKeepAliveClientMixin {
   int percent = 0;
-  double oneRepMax = 0.0;
+  Max? oneRepMax;
   Sets sets = new Sets(0, 0, 0, 0);
+  String percentageController = '0%';
   TextEditingController setsController = new TextEditingController();
   TextEditingController repsController = new TextEditingController();
   TextEditingController weightController = new TextEditingController();
   TextEditingController restController = new TextEditingController();
-  List types = ['reps', 'sets', 'weight', 'rest'];
+  List types = ['reps', 'sets', 'weight', 'rest', ''];
   List setList = [0, 0, 0.0, 0.0];
+  MaxInformation? maxinfoWidget;
+  ValueNotifier<double> _notifier = ValueNotifier(0.0);
 
   @override
   void initState() {
-    percentage = ValueNotifier<String>('0%');
-    getOneRepMax().then((value) {
-      oneRepMax = value;
-    });
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
     // TODO: implement initState
     super.initState();
@@ -74,6 +74,7 @@ class _SetWidgetState extends State<SetWidget>
               child: getSetWidget(snapshot),
             );
           } else {
+            _notifier.value = snapshot.data!.sets[widget.id][types[2]];
             return getSetWidget(snapshot);
           }
         }
@@ -111,43 +112,35 @@ class _SetWidgetState extends State<SetWidget>
             child: getTextField(3, snapshot),
             width: screenWidth * 0.145,
           ),
-          ValueListenableBuilder(
-            valueListenable: percentage,
-            builder: (context, value, child) => Container(
-              child: Center(
-                  child: Text(
-                value.toString(),
-                style: setStyle,
-              )),
-              width: screenWidth * 0.11,
-            ),
-          )
+          Container(
+            child: ValueListenableBuilder(
+            valueListenable: _notifier,
+            builder: (BuildContext context, double value, Widget? child) {
+              return MaxInformation(id: widget.exercise.name, weight: value, setMax: setOneRepMax);
+            } 
+          ), 
+            width: screenWidth * 0.11,
+          ),
         ],
       ),
     );
   }
 
-  TextField getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
+  void setOneRepMax(Max max) {
+    oneRepMax = max;
+  }
+
+  Widget getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
     List controllers = [
       repsController,
       setsController,
       weightController,
       restController
     ];
-    controllers[type].text = getHintText(snapshot, type);
-    if (widget.isTemplate && controllers[type].text == '') {
-      double weight = snapshot.data?.sets[widget.id][types[2]];
-      try {
-        getOneRepMax().then((value) {
-          percentage.value = ((weight / value) * 100).toInt().toString() + '%';
-        });
-      } catch (Exception) {
-        print("Percentage error");
-      }
 
-      //widget.addNewSet(sets, widget.id);
-    }
-    return TextField(
+
+      controllers[type].text = getHintText(snapshot, type);
+      return TextField(
       cursorColor: Colors.white,
       style: setStyle,
       textAlign: TextAlign.center,
@@ -166,13 +159,9 @@ class _SetWidgetState extends State<SetWidget>
         if (weightController.text.contains('%')) {
           // set weight to be percentage of max
           var regex = new RegExp(r'\D');
-          getWeightFromMax(weightController.text.replaceAll(regex, ''))
-              .then((result) {
-            sets.weight = result;
-            weightController.text = result.toString();
-            percentage.value =
-                ((sets.weight / oneRepMax) * 100).round().toString() + '%';
-          });
+          sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
+          weightController.text = sets.weight.toString();
+          _notifier.value = sets.weight;
         }
         sets.weight = getInfo(weightController.text, 1);
         sets.rest = getInfo(restController.text, 1);
@@ -181,8 +170,7 @@ class _SetWidgetState extends State<SetWidget>
         }
         widget.addNewSet(widget.exercise, sets, widget.id);
         try {
-          percentage.value =
-              ((sets.weight / oneRepMax) * 100).toInt().toString() + '%';
+          _notifier.value = sets.weight;
         } catch (Exception) {
           print("Percentage exception:");
           print(Exception);
@@ -208,35 +196,14 @@ class _SetWidgetState extends State<SetWidget>
     }
   }
 
-  Future<double> getOneRepMax() async {
-    var result = await getSpecificMax(widget.name, 1);
-    if (result.length < 1) {
-      double count = 0;
-      while (result.length < 1 || count > 20) {
-        result = await getSpecificMax(widget.name, count);
-        count++;
-      }
-      if (result.length < 1) {
-        return 0.0;
-      }
-      return result[0].weight / maxTable[(count - 1).toInt()];
-    }
-    return result[0].weight;
-  }
-
-  Future<double> getWeightFromMax(String percentage) async {
-    var result = await getSpecificMax(widget.name, 1);
-    if (result.length < 1) {
-      double count = 2;
-      while (result.length < 1 || count > 20) {
-        result = await getSpecificMax(widget.name, count);
-        count++;
-      }
-      return (result[0].weight / maxTable[(count - 1).toInt()]).roundToDouble();
-    }
-    print(result);
-    return (result[0].weight * (double.parse(percentage) / 100))
-        .roundToDouble();
+  double getWeightFromMax(String percentage) {
+    var result = oneRepMax!.weight / maxTable[oneRepMax!.reps -1];
+    print("RESULT " + result.toString());
+    print(oneRepMax!.weight);
+    print(oneRepMax!.reps);
+    double the_percent = double.parse(percentage) / 100;
+    print(the_percent);
+    return (result * the_percent).roundToDouble();
   }
 
   String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {

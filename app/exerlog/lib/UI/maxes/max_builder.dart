@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 
 class MaxInformation extends StatefulWidget {
   final String id;
-  final double weight;
+  double weight;
+  Function? setMax;
 
-  MaxInformation({required this.id, required this.weight});
+  MaxInformation({required this.id, required this.weight, this.setMax});
   @override
   _MaxInformationState createState() => _MaxInformationState();
 
@@ -34,9 +35,12 @@ class _MaxInformationState extends State<MaxInformation> {
             return Center(
               child: Text("Error"),
             );
-          } else {
+          } else { 
             oneRepMax = snapshot.data!.weight / maxTable[snapshot.data!.reps -1];
             print(snapshot.data!.exercise + ": " +oneRepMax.toString() );
+            if (widget.setMax != null) {
+              widget.setMax!(snapshot.data);
+            }
             text = ((widget.weight / oneRepMax) * 100).round().toString() + "%";
             return Center(
               child: Text(text, style: setStyle,),
@@ -45,6 +49,12 @@ class _MaxInformationState extends State<MaxInformation> {
         }
       },
     );
+  }
+
+  void updateSelf(double weight) {
+    setState(() {
+      widget.weight = weight;
+    });
   }
 
 }
