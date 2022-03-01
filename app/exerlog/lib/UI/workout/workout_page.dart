@@ -72,6 +72,22 @@ print("init");
     //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CalendarPage(
+                        ),
+                      ),
+                    );
+          },
+          color: greenTextColor
+        ),
+      ),
       body: firstLoad
           ? Container(
               color: backgroundColor,
@@ -82,30 +98,6 @@ print("init");
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(top: screenHeight*0.03),
-                      height: screenHeight *0.05,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          
-                          BackButton(
-                          onPressed: () {
-                            print("hello");
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CalendarPage(
-                                ),
-                              ),
-                            );
-                          },
-                          color: greenTextColor,
-                        ),
-                        Container()
-                        ]
-                      ),
-                    ),
                     WorkoutTotalsWidget(
                       totals: workoutData.totals,
                     ),
