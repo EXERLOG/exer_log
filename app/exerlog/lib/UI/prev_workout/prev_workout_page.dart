@@ -93,7 +93,6 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(),
                     WorkoutTotalsWidget(
                       totals: workoutData.totals,
                     ),
