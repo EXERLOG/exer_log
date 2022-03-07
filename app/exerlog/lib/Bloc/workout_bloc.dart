@@ -28,7 +28,6 @@ Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDat
       .doc(userID)
       .collection('workouts')
       .where('date', isGreaterThanOrEqualTo: startDate).where('date', isLessThanOrEqualTo: endDate).get();
-      print(ref.docs[1]['name']);
   
   List<Workout> workoutList = [];
   for (int i = 0; i < ref.docs.length; i++) {
@@ -101,7 +100,6 @@ void replaceWorkouts() async {
     Workout workout = await getSpecificWorkoutToReplace(ref.docs[i].id);
     for (int i = 0; i < workout.exercises.length; i++) {
       exerciseList.add(await getSpecificExerciseToReplace(workout.exercises[i]));
-      print(exerciseList[i].name);
     }
     workout.exercises = exerciseList;
     saveWorkout(workout);
@@ -121,7 +119,6 @@ void saveWorkout(Workout workout) async {
       .collection("workouts")
       .add(jsonWorkout)
       .then((value) {
-    print(value.id);
   });
 
   //databaseRef.push().set(workout.toJson());

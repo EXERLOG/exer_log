@@ -12,11 +12,11 @@ import 'package:flutter/material.dart';
 
 class ExerciseCard extends StatefulWidget {
   final String name;
-  final Exercise exercise;
+  Exercise exercise;
   Function(Exercise) addExercise;
   Function(Exercise) updateExisitingExercise;
+  Function(Exercise, Sets, int) removeSet;
   final bool isTemplate;
-  List<SetWidget> setList;
   WorkoutData workoutData;
 
   ExerciseCard(
@@ -24,8 +24,8 @@ class ExerciseCard extends StatefulWidget {
       required this.exercise,
       required this.addExercise,
       required this.updateExisitingExercise,
+      required this.removeSet,
       required this.isTemplate,
-      required this.setList,
       required this.workoutData});
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
@@ -33,30 +33,50 @@ class ExerciseCard extends StatefulWidget {
 
 class _ExerciseCardState extends State<ExerciseCard>
     with AutomaticKeepAliveClientMixin {
+      static int counter = 0;
+        List<SetWidget> setList = [];
   int index = 0;
-  double height = screenHeight * 0.23;
+  double originalHeight = screenHeight * 0.23;
+  double height = 0;
   TotalsData totalData =
       new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
   late ExerciseTotalsWidget totalWidget;
 
   @override
   void initState() {
-    height += getHeight() - 20;
-    print("LENGTH " + widget.exercise.name + ": " + widget.exercise.name.length.toString());
-    
+    setList = [];
+    originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
-    if (widget.setList.length < 1) {
-      widget.setList.add(new SetWidget(
+    if (widget.exercise.sets.length < 1) {
+      setList.add(new SetWidget(
         name: widget.name,
         exercise: widget.exercise,
-        addNewSet: widget.workoutData.addNewSet,
+        addNewSet: widget.workoutData.addSet,
+        removeSet: removeSet,
         //createNewSet: createNewSet,
         id: 0,
+        counter: counter,
         isTemplate: widget.isTemplate,
       ));
       widget.exercise.sets.add(new Sets(0, 0, 0, 0));
     }
-    height += (screenHeight * 0.05) * (widget.setList.length - 1);
+
+    if (widget.exercise.sets.length > 0) {
+      int i = 0;
+      for (Sets sets in widget.exercise.sets) {
+        setList.add(new SetWidget(
+            name: widget.exercise.name,
+            exercise: widget.exercise,
+            addNewSet: widget.workoutData.addSet,
+            removeSet: removeSet,
+            counter: counter,
+            id: i,
+            isTemplate: widget.isTemplate));
+            counter++;
+        i++;
+      }
+    }
+    height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
     super.initState();
   }
 
@@ -64,7 +84,7 @@ class _ExerciseCardState extends State<ExerciseCard>
   Widget build(BuildContext context) {
     totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
-      height: height + screenHeight * 0.06,
+      height: height + screenHeight*0.06,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -155,7 +175,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                     ),
                   ),
                   Column(
-                    children: widget.setList,
+                    children: setList,
                   )
                 ],
               )
@@ -183,27 +203,61 @@ class _ExerciseCardState extends State<ExerciseCard>
                   size: 50,
                   color: backgroundColor,
                 ),
-                onPressed: () {
-                  setState(() {
-                    height += screenHeight * 0.05;
-                    widget.setList.add(new SetWidget(
-                      name: widget.name,
-                      exercise: widget.exercise,
-                      addNewSet: widget.workoutData.addSet,
-                      //createNewSet: createNewSet,
-                      id: widget.exercise.sets.length,
-                      isTemplate: false,
-                    ));
-                    widget.exercise.sets.add(new Sets(0, 0, 0, 0));
-                    widget.addExercise(widget.exercise);
-                  });
-                },
+                onPressed: addSet,
               ),
             ),
           ),
         )
       ]),
     );
+  }
+
+  void addSet() {
+    counter++;
+     setState(() {
+      setList.add(new SetWidget(
+        name: widget.name,
+        exercise: widget.exercise,
+        addNewSet: widget.workoutData.addSet,
+        removeSet: removeSet,
+        counter: counter,
+        id: widget.exercise.sets.length,
+        isTemplate: false,
+      ));
+      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.addExercise(widget.exercise);
+      });
+      setHeight();
+  }
+
+  void removeSet(exercise, sets, id) {
+    setState(() {
+      print("REMOVING " + id.toString());
+      setList.removeAt(id);
+      widget.exercise.sets.remove(sets);
+      widget.exercise = widget.removeSet(exercise, sets, id);
+      height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+      setList = [];
+      int i = 0;
+      for (Sets sets in widget.exercise.sets) {
+        setList.add(new SetWidget(
+            name: widget.exercise.name,
+            exercise: widget.exercise,
+            addNewSet: widget.workoutData.addSet,
+            removeSet: removeSet,
+            counter: counter,
+            id: i,
+            isTemplate: widget.isTemplate));
+        counter++;
+        i++;
+      }
+    });
+  }
+
+   void setHeight() {
+     setState(() {
+       height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+     });
   }
 
   double getHeight() {

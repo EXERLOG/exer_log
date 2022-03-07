@@ -61,7 +61,6 @@ void saveMax(Max max) {
       .collection("maxes")
       .add(jsonMax)
       .then((value) {
-    print(value.id);
   });
 }
 

@@ -263,7 +263,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
         Navigator.of(context).pop();
           Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => WorkoutPage(widget.workout!
+                      builder: (context) => WorkoutPage(widget.workout
                       ),
                     ),
                   );

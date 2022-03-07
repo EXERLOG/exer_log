@@ -11,10 +11,9 @@ class WorkoutData {
   Function(Workout) updateTotals;
   Workout workout;
   WorkoutTotals totals;
-  Function(Exercise, Sets, int) addNewSet;
   List<ExerciseCard> exerciseWidgets = [];
 
-  WorkoutData(this.workout, this.totals, this.updateTotals, this.addNewSet) {
+  WorkoutData(this.workout, this.totals, this.updateTotals) {
     workout = this.workout;
   
       loadWorkoutData().then((value) {
@@ -32,8 +31,15 @@ class WorkoutData {
     setTotals(exercise);
   }
 
+  removeSet(exercise, setToRemove,id) {
+    exercise.sets.removeAt(id);
+    setExerciseWidgets();
+    setTotals(exercise);
+    return exercise;
+  }
+
   void setTotals(exercise) {
-    TotalsData returnTotals = exercise.totalWidget.totals;
+    TotalsData returnTotals = TotalsData(['', '', '', '']);
     int totalSets = 0;
     int totalReps = 0;
     double totalKgs = 0;
@@ -95,27 +101,18 @@ class WorkoutData {
 
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
+    int count = 0;
     for (Exercise exercise in workout.exercises) {
-      List<SetWidget> setList = [];
-      int i = 0;
-      for (Sets sets in exercise.sets) {
-        setList.add(new SetWidget(
-            name: exercise.name,
-            exercise: exercise,
-            addNewSet: addSet,
-            id: i,
-            isTemplate: workout.template));
-        i++;
-      }
       exerciseWidgets.add(new ExerciseCard(
         name: exercise.name,
         exercise: exercise,
         addExercise: addExercise,
         updateExisitingExercise: updateExisitingExercise,
+        removeSet: removeSet,
         isTemplate: workout.template,
-        setList: setList,
         workoutData: this,
       ));
+
     }
     return exerciseWidgets;
   }
@@ -125,9 +122,6 @@ class WorkoutData {
       totals = new WorkoutTotals(0, 0, 0, 0, 0);
       for (Exercise oldexercise in workout.exercises) {
         totals.exercises++;
-        if (oldexercise.name == exercise.name) {
-          oldexercise = exercise;
-        }
         for (Sets sets in oldexercise.sets) {
           totals.sets += sets.sets;
           int reps_set = sets.sets * sets.reps;

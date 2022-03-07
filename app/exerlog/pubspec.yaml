@@ -39,6 +39,7 @@ dependencies:
   google_sign_in: ^5.2.1
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.2.0
+  flutter_slidable: ^1.2.0
 
 
 

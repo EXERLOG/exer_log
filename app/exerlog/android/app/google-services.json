@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "122654432640",
+    "firebase_url": "https://exerlog-2495b-default-rtdb.firebaseio.com",
     "project_id": "exerlog-2495b",
     "storage_bucket": "exerlog-2495b.appspot.com"
   },
@@ -13,6 +14,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "122654432640-638u4t6v7ajqr09fk50m8r0si05issuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hallden.exerlog",
+            "certificate_hash": "3e7bb8b95ea81cd36af557244370d9e316ddab24"
+          }
+        },
+        {
+          "client_id": "122654432640-m1o6n9413o6op0t9oj2tu14l4229kg6a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hallden.exerlog",
+            "certificate_hash": "d3756ea90e5aa05d83ad52b15a7f8ce2a57c44b6"
+          }
+        },
         {
           "client_id": "122654432640-9nn32j0nsjoj4144ed8mqjrfjad7rlts.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +46,13 @@
             {
               "client_id": "122654432640-9nn32j0nsjoj4144ed8mqjrfjad7rlts.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "122654432640-tnmhp7ieu057vgivbs0c6lgh6timqarl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hallden.exerlog"
+              }
             }
           ]
         }

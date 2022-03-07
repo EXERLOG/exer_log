@@ -37,7 +37,6 @@ class _MaxInformationState extends State<MaxInformation> {
             );
           } else { 
             oneRepMax = snapshot.data!.weight / maxTable[snapshot.data!.reps -1];
-            print(snapshot.data!.exercise + ": " +oneRepMax.toString() );
             if (widget.setMax != null) {
               widget.setMax!(snapshot.data);
             }

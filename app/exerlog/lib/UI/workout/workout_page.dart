@@ -49,11 +49,11 @@ print("init");
       
     );
     workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
     } else {
       firstLoad = false;
       workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
       addExercises(widget.workout);
     }
     // TODO: implement initState
@@ -186,7 +186,7 @@ print("init");
     setState(() {
       firstLoad = false;
       //workoutData.workout = new_workout;
-      //workout = new_workout;
+      //widget.workout = new_workout;
       //print(workoutData.exerciseWidgets[0].setList.length);
     });
   }
@@ -278,7 +278,7 @@ print("init");
   addExercises(new_workout) {
     setState(() {
       WorkoutData newWorkoutData = new WorkoutData(new_workout,
-          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
       firstLoad = false;
       workoutData = newWorkoutData;
       widget.workout = newWorkoutData.workout;
