@@ -11,19 +11,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseCard extends StatefulWidget {
+  final ValueKey key;
   final String name;
   Exercise exercise;
   Function(Exercise) addExercise;
   Function(Exercise) updateExisitingExercise;
+  Function(Exercise) removeExercise;
   Function(Exercise, Sets, int) removeSet;
   final bool isTemplate;
   WorkoutData workoutData;
 
   ExerciseCard(
-      {required this.name,
+      {
+      required this.key,
+      required this.name,
       required this.exercise,
       required this.addExercise,
       required this.updateExisitingExercise,
+      required this.removeExercise,
       required this.removeSet,
       required this.isTemplate,
       required this.workoutData});
@@ -61,7 +66,7 @@ class _ExerciseCardState extends State<ExerciseCard>
       widget.exercise.sets.add(new Sets(0, 0, 0, 0));
     }
 
-    if (widget.exercise.sets.length > 0) {
+    else if (widget.exercise.sets.length > 0) {
       int i = 0;
       for (Sets sets in widget.exercise.sets) {
         setList.add(new SetWidget(
@@ -232,24 +237,27 @@ class _ExerciseCardState extends State<ExerciseCard>
 
   void removeSet(exercise, sets, id) {
     setState(() {
-      print("REMOVING " + id.toString());
       setList.removeAt(id);
-      widget.exercise.sets.remove(sets);
-      widget.exercise = widget.removeSet(exercise, sets, id);
-      height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
-      setList = [];
-      int i = 0;
-      for (Sets sets in widget.exercise.sets) {
-        setList.add(new SetWidget(
-            name: widget.exercise.name,
-            exercise: widget.exercise,
-            addNewSet: widget.workoutData.addSet,
-            removeSet: removeSet,
-            counter: counter,
-            id: i,
-            isTemplate: widget.isTemplate));
-        counter++;
-        i++;
+      if (setList.length == 0) {
+        widget.removeExercise(exercise);
+      } else {
+        widget.exercise.sets.remove(sets);
+        widget.exercise = widget.removeSet(exercise, sets, id);
+        height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+        setList = [];
+        int i = 0;
+        for (Sets sets in widget.exercise.sets) {
+          setList.add(new SetWidget(
+              name: widget.exercise.name,
+              exercise: widget.exercise,
+              addNewSet: widget.workoutData.addSet,
+              removeSet: removeSet,
+              counter: counter,
+              id: i,
+              isTemplate: widget.isTemplate));
+          counter++;
+          i++;
+        }
       }
     });
   }

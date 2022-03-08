@@ -6,12 +6,14 @@ import 'package:exerlog/UI/exercise/exercise_card.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:flutter/widgets.dart';
 
 class WorkoutData {
   Function(Workout) updateTotals;
   Workout workout;
   WorkoutTotals totals;
   List<ExerciseCard> exerciseWidgets = [];
+  static int key = 0;
 
   WorkoutData(this.workout, this.totals, this.updateTotals) {
     workout = this.workout;
@@ -108,11 +110,13 @@ class WorkoutData {
         exercise: exercise,
         addExercise: addExercise,
         updateExisitingExercise: updateExisitingExercise,
+        removeExercise: removeExercise,
         removeSet: removeSet,
         isTemplate: workout.template,
         workoutData: this,
+        key: ValueKey(key),
       ));
-
+      key++;
     }
     return exerciseWidgets;
   }
@@ -136,6 +140,12 @@ class WorkoutData {
       print("problem");
       print(Exception);
     }
+  }
+
+  removeExercise(exercise) async {
+    workout.exercises.remove(exercise);
+    setExerciseWidgets();
+    updateTotals(workout);
   }
 
   addExercise(exercise) async {
