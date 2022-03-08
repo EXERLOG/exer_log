@@ -234,14 +234,12 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
       onPressed: () {
         deleteWorkout(workoutData.workout);
         Navigator.of(context).pop();
-        setState(() {
           Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CalendarPage(
                       ),
                     ),
                   );
-        });
 
       },
     );
