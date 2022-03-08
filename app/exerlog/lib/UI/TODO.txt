@@ -1,10 +1,8 @@
 Pre-alpha
- - remove exercise
- - remove set
  - exercise totals should update
-
+ - deleting workout
  feature
- - calendar to see workouts
+ - add streambuilder functionality
 
 
 MVP:

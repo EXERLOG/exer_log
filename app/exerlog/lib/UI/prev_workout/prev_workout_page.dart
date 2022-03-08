@@ -13,6 +13,7 @@ import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/exercise/exercise_card.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
+import 'package:exerlog/UI/prev_workout/delete_prev_workout_dialog.dart';
 import 'package:exerlog/UI/workout/add_new_workout_alert.dart';
 import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
@@ -36,13 +37,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
   late PrevWorkoutData workoutData;
   String exerciseName = '';
   late bool firstLoad;
-  late Workout workout;
+  late Workout newWorkout;
 
   @override
   void initState() {
     print("init");
     firstLoad = true;
-    workout = new Workout(
+    newWorkout = new Workout(
       [],
       '',
       '',
@@ -51,9 +52,12 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       '',
       false,
     );
+
+    newWorkout.id = widget.workout.id;
+
     // TODO: implement initState
     workoutData = new PrevWorkoutData(
-        workout, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+        newWorkout, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
 
     super.initState();
   }
@@ -81,7 +85,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
                     );
           },
           color: greenTextColor
-        ), 
+        ),
+        actions: [
+          TextButton(onPressed: () {
+            showDeleteWorkoutAlertDialog(context);
+          }, 
+          child: Icon(Icons.delete,color: greenTextColor,))
+        ], 
       ),
       body: firstLoad
           ? Container(
@@ -96,19 +106,15 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
                     WorkoutTotalsWidget(
                       totals: workoutData.totals,
                     ),
-                    Container(
-                      height: screenHeight * 0.5,
-                      child: ListView(
-                        addAutomaticKeepAlives: true,
-                        children: workoutData.exerciseWidgets,
+                    Expanded(
+                      child: Container(
+                        //height: screenHeight * 0.5,
+                        child: ListView(
+                          addAutomaticKeepAlives: true,
+                          children: workoutData.exerciseWidgets,
+                        ),
                       ),
                     ),
-                    Container(
-                      height: screenHeight * 0.065,
-                      width: screenWidth * 0.9,
-                      margin: EdgeInsets.only(bottom: 30),
-                      
-                    )
                   ],
                 ),
               ),
@@ -199,7 +205,6 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
               updateTotals,
               addNewSet);
         });
-        Navigator.pop(context);
       },
     );
 
@@ -216,6 +221,46 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
   }
 
+showDeleteWorkoutAlertDialog(BuildContext context) {
+    RaisedGradientButton okButton = RaisedGradientButton(
+      gradient: LinearGradient(
+        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+      ),
+      radius: 30,
+      child: Text(
+        "DELETE",
+        style: buttonTextSmall,
+      ),
+      onPressed: () {
+        deleteWorkout(workoutData.workout);
+        Navigator.of(context).pop();
+        setState(() {
+          Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CalendarPage(
+                      ),
+                    ),
+                  );
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    DeleteWorkoutAlert alert = DeleteWorkoutAlert(okButton);
+
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
+
   setWorkoutName(name) {
     workoutData.workout.name = name;
   }
@@ -226,7 +271,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
           new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
       firstLoad = false;
       workoutData = newWorkoutData;
-      workout = newWorkoutData.workout;
+      newWorkout = newWorkoutData.workout;
       //print(workoutData.workout.exercises[0]);
     });
   }

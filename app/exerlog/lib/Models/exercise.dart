@@ -7,6 +7,7 @@ class Exercise {
   String name;
   List sets;
   List bodyParts;
+  String? id;
   ExerciseTotalsWidget totalWidget =
       new ExerciseTotalsWidget(new TotalsData(['', '', '', '']), 0);
 

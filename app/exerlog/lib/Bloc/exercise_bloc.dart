@@ -7,8 +7,6 @@ import 'package:exerlog/Models/workout.dart';
 
 import '../main.dart';
 
-deleteExercise() {}
-
 Future<Exercise> getSpecificExercise(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')
@@ -20,24 +18,7 @@ Future<Exercise> getSpecificExercise(String id) async {
         toFirestore: (exercise, _) => exercise.toJson(),
       );
   Exercise exercise = await data.get().then((value) => value.data()!);
-  return exercise;
-}
-Future<Exercise> getSpecificExerciseToReplace(String id) async {
-  final data = FirebaseFirestore.instance
-      .collection('users')
-      .doc("KGjuifVkeop9CFHmTIHU")
-      .collection('exercises')
-      .doc(id)
-      .withConverter<Exercise>(
-        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
-        toFirestore: (exercise, _) => exercise.toJson(),
-      );
-  Exercise exercise = await data.get().then((value) => value.data()!);
-  List<Sets> setList = [];
-  for (int i = 0; i < exercise.sets.length; i++) {
-    setList.add(Sets.fromString(exercise.sets[i]));
-  }
-  exercise.sets = setList;
+  exercise.id = data.id;
   return exercise;
 }
 
@@ -70,6 +51,7 @@ Future<Exercise> loadExercise(String id) async {
         toFirestore: (exercise, _) => exercise.toJson(),
       );
   Exercise exercise = await data.get().then((value) => value.data()!);
+  exercise.id = data.id;
   List<Sets> setList = [];
   for (int i = 0; i < exercise.sets.length; i++) {
     Sets set_ = Sets.fromString(exercise.sets[i]);
@@ -99,7 +81,6 @@ Future<Exercise> getExerciseByName(String exercise) async {
 }
 
 Future<String> saveExercise(Exercise exercise) async {
-  checkMax(exercise);
   Map<String, Object?> jsonExercise = exercise.toJson();
   final ref = await firestoreInstance
       .collection("users")
@@ -107,7 +88,20 @@ Future<String> saveExercise(Exercise exercise) async {
       .collection("exercises")
       .doc();
   await ref.set(jsonExercise);
+  exercise.id = ref.id;
+  checkMax(exercise);
   return ref.id;
+}
+
+void deleteExercise(Exercise exercise) async {
+  //checkRemoveMax(exercise);
+  await firestoreInstance
+      .collection("users")
+      .doc(userID)
+      .collection("exercises")
+      .doc(exercise.id)
+      .delete();
+  deleteMax(exercise);
 }
 
 void updateExercise(String id, Exercise exercise) {}

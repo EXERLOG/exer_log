@@ -38,6 +38,12 @@ class _WorkoutPageState extends State<WorkoutPage> {
 print("init");
     if (widget.workout == null) {
       firstLoad = true;
+      String id = '';
+      try {
+        id = widget.workout!.id!;
+      } catch (Exception) {
+
+      }
        widget.workout = new Workout(
       [],
       '',
@@ -48,6 +54,7 @@ print("init");
       false,
       
     );
+    widget.workout!.id = id;
     workoutData = new WorkoutData(
         widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
     } else {

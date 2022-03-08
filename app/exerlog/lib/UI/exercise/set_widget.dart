@@ -75,7 +75,7 @@ class _SetWidgetState extends State<SetWidget>
           motion: ScrollMotion(),
     
           // A pane can dismiss the Slidable.
-          dismissible: DismissiblePane(onDismissed: () {}),
+          //dismissible: DismissiblePane(onDismissed: () {}),
     
           // All actions are defined in the children parameter.
           children: [

@@ -11,6 +11,7 @@ class Workout {
   String name;
   bool template;
   DateTime? date;
+  String? id;
 
   Workout(this.exercises, this.notes, this.rating, this.time, this.type,
       this.name, this.template);

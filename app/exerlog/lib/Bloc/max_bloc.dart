@@ -8,8 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '../main.dart';
 
-deleteMax() {}
-
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
@@ -25,6 +23,23 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
     maxList.add(max);
   }
   return maxList;
+}
+
+void deleteMax(Exercise exercise) async {
+  final ref = await firestoreInstance
+      .collection("users")
+      .doc(userID)
+      .collection("maxes")
+      .where('exerciseID', isEqualTo: exercise.id)
+      .get();
+  for (int i = 0; i < ref.docs.length; i++) {
+      firestoreInstance
+    .collection('users')
+    .doc(userID)
+    .collection('maxes')
+    .doc(ref.docs[i].id)
+    .delete();
+  }
 }
 
 Future<Max> getOneRepMax(String exercise) async {
@@ -93,6 +108,7 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   } else {
@@ -117,10 +133,13 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   }
 }
+
+
 
 void updateExercise(String id, Exercise exercise) {}
 
