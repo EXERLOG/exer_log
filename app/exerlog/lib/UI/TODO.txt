@@ -1,8 +1,37 @@
 Pre-alpha
  - exercise totals should update
- - deleting workout
+ - make sure that redoing a workout saves new workout
+ - add user id to firebase exercises
+ - add total reps, sets, weight for workouts
+ - add total reps, sets, weight for exercises 
  feature
  - add streambuilder functionality
+
+exercise_names 
+    name "BB Bench Press"
+    users
+        userid1 'exercise_id'
+        userid2 'exercise_id'
+
+when I get an exercise we check if
+the exercise name exists 
+if it exists we check if the exercise has the user
+if it does then we get the exercise id's from the user 
+then we get the exercise id's and sort by date
+then get the most recent exercise 
+this should be the exercise that we want  
+
+when I add an exercise we 
+first add to the exericse database then we
+check if the exercise name exists 
+if not we add the exercise name
+if it exists we check if the exercise has the user
+we add the user and exercise id
+
+need the exercises
+need the reps and sets
+and the weight calculated on their % but my max 
+
 
 
 MVP:
