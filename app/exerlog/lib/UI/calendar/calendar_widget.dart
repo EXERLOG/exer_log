@@ -18,20 +18,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    return FutureBuilder<List<Widget>>(
-      future: getDates(),
-      builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("Error"),
-            );
-          } else {
-      return Container(
+    return Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -60,19 +47,15 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: snapshot.data!,
+              children: getDates(),
             )
           ],
         ),
       );
     }
   }
-      }
-    );
-  }
-  }
 
-  Future<List<Widget>> getDates() async {
+  List<Widget> getDates() {
     List weekdayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     List<Widget> datelist = [];
     int today = DateTime.now().day;
@@ -93,7 +76,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     // calculate how many days and weeks should be shown in the calendar
     DateTime prev_month = first.subtract(Duration(days: first.weekday));
 
-    final workout_list = await getWorkoutsWithinDates(prev_month, last.add(Duration(days: 7-last.weekday+1)));
     int days_to_show = last.day + (first.weekday-1) + (7-last.weekday);
     double weeks = days_to_show/7;
     if (weeks is !int) {
@@ -103,7 +85,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
     int current_day = 0;
     int j = 0;
-    Map finalWorkoutList = {};
     while (current_day != days_to_show) {
       if (j == 7) {
         j = 0;
@@ -111,13 +92,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
       DateTime day_to_add = prev_month.add(Duration(days: current_day + 1));
       week_list[j].add(day_to_add);
-      bool workoutAdded = false;
-      for (int i = 0; i < workout_list.length; i++) {
-        if (day_to_add.month == workout_list[i].date?.month && day_to_add.day == workout_list[i].date?.day)  {
-          finalWorkoutList[day_to_add] = workout_list[i];
-        }
-      }
-
       j++;
       current_day++;
     }
@@ -126,8 +100,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       List<Widget> dates = [];
       dates.add(Text(weekdayNames[i], style: setStyle,));
       for (int j = 0; j < week_list[i].length; j++) {
-        Workout workout = finalWorkoutList[week_list[i][j]];
-        dates.add(DateWidget(week_list[i][j], workout));
+        dates.add(DateWidget(week_list[i][j]));
       }
       datelist.add(Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

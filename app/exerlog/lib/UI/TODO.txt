@@ -1,6 +1,5 @@
 Pre-alpha
  - exercise totals should update
- - make sure that redoing a workout saves new workout
  - add user id to firebase exercises
  - add total reps, sets, weight for workouts
  - add total reps, sets, weight for exercises 
