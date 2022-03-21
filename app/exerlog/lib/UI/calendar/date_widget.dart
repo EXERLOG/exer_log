@@ -27,13 +27,7 @@ class _DateWidgetState extends State<DateWidget> {
     DateTime after = new DateTime(widget.date.year, widget.date.month, widget.date.day, 23, 59, 59, 0 , 0);
     DateTime before = new DateTime(widget.date.year, widget.date.month, widget.date.day, 0, 0, 0, 0 , 0);
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirebaseFirestore.instance
-      .collection('users')
-      .doc(userID)
-      .collection('workouts')
-      .where('date', isLessThan: after)
-      .where('date', isGreaterThan: before)
-      .snapshots(),
+      stream: getWorkoutOnDate(after, before),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(

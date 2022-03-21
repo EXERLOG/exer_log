@@ -1,10 +1,6 @@
 Pre-alpha
  - exercise totals should update
- - add user id to firebase exercises
- - add total reps, sets, weight for workouts
- - add total reps, sets, weight for exercises 
- feature
- - add streambuilder functionality
+ - add user id to firebase exercises 
 
 exercise_names 
     name "BB Bench Press"

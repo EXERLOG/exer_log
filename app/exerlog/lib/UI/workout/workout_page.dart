@@ -52,7 +52,9 @@ print("init");
       '',
       '',
       false,
-      
+      0,
+      0.0,
+      0
     );
     widget.workout!.id = id;
     workoutData = new WorkoutData(
@@ -151,9 +153,9 @@ print("init");
                         onPressed: () {
                           for (Exercise exercise
                               in workoutData.workout.exercises) {
-                            for (Sets sets in exercise.sets) {
-                              if (sets.reps == 0) {
-                                exercise.sets.remove(sets);
+                            for (int i = 0; i < exercise.sets.length; i++) {
+                              if (exercise.sets[i].reps == 0) {
+                                exercise.sets.remove(exercise.sets[i]);
                               }
                             }
                             if (exercise.sets.length == 0) {
@@ -216,7 +218,7 @@ print("init");
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
-            workoutData.addExercise(new Exercise(exerciseName, [], []));
+            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
             // workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);

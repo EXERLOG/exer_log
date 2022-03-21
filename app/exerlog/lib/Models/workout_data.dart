@@ -62,7 +62,7 @@ class WorkoutData {
 
   Future<Workout> loadWorkoutData() async {
     Workout loaded_workout =
-        new Workout(workout.exercises, '', '', 0, '', '', true);
+        new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
         loaded_workout.id = workout.id;
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];

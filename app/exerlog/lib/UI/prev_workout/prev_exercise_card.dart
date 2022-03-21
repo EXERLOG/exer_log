@@ -54,7 +54,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
         id: 0,
         isTemplate: widget.isTemplate,
       ));
-      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
     height += (screenHeight * 0.05) * (widget.setList.length - 1);
     super.initState();

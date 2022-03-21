@@ -45,20 +45,14 @@ void deleteMax(Exercise exercise) async {
 Future<Max> getOneRepMax(String exercise) async {
   int reps = 1;
   QuerySnapshot<Map<String, dynamic>>? ref;
-  while (reps < 21) {
-      ref = await FirebaseFirestore.instance
+  ref = await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
         .collection('maxes')
         .where('exercise', isEqualTo: exercise)
-        .where('reps', isEqualTo: reps)
         .orderBy('weight', descending: true)
         .get();
-    if (ref.docs.length > 0) {
-      reps = 21;
-    }
-    reps += 1;
-  }
+  print(ref.docs.first.data());
   Max returnMax;
   if (ref != null) {
     returnMax = Max.fromJson(ref.docs.first.data());

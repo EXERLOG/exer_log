@@ -63,7 +63,7 @@ class _ExerciseCardState extends State<ExerciseCard>
         counter: counter,
         isTemplate: widget.isTemplate,
       ));
-      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
 
     else if (widget.exercise.sets.length > 0) {
@@ -229,7 +229,7 @@ class _ExerciseCardState extends State<ExerciseCard>
         id: widget.exercise.sets.length,
         isTemplate: false,
       ));
-      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
       widget.addExercise(widget.exercise);
       });
       setHeight();

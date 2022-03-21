@@ -37,18 +37,14 @@ Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDat
   return workoutList;
 }
 
-Stream<QuerySnapshot<Map<String, dynamic>>> getWorkoutOnDate(DateTime date) {
-  final ref = FirebaseFirestore.instance
+Stream<QuerySnapshot<Map<String, dynamic>>> getWorkoutOnDate(DateTime after, DateTime before) {
+  return FirebaseFirestore.instance
       .collection('users')
       .doc(userID)
       .collection('workouts')
-      .where('date', isEqualTo: date).snapshots();
-
-  ref.last.then((value) => {
-    print("HELKO"),
-    print(value.docs)
-  });
-  return ref;
+      .where('date', isLessThan: after)
+      .where('date', isGreaterThan: before)
+      .snapshots();
 }
 
 Future<Workout> loadWorkout(Workout workout) async {
@@ -92,8 +88,10 @@ Future<List<Workout>> getWorkoutTemplates() async {
 void saveWorkout(Workout workout) async {
   List exerciseList = [];
   for (Exercise exercise in workout.exercises) {
+    exercise.setExerciseTotals();
     exerciseList.add(await saveExercise(exercise));
   }
+  workout.setWorkoutTotals();
   workout.exercises = exerciseList;
   Map<String, Object?> jsonWorkout = workout.toJson();
   firestoreInstance

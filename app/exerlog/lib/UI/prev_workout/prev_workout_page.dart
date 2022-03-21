@@ -51,6 +51,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       '',
       '',
       false,
+      0,
+      0.0,
+      0
     );
 
     newWorkout.id = widget.workout.id;
@@ -158,7 +161,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
-            workoutData.addExercise(new Exercise(exerciseName, [], []));
+            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
             workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
@@ -200,7 +203,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
         setState(() {
           firstLoad = true;
           workoutData = new PrevWorkoutData(
-              new Workout([], '', '', 0, '', '', false),
+              new Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
               new WorkoutTotals(0, 0, 0, 0, 0),
               updateTotals,
               addNewSet);

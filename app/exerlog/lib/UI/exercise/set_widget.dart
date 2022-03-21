@@ -41,7 +41,7 @@ class _SetWidgetState extends State<SetWidget>
   with AutomaticKeepAliveClientMixin {
   int percent = 0;
   Max? oneRepMax;
-  Sets sets = new Sets(0, 0, 0, 0);
+  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
   String percentageController = '0%';
   TextEditingController setsController = new TextEditingController();
   TextEditingController repsController = new TextEditingController();
@@ -49,13 +49,14 @@ class _SetWidgetState extends State<SetWidget>
   TextEditingController restController = new TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
-  ValueNotifier<double> _notifier = ValueNotifier(0.0);
+  ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
 
   @override
   void initState() {
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
     // TODO: implement initState
-    _notifier.value = widget.exercise.sets[widget.id].weight;
+    _notifier.value.weight = widget.exercise.sets[widget.id].weight;
+    _notifier.value.reps = widget.exercise.sets[widget.id].reps;
     super.initState();
   }
 
@@ -122,8 +123,8 @@ class _SetWidgetState extends State<SetWidget>
               Container(
                 child: ValueListenableBuilder(
                 valueListenable: _notifier,
-                builder: (BuildContext context, double value, Widget? child) {
-                  return MaxInformation(id: widget.exercise.name, weight: value, setMax: setOneRepMax);
+                builder: (BuildContext context, SetData value, Widget? child) {
+                  return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id], setMax: setOneRepMax, setPercentage: setPercentage);
                 } 
               ), 
                 width: screenWidth * 0.11,
@@ -133,6 +134,11 @@ class _SetWidgetState extends State<SetWidget>
         ),
       ),
     );
+  }
+
+  void setPercentage(percent) {
+    widget.exercise.sets[widget.id].percentage = percent;
+    sets.percentage = percent;
   }
 
   void setOneRepMax(Max max) {
@@ -170,7 +176,6 @@ class _SetWidgetState extends State<SetWidget>
           var regex = new RegExp(r'\D');
           sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
           weightController.text = sets.weight.toString();
-          _notifier.value = sets.weight;
         }
         sets.weight = getInfo(weightController.text, 1);
         sets.rest = getInfo(restController.text, 1);
@@ -178,12 +183,7 @@ class _SetWidgetState extends State<SetWidget>
           sets.sets = 1;
         }
         widget.addNewSet(widget.exercise, sets, widget.id);
-        try {
-          _notifier.value = sets.weight;
-        } catch (Exception) {
-          print("Percentage exception:");
-          print(Exception);
-        }
+        _notifier.value = new SetData(sets.weight, sets.reps);
         //percent = (sets.weight / oneRepMax).round();
       },
     );
@@ -228,4 +228,11 @@ class _SetWidgetState extends State<SetWidget>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+}
+
+class SetData {
+  double weight;
+  int reps;
+
+  SetData(this.weight, this.reps);
 }
