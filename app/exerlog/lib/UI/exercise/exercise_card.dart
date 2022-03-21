@@ -15,11 +15,12 @@ class ExerciseCard extends StatefulWidget {
   final String name;
   Exercise exercise;
   Function(Exercise) addExercise;
-  Function(Exercise) updateExisitingExercise;
+  Function() updateExisitingExercise;
   Function(Exercise) removeExercise;
   Function(Exercise, Sets, int) removeSet;
   final bool isTemplate;
   WorkoutData workoutData;
+  ExerciseTotalsWidget totalsWidget;
 
   ExerciseCard(
       {
@@ -31,7 +32,8 @@ class ExerciseCard extends StatefulWidget {
       required this.removeExercise,
       required this.removeSet,
       required this.isTemplate,
-      required this.workoutData});
+      required this.workoutData,
+      required this.totalsWidget});
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
 }
@@ -40,15 +42,16 @@ class _ExerciseCardState extends State<ExerciseCard>
     with AutomaticKeepAliveClientMixin {
       static int counter = 0;
         List<SetWidget> setList = [];
-  int index = 0;
+  static int index = 0;
   double originalHeight = screenHeight * 0.23;
   double height = 0;
   TotalsData totalData =
-      new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
-  late ExerciseTotalsWidget totalWidget;
+      new TotalsData(0, 0, 0.0, 0.0);
+  late ValueNotifier<TotalsData> _notifier;
 
   @override
   void initState() {
+    widget.exercise.setExerciseTotals();
     setList = [];
     originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
@@ -62,6 +65,7 @@ class _ExerciseCardState extends State<ExerciseCard>
         id: 0,
         counter: counter,
         isTemplate: widget.isTemplate,
+        updateTotal: updateTotal,
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
@@ -76,18 +80,19 @@ class _ExerciseCardState extends State<ExerciseCard>
             removeSet: removeSet,
             counter: counter,
             id: i,
-            isTemplate: widget.isTemplate));
+            isTemplate: widget.isTemplate,
+            updateTotal: updateTotal,));
             counter++;
         i++;
       }
     }
+    _notifier = ValueNotifier(widget.totalsWidget.totals);
     height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
       height: height + screenHeight*0.06,
       child: Stack(children: [
@@ -119,7 +124,15 @@ class _ExerciseCardState extends State<ExerciseCard>
                         style: mediumTitleStyleWhite,
                       ),
                     ),
-                    widget.exercise.totalWidget
+                    Container(
+                child: ValueListenableBuilder(
+                valueListenable: _notifier,
+                builder: (BuildContext context, TotalsData value, Widget? child) {
+                  return ExerciseTotalsWidget(totals: value, index: index,);
+                } 
+              ), 
+                
+              ),
                   ],
                 ),
               ),
@@ -228,6 +241,7 @@ class _ExerciseCardState extends State<ExerciseCard>
         counter: counter,
         id: widget.exercise.sets.length,
         isTemplate: false,
+        updateTotal: updateTotal,
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
       widget.addExercise(widget.exercise);
@@ -254,12 +268,17 @@ class _ExerciseCardState extends State<ExerciseCard>
               removeSet: removeSet,
               counter: counter,
               id: i,
-              isTemplate: widget.isTemplate));
+              isTemplate: widget.isTemplate,
+              updateTotal: updateTotal));
           counter++;
           i++;
         }
       }
     });
+  }
+
+  void updateTotal() {
+    _notifier.value = new TotalsData(widget.exercise.totalReps, widget.exercise.totalSets, widget.exercise.totalWeight, (widget.exercise.totalWeight / widget.exercise.totalReps).roundToDouble());
   }
 
    void setHeight() {

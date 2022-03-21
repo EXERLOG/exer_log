@@ -5,6 +5,7 @@ import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/maxes/max_builder.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,8 @@ class SetWidget extends StatefulWidget {
   final Exercise exercise;
   Function(Exercise, Sets, int) addNewSet;
   Function(Exercise, Sets, int) removeSet;
+  Function? updateExercise;
+  Function updateTotal;
   final counter;
   //Function(Sets, int) createNewSet;
   final bool isTemplate;
@@ -32,6 +35,8 @@ class SetWidget extends StatefulWidget {
       required this.counter,
       required this.id,
       required this.isTemplate,
+      this.updateExercise,
+      required this.updateTotal
       });
   @override
   _SetWidgetState createState() => _SetWidgetState();
@@ -50,7 +55,7 @@ class _SetWidgetState extends State<SetWidget>
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
   ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
-
+  
   @override
   void initState() {
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
@@ -184,6 +189,7 @@ class _SetWidgetState extends State<SetWidget>
         }
         widget.addNewSet(widget.exercise, sets, widget.id);
         _notifier.value = new SetData(sets.weight, sets.reps);
+        widget.updateTotal();
         //percent = (sets.weight / oneRepMax).round();
       },
     );

@@ -12,17 +12,24 @@ class Exercise {
   double totalWeight;
   int totalSets;
   ExerciseTotalsWidget totalWidget =
-      new ExerciseTotalsWidget(new TotalsData(['', '', '', '']), 0);
+      new ExerciseTotalsWidget(totals: new TotalsData(0, 0, 0.0, 0.0), index: 0);
 
   Exercise(this.name, this.sets, this.bodyParts, this.totalSets, this.totalReps, this.totalWeight);
 
   void setExerciseTotals() {
+    totalReps = 0;
+    totalSets = 0;
+    totalWeight = 0.0;
     for (Sets set in sets) {
       totalSets += set.sets;
       int reps = (set.reps * set.sets);
       totalReps += reps;
       totalWeight += (reps * set.weight);
     }
+    totalWidget.totals.totalReps = totalReps;
+    totalWidget.totals.totalSets = totalSets;
+    totalWidget.totals.totalWeight = totalWeight;
+    totalWidget.totals.avg_weight = totalWeight / totalReps; 
   }
 
   Map<String, dynamic> toJson() {
