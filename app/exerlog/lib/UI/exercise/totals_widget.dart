@@ -7,23 +7,28 @@ class ExerciseTotalsWidget extends StatefulWidget {
   TotalsData totals;
   int index;
 
-  ExerciseTotalsWidget(this.totals, this.index) {
-    totals = this.totals;
-    index = this.index;
-  }
+  ExerciseTotalsWidget({required this.totals, required this.index});
   @override
   _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();
 }
 
 class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
+  List _list = [];
+  List endings = [" reps", " sets", " kgs", " kgs/rep"];
   @override
   Widget build(BuildContext context) {
+   _list = [
+    widget.totals.totalReps,
+    widget.totals.totalSets,
+    widget.totals.totalWeight,
+    widget.totals.avg_weight
+  ];
     return Container(
-      height: screenHeight*0.04,
-      width: screenWidth*0.3,
+      height: screenHeight * 0.04,
+      width: screenWidth * 0.3,
       child: RaisedGradientButton(
           child: Text(
-            widget.totals.total[widget.index],
+            _list[widget.index].toString() + endings[widget.index],
             style: buttonTextSmall,
           ),
           gradient: LinearGradient(
@@ -37,16 +42,16 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
               }
             });
           },
-          radius: 30,
-          borderSize: 0),
+          radius: 30,),
     );
   }
 }
 
 class TotalsData {
-  List<String> total;
+  int totalReps;
+  int totalSets;
+  double totalWeight;
+  double avg_weight;
 
-  TotalsData(this.total) {
-    total = this.total;
-  }
+  TotalsData(this.totalReps, this.totalSets, this.totalWeight, this.avg_weight);
 }

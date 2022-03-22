@@ -1,5 +1,6 @@
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/prev_workout_data.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
@@ -7,94 +8,64 @@ import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
+import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ExerciseCard extends StatefulWidget {
-  final ValueKey key;
+class PrevExerciseCard extends StatefulWidget {
   final String name;
-  Exercise exercise;
+  final Exercise exercise;
   Function(Exercise) addExercise;
-  Function() updateExisitingExercise;
-  Function(Exercise) removeExercise;
-  Function(Exercise, Sets, int) removeSet;
+  Function(Exercise) updateExisitingExercise;
   final bool isTemplate;
-  WorkoutData workoutData;
-  ExerciseTotalsWidget totalsWidget;
+  List<PrevSetWidget> setList;
+  PrevWorkoutData prevworkoutData;
 
-  ExerciseCard(
-      {
-      required this.key,
-      required this.name,
+  PrevExerciseCard(
+      {required this.name,
       required this.exercise,
       required this.addExercise,
       required this.updateExisitingExercise,
-      required this.removeExercise,
-      required this.removeSet,
       required this.isTemplate,
-      required this.workoutData,
-      required this.totalsWidget});
+      required this.setList,
+      required this.prevworkoutData});
   @override
-  _ExerciseCardState createState() => _ExerciseCardState();
+  _PrevExerciseCardState createState() => _PrevExerciseCardState();
 }
 
-class _ExerciseCardState extends State<ExerciseCard>
+class _PrevExerciseCardState extends State<PrevExerciseCard>
     with AutomaticKeepAliveClientMixin {
-      static int counter = 0;
-        List<SetWidget> setList = [];
-  static int index = 0;
-  double originalHeight = screenHeight * 0.23;
-  double height = 0;
+  int index = 0;
+  double height = screenHeight * 0.23;
   TotalsData totalData =
       new TotalsData(0, 0, 0.0, 0.0);
-  late ValueNotifier<TotalsData> _notifier;
+  late ExerciseTotalsWidget totalWidget;
 
   @override
   void initState() {
-    widget.exercise.setExerciseTotals();
-    setList = [];
-    originalHeight += getHeight() - 20;
+    height += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
-    if (widget.exercise.sets.length < 1) {
-      setList.add(new SetWidget(
+    if (widget.setList.length < 1) {
+      widget.setList.add(new PrevSetWidget(
         name: widget.name,
         exercise: widget.exercise,
-        addNewSet: widget.workoutData.addSet,
-        removeSet: removeSet,
+        addNewSet: widget.prevworkoutData.addNewSet,
         //createNewSet: createNewSet,
         id: 0,
-        counter: counter,
         isTemplate: widget.isTemplate,
-        updateTotal: updateTotal,
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
-
-    else if (widget.exercise.sets.length > 0) {
-      int i = 0;
-      for (Sets sets in widget.exercise.sets) {
-        setList.add(new SetWidget(
-            name: widget.exercise.name,
-            exercise: widget.exercise,
-            addNewSet: widget.workoutData.addSet,
-            removeSet: removeSet,
-            counter: counter,
-            id: i,
-            isTemplate: widget.isTemplate,
-            updateTotal: updateTotal,));
-            counter++;
-        i++;
-      }
-    }
-    _notifier = ValueNotifier(widget.totalsWidget.totals);
-    height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+    totalWidget = widget.exercise.totalWidget; 
+    height += (screenHeight * 0.05) * (widget.setList.length - 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    totalWidget = new ExerciseTotalsWidget(totals: totalData, index: index);
     return Container(
-      height: height + screenHeight*0.06,
+      height: height + screenHeight * 0.06,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -124,15 +95,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                         style: mediumTitleStyleWhite,
                       ),
                     ),
-                    Container(
-                child: ValueListenableBuilder(
-                valueListenable: _notifier,
-                builder: (BuildContext context, TotalsData value, Widget? child) {
-                  return ExerciseTotalsWidget(totals: value, index: index,);
-                } 
-              ), 
-                
-              ),
+                    totalWidget
                   ],
                 ),
               ),
@@ -193,108 +156,28 @@ class _ExerciseCardState extends State<ExerciseCard>
                     ),
                   ),
                   Column(
-                    children: setList,
+                    children: widget.setList,
                   )
                 ],
               )
             ],
           ),
         ),
-        Positioned(
-          right: screenWidth * 0.43,
-          left: screenWidth * 0.43,
-          top: height - 15,
-          child: Container(
-            height: screenHeight * 0.07,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                  ),
-                  borderRadius: BorderRadius.circular(30)),
-              child: FloatingActionButton(
-                heroTag: null,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                child: Icon(
-                  Icons.add,
-                  size: 50,
-                  color: backgroundColor,
-                ),
-                onPressed: addSet,
-              ),
-            ),
-          ),
-        )
-      ]),
+      ]
+      )
     );
   }
 
-  void addSet() {
-    counter++;
-     setState(() {
-      setList.add(new SetWidget(
-        name: widget.name,
-        exercise: widget.exercise,
-        addNewSet: widget.workoutData.addSet,
-        removeSet: removeSet,
-        counter: counter,
-        id: widget.exercise.sets.length,
-        isTemplate: false,
-        updateTotal: updateTotal,
-      ));
-      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
-      widget.addExercise(widget.exercise);
-      });
-      setHeight();
-  }
-
-  void removeSet(exercise, sets, id) {
-    setState(() {
-      setList.removeAt(id);
-      if (setList.length == 0) {
-        widget.removeExercise(exercise);
-      } else {
-        widget.exercise.sets.remove(sets);
-        widget.exercise = widget.removeSet(exercise, sets, id);
-        height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
-        setList = [];
-        int i = 0;
-        for (Sets sets in widget.exercise.sets) {
-          setList.add(new SetWidget(
-              name: widget.exercise.name,
-              exercise: widget.exercise,
-              addNewSet: widget.workoutData.addSet,
-              removeSet: removeSet,
-              counter: counter,
-              id: i,
-              isTemplate: widget.isTemplate,
-              updateTotal: updateTotal));
-          counter++;
-          i++;
-        }
-      }
-    });
-  }
-
-  void updateTotal() {
-    _notifier.value = new TotalsData(widget.exercise.totalReps, widget.exercise.totalSets, widget.exercise.totalWeight, (widget.exercise.totalWeight / widget.exercise.totalReps).roundToDouble());
-  }
-
-   void setHeight() {
-     setState(() {
-       height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
-     });
-  }
-
   double getHeight() {
-    double length = (widget.exercise.name.length/16);
+    print("REMAINDER " + widget.name + (widget.exercise.name.length).toString());
+    double length = (widget.exercise.name.length/17);
     if (length.toInt() == 0 || length == 1.0) {
       return 25;
     } else {
       return (length.toInt() + 1) * 25;
     }
   }
+
 
   @override
   bool get wantKeepAlive => true;

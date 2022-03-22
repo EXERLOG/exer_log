@@ -1,3 +1,34 @@
-TODO:
+Pre-alpha
+ - exercise totals should update
 
-- create pseudo json for the database
+
+
+MVP:
+
+- track workout
+    - delete exercise
+    - delete set
+    - quit workout
+- load workout
+    - from calendar view
+- delete workout
+    - get a list of the workouts that have been done (calendar view)
+- get analytics (volume, intensity etc)
+- login/signup
+
+CALENDAR PAGE
+- calendar
+
+- list of workouts
+    - name of the workout
+    - date of the workout
+
+ANALYTICS PAGE
+- choice of period (days, week/weeks, month/months, year/years)
+- choice of metric to look at (volume, reps, total weight, avg weight)
+- same for maxes
+
+TRACK WORKOUT PAGE
+- delete exercise
+- delete set 
+- exit workout 

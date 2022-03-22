@@ -8,47 +8,79 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '../main.dart';
 
-
-deleteMax() {}
-
-
-
-
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance
-  .collection('users')
-  .doc(userID)
-  .collection('maxes')
-  .where('exercise', isEqualTo: exercise)
-  .where('reps', isEqualTo: reps)
-  .get();
+      .collection('users')
+      .doc(userID)
+      .collection('maxes')
+      .where('exercise', isEqualTo: exercise)
+      .where('reps', isEqualTo: reps)
+      .orderBy('weight', descending: true)
+      .get();
   List<Max> maxList = [];
   for (int i = 0; i < ref.docs.length; i++) {
-    final data = FirebaseFirestore.instance.collection('users').doc(userID).collection('maxes').doc(ref.docs[i].id).withConverter<Max>(
-      fromFirestore: (snapshot, _) => Max.fromJson(snapshot.data()!),
-      toFirestore: (max, _) => max.toJson(),
-    );
-    maxList.add(await data.get().then((value) => value.data()!));
+    Max max = Max.fromJson(ref.docs[i].data());
+    maxList.add(max);
   }
   return maxList;
 }
-  
-void saveMax(Max max) {
-  Map<String, Object?> jsonMax = max.toJson();
-  firestoreInstance.collection("users").doc(userID).collection("maxes").add(jsonMax).then((value){
-    print(value.id);
-  }); 
+
+void deleteMax(Exercise exercise) async {
+  final ref = await firestoreInstance
+      .collection("users")
+      .doc(userID)
+      .collection("maxes")
+      .where('exerciseID', isEqualTo: exercise.id)
+      .get();
+  for (int i = 0; i < ref.docs.length; i++) {
+      firestoreInstance
+    .collection('users')
+    .doc(userID)
+    .collection('maxes')
+    .doc(ref.docs[i].id)
+    .delete();
+  }
 }
 
+Future<Max> getOneRepMax(String exercise) async {
+  int reps = 1;
+  QuerySnapshot<Map<String, dynamic>>? ref;
+  ref = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('maxes')
+        .where('exercise', isEqualTo: exercise)
+        .orderBy('weight', descending: true)
+        .get();
+  print(ref.docs.first.data());
+  Max returnMax;
+  if (ref != null) {
+    returnMax = Max.fromJson(ref.docs.first.data());
+  } else {
+    returnMax = new Max(0, 0, 0, '');
+  }
+  return returnMax;
+}
+
+void saveMax(Max max) {
+  Map<String, Object?> jsonMax = max.toJson();
+  firestoreInstance
+      .collection("users")
+      .doc(userID)
+      .collection("maxes")
+      .add(jsonMax)
+      .then((value) {
+  });
+}
 
 void checkMax(Exercise exercise) async {
   // check if max already exists otherwise save
   final ref = await FirebaseFirestore.instance
-  .collection('users')
-  .doc(userID)
-  .collection('maxes')
-  .where('exercise', isEqualTo: exercise.name)
-  .get();
+      .collection('users')
+      .doc(userID)
+      .collection('maxes')
+      .where('exercise', isEqualTo: exercise.name)
+      .get();
 
   if (ref.docs.length == 0) {
     List setList = [];
@@ -70,10 +102,10 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   } else {
-
     List setList = [];
     for (Sets set in exercise.sets) {
       bool shouldUpdate = true;
@@ -95,15 +127,16 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   }
 }
 
-void updateExercise(String id, Exercise exercise) {
-  
-}
 
-  void printFirebase(){
-    //
+
+void updateExercise(String id, Exercise exercise) {}
+
+void printFirebase() {
+  //
 }

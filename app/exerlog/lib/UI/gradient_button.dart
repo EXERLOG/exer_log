@@ -9,7 +9,6 @@ class RaisedGradientButton extends StatefulWidget {
   final double height;
   final Function onPressed;
   final double radius;
-  final double borderSize;
   RaisedGradientButton({
     required this.child,
     required this.gradient,
@@ -17,7 +16,6 @@ class RaisedGradientButton extends StatefulWidget {
     this.height = 50.0,
     required this.onPressed,
     required this.radius,
-    required this.borderSize,
   });
   @override
   _RaisedGradientButtonState createState() => _RaisedGradientButtonState();
@@ -41,7 +39,7 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
-                side: BorderSide(width: widget.borderSize)
+                //side: BorderSide(width: widget.borderSize)
                 
               )
             )

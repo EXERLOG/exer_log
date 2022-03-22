@@ -11,6 +11,10 @@ Color textColorBlue = Color(0xFF31A6DC);
 Color greenTextColor = Color(0xFF34D2C1);
 
 // text styles
+TextStyle whiteTextStyleSmall = TextStyle(
+    color: Colors.white,
+    fontFamily: "Avenir",
+    fontSize: 12);
 TextStyle buttonTextSmall = TextStyle(
     color: backgroundColor,
     fontFamily: "Avenir",

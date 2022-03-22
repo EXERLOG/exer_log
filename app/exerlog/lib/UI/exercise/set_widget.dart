@@ -2,135 +2,165 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
+import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
+import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/UI/maxes/max_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import '';
 
 class SetWidget extends StatefulWidget {
   final String name;
   final Exercise exercise;
-  Function(Sets, int) addNewSet;
+  Function(Exercise, Sets, int) addNewSet;
+  Function(Exercise, Sets, int) removeSet;
+  Function? updateExercise;
+  Function updateTotal;
+  final counter;
+  //Function(Sets, int) createNewSet;
+  final bool isTemplate;
   int id;
 
   SetWidget(
       {required this.name,
       required this.exercise,
       required this.addNewSet,
-      required this.id});
+      required this.removeSet,
+      //required this.createNewSet,
+      required this.counter,
+      required this.id,
+      required this.isTemplate,
+      this.updateExercise,
+      required this.updateTotal
+      });
   @override
   _SetWidgetState createState() => _SetWidgetState();
 }
 
 class _SetWidgetState extends State<SetWidget>
-    with AutomaticKeepAliveClientMixin {
-  late ValueNotifier<String> percentage;
+  with AutomaticKeepAliveClientMixin {
   int percent = 0;
-  double oneRepMax = 0.0;
-  Sets sets = new Sets(0, 0, 0, 0);
+  Max? oneRepMax;
+  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
+  String percentageController = '0%';
   TextEditingController setsController = new TextEditingController();
   TextEditingController repsController = new TextEditingController();
   TextEditingController weightController = new TextEditingController();
   TextEditingController restController = new TextEditingController();
-  List types = ['reps', 'sets', 'weight', 'rest'];
-  List setList = [0, 0, 0.0, 0.0];
-
+  List types = ['reps', 'sets', 'weight', 'rest', ''];
+  MaxInformation? maxinfoWidget;
+  ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
+  
   @override
   void initState() {
-    percentage = ValueNotifier<String>('0%');
-    getOneRepMax().then((value) {
-      oneRepMax = value;
-    });
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
     // TODO: implement initState
+    _notifier.value.weight = widget.exercise.sets[widget.id].weight;
+    _notifier.value.reps = widget.exercise.sets[widget.id].reps;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Exercise>(
-      future: getExerciseByName(widget.name),
-      builder: (BuildContext context, AsyncSnapshot<Exercise> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            print(snapshot.error);
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          }
-          if (!snapshot.hasData) {
-            print("No data");
-            return Center(
-              child: getSetWidget(snapshot),
-            );
-          } else {
-            return getSetWidget(snapshot);
-          }
-        }
-      },
-    );
+    return getSetWidget();
   }
 
-  Container getSetWidget(AsyncSnapshot<Exercise> snapshot) {
-    return Container(
-      height: screenHeight * 0.05,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            child: Center(
-                child: Text(
-              "#" + (widget.id + 1).toString(),
-              style: setStyle,
-            )),
-            width: screenWidth * 0.08,
-          ),
-          Container(
-            child: getTextField(0, snapshot),
-            width: screenWidth * 0.145,
-          ),
-          Container(
-            child: getTextField(1, snapshot),
-            width: screenWidth * 0.145,
-          ),
-          Container(
-            child: getTextField(2, snapshot),
-            width: screenWidth * 0.145,
-          ),
-          Container(
-            child: getTextField(3, snapshot),
-            width: screenWidth * 0.145,
-          ),
-          ValueListenableBuilder(
-            valueListenable: percentage,
-            builder: (context, value, child) => Container(
-              child: Center(
-                  child: Text(
-                value.toString(),
-                style: setStyle,
-              )),
-              width: screenWidth * 0.11,
+
+  SlidableAutoCloseBehavior getSetWidget() {
+    return SlidableAutoCloseBehavior(
+      closeWhenTapped: true,
+      child: Slidable(
+        key: ValueKey(widget.counter),
+        endActionPane: ActionPane(
+          // A motion is a widget used to control how the pane animates.
+          motion: ScrollMotion(),
+    
+          // A pane can dismiss the Slidable.
+          //dismissible: DismissiblePane(onDismissed: () {}),
+    
+          // All actions are defined in the children parameter.
+          children: [
+            // A SlidableAction can have an icon and/or a label.
+            TextButton(
+              onPressed: () {
+                  widget.removeSet(widget.exercise, sets, widget.id);
+              },
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color(0xFFFE4A49))),
+              child: Icon(Icons.delete, color: Colors.white,),
             ),
-          )
-        ],
+          ],
+        ),
+    
+        child: Container(
+          height: screenHeight * 0.05,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: Center(
+                    child: Text(
+                  "#" + (widget.id + 1).toString(),
+                  style: setStyle,
+                )),
+                width: screenWidth * 0.08,
+              ),
+              Container(
+                child: getTextField(0),
+                width: screenWidth * 0.145,
+              ),
+              Container(
+                child: getTextField(1),
+                width: screenWidth * 0.145,
+              ),
+              Container(
+                child: getTextField(2),
+                width: screenWidth * 0.145,
+              ),
+              Container(
+                child: getTextField(3),
+                width: screenWidth * 0.145,
+              ),
+              Container(
+                child: ValueListenableBuilder(
+                valueListenable: _notifier,
+                builder: (BuildContext context, SetData value, Widget? child) {
+                  return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id], setMax: setOneRepMax, setPercentage: setPercentage);
+                } 
+              ), 
+                width: screenWidth * 0.11,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  TextField getTextField(int type, AsyncSnapshot<Exercise> snapshot) {
+  void setPercentage(percent) {
+    widget.exercise.sets[widget.id].percentage = percent;
+    sets.percentage = percent;
+  }
+
+  void setOneRepMax(Max max) {
+    oneRepMax = max;
+  }
+
+  Widget getTextField(int type) {
     List controllers = [
       repsController,
       setsController,
       weightController,
       restController
     ];
-    return TextField(
+
+
+      controllers[type].text = getHintText(type);
+      return TextField(
       cursorColor: Colors.white,
       style: setStyle,
       textAlign: TextAlign.center,
@@ -140,7 +170,7 @@ class _SetWidgetState extends State<SetWidget>
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        hintText: getHintText(snapshot, type),
+        hintText: getHintText(type),
         hintStyle: setHintStyle,
       ),
       onChanged: (value) {
@@ -149,36 +179,19 @@ class _SetWidgetState extends State<SetWidget>
         if (weightController.text.contains('%')) {
           // set weight to be percentage of max
           var regex = new RegExp(r'\D');
-          getWeightFromMax(weightController.text.replaceAll(regex, ''))
-              .then((result) {
-            setState(() {
-              sets.weight = result;
-              weightController.text = result.toString();
-              percentage.value =
-                  ((sets.weight / oneRepMax) * 100).round().toString() + '%';
-            });
-          });
+          sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
+          weightController.text = sets.weight.toString();
         }
         sets.weight = getInfo(weightController.text, 1);
         sets.rest = getInfo(restController.text, 1);
         if (sets.sets == 0.0) {
           sets.sets = 1;
         }
-        widget.addNewSet(sets, widget.id);
-        percentage.value =
-            ((sets.weight / oneRepMax) * 100).toInt().toString() + '%';
+        widget.addNewSet(widget.exercise, sets, widget.id);
+        _notifier.value = new SetData(sets.weight, sets.reps);
+        widget.updateTotal();
         //percent = (sets.weight / oneRepMax).round();
       },
-      // onEditingComplete: () {
-      //   sets.reps = getInfo(repsController.text, 0);
-      //   sets.sets = getInfo(setsController.text, 0);
-      //   sets.weight = getInfo(weightController.text, 1);
-      //   sets.rest = getInfo(restController.text, 1);
-      //   if (sets.sets == 0.0) {
-      //     sets.sets = 1;
-      //   }
-      //   widget.addNewSet(sets, widget.id);
-      // },
     );
   }
 
@@ -198,41 +211,22 @@ class _SetWidgetState extends State<SetWidget>
     }
   }
 
-  Future<double> getOneRepMax() async {
-    var result = await getSpecificMax(widget.name, 1);
-    if (result.length < 1) {
-      double count = 0;
-      while (result.length < 1 || count > 20) {
-        result = await getSpecificMax(widget.name, count);
-        count++;
-      }
-      if (result.length < 1) {
-        return 0.0;
-      }
-      return result[0].weight / maxTable[(count - 1).toInt()];
-    }
-    return result[0].weight;
+  double getWeightFromMax(String percentage) {
+    var result = oneRepMax!.weight / maxTable[oneRepMax!.reps -1];
+    double the_percent = double.parse(percentage) / 100;
+    return (result * the_percent).roundToDouble();
   }
 
-  Future<double> getWeightFromMax(String percentage) async {
-    var result = await getSpecificMax(widget.name, 1);
-    if (result.length < 1) {
-      double count = 2;
-      while (result.length < 1 || count > 20) {
-        result = await getSpecificMax(widget.name, count);
-        count++;
-      }
-      return (result[0].weight / maxTable[(count - 1).toInt()]).roundToDouble();
-    }
-    print(result);
-    return (result[0].weight * (double.parse(percentage) / 100))
-        .roundToDouble();
-  }
-
-  String getHintText(AsyncSnapshot<Exercise> snapshot, int type) {
+  String getHintText(int type) {
+    List listType = [
+      widget.exercise.sets[widget.id].reps,
+      widget.exercise.sets[widget.id].sets,
+      widget.exercise.sets[widget.id].weight,
+      widget.exercise.sets[widget.id].rest,
+    ];
     String returnText = '';
     try {
-      returnText = snapshot.data?.sets[widget.id][types[type]].toString() ?? '';
+      returnText = listType[type].toString();
     } catch (Exception) {}
     return returnText;
   }
@@ -240,4 +234,11 @@ class _SetWidgetState extends State<SetWidget>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+}
+
+class SetData {
+  double weight;
+  int reps;
+
+  SetData(this.weight, this.reps);
 }
