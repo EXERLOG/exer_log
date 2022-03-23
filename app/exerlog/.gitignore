@@ -1,4 +1,5 @@
-android/app/upload-keystore.jksandroid/app/upload-keystore.jks  
+android/app/upload-keystore.jks
+android/app/upload-keystore.jks  
 # Miscellaneous
 *.class
 *.log
