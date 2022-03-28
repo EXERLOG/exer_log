@@ -20,7 +20,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
     return Container(
       height: screenHeight * 0.13,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
           color: backgroundColor,
           boxShadow: [
             BoxShadow(
@@ -29,7 +29,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                 blurRadius: 5,
                 spreadRadius: 5),
           ]),
-      margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+      margin: EdgeInsets.only( bottom: 10),
       padding: EdgeInsets.all(10),
       child: Column(
         children: [

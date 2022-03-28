@@ -14,10 +14,15 @@ import 'UI/global.dart';
 // import '/UI/login_page.dart';
 import 'Models/user.dart';
 import 'UI/login_screen/login_page.dart';
+import 'package:flutter/services.dart';
+
 String userID = '';
 User the_user;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp,]
+  );
   runApp(MyApp());
 }
 

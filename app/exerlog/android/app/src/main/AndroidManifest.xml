@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hallden.exerlog">
    <application
-        android:label="exerlog"
+        android:label="ExerLog"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

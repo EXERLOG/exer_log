@@ -8,8 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '../main.dart';
 
-deleteMax() {}
-
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
@@ -27,23 +25,34 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   return maxList;
 }
 
+void deleteMax(Exercise exercise) async {
+  final ref = await firestoreInstance
+      .collection("users")
+      .doc(userID)
+      .collection("maxes")
+      .where('exerciseID', isEqualTo: exercise.id)
+      .get();
+  for (int i = 0; i < ref.docs.length; i++) {
+      firestoreInstance
+    .collection('users')
+    .doc(userID)
+    .collection('maxes')
+    .doc(ref.docs[i].id)
+    .delete();
+  }
+}
+
 Future<Max> getOneRepMax(String exercise) async {
   int reps = 1;
   QuerySnapshot<Map<String, dynamic>>? ref;
-  while (reps < 21) {
-      ref = await FirebaseFirestore.instance
+  ref = await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
         .collection('maxes')
         .where('exercise', isEqualTo: exercise)
-        .where('reps', isEqualTo: reps)
         .orderBy('weight', descending: true)
         .get();
-    if (ref.docs.length > 0) {
-      reps = 21;
-    }
-    reps += 1;
-  }
+  print(ref.docs.first.data());
   Max returnMax;
   if (ref != null) {
     returnMax = Max.fromJson(ref.docs.first.data());
@@ -61,7 +70,6 @@ void saveMax(Max max) {
       .collection("maxes")
       .add(jsonMax)
       .then((value) {
-    print(value.id);
   });
 }
 
@@ -94,6 +102,7 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   } else {
@@ -118,10 +127,13 @@ void checkMax(Exercise exercise) async {
     }
     for (Sets set in setList) {
       Max max = Max(set.weight, set.reps, set.sets, exercise.name);
+      max.exerciseID = exercise.id;
       saveMax(max);
     }
   }
 }
+
+
 
 void updateExercise(String id, Exercise exercise) {}
 

@@ -33,7 +33,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
     with AutomaticKeepAliveClientMixin {
   int percent = 0;
   double oneRepMax = 0.0;
-  Sets sets = new Sets(0, 0, 0, 0);
+  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
   String setsController = "";
   String repsController = "";
   String weightController = "";
@@ -102,9 +102,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
       percentageController
     ];
     if (types[type] == '') {
-      print("HelloMax");
-      double weight = widget.exercise.sets[widget.id].weight;
-      return MaxInformation(id: widget.exercise.name, weight: weight);
+      return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id]);
       //widget.addNewSet(sets, widget.id);
     } else {
       return Center(

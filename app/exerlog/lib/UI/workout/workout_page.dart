@@ -38,6 +38,12 @@ class _WorkoutPageState extends State<WorkoutPage> {
 print("init");
     if (widget.workout == null) {
       firstLoad = true;
+      String id = '';
+      try {
+        id = widget.workout!.id!;
+      } catch (Exception) {
+
+      }
        widget.workout = new Workout(
       [],
       '',
@@ -46,14 +52,17 @@ print("init");
       '',
       '',
       false,
-      
+      0,
+      0.0,
+      0
     );
+    widget.workout!.id = id;
     workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
     } else {
       firstLoad = false;
       workoutData = new WorkoutData(
-        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+        widget.workout!, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
       addExercises(widget.workout);
     }
     // TODO: implement initState
@@ -72,89 +81,41 @@ print("init");
     //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return Scaffold(
-      body: firstLoad
-          ? Container(
-              color: backgroundColor,
-            )
-          : GestureDetector(
-              child: Container(
-                color: backgroundColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: screenHeight*0.03),
-                      height: screenHeight *0.05,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          
-                          BackButton(
-                          onPressed: () {
-                            print("hello");
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => CalendarPage(
-                                ),
-                              ),
-                            );
-                          },
-                          color: greenTextColor,
-                        ),
-                        Container()
-                        ]
-                      ),
-                    ),
-                    WorkoutTotalsWidget(
-                      totals: workoutData.totals,
-                    ),
-                    Container(
-                      height: screenHeight * 0.5,
-                      child: ListView(
-                        addAutomaticKeepAlives: true,
-                        children: workoutData.exerciseWidgets,
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.065,
-                      width: screenWidth * 0.9,
-                      child: GradientBorderButton(
-                        addButton: true,
-                        gradient: LinearGradient(
-                          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                        ),
-                        radius: 30,
-                        borderSize: 3,
-                        onPressed: () {
-                          // create new exercise
-                          showAlertDialogExercise(context);
-                        },
-                        child: Container(
-                          width: screenWidth * 0.6,
-                          child: Center(
-                              child: Text(
-                            "Add New Exercise",
-                            style: greenButtonTextThin,
-                          )),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: greenTextColor,
+        child: Icon(Icons.add, color: backgroundColor,),
+        onPressed: () {
+        showAlertDialogExercise(context);
+        
+      },),
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CalendarPage(
                         ),
                       ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.065,
-                      width: screenWidth * 0.9,
-                      margin: EdgeInsets.only(bottom: 30),
-                      child: RaisedGradientButton(
-                        gradient: LinearGradient(
-                          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                        ),
-                        radius: 30,
-                        onPressed: () {
+                    );
+          },
+          color: greenTextColor
+        ),
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 5),
+            height: 30,
+            width: 30,
+            child: FloatingActionButton(
+              backgroundColor: greenTextColor,
+                  onPressed: () {
                           for (Exercise exercise
                               in workoutData.workout.exercises) {
-                            for (Sets sets in exercise.sets) {
-                              if (sets.reps == 0) {
-                                exercise.sets.remove(sets);
+                            for (int i = 0; i < exercise.sets.length; i++) {
+                              if (exercise.sets[i].reps == 0) {
+                                exercise.sets.remove(exercise.sets[i]);
                               }
                             }
                             if (exercise.sets.length == 0) {
@@ -165,19 +126,97 @@ print("init");
                             showSaveWorkoutAlertDialog(context);
                           }
                         },
-                        child: Container(
-                          child: Center(
-                              child: Text(
-                            "Save",
-                            style: buttonText,
-                          )),
+              child: Icon(Icons.done, color: backgroundColor,),
+            ),
+          ),
+        ],
+      ),
+      body: new GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+      child: firstLoad
+          ? Container(
+              color: backgroundColor,
+            )
+          : GestureDetector(
+              child: Container(
+                color: backgroundColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    WorkoutTotalsWidget(
+                      totals: workoutData.totals,
+                    ),
+                   Expanded(
+                        child: ListView(
+                          addAutomaticKeepAlives: true,
+                          children: workoutData.exerciseWidgets,
                         ),
                       ),
-                    )
+                    // Container(
+                    //   height: screenHeight * 0.065,
+                    //   width: screenWidth * 0.9,
+                    //   child: GradientBorderButton(
+                    //     addButton: true,
+                    //     gradient: LinearGradient(
+                    //       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+                    //     ),
+                    //     radius: 30,
+                    //     borderSize: 3,
+                    //     onPressed: () {
+                    //       // create new exercise
+                    //       showAlertDialogExercise(context);
+                    //     },
+                    //     child: Container(
+                    //       width: screenWidth * 0.6,
+                    //       child: Center(
+                    //           child: Text(
+                    //         "Add New Exercise",
+                    //         style: greenButtonTextThin,
+                    //       )),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   height: screenHeight * 0.065,
+                    //   width: screenWidth * 0.9,
+                    //   margin: EdgeInsets.only(bottom: 30),
+                    //   child: RaisedGradientButton(
+                    //     gradient: LinearGradient(
+                    //       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+                    //     ),
+                    //     radius: 30,
+                    //     onPressed: () {
+                    //       for (Exercise exercise
+                    //           in workoutData.workout.exercises) {
+                    //         for (int i = 0; i < exercise.sets.length; i++) {
+                    //           if (exercise.sets[i].reps == 0) {
+                    //             exercise.sets.remove(exercise.sets[i]);
+                    //           }
+                    //         }
+                    //         if (exercise.sets.length == 0) {
+                    //           workoutData.workout.exercises.remove(exercise);
+                    //         }
+                    //       }
+                    //       if (workoutData.workout.exercises.length > 0) {
+                    //         showSaveWorkoutAlertDialog(context);
+                    //       }
+                    //     },
+                    //     child: Container(
+                    //       child: Center(
+                    //           child: Text(
+                    //         "Save",
+                    //         style: buttonText,
+                    //       )),
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ),
             ),
+      )
     );
   }
 
@@ -194,7 +233,7 @@ print("init");
     setState(() {
       firstLoad = false;
       //workoutData.workout = new_workout;
-      //workout = new_workout;
+      //widget.workout = new_workout;
       //print(workoutData.exerciseWidgets[0].setList.length);
     });
   }
@@ -217,7 +256,7 @@ print("init");
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
-            workoutData.addExercise(new Exercise(exerciseName, [], []));
+            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
             // workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
@@ -236,10 +275,6 @@ print("init");
         return alert;
       },
     );
-  }
-
-  addNewSet(exercise, newSet, id) {
-    workoutData.addSet(exercise, newSet, id);
   }
 
   createNewSet(sets, id) {}
@@ -271,7 +306,7 @@ print("init");
 
     // show the dialog
     showDialog(
-      barrierDismissible: false,
+      barrierDismissible: true,
       context: context,
       builder: (BuildContext context) {
         return alert;
@@ -286,7 +321,7 @@ print("init");
   addExercises(new_workout) {
     setState(() {
       WorkoutData newWorkoutData = new WorkoutData(new_workout,
-          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals);
       firstLoad = false;
       workoutData = newWorkoutData;
       widget.workout = newWorkoutData.workout;

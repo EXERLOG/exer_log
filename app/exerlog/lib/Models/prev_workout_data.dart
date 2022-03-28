@@ -30,33 +30,13 @@ class PrevWorkoutData {
 
   addSet(exercise, newSet, id) {
     exercise.sets[id] = newSet;
-    //updateExisitingExercise(exercise);
-    setTotals(exercise);
-  }
-
-  void setTotals(exercise) {
-    TotalsData returnTotals = exercise.totalWidget.totals;
-    int totalSets = 0;
-    int totalReps = 0;
-    double totalKgs = 0;
-    for (Sets sets in exercise.sets) {
-      totalSets += sets.sets;
-      int reps = sets.sets > 0 ? sets.sets * sets.reps : sets.reps;
-      totalReps += reps;
-      totalKgs += reps * sets.weight;
-    }
-    double avgKgs = (totalKgs / totalReps).roundToDouble();
-    returnTotals.total[0] = totalSets.toString() + " sets";
-    returnTotals.total[1] = totalReps.toString() + " reps";
-    returnTotals.total[2] = totalKgs.toString() + " kgs";
-    returnTotals.total[3] = avgKgs.toString() + " kg/rep";
-    exercise.totalWidget.totals = returnTotals;
     updateExisitingExercise(exercise);
   }
 
   Future<Workout> loadWorkoutData() async {
     Workout loaded_workout =
-        new Workout(workout.exercises, '', '', 0, '', '', true);
+        new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
+    loaded_workout.id = workout.id;
     List<Sets> setList = [];
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
@@ -79,7 +59,6 @@ class PrevWorkoutData {
                   totalKgs += reps * sets.weight,
                 },
               avgKgs = (totalKgs / totalReps).roundToDouble(),
-              setTotals(value),
               });
       }
       loaded_workout.exercises = exerciseList;

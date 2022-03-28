@@ -11,60 +11,90 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseCard extends StatefulWidget {
+  final ValueKey key;
   final String name;
-  final Exercise exercise;
+  Exercise exercise;
   Function(Exercise) addExercise;
-  Function(Exercise) updateExisitingExercise;
+  Function() updateExisitingExercise;
+  Function(Exercise) removeExercise;
+  Function(Exercise, Sets, int) removeSet;
   final bool isTemplate;
-  List<SetWidget> setList;
   WorkoutData workoutData;
+  ExerciseTotalsWidget totalsWidget;
 
   ExerciseCard(
-      {required this.name,
+      {
+      required this.key,
+      required this.name,
       required this.exercise,
       required this.addExercise,
       required this.updateExisitingExercise,
+      required this.removeExercise,
+      required this.removeSet,
       required this.isTemplate,
-      required this.setList,
-      required this.workoutData});
+      required this.workoutData,
+      required this.totalsWidget});
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
 }
 
 class _ExerciseCardState extends State<ExerciseCard>
     with AutomaticKeepAliveClientMixin {
-  int index = 0;
-  double height = screenHeight * 0.23;
+      static int counter = 0;
+        List<SetWidget> setList = [];
+  static int index = 0;
+  double originalHeight = screenHeight * 0.23;
+  double height = 0;
   TotalsData totalData =
-      new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
-  late ExerciseTotalsWidget totalWidget;
+      new TotalsData(0, 0, 0.0, 0.0);
+  late ValueNotifier<TotalsData> _notifier;
 
   @override
   void initState() {
-    height += getHeight() - 20;
-    print("LENGTH " + widget.exercise.name + ": " + widget.exercise.name.length.toString());
-    
+    widget.exercise.setExerciseTotals();
+    setList = [];
+    originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
-    if (widget.setList.length < 1) {
-      widget.setList.add(new SetWidget(
+    if (widget.exercise.sets.length < 1) {
+      setList.add(new SetWidget(
         name: widget.name,
         exercise: widget.exercise,
-        addNewSet: widget.workoutData.addNewSet,
+        addNewSet: widget.workoutData.addSet,
+        removeSet: removeSet,
         //createNewSet: createNewSet,
         id: 0,
+        counter: counter,
         isTemplate: widget.isTemplate,
+        updateTotal: updateTotal,
       ));
-      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
-    height += (screenHeight * 0.05) * (widget.setList.length - 1);
+
+    else if (widget.exercise.sets.length > 0) {
+      int i = 0;
+      for (Sets sets in widget.exercise.sets) {
+        setList.add(new SetWidget(
+            name: widget.exercise.name,
+            exercise: widget.exercise,
+            addNewSet: widget.workoutData.addSet,
+            removeSet: removeSet,
+            counter: counter,
+            id: i,
+            isTemplate: widget.isTemplate,
+            updateTotal: updateTotal,));
+            counter++;
+        i++;
+      }
+    }
+    _notifier = ValueNotifier(widget.totalsWidget.totals);
+    height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    totalWidget = new ExerciseTotalsWidget(totalData, index);
     return Container(
-      height: height + screenHeight * 0.06,
+      height: height + screenHeight*0.06,
       child: Stack(children: [
         Container(
           decoration: BoxDecoration(
@@ -94,7 +124,15 @@ class _ExerciseCardState extends State<ExerciseCard>
                         style: mediumTitleStyleWhite,
                       ),
                     ),
-                    widget.exercise.totalWidget
+                    Container(
+                child: ValueListenableBuilder(
+                valueListenable: _notifier,
+                builder: (BuildContext context, TotalsData value, Widget? child) {
+                  return ExerciseTotalsWidget(totals: value, index: index,);
+                } 
+              ), 
+                
+              ),
                   ],
                 ),
               ),
@@ -155,7 +193,7 @@ class _ExerciseCardState extends State<ExerciseCard>
                     ),
                   ),
                   Column(
-                    children: widget.setList,
+                    children: setList,
                   )
                 ],
               )
@@ -183,27 +221,70 @@ class _ExerciseCardState extends State<ExerciseCard>
                   size: 50,
                   color: backgroundColor,
                 ),
-                onPressed: () {
-                  setState(() {
-                    height += screenHeight * 0.05;
-                    widget.setList.add(new SetWidget(
-                      name: widget.name,
-                      exercise: widget.exercise,
-                      addNewSet: widget.workoutData.addSet,
-                      //createNewSet: createNewSet,
-                      id: widget.exercise.sets.length,
-                      isTemplate: false,
-                    ));
-                    widget.exercise.sets.add(new Sets(0, 0, 0, 0));
-                    widget.addExercise(widget.exercise);
-                  });
-                },
+                onPressed: addSet,
               ),
             ),
           ),
         )
       ]),
     );
+  }
+
+  void addSet() {
+    counter++;
+     setState(() {
+      setList.add(new SetWidget(
+        name: widget.name,
+        exercise: widget.exercise,
+        addNewSet: widget.workoutData.addSet,
+        removeSet: removeSet,
+        counter: counter,
+        id: widget.exercise.sets.length,
+        isTemplate: false,
+        updateTotal: updateTotal,
+      ));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
+      widget.addExercise(widget.exercise);
+      });
+      setHeight();
+  }
+
+  void removeSet(exercise, sets, id) {
+    setState(() {
+      setList.removeAt(id);
+      if (setList.length == 0) {
+        widget.removeExercise(exercise);
+      } else {
+        widget.exercise.sets.remove(sets);
+        widget.exercise = widget.removeSet(exercise, sets, id);
+        height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+        setList = [];
+        int i = 0;
+        for (Sets sets in widget.exercise.sets) {
+          setList.add(new SetWidget(
+              name: widget.exercise.name,
+              exercise: widget.exercise,
+              addNewSet: widget.workoutData.addSet,
+              removeSet: removeSet,
+              counter: counter,
+              id: i,
+              isTemplate: widget.isTemplate,
+              updateTotal: updateTotal));
+          counter++;
+          i++;
+        }
+      }
+    });
+  }
+
+  void updateTotal() {
+    _notifier.value = new TotalsData(widget.exercise.totalReps, widget.exercise.totalSets, widget.exercise.totalWeight, (widget.exercise.totalWeight / widget.exercise.totalReps).roundToDouble());
+  }
+
+   void setHeight() {
+     setState(() {
+       height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+     });
   }
 
   double getHeight() {

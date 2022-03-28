@@ -38,7 +38,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
   int index = 0;
   double height = screenHeight * 0.23;
   TotalsData totalData =
-      new TotalsData(['0 sets', '0 reps', '0 kgs', '0 kg/rep']);
+      new TotalsData(0, 0, 0.0, 0.0);
   late ExerciseTotalsWidget totalWidget;
 
   @override
@@ -54,15 +54,16 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
         id: 0,
         isTemplate: widget.isTemplate,
       ));
-      widget.exercise.sets.add(new Sets(0, 0, 0, 0));
+      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     }
+    totalWidget = widget.exercise.totalWidget; 
     height += (screenHeight * 0.05) * (widget.setList.length - 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    totalWidget = new ExerciseTotalsWidget(totalData, index);
+    totalWidget = new ExerciseTotalsWidget(totals: totalData, index: index);
     return Container(
       height: height + screenHeight * 0.06,
       child: Stack(children: [
@@ -94,7 +95,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard>
                         style: mediumTitleStyleWhite,
                       ),
                     ),
-                    widget.exercise.totalWidget
+                    totalWidget
                   ],
                 ),
               ),

@@ -1,12 +1,6 @@
 Pre-alpha
- - remove exercise
- - remove set
- - quit workout
  - exercise totals should update
- - adding old exercise should add fill in the details
 
- feature
- - calendar to see workouts
 
 
 MVP:
@@ -24,7 +18,7 @@ MVP:
 
 CALENDAR PAGE
 - calendar
-    - dates of workouts marked
+
 - list of workouts
     - name of the workout
     - date of the workout
