@@ -72,6 +72,11 @@ print("init");
     super.initState();
   }
 
+  @override void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //if (firstLoad) {
@@ -96,7 +101,7 @@ print("init");
           } else {
             if (snapshot.data!.isEmpty) {
               firstLoad = false;
-              //Future.delayed(Duration.zero, () => showAlertDialogExercise(context));
+              Future.delayed(Duration.zero, () => showAlertDialogExercise(context));
              return getPage(); 
             } else {
               firstLoad = false;
@@ -269,6 +274,15 @@ print("init");
     });
   }
 
+  addExercise() {
+    if (exerciseName != '') { 
+            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));   
+            
+            // workoutData.setExerciseWidgets();
+          Navigator.pop(context);
+        }
+  }
+
   showAlertDialogExercise(BuildContext context) {
     ExerciseNameSelectionWidget exerciseNameSelectionWidget =
         new ExerciseNameSelectionWidget(
@@ -284,17 +298,7 @@ print("init");
         "ADD",
         style: buttonTextSmall,
       ),
-      onPressed: () {
-        if (exerciseName != '') { 
-          setState(() {
-            firstLoad = false;
-            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
-          });   
-            
-            // workoutData.setExerciseWidgets();
-          Navigator.pop(context);
-        }
-      },
+      onPressed: addExercise,
     );
 
     // set up the AlertDialog
