@@ -17,7 +17,7 @@ class Authentication {
     required BuildContext context,
   }) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
-    //FirebaseAuth.instance.currentUser?.delete();
+    // FirebaseAuth.instance.currentUser?.delete();
     // User? user;
     User? user = FirebaseAuth.instance.currentUser;
 

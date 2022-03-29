@@ -4,12 +4,16 @@ import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
+import 'package:exerlog/Models/user.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/login_screen/google_signin_button.dart';
 import 'package:exerlog/UI/login_screen/login_data.dart';
 import 'package:exerlog/UI/login_screen/login_form.dart';
 import 'package:exerlog/UI/login_screen/signup_form.dart';
 import 'package:exerlog/UI/workout/workout_builder.dart';
+import 'package:exerlog/UI/workout/workout_page.dart';
+import 'package:exerlog/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../gradient_button.dart';
 import '../global.dart';
@@ -47,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: backgroundColor,
         body: Container(
           padding: EdgeInsets.only(top: height*0.25, bottom: height*0.3, left: 30, right: 30),
@@ -114,17 +119,55 @@ class _LoginPageState extends State<LoginPage> {
                   gradient: LinearGradient(
                     colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (index == 0) {
                       // login with email and password
                       if (loginData.password != '' && loginData.email != '') {
-                        EmailSignup.signInWithEmailAndPassword(loginData.email, loginData.password);
+                        User? user = await EmailSignup.signInWithEmailAndPassword(loginData.email, loginData.password).then((value) {
+                          userID = value?.uid;
+                          return value;
+                        });
+                       
+                
+                if (user != null) {
+                  print("USER IS NOT NULL");
+                  userID = user.uid;
+                  the_user = user;
+                  setState(() {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WorkoutPage(null
+                      ),
+                    ),
+                  );
+                  });                 
+                }
                       }
                     }
                     else {
                       // signup with email and password
                       if (loginData.password != '' && loginData.email != '') {
-                        EmailSignup.registerWithEmail(loginData.email, loginData.password);
+                        User? user = await EmailSignup.registerWithEmail(loginData.email, loginData.password).then((value) {
+                          userID = value?.uid;
+                          return value;
+                        });
+                       
+                
+                if (user != null) {
+                  print("USER IS NOT NULL");
+                  userID = user.uid;
+                  the_user = user;
+                  setState(() {
+                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WorkoutPage(null
+                      ),
+                    ),
+                  );
+                  });                 
+                }
                       }
                     }
                   },

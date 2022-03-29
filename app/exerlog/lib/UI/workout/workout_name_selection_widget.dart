@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 class WorkoutTemplateSelectionWidget extends StatefulWidget {
   Function(Workout) setWorkout;
+  List workoutList;
 
   WorkoutTemplateSelectionWidget({
     required this.setWorkout,
+    required this.workoutList
   }) {
     setWorkout = this.setWorkout;
   }
@@ -22,20 +24,8 @@ class _WorkoutNameSelectionWidgetState
   Map workoutMap = {};
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Workout>>(
-      future: getWorkoutTemplates(),
-      builder: (BuildContext context, AsyncSnapshot<List<Workout>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("Error"),
-            );
-          } else {
-            return Center(
+    return 
+       Center(
               child: Theme(
                 data: ThemeData(
                     // backgroundColor: backgroundColor,
@@ -72,7 +62,7 @@ class _WorkoutNameSelectionWidgetState
                       Navigator.pop(context);
                     },
                     items:
-                        snapshot.data!.map<DropdownMenuItem<String>>((element) {
+                        widget.workoutList.map<DropdownMenuItem<String>>((element) {
                       dropDownValue = element.name;
                       workoutMap[element.name] = element;
                       print("NAME " + element.name);
@@ -85,9 +75,5 @@ class _WorkoutNameSelectionWidgetState
                 ),
               ),
             );
-          }
-        }
-      },
-    );
   }
 }
