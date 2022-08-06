@@ -1,10 +1,10 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/login_screen/google_signin_button.dart';
-import 'package:exerlog/UI/login_screen/login_data.dart';
+import 'package:exerlog/UI/login_screen/auth_data.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
-  final LoginData loginData;
+  final AuthData loginData;
 
   const LoginForm(this.loginData);
 

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'UI/login_screen/login_page.dart';
+import 'UI/login_screen/authentication_page.dart';
 
 String userID = '';
 User the_user;
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              home: LoginPage(title: '1'),
+              home: AuthenticationPage(),
               color: Colors.blue,
             );
           }
