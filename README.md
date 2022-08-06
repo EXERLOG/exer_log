@@ -8,7 +8,9 @@ Create workouts and keep track of your reps, sets, weight, total weight, total r
 
 Right now the project is in it's infancy so there are a lot of features left to be added. If you want to follow the full buildout of this project then I (Kalle Hallden) have a YouTube channel where I document the progress every week: https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG
 
+## Technologies used
 
+This project uses Flutter. The reason I (Kalle) chose Flutter is that I am very comfortable with using the framework and that you only have to write once and can run anywhere.
 
 ## Current Features
 Workout metrics:
