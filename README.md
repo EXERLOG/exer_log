@@ -26,7 +26,8 @@ Workout analytics:
 - Progressive overload tracking
 
 Workout Planner:
-- the ability to set up a workout plan for future workouts
+- The ability to set up a workout plan for future workouts
+
 The thinking here is that this can become a way for people to create workouts and share them with each other. Let's say that a json workout template can be imported in the app so that you can perform that workout. This might be a really good way for trainers to create long term workout plans for their athletes. 
 
 Body metrics:
