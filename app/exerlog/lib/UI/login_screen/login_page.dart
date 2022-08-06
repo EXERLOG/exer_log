@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart' show Either;
-import 'package:exerlog/core/error_handling/error.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../Bloc/email_signup.dart';
-import '../../validators/auth_validators.dart';
-import '../../validators/validator.dart';
+import '../../core/error_handling/error.dart';
+import '../../core/validators/auth_validators.dart';
+import '../../core/validators/validator.dart';
 import '../global.dart';
 import '../gradient_button.dart';
 import '../workout/workout_page.dart';

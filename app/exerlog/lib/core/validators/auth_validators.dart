@@ -1,4 +1,4 @@
-import 'package:exerlog/validators/validator.dart';
+import 'package:exerlog/core/validators/validator.dart';
 
 class EmailValidator extends Validator<String> {
   EmailValidator.set(String value) : super.set(value);
