@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     super.initState();
 
     controller = TabController(length: tabs.length, vsync: this);
+    controller.addListener(_handleTabSelection);
   }
 
   @override
@@ -162,6 +163,12 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         ),
       ),
     );
+  }
+
+  void _handleTabSelection() {
+    setState(() {
+      index = controller.index;
+    });
   }
 }
 
