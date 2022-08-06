@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'UI/login_screen/login_page.dart';
 
+import 'UI/login_screen/login_page.dart';
+
 String userID = '';
 User the_user;
 
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
               ),
               home: LoginPage('1'),
+              home: LoginPage(title: '1'),
               color: Colors.blue,
             );
           }
