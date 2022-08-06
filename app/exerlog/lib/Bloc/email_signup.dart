@@ -22,8 +22,14 @@ class EmailSignup {
       }
       return Left(user);
     } on FirebaseAuthException catch (e) {
-      return Right(
-          ErrorModel(code: e.code, errorMessage: e.message.toString()));
+      String? errorMessage;
+      if (e.code == "ERROR_EMAIL_ALREADY_IN_USE" ||
+          e.code == "account-exists-with-different-credential" ||
+          e.code == "email-already-in-use") {
+        errorMessage = "Email already in use";
+      }
+      return Right(ErrorModel(
+          code: e.code, errorMessage: errorMessage ?? e.message.toString()));
     } catch (e) {
       return Right(ErrorModel(errorMessage: e.toString()));
     }
@@ -46,8 +52,15 @@ class EmailSignup {
       }
       return Left(user);
     } on FirebaseAuthException catch (e) {
-      return Right(
-          ErrorModel(code: e.code, errorMessage: e.message.toString()));
+      String? errorMessage;
+      if (e.code == "ERROR_USER_NOT_FOUND" || e.code == "user-not-found") {
+        errorMessage = "No user found with this email.";
+      } else if (e.code == "ERROR_WRONG_PASSWORD" ||
+          e.code == "wrong-password") {
+        errorMessage = "Enter correct password";
+      }
+      return Right(ErrorModel(
+          code: e.code, errorMessage: errorMessage ?? e.message.toString()));
     } catch (e) {
       return Right(ErrorModel(errorMessage: e.toString()));
     }
