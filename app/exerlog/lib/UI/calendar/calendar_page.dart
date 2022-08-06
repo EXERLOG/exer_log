@@ -1,6 +1,7 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'calendar_widget.dart';
 
@@ -17,14 +18,14 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Container(
-        padding: EdgeInsets.only(top:30, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 30, left: 20, right: 20),
         color: backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CalendarWidget(),
             Container(
-              width: MediaQuery.of(context).size.width *0.8,
+              width: MediaQuery.of(context).size.width * 0.8,
               margin: EdgeInsets.only(bottom: 30),
               child: RaisedGradientButton(
                 gradient: LinearGradient(
@@ -36,20 +37,20 @@ class _CalendarPageState extends State<CalendarPage> {
                   style: buttonTextSmall,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => WorkoutPage(null
-                        ),
-                      ),
-                    );
+                  FirebaseAuth.instance.signOut();
+                  // Navigator.of(context).pop();
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: (context) => WorkoutPage(null
+                  //       ),
+                  //     ),
+                  //   );
                 },
               ),
             )
           ],
-          ),
+        ),
       ),
     );
   }
-
 }

@@ -51,40 +51,8 @@ class _SignupFormState extends State<SignupForm> {
                             },
                             controller: emailController,
                             style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "email")),
-                      ),
-                    ],
-                  ),
-                ))),
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.lock,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            controller: passwordController1,
-                            obscureText: true,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "password")),
+                            decoration: InputDecoration(
+                                border: InputBorder.none, hintText: "email")),
                       ),
                     ],
                   ),
@@ -115,17 +83,52 @@ class _SignupFormState extends State<SignupForm> {
                         width: MediaQuery.of(context).size.width * 0.65,
                         child: TextField(
                             onChanged: (value) {
-                              if (value == passwordController1.text) {
-                                print("Same!");
-                                widget.loginData.password = value;
-                              } else {
-                                widget.loginData.password = '';
-                              }
+                              widget.loginData.password = value;
+                            },
+                            controller: passwordController1,
+                            obscureText: true,
+                            style: mediumTitleStyleWhite,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "password")),
+                      ),
+                    ],
+                  ),
+                ))),
+        Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: greenTextColor,
+            ),
+            child: Container(
+                margin: EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: backgroundColor,
+                ),
+                child: Container(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          width: 40,
+                          child: Icon(
+                            Icons.lock,
+                            color: greenTextColor,
+                          )),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: TextField(
+                            onChanged: (value) {
+                              widget.loginData.confirmPassword = value;
                             },
                             controller: passwordController2,
                             obscureText: true,
                             style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "repeat password")),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "repeat password")),
                       ),
                     ],
                   ),

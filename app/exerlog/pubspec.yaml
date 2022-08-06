@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^2.2.0
   flutter_slidable: ^1.2.0
   flutter_launcher_icons: ^0.9.2
+  dartz: ^0.10.1
 
 flutter_icons:
   android: true

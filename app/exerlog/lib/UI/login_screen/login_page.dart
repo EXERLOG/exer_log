@@ -1,12 +1,17 @@
-import 'package:exerlog/Bloc/email_signup.dart';
-import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/UI/gradient_button.dart';
-import 'package:exerlog/UI/login_screen/login_data.dart';
-import 'package:exerlog/UI/login_screen/login_form.dart';
-import 'package:exerlog/UI/login_screen/signup_form.dart';
-import 'package:exerlog/UI/workout/workout_page.dart';
-import 'package:exerlog/main.dart';
+import 'package:dartz/dartz.dart' show Either;
+import 'package:exerlog/core/error_handling/error.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../Bloc/email_signup.dart';
+import '../../validators/auth_validators.dart';
+import '../../validators/validator.dart';
+import '../global.dart';
+import '../gradient_button.dart';
+import '../workout/workout_page.dart';
+import 'login_data.dart';
+import 'login_form.dart';
+import 'signup_form.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -20,10 +25,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
 
-  LoginData loginData = LoginData('', '');
+  LoginData loginData = LoginData(email: '', password: '');
   bool login = true;
   int index = 0;
   List<Tab> tabs = <Tab>[
@@ -44,7 +50,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-
     controller = TabController(length: tabs.length, vsync: this);
   }
 
@@ -83,7 +88,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                   child: AppBar(
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
-                    flexibleSpace: TabBar(tabs: tabs, controller: controller),
+                    elevation: 0,
+                    flexibleSpace: TabBar(
+                        tabs: tabs,
+                        controller: controller,
+                        onTap: ((value) => setState(() {
+                              index = value;
+                            }))),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -108,50 +119,87 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                     ),
                     onPressed: () async {
+                      // TODO: Separate Logical Part from UI
                       if (index == 0) {
+                        // Validating for login
+                        GroupValidator validation = GroupValidator(validators: [
+                          EmailValidator.set(loginData.email),
+                          PasswordValidator.set(loginData.password)
+                        ]);
+                        if (!validation.isValid) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(validation.error.message!),
+                            backgroundColor: Colors.red,
+                          ));
+                          return;
+                        }
+
                         // login with email and password
-                        if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.signInWithEmailAndPassword(
-                            loginData.email,
-                            loginData.password,
-                          );
-
-                          if (user != null) {
-                            print("USER IS NOT NULL");
-
-                            userID = user.uid;
-                            the_user = user;
-
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WorkoutPage(null),
-                              ),
-                            );
+                        final Either<User?, ErrorModel> results =
+                            await EmailSignup.signInWithEmailAndPassword(
+                          loginData.email,
+                          loginData.password,
+                        );
+                        results.fold((user) {
+                          if (user == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("User not found"),
+                              backgroundColor: Colors.red,
+                            ));
+                            return;
                           }
-                        }
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => WorkoutPage(null),
+                            ),
+                          );
+                        },
+                            (error) => ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(error.errorMessage.toString()),
+                                  backgroundColor: Colors.red,
+                                )));
                       } else {
-                        // signup with email and password
-                        if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.registerWithEmail(
-                            loginData.email,
-                            loginData.password,
-                          );
-
-                          if (user != null) {
-                            print("USER IS NOT NULL");
-
-                            userID = user.uid;
-                            the_user = user;
-
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WorkoutPage(null),
-                              ),
-                            );
-                          }
+                        // Validating for register
+                        GroupValidator validation = GroupValidator(validators: [
+                          EmailValidator.set(loginData.email),
+                          PasswordValidator.set(loginData.password),
+                          ConfirmPasswordValidator.set(loginData.password,
+                              loginData.confirmPassword ?? '')
+                        ]);
+                        if (!validation.isValid) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(validation.error.message!),
+                            backgroundColor: Colors.red,
+                          ));
+                          return;
                         }
+
+                        // signup with email and password
+                        final Either<User?, ErrorModel> results =
+                            await EmailSignup.registerWithEmail(
+                          loginData.email,
+                          loginData.password,
+                        );
+                        results.fold((user) {
+                          if (user == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Registration Failed"),
+                              backgroundColor: Colors.red,
+                            ));
+                            return;
+                          }
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => WorkoutPage(null),
+                            ),
+                          );
+                        },
+                            (error) => ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(error.errorMessage.toString()),
+                                  backgroundColor: Colors.red,
+                                )));
                       }
                     },
                   ),

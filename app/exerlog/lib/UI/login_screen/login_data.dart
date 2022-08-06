@@ -1,6 +1,8 @@
 class LoginData {
   String password;
   String email;
+  String? confirmPassword;
 
-  LoginData(this.email, this.password);
+  LoginData(
+      {required this.email, required this.password, this.confirmPassword});
 }
