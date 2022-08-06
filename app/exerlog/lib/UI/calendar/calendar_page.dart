@@ -1,7 +1,6 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'calendar_widget.dart';
 
@@ -37,14 +36,12 @@ class _CalendarPageState extends State<CalendarPage> {
                   style: buttonTextSmall,
                 ),
                 onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  // Navigator.of(context).pop();
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(
-                  //       builder: (context) => WorkoutPage(null
-                  //       ),
-                  //     ),
-                  //   );
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => WorkoutPage(null),
+                    ),
+                  );
                 },
               ),
             )
