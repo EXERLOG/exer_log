@@ -1,6 +1,6 @@
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/workout.dart';
-import 'package:exerlog/UI/calendar/date_widget.dart';
+import 'package:exerlog/UI/calendar/widgets/date_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:flutter/material.dart';
 

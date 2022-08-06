@@ -5,7 +5,7 @@ import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
-import 'package:exerlog/UI/calendar/calendar_page.dart';
+import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/exercise/exercise_card.dart';
