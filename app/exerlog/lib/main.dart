@@ -1,14 +1,14 @@
 // @dart = 2.9
 import 'package:exerlog/Bloc/authentication.dart';
-import 'package:exerlog/UI/calendar/calendar_page.dart';
+import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'UI/login_screen/login_page.dart';
 
 String userID = '';
 User the_user;
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
