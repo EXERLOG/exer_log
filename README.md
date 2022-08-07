@@ -1,4 +1,9 @@
+<p align="center">
+<img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-d.png?raw=true#gh-light-mode-only">
+<img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-w.png?raw=true#gh-dark-mode-only">
+</p>
 
+---
 
 # ExerLog 
 
