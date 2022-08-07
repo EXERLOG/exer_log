@@ -35,12 +35,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 setState(() {
                   _isSigningIn = true;
                 });
-                
-                User? user =
-                  await Authentication.signInWithGoogle(context: context).then((value) {
-                    userID = value?.uid;
-                    return value;
-                  });
+
+                User? user = await Authentication.signInWithGoogle(context: context).then((value) {
+                  userID = value?.uid;
+                  return value;
+                });
 
                 setState(() {
                   _isSigningIn = false;
@@ -54,12 +53,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   setState(() {
                     Navigator.pop(context);
                     Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => WorkoutPage(null
+                      MaterialPageRoute(
+                        builder: (context) => WorkoutPage(null),
                       ),
-                    ),
-                  );
-                  });                 
+                    );
+                  });
                 }
               },
               child: Padding(

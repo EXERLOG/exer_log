@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
   LoginData loginData = LoginData('', '');
   bool login = true;
-  int index = 0;
+  int tabIndex = 0;
   List<Tab> tabs = <Tab>[
     Tab(
       child: Text(
@@ -46,6 +46,18 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     super.initState();
 
     controller = TabController(length: tabs.length, vsync: this);
+    controller.addListener(() {
+      if (controller.indexIsChanging)
+        setState(() {
+          tabIndex = controller.index;
+        });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -101,14 +113,14 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                   child: RaisedGradientButton(
                     radius: 30,
                     child: Text(
-                      index > 0 ? "Sign up" : "Login",
+                      tabIndex == 0 ? "Login" : "Sign up",
                       style: buttonText,
                     ),
                     gradient: LinearGradient(
                       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                     ),
                     onPressed: () async {
-                      if (index == 0) {
+                      if (tabIndex == 0) {
                         // login with email and password
                         if (loginData.password != '' && loginData.email != '') {
                           final user = await EmailSignup.signInWithEmailAndPassword(
