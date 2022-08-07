@@ -10,6 +10,7 @@ import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/maxes/max_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import '';
@@ -55,7 +56,7 @@ class _SetWidgetState extends State<SetWidget>
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
   ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
-  
+
   @override
   void initState() {
     //percentageProvider = Provider.of<PercentageProvider>(context, listen: false);
@@ -165,6 +166,8 @@ class _SetWidgetState extends State<SetWidget>
       style: setStyle,
       textAlign: TextAlign.center,
       keyboardType: type == 2 ? TextInputType.text : TextInputType.number,
+      inputFormatters: type == 2 ? <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}%?$'))]
+          : <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
       controller: controllers[type],
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
