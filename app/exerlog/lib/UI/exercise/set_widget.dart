@@ -166,9 +166,9 @@ class _SetWidgetState extends State<SetWidget>
       style: setStyle,
       textAlign: TextAlign.center,
       keyboardType: type == 2 ? TextInputType.text : TextInputType.number,
-      inputFormatters: type == 2 ? <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}%?$'))]
-          : type == 3 ? <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))]
-          : <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: type == 2 ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}%?'))]
+          : type == 3 ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))]
+          : [FilteringTextInputFormatter.digitsOnly],
       controller: controllers[type],
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
