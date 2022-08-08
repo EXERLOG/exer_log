@@ -73,7 +73,7 @@ CD into the project
   cd exer_log/app/exerlog
 ```
 
-Download dependancies 
+Download dependencies 
 
 ```bash
   flutter pub get
