@@ -1,90 +1,129 @@
+# ExerLog
+
 <p align="center">
-<img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-d.png?raw=true#gh-light-mode-only">
-<img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-w.png?raw=true#gh-dark-mode-only">
+  <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-dark.png?raw=true#gh-light-mode-only">
+  <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/img/logo-light.png?raw=true#gh-dark-mode-only">
 </p>
 
----
+## Introduction
 
-# ExerLog 
+![](https://badgen.net/github/stars/kallehallden/exer_log)
+![](https://badgen.net/github/forks/kallehallden/exer_log)
+![](https://badgen.net/github/open-issues/kallehallden/exer_log)
+![](https://badgen.net/github/open-prs/kallehallden/exer_log)
 
-ExerLog is a simple and easy-to-use exercise journal app developed in conjunction with sports science that focuses on providing you with all the essential data without all the irrelevant information that you don't need. An app that keeps track of your exercises, body measurements, and offers you access to relevant workout information. The goal is to give you the freedom of a analog exercise journal with the analytical abilities of excel.  
+**ExerLog** is simple and easy-to-use exercise-journal app. Developed in
+conjunction with Sports Science, ExerLog focuses on providing all the
+essential workout data without all the unnecessary and irrelevant
+information. The goal of this app is to give you the freedom of a
+historical exercise journal paired with the analytical abilities of
+[spreadsheets](https://en.wikipedia.org/wiki/Spreadsheet).
 
-Create workouts and keep track of your reps, sets, weight, total weight, total reps, total sets, maxes and more. Track important physical measurements including bodyweight, waist size, arm size, and more. Then, visualize all of these measurements in bar charts and graphs that show your advancement over time. 
+This project is currently *in development*; there are still several
+features that are [yet to be implemented](#room-for-improvement).
 
-Right now the project is in it's infancy so there are a lot of features left to be added. If you want to follow the full buildout of this project then I (Kalle Hallden) have a YouTube channel where I document the progress every week: https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG
+There is a series dedicated to the full build-out of this project
+on my YouTube channel:
 
-## Technologies used
+- [[YouTube] Coding My Startup - @KalleHallden](https://www.youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG)
 
-This project uses Flutter. The reason I (Kalle) chose Flutter is that I am very comfortable with using the framework and that you only have to write once and can run anywhere.
 
-## Current Features
-Workout metrics:
-- Name of exercise
-- Reps
-- Sets
-- Weight
-- Rest
-- Total weight/reps/sets per exercise and for the full workout
+## Technologies Used
 
-## Future features
-Workout analytics:
-- Charts for strength increases over time
-- Charts for volume (ie total weight and average weight per workout) over time (for easy periodisation)
-- Progressive overload tracking
+- [Flutter](https://en.wikipedia.org/wiki/Flutter_(software))
+- [Firebase](https://en.wikipedia.org/wiki/Firebase)
+
+
+## How to Run
+
+- Install the [Flutter SDK](https://docs.flutter.dev/get-started/install).
+
+- Clone this repository onto your local machine.
+
+```powershell
+git clone "https://github.com/KalleHallden/exer_log.git"
+```
+
+- Navigate into the proper directory.
+
+```powershell
+cd "./exer_log/app/exerlog"
+```
+
+- Download the project's dependencies.
+
+```powershell
+flutter pub get
+```
+
+- Run the project.
+
+```powershell
+flutter run
+```
+
+
+## Room for Improvement
+
+### Current features
+
+Workout Metrics:
+
+- [x] Custom exercise names
+- [x] Reps
+- [x] Sets
+- [x] Weight
+- [x] Rest
+- [x] Total weight, reps and sets per exercise for the entire workout.
+
+### Unimplemented features
+
+Workout Analytics:
+
+- [ ] Chart displaying strength increase over time.
+- [ ] Chart displaying volume* over time (for easy periodization).
+- [ ] Tracking progressive overload.
+
+> *Volume refers to the total amount of physical work performed in
+> either a single workout session or over the course of an extended
+> exercise program.
 
 Workout Planner:
-- The ability to set up a workout plan for future workouts
 
-The thinking here is that this can become a way for people to create workouts and share them with each other. Let's say that a json workout template can be imported in the app so that you can perform that workout. This might be a really good way for trainers to create long term workout plans for their athletes. 
+- [ ] Ability to set up a workout plan for future workouts.
 
-Body metrics:
-- Body Weight
-- Waist size
-- Arm size
-- Calf size
-- Chest size
-- Wrist size
-- Thigh size
+Body Metrics:
+
+> The rationale behind this is that this can become a way for users to
+> create workouts and share them with one another. For example, a JSON
+> workout template can be imported into the app so that you can perform
+> that workout. This might be a really good way for trainers to create
+> long term workout plans for their athletes.
+
+- [ ] Body Weight
+- [ ] Waist size
+- [ ] Arm size
+- [ ] Calf size
+- [ ] Chest size
+- [ ] Wrist size
+- [ ] Thigh size
+
 
 ## Contributing
 
-Contributions are always welcome!
+Want to contribute? Great!
+Click [here](./contributing.md) to get started.
 
-See `contributing.md` for ways to get started.
+Please adhere to the project's [Code of Conduct](./code_of_conduct.md).
 
-Please adhere to this project's `code of conduct`.
+Bug/Feature Request
+--------------------
 
-![Issues](https://img.shields.io/github/issues/KalleHallden/exer_log)
-## Development
-
-Install the Flutter SDK from the official [flutter.dev](https://docs.flutter.dev/get-started/install) website for your operating system.
-
+If you find a bug (program failed to run and/or gave undesired results)
+or you just want to request a feature, kindly open a
+[new issue](https://github.com/KalleHallden/exer_log/issues).
 
 
-Clone this project
-
-```
-  git clone https://github.com/KalleHallden/exer_log.git
-```
-
-CD into the project
-
-```bash
-  cd exer_log/app/exerlog
-```
-
-Download dependancies 
-
-```bash
-  flutter pub get
-```
-
-Run the project
-
-```bash
-  flutter run
-```
 ## Authors
 
 - [@KalleHallden](https://github.com/KalleHallden)
-
