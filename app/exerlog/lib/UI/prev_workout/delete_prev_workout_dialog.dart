@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class DeleteWorkoutAlert extends StatefulWidget {
   RaisedGradientButton deleteWorkoutButton;
-  DeleteWorkoutAlert(this.deleteWorkoutButton);
+  RaisedGradientButton cancelWorkoutButton;
+  DeleteWorkoutAlert(this.deleteWorkoutButton, this.cancelWorkoutButton);
   @override
   _DeleteWorkoutAlertState createState() => _DeleteWorkoutAlertState();
 }
@@ -28,19 +29,29 @@ class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: EdgeInsets.all(15),
-        height: screenHeight * 0.4,
+        height: screenHeight * 0.25,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
               "Are you sure you want to delete this workout?",
               style: mediumTitleStyleWhite,
               textAlign: TextAlign.center,
             ),
-            Container(
-              height: screenHeight * 0.05,
-              width: screenWidth * 0.5,
-              child: widget.deleteWorkoutButton,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: screenHeight * 0.05,
+                  width: screenWidth * 0.30,
+                  child: widget.cancelWorkoutButton,
+                ),
+                Container(
+                  height: screenHeight * 0.05,
+                  width: screenWidth * 0.3,
+                  child: widget.deleteWorkoutButton,
+                ),
+              ],
             ),
           ],
         ),
