@@ -10,7 +10,7 @@ import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
-import 'package:exerlog/UI/exercise/exercise_card.dart';
+import 'package:exerlog/UI/exercise/exercise_card/exercise_card.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
 import 'package:exerlog/UI/prev_workout/delete_prev_workout_dialog.dart';

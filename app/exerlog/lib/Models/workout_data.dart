@@ -2,7 +2,7 @@ import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
-import 'package:exerlog/UI/exercise/exercise_card.dart';
+import 'package:exerlog/UI/exercise/exercise_card/exercise_card.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
@@ -32,12 +32,11 @@ class WorkoutData {
     //setExerciseWidgets();
   }
 
-  removeSet(exercise, setToRemove,id) {
+  void removeSet(exercise, setToRemove,id) {
     exercise.sets.removeAt(id);
     exercise.setExerciseTotals();
     updateExisitingExercise();
     setExerciseWidgets();
-    return exercise;
   }
 
 
@@ -86,6 +85,7 @@ class WorkoutData {
 
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
+    totals = WorkoutTotals(0,0,0,0,0);
     for (Exercise exercise in workout.exercises) {
       List<SetWidget> setList = [];
       int i = 0;
@@ -103,7 +103,6 @@ class WorkoutData {
       ));
       key++;
       for (Sets sets in exercise.sets) {
-
         totals.sets += sets.sets;
         int reps_set = sets.sets * sets.reps;
         totals.weight += reps_set * sets.weight;
@@ -139,8 +138,6 @@ class WorkoutData {
 
   removeExercise(exercise) async {
     workout.exercises.remove(exercise);
-    setExerciseWidgets();
-    updateTotals(workout);
   }
 
   addExercise(exercise) async {

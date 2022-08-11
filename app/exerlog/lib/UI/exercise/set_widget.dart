@@ -37,8 +37,9 @@ class SetWidget extends StatefulWidget {
       required this.id,
       required this.isTemplate,
       this.updateExercise,
-      required this.updateTotal
-      });
+      required this.updateTotal,
+      Key?key,
+      }): super(key: key);
   @override
   _SetWidgetState createState() => _SetWidgetState();
 }

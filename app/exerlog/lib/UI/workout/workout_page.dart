@@ -8,7 +8,7 @@ import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
-import 'package:exerlog/UI/exercise/exercise_card.dart';
+import 'package:exerlog/UI/exercise/exercise_card/exercise_card.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
 import 'package:exerlog/UI/workout/add_new_workout_alert.dart';
@@ -185,69 +185,17 @@ print("init");
                         totals: workoutData.totals,
                       ),
                      Expanded(
-                          child: ListView(
+                          child: ListView.separated(
+                            padding: EdgeInsets.symmetric(
+                             horizontal: 20,
+                             vertical: 10,
+                            ),
+                            itemCount: workoutData.exerciseWidgets.length,
                             addAutomaticKeepAlives: true,
-                            children: workoutData.exerciseWidgets,
+                            separatorBuilder: (context, index) => SizedBox(height: 10),
+                            itemBuilder:(context, index)=> workoutData.exerciseWidgets[index],
                           ),
                         ),
-                      // Container(
-                      //   height: screenHeight * 0.065,
-                      //   width: screenWidth * 0.9,
-                      //   child: GradientBorderButton(
-                      //     addButton: true,
-                      //     gradient: LinearGradient(
-                      //       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                      //     ),
-                      //     radius: 30,
-                      //     borderSize: 3,
-                      //     onPressed: () {
-                      //       // create new exercise
-                      //       showAlertDialogExercise(context);
-                      //     },
-                      //     child: Container(
-                      //       width: screenWidth * 0.6,
-                      //       child: Center(
-                      //           child: Text(
-                      //         "Add New Exercise",
-                      //         style: greenButtonTextThin,
-                      //       )),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Container(
-                      //   height: screenHeight * 0.065,
-                      //   width: screenWidth * 0.9,
-                      //   margin: EdgeInsets.only(bottom: 30),
-                      //   child: RaisedGradientButton(
-                      //     gradient: LinearGradient(
-                      //       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                      //     ),
-                      //     radius: 30,
-                      //     onPressed: () {
-                      //       for (Exercise exercise
-                      //           in workoutData.workout.exercises) {
-                      //         for (int i = 0; i < exercise.sets.length; i++) {
-                      //           if (exercise.sets[i].reps == 0) {
-                      //             exercise.sets.remove(exercise.sets[i]);
-                      //           }
-                      //         }
-                      //         if (exercise.sets.length == 0) {
-                      //           workoutData.workout.exercises.remove(exercise);
-                      //         }
-                      //       }
-                      //       if (workoutData.workout.exercises.length > 0) {
-                      //         showSaveWorkoutAlertDialog(context);
-                      //       }
-                      //     },
-                      //     child: Container(
-                      //       child: Center(
-                      //           child: Text(
-                      //         "Save",
-                      //         style: buttonText,
-                      //       )),
-                      //     ),
-                      //   ),
-                      // )
                     ],
                   ),
                 ),
