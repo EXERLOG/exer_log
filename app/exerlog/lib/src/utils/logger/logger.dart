@@ -28,7 +28,7 @@ class Log {
 
   static void info(String message) => _singleton._logger.i(message);
 
-  static void error(String message) => _singleton._logger.e(message);
+  static void error(String? message) => _singleton._logger.e(message);
 
   static void warning(String message) => _singleton._logger.w(message);
 }
