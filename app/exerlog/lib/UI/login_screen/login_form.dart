@@ -51,6 +51,9 @@ class _LoginFormState extends State<LoginForm> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "email/username",
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
@@ -93,6 +96,9 @@ class _LoginFormState extends State<LoginForm> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "password",
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
