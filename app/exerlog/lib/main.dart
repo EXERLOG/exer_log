@@ -1,62 +1,82 @@
 // @dart = 2.9
-import 'package:exerlog/Bloc/authentication.dart';
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
+import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
+import 'package:exerlog/src/utils/logger/riverpod_logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'UI/login_screen/login_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'src/feature/authentication/view/landing_screen.dart';
+import 'src/core/base/shared_preference/shared_preference_b.dart';
+
+/// TODO: Remove global instances and use shared pref keys
+
+@Deprecated('Use `USER_UID` instead. Will be removed soon')
 String userID = '';
+@Deprecated('Should be removed')
 User the_user;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// Device orientation locked to portrait up
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(MyApp());
+
+  /// A widget that stores the state of providers.
+  /// All Flutter applications using Riverpod must contain a [ProviderScope] at
+  /// the root of their widget tree
+  runApp(ProviderScope(observers: [RiverpodLogger()], child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+final _firebaseInitProvider = FutureProvider<FirebaseApp>((ref) async {
+  FirebaseApp firebaseApp = await Firebase.initializeApp();
+  return firebaseApp;
+});
+
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire:
-      future: Authentication.initializeFirebase(context: context),
-      builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return Container();
-        }
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<FirebaseApp> firebase = ref.watch(_firebaseInitProvider);
 
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          User user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: CalendarPage(),
-              color: Colors.blue,
-            );
-          } else {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: LoginPage(title: '1'),
-              color: Colors.blue,
-            );
-          }
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return Container();
-      },
+    return MaterialApp(
+      title: 'EXERLOG',
+      debugShowCheckedModeBanner: false,
+      home: firebase.when(
+        data: (data) {
+          AsyncValue<User> authState = ref.watch(authStateProvider);
+          return authState.when(
+            data: (user) {
+              if (user != null) {
+                setValue(USER_UID, user.uid);
+                return CalendarPage();
+              }
+              return user != null ? CalendarPage() : LandingScreen();
+            },
+            error: (e, stackTrace) {
+              /// TODO: Use a generic error screen
+              return SizedBox.shrink();
+            },
+            loading: () {
+              /// TODO: Use a generic loading screen / welcome screen
+              return const CircularProgressIndicator();
+            },
+          );
+        },
+        error: (e, stackTrace) {
+          Log.error(e);
+          Log.error(stackTrace.toString());
+          return SizedBox.shrink();
+        },
+        loading: () {
+          /// TODO: Use a splash screen
+          return const CircularProgressIndicator();
+        },
+      ),
     );
   }
 }
