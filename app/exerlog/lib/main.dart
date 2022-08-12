@@ -1,4 +1,6 @@
 // @dart = 2.9
+import 'dart:io';
+
 import 'package:exerlog/Bloc/authentication.dart';
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +16,15 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
+  if (Platform.isAndroid) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+    ));
+  }
+
   runApp(MyApp());
 }
 
