@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'logger.dart';
 
 class RiverpodLogger extends ProviderObserver {
@@ -14,5 +15,14 @@ class RiverpodLogger extends ProviderObserver {
   "provider": "${provider.name ?? provider.runtimeType}",
   "newValue": "$newValue"
 }''');
+  }
+
+  @override
+  void didDisposeProvider(ProviderBase provider, ProviderContainer containers) {
+    Log.info('''
+{
+  "disposed provider": "${provider.name ?? provider.runtimeType}",
+}''');
+    super.didDisposeProvider(provider, containers);
   }
 }
