@@ -51,7 +51,8 @@ class _SignupFormState extends State<SignupForm> {
                             },
                             controller: emailController,
                             style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "email")),
+                            decoration: InputDecoration(
+                                border: InputBorder.none, hintText: "email")),
                       ),
                     ],
                   ),
@@ -84,7 +85,9 @@ class _SignupFormState extends State<SignupForm> {
                             controller: passwordController1,
                             obscureText: true,
                             style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "password")),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "password")),
                       ),
                     ],
                   ),
@@ -125,7 +128,9 @@ class _SignupFormState extends State<SignupForm> {
                             controller: passwordController2,
                             obscureText: true,
                             style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "repeat password")),
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "repeat password")),
                       ),
                     ],
                   ),

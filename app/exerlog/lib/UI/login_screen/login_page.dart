@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage>
             Image.asset("lib/assets/logo-light.png"),
             Center(
               child: Container(
-                height: height * 0.42,
+                height: height * 0.5,
                 decoration: BoxDecoration(
                   color: Color(0xFF2E2C42),
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -94,12 +94,15 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     const SizedBox(height: 16),
                     Expanded(
-                      child: TabBarView(
-                        controller: controller,
-                        children: [
-                          LoginForm(loginData),
-                          SignupForm(loginData),
-                        ],
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: TabBarView(
+                          controller: controller,
+                          children: [
+                            LoginForm(loginData),
+                            SignupForm(loginData),
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
