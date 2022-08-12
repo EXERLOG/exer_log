@@ -25,13 +25,16 @@ class CalendarPage extends StatelessWidget {
             CalendarWidget(),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).padding.bottom,
+              ),
               child: RaisedGradientButton(
                 child: Text(
                   "START NEW WORKOUT",
                   style: buttonTextSmall,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => WorkoutPage(null),
                     ),
