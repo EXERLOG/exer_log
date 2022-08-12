@@ -1,7 +1,7 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_button.dart';
-import 'package:exerlog/UI/login_screen/login_form.dart';
-import 'package:exerlog/UI/login_screen/signup_form.dart';
+import 'package:exerlog/src/feature/authentication/widgets/login_form.dart';
+import 'package:exerlog/src/feature/authentication/widgets/signup_form.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
@@ -28,7 +28,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
     Tab(
       child: Text(
         "Login",
-
         /// TODO: Handle text style properly (applies everywhere)
         style: loginOptionTextStyle,
       ),
