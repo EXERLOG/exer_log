@@ -20,12 +20,12 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
 
   LoginData loginData = LoginData('', '');
   bool login = true;
-  int index = 0;
   List<Tab> tabs = <Tab>[
     Tab(
       child: Text(
@@ -45,7 +45,20 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
 
-    controller = TabController(length: tabs.length, vsync: this);
+    controller = TabController(
+      length: tabs.length,
+      vsync: this,
+    );
+
+    controller.addListener(() {
+      setState(() {
+        if (controller.index == 0) {
+          login = true;
+        } else {
+          login = false;
+        }
+      });
+    });
   }
 
   @override
@@ -94,6 +107,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       LoginForm(loginData),
                       SignupForm(loginData),
                     ],
+                    physics: BouncingScrollPhysics(),
                   ),
                 ),
                 Padding(
@@ -101,17 +115,19 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                   child: RaisedGradientButton(
                     radius: 30,
                     child: Text(
-                      index > 0 ? "Sign up" : "Login",
+                      login ? "Login" : "Sign up",
                       style: buttonText,
                     ),
                     gradient: LinearGradient(
                       colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
                     ),
                     onPressed: () async {
-                      if (index == 0) {
+                      print(controller.index);
+                      if (controller.index == 0) {
                         // login with email and password
                         if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.signInWithEmailAndPassword(
+                          final user =
+                              await EmailSignup.signInWithEmailAndPassword(
                             loginData.email,
                             loginData.password,
                           );
@@ -122,8 +138,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             userID = user.uid;
                             the_user = user;
 
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
+                            Navigator.pushReplacement(
+                              context,
                               MaterialPageRoute(
                                 builder: (context) => WorkoutPage(null),
                               ),
@@ -144,8 +160,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             userID = user.uid;
                             the_user = user;
 
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
+                            Navigator.pushReplacement(
+                              context,
                               MaterialPageRoute(
                                 builder: (context) => WorkoutPage(null),
                               ),
@@ -165,12 +181,49 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   }
 }
 
-//   child: DefaultTabController(
-//   length: tabs.length,
-//   initialIndex: 0,
-//     child: TabBar(
-//       indicatorColor: textColorBlue,
-//       tabs:tabs
-//       ),
-// ),
-// )
+Widget NoInfoDialog(context) {
+  return Dialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Container(
+      height: 200,
+      width: 400,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: backgroundColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Please enter your email and password",
+              overflow: TextOverflow.visible,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Expanded(child: Container()),
+            RaisedGradientButton(
+              radius: 30,
+              child: Text(
+                "OK",
+                style: buttonText,
+              ),
+              gradient: LinearGradient(
+                colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
