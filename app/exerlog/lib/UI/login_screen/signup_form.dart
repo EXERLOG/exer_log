@@ -19,117 +19,133 @@ class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.mail,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            onChanged: (value) {
-                              widget.loginData.email = value;
-                            },
-                            controller: emailController,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "email")),
-                      ),
-                    ],
+        const SizedBox(height: 16.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: greenTextColor,
+              ),
+              child: Container(
+                  margin: EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: backgroundColor,
                   ),
-                ))),
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.lock,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            controller: passwordController1,
-                            obscureText: true,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "password")),
-                      ),
-                    ],
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            width: 40,
+                            child: Icon(
+                              Icons.mail,
+                              color: greenTextColor,
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.65,
+                          child: TextField(
+                              onChanged: (value) {
+                                widget.loginData.email = value;
+                              },
+                              controller: emailController,
+                              style: mediumTitleStyleWhite,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none, hintText: "email")),
+                        ),
+                      ],
+                    ),
+                  ))),
+        ),
+        const SizedBox(height: 30.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: greenTextColor,
+              ),
+              child: Container(
+                  margin: EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: backgroundColor,
                   ),
-                ))),
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.lock,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            onChanged: (value) {
-                              if (value == passwordController1.text) {
-                                print("Same!");
-                                widget.loginData.password = value;
-                              } else {
-                                widget.loginData.password = '';
-                              }
-                            },
-                            controller: passwordController2,
-                            obscureText: true,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "repeat password")),
-                      ),
-                    ],
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            width: 40,
+                            child: Icon(
+                              Icons.lock,
+                              color: greenTextColor,
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.65,
+                          child: TextField(
+                              controller: passwordController1,
+                              obscureText: true,
+                              style: mediumTitleStyleWhite,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "password")),
+                        ),
+                      ],
+                    ),
+                  ))),
+        ),
+        const SizedBox(height: 30.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: greenTextColor,
+              ),
+              child: Container(
+                  margin: EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: backgroundColor,
                   ),
-                ))),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            width: 40,
+                            child: Icon(
+                              Icons.lock,
+                              color: greenTextColor,
+                            )),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.65,
+                          child: TextField(
+                              onChanged: (value) {
+                                if (value == passwordController1.text) {
+                                  print("Same!");
+                                  widget.loginData.password = value;
+                                } else {
+                                  widget.loginData.password = '';
+                                }
+                              },
+                              controller: passwordController2,
+                              obscureText: true,
+                              style: mediumTitleStyleWhite,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "repeat password")),
+                        ),
+                      ],
+                    ),
+                  ))),
+        ),
       ],
     );
   }
