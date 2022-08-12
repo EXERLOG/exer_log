@@ -1,6 +1,6 @@
 import 'package:exerlog/src/core/base/base_state.dart';
-import 'package:exerlog/src/core/base/constants/shared_pref_key.dart';
-import 'package:exerlog/src/core/base/shared_pref_wrapper.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_pref_key.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_pref_wrapper.dart';
 import 'package:exerlog/src/dependency.dart';
 import 'package:exerlog/src/feature/authentication/data/authentication_repository.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
