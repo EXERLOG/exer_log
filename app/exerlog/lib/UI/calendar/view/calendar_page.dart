@@ -1,7 +1,7 @@
 import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
 import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/UI/gradient_button.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:flutter/material.dart';
 

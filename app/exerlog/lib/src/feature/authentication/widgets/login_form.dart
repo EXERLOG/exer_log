@@ -2,7 +2,7 @@ import 'package:exerlog/src/feature/authentication/controller/authentication_con
 import 'package:exerlog/src/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-import 'text_field.dart';
+import '../../../widgets/text_field.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm(this.controller);

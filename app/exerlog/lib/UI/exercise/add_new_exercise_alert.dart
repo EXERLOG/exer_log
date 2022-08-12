@@ -1,6 +1,6 @@
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/UI/gradient_button.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class AddExerciseAlert extends StatelessWidget {

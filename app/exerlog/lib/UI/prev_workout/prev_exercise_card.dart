@@ -7,7 +7,7 @@ import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/UI/gradient_button.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

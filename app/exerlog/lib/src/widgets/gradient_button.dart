@@ -46,13 +46,9 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
           onPressed: _isLoading
               ? null
               : () async {
-                  setState(() {
-                    _isLoading = true;
-                  });
+                  setState(() => _isLoading = true);
                   await widget.onPressed();
-                  setState(() {
-                    _isLoading = false;
-                  });
+                  setState(() => _isLoading = false);
                 },
           child: _isLoading
               ? Center(

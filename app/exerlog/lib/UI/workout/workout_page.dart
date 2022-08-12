@@ -16,7 +16,7 @@ import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:flutter/material.dart';
-import '../gradient_button.dart';
+import '../../src/widgets/gradient_button.dart';
 import '../global.dart';
 
 class WorkoutPage extends StatefulWidget {
