@@ -1,5 +1,6 @@
 // @dart = 2.9
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
+import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/utils/logger/riverpod_logger.dart';
@@ -9,17 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'src/feature/authentication/view/landing_screen.dart';
 import 'src/core/base/shared_preference/shared_preference_b.dart';
+import 'src/feature/authentication/view/landing_screen.dart';
 
 /// TODO: Remove global instances and use shared pref keys
-
 @Deprecated('Use `USER_UID` instead. Will be removed soon')
 String userID = '';
 @Deprecated('Should be removed')
 User the_user;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Device orientation locked to portrait up
@@ -27,10 +27,24 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
 
+  /// Initialize shared preference
+  try {
+    await initializeSharedPreference();
+  } catch (e, stackTrace) {
+    Log.error(e);
+    Log.error(stackTrace.toString());
+    throw ErrorDescription(e);
+  }
+
   /// A widget that stores the state of providers.
   /// All Flutter applications using Riverpod must contain a [ProviderScope] at
   /// the root of their widget tree
-  runApp(ProviderScope(observers: [RiverpodLogger()], child: MyApp()));
+  runApp(
+    ProviderScope(
+      observers: [RiverpodLogger()],
+      child: MyApp(),
+    ),
+  );
 }
 
 final _firebaseInitProvider = FutureProvider<FirebaseApp>((ref) async {
@@ -53,6 +67,9 @@ class MyApp extends ConsumerWidget {
             data: (user) {
               if (user != null) {
                 setValue(USER_UID, user.uid);
+
+                /// TODO: Remove later
+                userID = getStringAsync(USER_UID);
                 return CalendarPage();
               }
               return user != null ? CalendarPage() : LandingScreen();
@@ -63,7 +80,7 @@ class MyApp extends ConsumerWidget {
             },
             loading: () {
               /// TODO: Use a generic loading screen / welcome screen
-              return const CircularProgressIndicator();
+              return _buildLoadingPlaceHolder();
             },
           );
         },
@@ -74,8 +91,17 @@ class MyApp extends ConsumerWidget {
         },
         loading: () {
           /// TODO: Use a splash screen
-          return const CircularProgressIndicator();
+          return _buildLoadingPlaceHolder();
         },
+      ),
+    );
+  }
+
+  Widget _buildLoadingPlaceHolder() {
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Center(
+        child: const CircularProgressIndicator(),
       ),
     );
   }
