@@ -30,7 +30,7 @@ class CalendarPage extends StatelessWidget {
               ),
               child: RaisedGradientButton(
                 child: Text(
-                  "START NEW WORKOUT",
+                  "START A NEW WORKOUT",
                   style: buttonTextSmall,
                 ),
                 onPressed: () {

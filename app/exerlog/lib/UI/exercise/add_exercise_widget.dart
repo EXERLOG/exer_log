@@ -7,15 +7,18 @@ import 'package:flutter/cupertino.dart';
 class ExerciseNameSelectionWidget extends StatefulWidget {
   Function(String) setExercisename;
 
-  ExerciseNameSelectionWidget({required this.setExercisename,}) {
+  ExerciseNameSelectionWidget({
+    required this.setExercisename,
+  }) {
     setExercisename = this.setExercisename;
   }
   @override
-  _ExerciseNameSelectionWidgetState createState() => _ExerciseNameSelectionWidgetState();
-
+  _ExerciseNameSelectionWidgetState createState() =>
+      _ExerciseNameSelectionWidgetState();
 }
 
-class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidget> {
+class _ExerciseNameSelectionWidgetState
+    extends State<ExerciseNameSelectionWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
@@ -34,44 +37,40 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
             return Center(
               child: Theme(
                 data: ThemeData(
-                  // backgroundColor: backgroundColor,
-                  // cardColor: backgroundColor,
-                  // focusColor: backgroundColor,
-                  // highlightColor: backgroundColor,
-                  // hoverColor: backgroundColor,
-                  // selectedRowColor: backgroundColor,
-                  // dialogBackgroundColor: backgroundColor,
-                  inputDecorationTheme: new InputDecorationTheme(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: greenTextColor),
-                      //  when the TextFormField in unfocused 
-                    ) ,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: greenTextColor),
-                      //  when the TextFormField in focused 
-                    ) ,
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: greenTextColor)
-                    )
-                  ),
-                  textTheme: TextTheme(
-                    subtitle1: setStyle,
-                  ) 
-                ),
+                    // backgroundColor: backgroundColor,
+                    // cardColor: backgroundColor,
+                    // focusColor: backgroundColor,
+                    // highlightColor: backgroundColor,
+                    // hoverColor: backgroundColor,
+                    // selectedRowColor: backgroundColor,
+                    // dialogBackgroundColor: backgroundColor,
+                    inputDecorationTheme: new InputDecorationTheme(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: greenTextColor),
+                          //  when the TextFormField in unfocused
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: greenTextColor),
+                          //  when the TextFormField in focused
+                        ),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: greenTextColor))),
+                    textTheme: TextTheme(
+                      subtitle1: setStyle,
+                    )),
                 child: Container(
                   child: Autocomplete<String>(
                     optionsMaxHeight: 100,
                     onSelected: (value) {
                       widget.setExercisename(value);
                     },
-                    optionsBuilder: (TextEditingValue textEditingValue) 
-                    { 
-                        widget.setExercisename(textEditingValue.text);
-                      return snapshot.data!.where((String name) => name.toLowerCase()
-                      .startsWith(textEditingValue.text.toLowerCase())
-                      );
-                     },
-                    ),
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      widget.setExercisename(textEditingValue.text);
+                      return snapshot.data!.where((String name) => name
+                          .toLowerCase()
+                          .startsWith(textEditingValue.text.toLowerCase()));
+                    },
+                  ),
                 ),
               ),
             );
@@ -80,5 +79,4 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
       },
     );
   }
-
 }

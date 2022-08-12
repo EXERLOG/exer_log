@@ -107,7 +107,6 @@ class _LoginPageState extends State<LoginPage>
                       LoginForm(loginData),
                       SignupForm(loginData),
                     ],
-                    physics: BouncingScrollPhysics(),
                   ),
                 ),
                 Padding(
@@ -123,7 +122,7 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     onPressed: () async {
                       print(controller.index);
-                      if (controller.index == 0) {
+                      if (login) {
                         // login with email and password
                         if (loginData.password != '' && loginData.email != '') {
                           final user =
@@ -179,51 +178,4 @@ class _LoginPageState extends State<LoginPage>
       ),
     );
   }
-}
-
-Widget NoInfoDialog(context) {
-  return Dialog(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: Container(
-      height: 200,
-      width: 400,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: backgroundColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Please enter your email and password",
-              overflow: TextOverflow.visible,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            Expanded(child: Container()),
-            RaisedGradientButton(
-              radius: 30,
-              child: Text(
-                "OK",
-                style: buttonText,
-              ),
-              gradient: LinearGradient(
-                colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
 }
