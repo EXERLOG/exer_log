@@ -1,20 +1,12 @@
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/UI/login_screen/login_data.dart';
+import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
+import 'package:exerlog/src/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-class SignupForm extends StatefulWidget {
-  final LoginData loginData;
+class SignupForm extends StatelessWidget {
+  SignupForm(this.controller);
 
-  const SignupForm(this.loginData);
-
-  @override
-  _SignupFormState createState() => _SignupFormState();
-}
-
-class _SignupFormState extends State<SignupForm> {
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordController1 = new TextEditingController();
-  TextEditingController passwordController2 = new TextEditingController();
+  final AuthenticationController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,114 +14,106 @@ class _SignupFormState extends State<SignupForm> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
+          margin: EdgeInsets.all(1),
+          padding: EdgeInsets.only(left: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: greenTextColor),
+            borderRadius: BorderRadius.circular(30),
+            color: backgroundColor,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 40,
+                child: Icon(
+                  Icons.mail,
+                  color: greenTextColor,
                 ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.mail,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            onChanged: (value) {
-                              widget.loginData.email = value;
-                            },
-                            controller: emailController,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "email")),
-                      ),
-                    ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.65,
+                child: TextFormField(
+                  controller: controller.emailTextEditingController,
+                  validator: (value) => Validators.requiredField(value),
+                  style: mediumTitleStyleWhite,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "email",
                   ),
-                ))),
+                ),
+              ),
+            ],
+          ),
+        ),
         Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
+          margin: EdgeInsets.all(1),
+          padding: EdgeInsets.only(left: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: greenTextColor),
+            borderRadius: BorderRadius.circular(30),
+            color: backgroundColor,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 40,
+                child: Icon(
+                  Icons.lock,
+                  color: greenTextColor,
                 ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.lock,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            controller: passwordController1,
-                            obscureText: true,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "password")),
-                      ),
-                    ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.65,
+                child: TextFormField(
+                  controller: controller.passwordTextEditingController,
+                  validator: (value) => Validators.requiredField(value),
+                  obscureText: true,
+                  style: mediumTitleStyleWhite,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "password",
                   ),
-                ))),
+                ),
+              ),
+            ],
+          ),
+        ),
         Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: greenTextColor,
-            ),
-            child: Container(
-                margin: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: backgroundColor,
+          margin: EdgeInsets.all(1),
+          padding: EdgeInsets.only(left: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: greenTextColor),
+            borderRadius: BorderRadius.circular(30),
+            color: backgroundColor,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 40,
+                child: Icon(
+                  Icons.lock,
+                  color: greenTextColor,
                 ),
-                child: Container(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          child: Icon(
-                            Icons.lock,
-                            color: greenTextColor,
-                          )),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        child: TextField(
-                            onChanged: (value) {
-                              if (value == passwordController1.text) {
-                                print("Same!");
-                                widget.loginData.password = value;
-                              } else {
-                                widget.loginData.password = '';
-                              }
-                            },
-                            controller: passwordController2,
-                            obscureText: true,
-                            style: mediumTitleStyleWhite,
-                            decoration: InputDecoration(border: InputBorder.none, hintText: "repeat password")),
-                      ),
-                    ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.65,
+                child: TextFormField(
+                  controller: controller.confirmPasswordTextEditingController,
+                  validator: (value) => Validators.requiredField(value),
+                  obscureText: true,
+                  style: mediumTitleStyleWhite,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "repeat password",
                   ),
-                ))),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
