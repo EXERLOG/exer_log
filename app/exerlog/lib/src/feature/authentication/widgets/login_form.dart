@@ -1,5 +1,4 @@
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
-import 'package:exerlog/src/feature/authentication/widgets/google_signin_button.dart';
 import 'package:exerlog/src/utils/validators.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +27,6 @@ class LoginForm extends StatelessWidget {
           textEditingController: controller.passwordTextEditingController,
           obscureText: true,
         ),
-        GoogleSignInButton()
       ],
     );
   }
