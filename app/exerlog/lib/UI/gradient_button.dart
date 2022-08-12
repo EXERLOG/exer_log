@@ -62,13 +62,6 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
                   ),
                 )
               : widget.child,
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(widget.radius),
-              ),
-            ),
-          ),
         ),
       ),
     );
