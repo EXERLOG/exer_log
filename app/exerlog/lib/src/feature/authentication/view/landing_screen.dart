@@ -1,12 +1,12 @@
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/core/base/extensions/context_extension.dart';
-import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
+import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
 import 'package:exerlog/src/feature/authentication/widgets/google_signin_button.dart';
 import 'package:exerlog/src/feature/authentication/widgets/login_form.dart';
 import 'package:exerlog/src/feature/authentication/widgets/signup_form.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

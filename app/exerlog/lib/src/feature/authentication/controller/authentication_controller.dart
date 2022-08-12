@@ -108,7 +108,8 @@ class AuthenticationController extends StateNotifier<BaseState> {
   /// Text Editing Controllers
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
-  TextEditingController confirmPasswordTextEditingController = TextEditingController();
+  TextEditingController confirmPasswordTextEditingController =
+      TextEditingController();
 
   void clearTextFields() {
     emailTextEditingController.clear();
@@ -116,7 +117,9 @@ class AuthenticationController extends StateNotifier<BaseState> {
     confirmPasswordTextEditingController.clear();
   }
 
-  bool isSamePassword() => passwordTextEditingController.text == confirmPasswordTextEditingController.text;
+  bool isSamePassword() =>
+      passwordTextEditingController.text ==
+      confirmPasswordTextEditingController.text;
 
   @override
   void dispose() {

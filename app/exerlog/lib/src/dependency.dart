@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class Dependency {
   static Provider<FirebaseAuth> get firebaseAuth => _firebaseAuthProvider;
+
   static Provider<GoogleSignIn?> get googleSignIn => _googleSignInProvider;
 }
 
