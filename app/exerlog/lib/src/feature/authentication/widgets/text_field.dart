@@ -19,6 +19,10 @@ class OutlinedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
+      borderSide: BorderSide(color: greenTextColor),
+      borderRadius: BorderRadius.circular(30),
+    );
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
       child: TextFormField(
@@ -39,14 +43,10 @@ class OutlinedTextField extends StatelessWidget {
             ),
           ),
           contentPadding: EdgeInsets.all(10),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: greenTextColor),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: greenTextColor),
-            borderRadius: BorderRadius.circular(30),
-          ),
+          focusedErrorBorder: _outlineInputBorder,
+          focusedBorder: _outlineInputBorder,
+          errorBorder: _outlineInputBorder,
+          enabledBorder: _outlineInputBorder,
         ),
       ),
     );
