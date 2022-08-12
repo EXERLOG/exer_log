@@ -20,7 +20,8 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
 
   LoginData loginData = LoginData('', '');
@@ -59,106 +60,116 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
           left: 30,
           right: 30,
         ),
-        child: Center(
-          child: Container(
-            height: height * 0.42,
-            decoration: BoxDecoration(
-              color: Color(0xFF2E2C42),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.2),
-                  offset: Offset(0, 3),
-                  blurRadius: 10,
-                  spreadRadius: 10,
-                )
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: 30,
-                  child: AppBar(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    flexibleSpace: TabBar(tabs: tabs, controller: controller),
-                  ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("lib/assets/logo-light.png"),
+            Center(
+              child: Container(
+                height: height * 0.42,
+                decoration: BoxDecoration(
+                  color: Color(0xFF2E2C42),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.2),
+                      offset: Offset(0, 3),
+                      blurRadius: 10,
+                      spreadRadius: 10,
+                    )
+                  ],
                 ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: TabBarView(
-                    controller: controller,
-                    children: [
-                      LoginForm(loginData),
-                      SignupForm(loginData),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                      child: AppBar(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        flexibleSpace:
+                            TabBar(tabs: tabs, controller: controller),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller,
+                        children: [
+                          LoginForm(loginData),
+                          SignupForm(loginData),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 0, 60, 16),
+                      child: RaisedGradientButton(
+                        radius: 30,
+                        child: Text(
+                          index > 0 ? "Sign up" : "Login",
+                          style: buttonText,
+                        ),
+                        gradient: LinearGradient(
+                          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+                        ),
+                        onPressed: () async {
+                          if (index == 0) {
+                            // login with email and password
+                            if (loginData.password != '' &&
+                                loginData.email != '') {
+                              final user =
+                                  await EmailSignup.signInWithEmailAndPassword(
+                                loginData.email,
+                                loginData.password,
+                              );
+
+                              if (user != null) {
+                                print("USER IS NOT NULL");
+
+                                userID = user.uid;
+                                the_user = user;
+
+                                Navigator.pop(context);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => WorkoutPage(null),
+                                  ),
+                                );
+                              }
+                            }
+                          } else {
+                            // signup with email and password
+                            if (loginData.password != '' &&
+                                loginData.email != '') {
+                              final user = await EmailSignup.registerWithEmail(
+                                loginData.email,
+                                loginData.password,
+                              );
+
+                              if (user != null) {
+                                print("USER IS NOT NULL");
+
+                                userID = user.uid;
+                                the_user = user;
+
+                                Navigator.pop(context);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => WorkoutPage(null),
+                                  ),
+                                );
+                              }
+                            }
+                          }
+                        },
+                      ),
+                    )
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(60, 0, 60, 16),
-                  child: RaisedGradientButton(
-                    radius: 30,
-                    child: Text(
-                      index > 0 ? "Sign up" : "Login",
-                      style: buttonText,
-                    ),
-                    gradient: LinearGradient(
-                      colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                    ),
-                    onPressed: () async {
-                      if (index == 0) {
-                        // login with email and password
-                        if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.signInWithEmailAndPassword(
-                            loginData.email,
-                            loginData.password,
-                          );
-
-                          if (user != null) {
-                            print("USER IS NOT NULL");
-
-                            userID = user.uid;
-                            the_user = user;
-
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WorkoutPage(null),
-                              ),
-                            );
-                          }
-                        }
-                      } else {
-                        // signup with email and password
-                        if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.registerWithEmail(
-                            loginData.email,
-                            loginData.password,
-                          );
-
-                          if (user != null) {
-                            print("USER IS NOT NULL");
-
-                            userID = user.uid;
-                            the_user = user;
-
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WorkoutPage(null),
-                              ),
-                            );
-                          }
-                        }
-                      }
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
