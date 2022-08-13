@@ -33,25 +33,12 @@ class MyApp extends StatelessWidget {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           User user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: CalendarPage(),
-              color: Colors.blue,
-            );
-          } else {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: LoginPage(title: '1'),
-              color: Colors.blue,
-            );
-          }
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(primarySwatch: Colors.blue),
+            home: user != null ? CalendarPage() : LoginPage(title: '1'),
+            color: Colors.blue,
+          );
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
