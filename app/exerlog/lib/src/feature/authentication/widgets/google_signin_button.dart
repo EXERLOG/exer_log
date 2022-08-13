@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
+import 'package:exerlog/src/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 class GoogleSignInButton extends StatefulWidget {
@@ -38,7 +39,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image(
-                    image: AssetImage("lib/assets/google-logo.png"),
+                    image: AssetImage(Assets.googleLogo),
                     height: 20.0,
                   ),
                   Padding(
