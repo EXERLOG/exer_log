@@ -1,0 +1,33 @@
+include: package:lint/analysis_options.yaml
+
+# Overview of linter rules: https://dart.dev/tools/linter-rules
+
+linter:
+  rules:
+    sort_constructors_first: true
+
+    prefer_single_quotes: true
+
+    always_specify_types: true
+
+    camel_case_types: true
+
+    library_names: true
+
+    require_trailing_commas: true
+
+    no_logic_in_create_state: true
+
+    avoid_empty_else: true
+
+    avoid_slow_async_io: true
+
+    avoid_print: true
+
+    avoid_positional_boolean_parameters: false
+
+    use_build_context_synchronously: false
+
+    lines_longer_than_80_chars: false
+
+    always_put_required_named_parameters_first: false
