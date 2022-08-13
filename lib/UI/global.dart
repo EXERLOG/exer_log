@@ -12,9 +12,10 @@ Color greenTextColor = Color(0xFF34D2C1);
 
 // text styles
 TextStyle whiteTextStyleSmall = TextStyle(
-    color: Colors.white,
-    fontFamily: "Avenir",
-    fontSize: 12);
+  color: Colors.white,
+  fontFamily: "Avenir",
+  fontSize: 12,
+);
 TextStyle buttonTextSmall = TextStyle(
     color: backgroundColor,
     fontFamily: "Avenir",
@@ -45,7 +46,7 @@ TextStyle mediumTitleStyleWhite = TextStyle(
     fontSize: 18);
 TextStyle setHintStyle = TextStyle(
   letterSpacing: 1,
-  color: Colors.white.withOpacity(0.2),
+  color: Colors.white.withOpacity(1),
   fontFamily: "Avenir",
   fontSize: 15,
 );
@@ -68,7 +69,6 @@ TextStyle smallTitleStyleWhite = TextStyle(
     fontFamily: "Avenir",
     fontWeight: FontWeight.bold,
     fontSize: 12);
-
 
 // one rep max calculation table
 List<double> maxTable = [
