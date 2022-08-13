@@ -43,7 +43,7 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
           borderRadius: BorderRadius.circular(widget.radius),
         ),
         child: TextButton(
-          onPressed: _onPressed(),
+          onPressed: () => _onPressed(),
           child: _isLoading
               ? Center(
                   child: CircularProgressIndicator(
@@ -57,13 +57,10 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
     );
   }
 
-  void Function()? _onPressed() {
-    return _isLoading
-        ? null
-        : () async {
-            setState(() => _isLoading = true);
-            await widget.onPressed();
-            setState(() => _isLoading = false);
-          };
+  Future<void> _onPressed() async {
+    if (_isLoading) return;
+    setState(() => _isLoading = true);
+    await widget.onPressed();
+    setState(() => _isLoading = false);
   }
 }
