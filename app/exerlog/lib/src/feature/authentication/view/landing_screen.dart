@@ -3,6 +3,7 @@ import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
+import 'package:exerlog/src/feature/authentication/widgets/elevated_container.dart';
 import 'package:exerlog/src/feature/authentication/widgets/google_signin_button.dart';
 import 'package:exerlog/src/feature/authentication/widgets/login_form.dart';
 import 'package:exerlog/src/feature/authentication/widgets/signup_form.dart';
@@ -80,7 +81,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: _BuildElevatedContainer(
+      body: ElevatedContainer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -141,38 +142,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
             SizedBox(height: 20),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _BuildElevatedContainer extends StatelessWidget {
-  const _BuildElevatedContainer({
-    required this.child,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: context.height * 0.50,
-        margin: EdgeInsets.symmetric(horizontal: 30),
-        decoration: BoxDecoration(
-          color: Color(0xFF2E2C42),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.2),
-              offset: Offset(0, 3),
-              blurRadius: 10,
-              spreadRadius: 10,
-            )
-          ],
-        ),
-        child: child,
       ),
     );
   }
