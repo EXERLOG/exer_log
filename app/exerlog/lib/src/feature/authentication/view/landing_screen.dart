@@ -80,8 +80,8 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: _buildElevatedCentredContainer(
-        Column(
+      body: _BuildElevatedContainer(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
@@ -144,13 +144,21 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
       ),
     );
   }
+}
 
-  Widget _buildElevatedCentredContainer(Widget child) {
-    final height = MediaQuery.of(context).size.height;
+class _BuildElevatedContainer extends StatelessWidget {
+  const _BuildElevatedContainer({
+    required this.child,
+    Key? key,
+  }) : super(key: key);
 
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: height * 0.50,
+        height: context.height * 0.50,
         margin: EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           color: Color(0xFF2E2C42),
