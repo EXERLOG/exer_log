@@ -84,7 +84,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
         if (user != null) {
           this.user = user;
           try {
-            setValue(USER_UID, this.user.uid);
+            SharedPref.setValue(USER_UID, this.user.uid);
             Log.info(this.user.uid);
 
             /// TODO: Remove later

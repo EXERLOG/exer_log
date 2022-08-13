@@ -29,7 +29,7 @@ void main() async {
 
   /// Initialize shared preference
   try {
-    await initializeSharedPreference();
+    await SharedPref.initializeSharedPreference();
   } catch (e, stackTrace) {
     Log.error(e.toString(), stackTrace: stackTrace);
     throw ErrorDescription(e);
@@ -65,10 +65,10 @@ class MyApp extends ConsumerWidget {
           return authState.when(
             data: (user) {
               if (user != null) {
-                setValue(USER_UID, user.uid);
+                SharedPref.setValue(USER_UID, user.uid);
 
                 /// TODO: Remove later
-                userID = getStringAsync(USER_UID);
+                userID = SharedPref.getStringAsync(USER_UID);
                 return CalendarPage();
               }
               return user != null ? CalendarPage() : LandingScreen();
