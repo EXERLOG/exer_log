@@ -43,7 +43,7 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
           borderRadius: BorderRadius.circular(widget.radius),
         ),
         child: TextButton(
-          onPressed: () => _onPressed(),
+          onPressed: _onPressed,
           child: _isLoading
               ? Center(
                   child: CircularProgressIndicator(
