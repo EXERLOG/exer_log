@@ -71,11 +71,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
           ),
         );
       } else if (state is ErrorState) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Something went wrong"),
-          ),
-        );
+        context.showSnackBar("Something went wrong");
       }
     });
 
@@ -129,11 +125,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
                     if (_controller.isSamePassword()) {
                       await _controller.signUp();
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Password should match"),
-                        ),
-                      );
+                      context.showSnackBar("Password should match");
                     }
                   }
                 }
