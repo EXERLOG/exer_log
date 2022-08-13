@@ -15,94 +15,103 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: greenTextColor,
-          ),
-          child: Container(
-            margin: EdgeInsets.all(1),
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: backgroundColor,
+              color: greenTextColor,
             ),
             child: Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    child: Icon(
-                      Icons.mail,
-                      color: greenTextColor,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.65,
-                    child: TextField(
-                      onChanged: (value) {
-                        widget.loginData.email = value;
-                      },
-                      style: mediumTitleStyleWhite,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "email/username",
+              margin: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: backgroundColor,
+              ),
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      child: Icon(
+                        Icons.mail,
+                        color: greenTextColor,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: TextField(
+                        onChanged: (value) {
+                          widget.loginData.email = value;
+                        },
+                        style: mediumTitleStyleWhite,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                              color: Colors.white30,
+                              fontWeight: FontWeight.w300),
+                          hintText: "Email/username",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: greenTextColor,
-          ),
-          child: Container(
-            margin: EdgeInsets.all(1),
+          Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: backgroundColor,
+              color: greenTextColor,
             ),
             child: Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 40,
-                    child: Icon(
-                      Icons.lock,
-                      color: greenTextColor,
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.65,
-                    child: TextField(
-                      onChanged: (value) {
-                        widget.loginData.password = value;
-                      },
-                      obscureText: true,
-                      style: mediumTitleStyleWhite,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "password",
+              margin: EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: backgroundColor,
+              ),
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 40,
+                      child: Icon(
+                        Icons.lock,
+                        color: greenTextColor,
                       ),
                     ),
-                  ),
-                ],
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: TextField(
+                        onChanged: (value) {
+                          widget.loginData.password = value;
+                        },
+                        obscureText: true,
+                        style: mediumTitleStyleWhite,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                              color: Colors.white30,
+                              fontWeight: FontWeight.w300),
+                          hintText: "password",
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        GoogleSignInButton()
-      ],
+          GoogleSignInButton()
+        ],
+      ),
     );
   }
 }

@@ -20,7 +20,8 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   late TabController controller;
 
   LoginData loginData = LoginData('', '');
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         ),
         child: Center(
           child: Container(
-            height: height * 0.42,
+            height: height * 0.5,
             decoration: BoxDecoration(
               color: Color(0xFF2E2C42),
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  height: 30,
+                  height: 40,
                   child: AppBar(
                     backgroundColor: Colors.transparent,
                     shadowColor: Colors.transparent,
@@ -111,7 +112,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                       if (index == 0) {
                         // login with email and password
                         if (loginData.password != '' && loginData.email != '') {
-                          final user = await EmailSignup.signInWithEmailAndPassword(
+                          final user =
+                              await EmailSignup.signInWithEmailAndPassword(
                             loginData.email,
                             loginData.password,
                           );
