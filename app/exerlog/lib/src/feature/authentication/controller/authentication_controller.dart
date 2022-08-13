@@ -72,8 +72,8 @@ class AuthenticationController extends StateNotifier<BaseState> {
       Log.error(e.message);
       state = ErrorState(message: e.message);
     } catch (e, stackTrace) {
-      Log.error(e.toString());
-      Log.error(stackTrace.toString());
+      Log.error(e.toString(), stackTrace: stackTrace);
+
       state = ErrorState(message: "Something went wrong");
     }
   }
@@ -91,8 +91,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
             userID = user.uid;
             the_user = user;
           } catch (e, stackTrace) {
-            Log.error(e.toString());
-            Log.error(stackTrace.toString());
+            Log.error(e.toString(), stackTrace: stackTrace);
             state = ErrorState(message: e.toString());
           }
           return state = SuccessState();

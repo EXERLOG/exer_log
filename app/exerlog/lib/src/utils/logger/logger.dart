@@ -17,7 +17,7 @@ class Log {
             printEmojis: true,
             // Print an emoji for each log message
             printTime: false // Should each log print contain a timestamp
-        ));
+            ));
   }
 
   static final Log _singleton = Log._internal();
@@ -28,7 +28,12 @@ class Log {
 
   static void info(String message) => _singleton._logger.i(message);
 
-  static void error(String? message) => _singleton._logger.e(message);
+  static void error(String? message, {StackTrace? stackTrace}) {
+    _singleton._logger.e(message);
+    if (stackTrace == null) {
+      _singleton._logger.e(stackTrace.toString());
+    }
+  }
 
   static void warning(String message) => _singleton._logger.w(message);
 }

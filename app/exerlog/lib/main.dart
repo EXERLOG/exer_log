@@ -31,8 +31,7 @@ void main() async {
   try {
     await initializeSharedPreference();
   } catch (e, stackTrace) {
-    Log.error(e);
-    Log.error(stackTrace.toString());
+    Log.error(e.toString(), stackTrace: stackTrace);
     throw ErrorDescription(e);
   }
 
