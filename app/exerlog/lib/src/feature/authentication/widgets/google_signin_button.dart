@@ -22,11 +22,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
       height: 50,
       width: context.width * .65,
       child: OutlinedButton(
-        onPressed: () async {
-          setState(() => _isLoading = true);
-          await widget.onPressed();
-          setState(() => _isLoading = false);
-        },
+        onPressed: _onPressed,
         child: _isLoading
             ? Center(
                 child: CircularProgressIndicator(
@@ -65,5 +61,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
         ),
       ),
     );
+  }
+
+  void _onPressed() async {
+    setState(() => _isLoading = true);
+    await widget.onPressed();
+    setState(() => _isLoading = false);
   }
 }
