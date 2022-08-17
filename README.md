@@ -1,5 +1,6 @@
 <p align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
@@ -68,6 +69,7 @@ Thank you so much to everyone who has been contributing to this project:
 <table>
   <tr>
     <td align="center"><a href="http://bit.ly/dinurymomshad"><img src="https://avatars.githubusercontent.com/u/26508767?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Momshad Dinury</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=dinurymomshad" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ckelwin"><img src="https://avatars.githubusercontent.com/u/5429312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chan Kelwin Hillary</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=ckelwin" title="Code">💻</a></td>
   </tr>
 </table>
 
