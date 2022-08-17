@@ -1,4 +1,7 @@
 <p align="center">
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
 </p>
@@ -88,3 +91,23 @@ Run the project
 
 - [@KalleHallden](https://github.com/KalleHallden)
 
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://bit.ly/dinurymomshad"><img src="https://avatars.githubusercontent.com/u/26508767?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Momshad Dinury</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=dinurymomshad" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
