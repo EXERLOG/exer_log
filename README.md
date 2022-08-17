@@ -58,7 +58,7 @@ Please adhere to this project's `code of conduct`.
 
 ![Issues](https://img.shields.io/github/issues/KalleHallden/exer_log)
 
-## Contributors ✨
+## Contributors 
 
 Thank you so much to everyone who has been contributing to this project:
 
