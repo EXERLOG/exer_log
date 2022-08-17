@@ -70,7 +70,7 @@ Clone this project
 CD into the project
 
 ```bash
-  cd exer_log/app/exerlog
+  cd exer_log
 ```
 
 Download dependencies 
