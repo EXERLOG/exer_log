@@ -29,7 +29,7 @@ Workout metrics:
 ## Future features
 Workout analytics:
 - Charts for strength increases over time
-- Charts for volume (ie total weight and average weight per workout) over time (for easy periodisation)
+- Charts for volume (ie total weight and average weight per workout) over time (for easy periodization)
 - Progressive overload tracking
 
 Workout Planner:
@@ -50,7 +50,7 @@ Body metrics:
 
 Contributions are always welcome!
 
-See [CONTRIBUTING.md](https://github.com/KalleHallden/exer_log/blob/master/CONTRIBUTING.md) for ways to get started.
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
