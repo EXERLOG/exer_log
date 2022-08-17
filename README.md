@@ -1,4 +1,6 @@
 <p align="center">
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
 </p>
@@ -55,6 +57,27 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for ways to get started.
 Please adhere to this project's `code of conduct`.
 
 ![Issues](https://img.shields.io/github/issues/KalleHallden/exer_log)
+
+## Contributors 
+
+Thank you so much to everyone who has been contributing to this project:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://bit.ly/dinurymomshad"><img src="https://avatars.githubusercontent.com/u/26508767?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Momshad Dinury</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=dinurymomshad" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 ## Development
 
 Install the Flutter SDK from the official [flutter.dev](https://docs.flutter.dev/get-started/install) website for your operating system.

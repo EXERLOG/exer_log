@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "dinurymomshad",
+      "name": "Momshad Dinury",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26508767?v=4",
+      "profile": "http://bit.ly/dinurymomshad",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "exer_log",
+  "projectOwner": "KalleHallden",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
