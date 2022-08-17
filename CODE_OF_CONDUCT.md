@@ -1,43 +1,44 @@
-Contributing
+# Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 Pull Request Process
-    
+
     1. Find yourself an issue you want to work on, see if anybody is working on it, if not, then assign it to yourself
     2. Fork the repo, create a branch for your issue
-    3. Make changes, commit and open a pull request
+    3. Make changes, commit and open a pull request into the [alpha](https://github.com/KalleHallden/exer_log/tree/alpha) branch
     4. Request review from a contributor
-    5. If your pr was approved, rebase and squash your commits, then merge it. 
-    6. Good job, you've just contributed! 
-    
-    Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations and container parameters.
-    You may merge your pull request after receving an approval from Kalle, or any other core contributor.
+    5. If your pr was approved, rebase and squash your commits, then merge it.
+    6. Good job, you've just contributed!
 
-Code of Conduct
-Our Pledge
+    Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations and container parameters.
+    You may merge your pull request after receiving an approval from Kalle, or any other core contributor.
+
+## Code of Conduct
+
+### Our Pledge
 
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
 Our Standards
 
 Examples of behavior that contributes to creating a positive environment include:
 
-    Using welcoming and inclusive language
-    Being respectful of differing viewpoints and experiences
-    Gracefully accepting constructive criticism
-    Focusing on what is best for the community
-    Showing empathy towards other community members
+- Using welcoming and inclusive language
+- Being respectful of differing viewpoints and experiences
+- Gracefully accepting constructive criticism
+- Focusing on what is best for the community
+- Showing empathy towards other community members
 
 Examples of unacceptable behavior by participants include:
 
-    The use of sexualized language or imagery and unwelcome sexual attention or advances
-    Trolling, insulting/derogatory comments, and personal or political attacks
-    Public or private harassment
-    Publishing others' private information, such as a physical or electronic address, without explicit permission
-    Other conduct which could reasonably be considered inappropriate in a professional setting
+- The use of sexualized language or imagery and unwelcome sexual attention or advances
+- Trolling, insulting/derogatory comments, and personal or political attacks
+- Public or private harassment
+- Publishing others' private information, such as a physical or electronic address, without explicit permission
+- Other conduct which could reasonably be considered inappropriate in a professional setting
 
-Our Responsibilities
+### Our Responsibilities
 
 Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 
