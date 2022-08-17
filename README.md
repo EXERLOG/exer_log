@@ -77,7 +77,7 @@ Thank you so much to everyone who has been contributing to this project:
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-infrastructure
+
 ## Development
 
 Install the Flutter SDK from the official [flutter.dev](https://docs.flutter.dev/get-started/install) website for your operating system.
