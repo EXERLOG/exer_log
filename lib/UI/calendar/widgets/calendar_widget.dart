@@ -1,5 +1,6 @@
 import 'package:exerlog/UI/calendar/widgets/date_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class CalendarWidget extends StatefulWidget {
@@ -20,55 +21,66 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ];
 
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
+    return ThemeProvider(builder: (context, theme) {
+      return Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.2),
               offset: Offset(0, 3),
               blurRadius: 5,
-              spreadRadius: 5),
-        ],
-        color: backgroundColor,
-      ),
-      height: screenHeight * 0.4,
-      child: Column(
-        children: [
-          Container(
-            height: screenHeight * 0.05,
-            child: Text(
-              monthNames[DateTime.now().month - 1],
-              style: mediumTitleStyleWhite,
+              spreadRadius: 5,
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 20, right: 20),
-            child: Divider(
-              color: Colors.white.withOpacity(0.5),
+          ],
+          color: theme.colorTheme.backgroundColorVariation,
+        ),
+        height: screenHeight * 0.4,
+        child: Column(
+          children: [
+            Container(
+              height: screenHeight * 0.05,
+              child: Text(
+                monthNames[DateTime.now().month - 1],
+                style: mediumTitleStyleWhite,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: getDates(),
-          )
-        ],
-      ),
-    );
+            Container(
+              margin: EdgeInsets.only(left: 20, right: 20),
+              child: Divider(
+                color: Colors.white.withOpacity(0.5),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: getDates(),
+            )
+          ],
+        ),
+      );
+    });
   }
 }
 
 List<Widget> getDates() {
-  List weekdayNames = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+  List weekdayNames = [
+    'MON',
+    'TUE',
+    'WED',
+    'THU',
+    'FRI',
+    'SAT',
+    'SUN',
+  ];
   List<Widget> datelist = [];
   int today = DateTime.now().day;
   int month = DateTime.now().month;
