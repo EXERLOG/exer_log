@@ -1,7 +1,5 @@
 // @dart = 2.9
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
-import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
+import 'package:exerlog/src/feature/onboarding/splash/view/splash_screen.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/utils/logger/riverpod_logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'src/core/base/shared_preference/shared_preference_b.dart';
-import 'src/feature/authentication/view/landing_screen.dart';
 
 /// TODO: Remove global instances and use shared pref keys
 @Deprecated('Use `USER_UID` instead. Will be removed soon')
@@ -35,6 +32,9 @@ void main() async {
     throw ErrorDescription(e);
   }
 
+  /// Initialize firebase
+  await Firebase.initializeApp();
+
   /// A widget that stores the state of providers.
   /// All Flutter applications using Riverpod must contain a [ProviderScope] at
   /// the root of their widget tree
@@ -46,62 +46,13 @@ void main() async {
   );
 }
 
-final _firebaseInitProvider = FutureProvider<FirebaseApp>((ref) async {
-  FirebaseApp firebaseApp = await Firebase.initializeApp();
-  return firebaseApp;
-});
-
 class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<FirebaseApp> firebase = ref.watch(_firebaseInitProvider);
-
     return MaterialApp(
       title: 'EXERLOG',
       debugShowCheckedModeBanner: false,
-      home: firebase.when(
-        data: (data) {
-          AsyncValue<User> authState = ref.watch(authStateProvider);
-          return authState.when(
-            data: (user) {
-              if (user != null) {
-                SharedPref.setValue(USER_UID, user.uid);
-
-                /// TODO: Remove later
-                userID = SharedPref.getStringAsync(USER_UID);
-                return CalendarPage();
-              }
-              return user != null ? CalendarPage() : LandingScreen();
-            },
-            error: (e, stackTrace) {
-              /// TODO: Use a generic error screen
-              return SizedBox.shrink();
-            },
-            loading: () {
-              /// TODO: Use a generic loading screen / welcome screen
-              return _buildLoadingPlaceHolder();
-            },
-          );
-        },
-        error: (e, stackTrace) {
-          Log.error(e);
-          Log.error(stackTrace.toString());
-          return SizedBox.shrink();
-        },
-        loading: () {
-          /// TODO: Use a splash screen
-          return _buildLoadingPlaceHolder();
-        },
-      ),
-    );
-  }
-
-  Widget _buildLoadingPlaceHolder() {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Center(
-        child: const CircularProgressIndicator(),
-      ),
+      home: SplashScreen(),
     );
   }
 }

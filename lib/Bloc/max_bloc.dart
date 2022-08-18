@@ -33,12 +33,12 @@ void deleteMax(Exercise exercise) async {
       .where('exerciseID', isEqualTo: exercise.id)
       .get();
   for (int i = 0; i < ref.docs.length; i++) {
-      firestoreInstance
-    .collection('users')
-    .doc(userID)
-    .collection('maxes')
-    .doc(ref.docs[i].id)
-    .delete();
+    firestoreInstance
+        .collection('users')
+        .doc(userID)
+        .collection('maxes')
+        .doc(ref.docs[i].id)
+        .delete();
   }
 }
 
@@ -46,12 +46,13 @@ Future<Max> getOneRepMax(String exercise) async {
   int reps = 1;
   QuerySnapshot<Map<String, dynamic>>? ref;
   ref = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('maxes')
-        .where('exercise', isEqualTo: exercise)
-        .orderBy('weight', descending: true)
-        .get();
+      .collection('users')
+      .doc(userID)
+      .collection('maxes')
+      .where('exercise', isEqualTo: exercise)
+      .orderBy('weight', descending: true)
+      .get();
+
   print(ref.docs.first.data());
   Max returnMax;
   if (ref != null) {
@@ -69,8 +70,7 @@ void saveMax(Max max) {
       .doc(userID)
       .collection("maxes")
       .add(jsonMax)
-      .then((value) {
-  });
+      .then((value) {});
 }
 
 void checkMax(Exercise exercise) async {
@@ -132,8 +132,6 @@ void checkMax(Exercise exercise) async {
     }
   }
 }
-
-
 
 void updateExercise(String id, Exercise exercise) {}
 

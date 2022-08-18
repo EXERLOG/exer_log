@@ -40,7 +40,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         ],
         color: backgroundColor,
       ),
-      height: screenHeight * 0.4,
+      height: screenHeight * 0.43,
       child: Column(
         children: [
           Container(

@@ -12,7 +12,9 @@ class CalendarPage extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Text("Exerlog"),
-        backgroundColor: backgroundColor.withOpacity(0.75),
+        elevation: 0,
+        backgroundColor:
+            Colors.transparent, // backgroundColor.withOpacity(0.75),
         actions: [
           LogoutButton(),
         ],

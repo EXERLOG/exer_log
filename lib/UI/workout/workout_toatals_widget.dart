@@ -10,15 +10,13 @@ class WorkoutTotalsWidget extends StatefulWidget {
   WorkoutTotalsWidget({required this.totals});
   @override
   _WorkoutTotalsWidgetState createState() => _WorkoutTotalsWidgetState();
-  
 }
 
 class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: screenHeight * 0.13,
+      height: screenHeight * 0.14,
       decoration: BoxDecoration(
           // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
           color: backgroundColor,
@@ -29,15 +27,20 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                 blurRadius: 5,
                 spreadRadius: 5),
           ]),
-      margin: EdgeInsets.only( bottom: 10),
+      margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Row(children: [
-            Container(
-              child: Text('Totals', style: mediumTitleStyleWhite,),
-            )
-          ],),
+          Row(
+            children: [
+              Container(
+                child: Text(
+                  'Totals',
+                  style: mediumTitleStyleWhite,
+                ),
+              )
+            ],
+          ),
           Divider(
             color: Colors.white.withOpacity(0.2),
           ),
@@ -45,48 +48,83 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                children: [Container(
-                  child: Text("sets", style: setStyle,),
-                ),
-                Container(
-                  child: Text(widget.totals.sets.toString(), style: setStyle,),
-                )
+                children: [
+                  Container(
+                    child: Text(
+                      "sets",
+                      style: setStyle,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      widget.totals.sets.toString(),
+                      style: setStyle,
+                    ),
+                  )
                 ],
               ),
               Column(
-                children: [Container(
-                  child: Text("reps", style: setStyle,),
-                ),
-                Container(
-                  child: Text(widget.totals.reps.toString(), style: setStyle,),
-                )
+                children: [
+                  Container(
+                    child: Text(
+                      "reps",
+                      style: setStyle,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      widget.totals.reps.toString(),
+                      style: setStyle,
+                    ),
+                  )
                 ],
               ),
               Column(
-                children: [Container(
-                  child: Text("load", style: setStyle,),
-                ),
-                Container(
-                  child: Text(widget.totals.weight.toString(), style: setStyle,),
-                )
+                children: [
+                  Container(
+                    child: Text(
+                      "load",
+                      style: setStyle,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      widget.totals.weight.toString(),
+                      style: setStyle,
+                    ),
+                  )
                 ],
               ),
               Column(
-                children: [Container(
-                  child: Text("kg/rep", style: setStyle,),
-                ),
-                Container(
-                  child: Text(widget.totals.avgKgs.toString(), style: setStyle,),
-                )
+                children: [
+                  Container(
+                    child: Text(
+                      "kg/rep",
+                      style: setStyle,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      widget.totals.avgKgs.toString(),
+                      style: setStyle,
+                    ),
+                  )
                 ],
               ),
               Column(
-                children: [Container(
-                  child: Text("exercises", style: setStyle,),
-                ),
-                Container(
-                  child: Text(widget.totals.exercises.toString(), style: setStyle,),
-                )
+                children: [
+                  Container(
+                    child: Text(
+                      "exercises",
+                      style: setStyle,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      widget.totals.exercises.toString(),
+                      style: setStyle,
+                    ),
+                  )
                 ],
               ),
             ],
@@ -104,7 +142,8 @@ class WorkoutTotals {
   double avgKgs;
   int exercises;
 
-  WorkoutTotals(this.sets, this.reps, this.weight, this.avgKgs, this.exercises) {
+  WorkoutTotals(
+      this.sets, this.reps, this.weight, this.avgKgs, this.exercises) {
     sets = this.sets;
     reps = this.reps;
     weight = this.weight;
