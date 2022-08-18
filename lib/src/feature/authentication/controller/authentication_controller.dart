@@ -8,10 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final authStateProvider = StreamProvider<User?>(
-  (ref) => ref.watch(Dependency.firebaseAuth).authStateChanges(),
-);
-
 final _authenticationProvider =
     StateNotifierProvider.autoDispose<AuthenticationController, BaseState>(
   (ref) => AuthenticationController(ref: ref),
@@ -79,27 +75,26 @@ class AuthenticationController extends StateNotifier<BaseState> {
     }
   }
 
-  void authStateChangeStatus({bool isSignUp = false}) {
-    ref!.read(authStateProvider).whenData(
-      (user) {
-        if (user != null) {
-          this.user = user;
-          SharedPref.setValue(USER_UID, this.user.uid);
-          Log.info(this.user.uid);
+  Future<void> authStateChangeStatus({bool isSignUp = false}) async {
+    User? user = ref!.read(Dependency.firebaseAuth).currentUser;
+    if (user != null) {
+      this.user = user;
+      SharedPref.setValue(USER_UID, this.user.uid);
+      SharedPref.setValue(IS_LOGGED_IN, true);
 
-          /// TODO: Remove later
-          userID = this.user.uid;
-          the_user = this.user;
-          if (isSignUp) {
-            state = SignUpSuccessState();
-          } else {
-            state = LoginSuccessState();
-          }
-        } else {
-          state = ErrorState(message: "Something went wrong");
-        }
-      },
-    );
+      Log.info(this.user.uid);
+
+      /// TODO: Remove later
+      userID = this.user.uid;
+      the_user = this.user;
+      if (isSignUp) {
+        state = SignUpSuccessState();
+      } else {
+        state = LoginSuccessState();
+      }
+    } else {
+      state = ErrorState(message: "Something went wrong");
+    }
   }
 
   Future<void> signOut() async => await _repository.signOut();

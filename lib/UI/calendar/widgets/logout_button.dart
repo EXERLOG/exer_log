@@ -1,3 +1,5 @@
+import 'package:exerlog/src/core/base/shared_preference/shared_pref_key.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_pref_wrapper.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,7 @@ class _LogoutButtonState extends State<LogoutButton> {
           if (!_isLoading) {
             setState(() => _isLoading = true);
             await FirebaseAuth.instance.signOut();
+            SharedPref.setValue(IS_LOGGED_IN, false);
             setState(() => _isLoading = false);
             _navigateToLandingScreen(context);
           }
