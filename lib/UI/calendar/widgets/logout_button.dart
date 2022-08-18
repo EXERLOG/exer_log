@@ -1,4 +1,4 @@
-import 'package:exerlog/main.dart' show MyApp;
+import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,26 +21,24 @@ class _LogoutButtonState extends State<LogoutButton> {
       child: InkWell(
         onTap: () async {
           if (!_isLoading) {
-            setState(() {
-              _isLoading = true;
-            });
+            setState(() => _isLoading = true);
             await FirebaseAuth.instance.signOut();
-            setState(() {
-              _isLoading = false;
-            });
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => MyApp()),
-              (route) => false,
-            );
+            setState(() => _isLoading = false);
+            _navigateToLandingScreen(context);
           }
         },
         child: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
+            ? Center(child: CircularProgressIndicator(strokeWidth: 2))
             : Icon(Icons.logout),
       ),
+    );
+  }
+
+  void _navigateToLandingScreen(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LandingScreen()),
+      (route) => false,
     );
   }
 }
