@@ -20,38 +20,40 @@ class OutlinedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(builder: (context, theme) {
-      OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
-        borderSide: BorderSide(color: theme.colorTheme.primaryColor),
-        borderRadius: BorderRadius.circular(30),
-      );
-      return Container(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-        child: TextFormField(
-          controller: textEditingController,
-          validator: validator,
-          style: mediumTitleStyleWhite,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hinText,
-            hintStyle: setHintStyle.copyWith(
-              color: Colors.white.withOpacity(0.5),
-            ),
-            prefixIcon: Container(
-              width: 40,
-              child: Icon(
-                leadingIcon,
-                color: theme.colorTheme.primaryColor,
+    return ThemeProvider(
+      builder: (context, theme) {
+        OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorTheme.primaryColor),
+          borderRadius: BorderRadius.circular(30),
+        );
+        return Container(
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+          child: TextFormField(
+            controller: textEditingController,
+            validator: validator,
+            style: mediumTitleStyleWhite,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              hintText: hinText,
+              hintStyle: setHintStyle.copyWith(
+                color: Colors.white.withOpacity(0.5),
               ),
+              prefixIcon: Container(
+                width: 40,
+                child: Icon(
+                  leadingIcon,
+                  color: theme.colorTheme.primaryColor,
+                ),
+              ),
+              contentPadding: EdgeInsets.all(10),
+              focusedErrorBorder: _outlineInputBorder,
+              focusedBorder: _outlineInputBorder,
+              errorBorder: _outlineInputBorder,
+              enabledBorder: _outlineInputBorder,
             ),
-            contentPadding: EdgeInsets.all(10),
-            focusedErrorBorder: _outlineInputBorder,
-            focusedBorder: _outlineInputBorder,
-            errorBorder: _outlineInputBorder,
-            enabledBorder: _outlineInputBorder,
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
