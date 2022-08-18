@@ -4,13 +4,14 @@ import 'package:exerlog/Models/workout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../global.dart';
+
 class ExerciseInformation extends StatefulWidget {
   final String id;
 
   ExerciseInformation({required this.id});
   @override
   _ExerciseInformationState createState() => _ExerciseInformationState();
-
 }
 
 class _ExerciseInformationState extends State<ExerciseInformation> {
@@ -20,9 +21,7 @@ class _ExerciseInformationState extends State<ExerciseInformation> {
       future: getSpecificExercise(widget.id),
       builder: (BuildContext context, AsyncSnapshot<Exercise> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Center(child: CircularProgressIndicator());
         } else {
           if (snapshot.hasError) {
             return Center(
@@ -37,5 +36,4 @@ class _ExerciseInformationState extends State<ExerciseInformation> {
       },
     );
   }
-
 }
