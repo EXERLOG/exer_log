@@ -54,7 +54,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
         email: emailTextEditingController.text,
         password: passwordTextEditingController.text,
       );
-      authStateChangeStatus();
+      authStateChangeStatus(isSignUp: true);
     } on FirebaseAuthException catch (e) {
       Log.error(e.code);
       Log.error(e.message);
@@ -62,6 +62,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
     }
   }
 
+  /// TODO: Need to decide if it's signIn / signUp
   Future<void> signInWithGoogle() async {
     try {
       state = LoadingState();
@@ -78,23 +79,22 @@ class AuthenticationController extends StateNotifier<BaseState> {
     }
   }
 
-  void authStateChangeStatus() {
+  void authStateChangeStatus({bool isSignUp = false}) {
     ref!.read(authStateProvider).whenData(
       (user) {
         if (user != null) {
           this.user = user;
-          try {
-            SharedPref.setValue(USER_UID, this.user.uid);
-            Log.info(this.user.uid);
+          SharedPref.setValue(USER_UID, this.user.uid);
+          Log.info(this.user.uid);
 
-            /// TODO: Remove later
-            userID = user.uid;
-            the_user = user;
-          } catch (e, stackTrace) {
-            Log.error(e.toString(), stackTrace: stackTrace);
-            state = ErrorState(message: e.toString());
+          /// TODO: Remove later
+          userID = this.user.uid;
+          the_user = this.user;
+          if (isSignUp) {
+            state = SignUpSuccessState();
+          } else {
+            state = LoginSuccessState();
           }
-          return state = SuccessState();
         } else {
           state = ErrorState(message: "Something went wrong");
         }
@@ -125,4 +125,13 @@ class AuthenticationController extends StateNotifier<BaseState> {
     clearTextFields();
     super.dispose();
   }
+}
+
+/// States
+class LoginSuccessState extends BaseState {
+  const LoginSuccessState();
+}
+
+class SignUpSuccessState extends BaseState {
+  const SignUpSuccessState();
 }
