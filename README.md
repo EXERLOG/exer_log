@@ -8,7 +8,7 @@
  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
  
  <p align="center">
-  <a href="https://github.com/KalleHallden/exer_log/graphs/contributors">
+  <a href="https://github.com/KalleHallden/exer_log#contributors">
   <img src="https://camo.githubusercontent.com/0f8af331286f904dda765feeb68557f46bce8c53d28a0452b7d2ccc10acfb9a0/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732f6b616c6c6568616c6c64656e2f657865725f6c6f67", alt="All Contributors">
    </a>
 </p>
