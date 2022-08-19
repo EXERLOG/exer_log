@@ -52,9 +52,9 @@ Future<Max> getOneRepMax(String exercise) async {
         .where('exercise', isEqualTo: exercise)
         .orderBy('weight', descending: true)
         .get();
-  print(ref.docs.first.data());
+//   print(ref.docs.first.data());
   Max returnMax;
-  if (ref != null) {
+  if (ref.docs.isNotEmpty) {
     returnMax = Max.fromJson(ref.docs.first.data());
   } else {
     returnMax = new Max(0, 0, 0, '');
