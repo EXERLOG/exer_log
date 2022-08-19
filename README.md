@@ -1,11 +1,20 @@
 <p align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
   
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
- 
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<p align="center">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
+ </p>
+ 
+ <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+ 
+ <p align="center">
+  <a href="https://github.com/KalleHallden/exer_log#contributors">
+  <img src="https://camo.githubusercontent.com/0f8af331286f904dda765feeb68557f46bce8c53d28a0452b7d2ccc10acfb9a0/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f636f6e7472696275746f72732f6b616c6c6568616c6c64656e2f657865725f6c6f67", alt="All Contributors">
+   </a>
+</p>
+ 
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 </p>
 
 ---
