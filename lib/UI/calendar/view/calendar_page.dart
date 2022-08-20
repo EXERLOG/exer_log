@@ -5,8 +5,32 @@ import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity/connectivity.dart';
 
-class CalendarPage extends StatelessWidget {
+import '../../../src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
+
+class CalendarPage extends StatefulWidget {
+  @override
+  State<CalendarPage> createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  Stream<ConnectivityResult> _connectivityStream =
+      Connectivity().onConnectivityChanged;
+  _noNetworkConnection() {
+    ScaffoldMessenger.of(context).showSnackBar(noNetworkConnectionSnackBar());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivityStream.listen((connectionResult) {
+      if (connectionResult == ConnectivityResult.none) {
+        _noNetworkConnection();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
