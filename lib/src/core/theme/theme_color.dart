@@ -19,6 +19,5 @@ class ThemeColor {
   static const Color backgroundColor = Color(0xFF2D2B41);
   static const Color textColorLoginForm = Color(0xFFACACB4);
   static const Color textColorBlue = Color(0xFF31A6DC);
-  static const Color greenTextColor = Color(0xFF34D2C1);
   static const Color redBackgroundColor = Color(0xFFE74C3C);
 }
