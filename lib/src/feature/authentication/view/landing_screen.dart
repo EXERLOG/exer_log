@@ -1,4 +1,3 @@
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
@@ -20,8 +19,7 @@ class LandingScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _LandingScreenState();
 }
 
-class _LandingScreenState extends ConsumerState<LandingScreen>
-    with SingleTickerProviderStateMixin {
+class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTickerProviderStateMixin {
   /// Form Keys
   final _loginFormKey = GlobalKey<FormState>();
   final _signUpFormKey = GlobalKey<FormState>();
@@ -66,10 +64,12 @@ class _LandingScreenState extends ConsumerState<LandingScreen>
     final _controller = ref.read(AuthenticationController.controller);
 
     ref.listen(AuthenticationController.provider, (_, state) {
-      if (state is SignUpSuccessState) {
-        _navigateToWorkoutScreen();
-      } else if (state is LoginSuccessState) {
-        _navigateToCalendarScreen();
+      if (state is SuccessState) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => WorkoutPage(null),
+          ),
+        );
       } else if (state is ErrorState) {
         context.showSnackBar("Something went wrong");
       }
