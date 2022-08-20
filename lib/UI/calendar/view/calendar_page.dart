@@ -30,12 +30,6 @@ class _CalendarPageState extends State<CalendarPage> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   connectionStreamSubscribtion.cancel();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
