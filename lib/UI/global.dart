@@ -71,6 +71,23 @@ TextStyle smallTitleStyleWhite = TextStyle(
   fontSize: 12,
 );
 
+// Dialog styles
+TextStyle dialogTitleStyle = new TextStyle(
+  color: Colors.white,
+  letterSpacing: 1,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.bold,
+  fontSize: 16,
+);
+
+TextStyle dialogDescriptionStyle = new TextStyle(
+  color: Colors.white,
+  letterSpacing: 1,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.w300,
+  fontSize: 14,
+);
+
 // one rep max calculation table
 List<double> maxTable = [
   1.0,
