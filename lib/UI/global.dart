@@ -1,14 +1,9 @@
+import 'package:exerlog/src/core/theme/theme_color.dart';
 import 'package:flutter/material.dart';
 
 // height and width of screen
 double screenHeight = 0.0;
 double screenWidth = 0.0;
-
-// colors
-Color backgroundColor = Color(0xFF2D2B41);
-Color textColorLoginForm = Color(0xFFACACB4);
-Color textColorBlue = Color(0xFF31A6DC);
-Color greenTextColor = Color(0xFF34D2C1);
 
 // text styles
 TextStyle whiteTextStyleSmall = TextStyle(
@@ -17,27 +12,27 @@ TextStyle whiteTextStyleSmall = TextStyle(
   fontSize: 12,
 );
 TextStyle buttonTextSmall = TextStyle(
-  color: backgroundColor,
+  color: ThemeColor.darkBlueVariation,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w800,
   fontSize: 12,
 );
 TextStyle buttonText = TextStyle(
-  color: backgroundColor,
+  color: ThemeColor.darkBlueVariation,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w800,
   fontSize: 18,
 );
 TextStyle loginOptionTextStyle = TextStyle(
   letterSpacing: 1,
-  color: textColorLoginForm,
+  color: ThemeColor.grey,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w300,
   fontSize: 18,
 );
 TextStyle loginOptionTextStyleSelected = TextStyle(
   letterSpacing: 1,
-  color: textColorBlue,
+  color: ThemeColor.secondary,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w400,
   fontSize: 18,
@@ -57,13 +52,13 @@ TextStyle setHintStyle = TextStyle(
 );
 TextStyle setStyle = TextStyle(
   letterSpacing: 1,
-  color: greenTextColor,
+  color: ThemeColor.primary,
   fontFamily: "Avenir",
   fontSize: 15,
 );
 TextStyle greenButtonTextThin = TextStyle(
   letterSpacing: 1,
-  color: greenTextColor,
+  color: ThemeColor.primary,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w300,
   fontSize: 18,
