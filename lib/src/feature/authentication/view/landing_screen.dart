@@ -20,7 +20,8 @@ class LandingScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _LandingScreenState();
 }
 
-class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTickerProviderStateMixin {
+class _LandingScreenState extends ConsumerState<LandingScreen>
+    with SingleTickerProviderStateMixin {
   /// Form Keys
   final _loginFormKey = GlobalKey<FormState>();
   final _signUpFormKey = GlobalKey<FormState>();
@@ -138,22 +139,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
           ),
         );
       },
-    );
-  }
-
-  void _navigateToCalendarScreen() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => CalendarPage(),
-      ),
-    );
-  }
-
-  Future<dynamic> _navigateToWorkoutScreen() {
-    return Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => WorkoutPage(null),
-      ),
     );
   }
 }

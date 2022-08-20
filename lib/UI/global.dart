@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 double screenHeight = 0.0;
 double screenWidth = 0.0;
 
-// colors
-Color textColorLoginForm = Color(0xFFACACB4);
-
 // text styles
 TextStyle whiteTextStyleSmall = TextStyle(
   color: Colors.white,
@@ -21,14 +18,14 @@ TextStyle buttonTextSmall = TextStyle(
   fontSize: 12,
 );
 TextStyle buttonText = TextStyle(
-  color:  ThemeColor.darkBlueVariation,
+  color: ThemeColor.darkBlueVariation,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w800,
   fontSize: 18,
 );
 TextStyle loginOptionTextStyle = TextStyle(
   letterSpacing: 1,
-  color: textColorLoginForm,
+  color: ThemeColor.grey,
   fontFamily: "Avenir",
   fontWeight: FontWeight.w300,
   fontSize: 18,
