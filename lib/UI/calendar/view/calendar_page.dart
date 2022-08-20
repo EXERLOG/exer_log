@@ -1,11 +1,45 @@
+import 'dart:async';
+
 import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
 import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity/connectivity.dart';
 
-class CalendarPage extends StatelessWidget {
+import '../../../src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
+
+class CalendarPage extends StatefulWidget {
+  @override
+  State<CalendarPage> createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  // final ScaffoldMessengerState _scaffold = _scaffoldMessangerKey.currentState;
+  Stream<ConnectivityResult> _connectivityStream =
+      Connectivity().onConnectivityChanged;
+  _noNetworkConnection() {
+    ScaffoldMessenger.of(context).showSnackBar(noNetworkConnectionSnackBar());
+  }
+
+  // late StreamSubscription connectionStreamSubscribtion;
+  @override
+  void initState() {
+    super.initState();
+    _connectivityStream.listen((connectionResult) {
+      if (connectionResult == ConnectivityResult.none) {
+        _noNetworkConnection();
+      }
+    });
+  }
+
+  // @override
+  // void dispose() {
+  //   connectionStreamSubscribtion.cancel();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +65,7 @@ class CalendarPage extends StatelessWidget {
                   style: buttonTextSmall,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => WorkoutPage(null),
                     ),

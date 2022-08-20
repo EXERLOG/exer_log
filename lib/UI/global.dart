@@ -9,7 +9,7 @@ Color backgroundColor = Color(0xFF2D2B41);
 Color textColorLoginForm = Color(0xFFACACB4);
 Color textColorBlue = Color(0xFF31A6DC);
 Color greenTextColor = Color(0xFF34D2C1);
-
+Color redBackgroundColor = Color(0xFFE74C3C);
 // text styles
 TextStyle whiteTextStyleSmall = TextStyle(
   color: Colors.white,
