@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
 import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
@@ -16,14 +14,12 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  // final ScaffoldMessengerState _scaffold = _scaffoldMessangerKey.currentState;
   Stream<ConnectivityResult> _connectivityStream =
       Connectivity().onConnectivityChanged;
   _noNetworkConnection() {
     ScaffoldMessenger.of(context).showSnackBar(noNetworkConnectionSnackBar());
   }
 
-  // late StreamSubscription connectionStreamSubscribtion;
   @override
   void initState() {
     super.initState();

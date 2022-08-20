@@ -46,11 +46,9 @@ void main() async {
 }
 
 class MyApp extends ConsumerWidget {
-  final _scaffoldMessangerKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      scaffoldMessengerKey: _scaffoldMessangerKey,
       title: 'EXERLOG',
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
