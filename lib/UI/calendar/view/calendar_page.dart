@@ -1,13 +1,13 @@
 import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
 import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
-
-import '../../../src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
 
 class CalendarPage extends StatefulWidget {
   @override
@@ -15,18 +15,14 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  Stream<ConnectivityResult> _connectivityStream =
-      Connectivity().onConnectivityChanged;
-  _noNetworkConnection() {
-    ScaffoldMessenger.of(context).showSnackBar(noNetworkConnectionSnackBar());
-  }
+  Stream<ConnectivityResult> _connectivityStream = Connectivity().onConnectivityChanged;
 
   @override
   void initState() {
     super.initState();
     _connectivityStream.listen((connectionResult) {
       if (connectionResult == ConnectivityResult.none) {
-        _noNetworkConnection();
+        _showNoNetworkConnectionSnackbar();
       }
     });
   }
@@ -73,4 +69,6 @@ class _CalendarPageState extends State<CalendarPage> {
       },
     );
   }
+
+  void _showNoNetworkConnectionSnackbar() => ScaffoldMessenger.of(context).showSnackBar(noNetworkConnectionSnackBar(AppTheme.of(context)));
 }
