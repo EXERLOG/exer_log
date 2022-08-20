@@ -50,6 +50,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "PickleNik",
+      "name": "Nikita Krupin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31113245?v=4",
+      "profile": "https://github.com/PickleNik",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
