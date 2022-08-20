@@ -14,4 +14,11 @@ class ThemeColor {
   static const Color pink = Color.fromRGBO(247, 172, 170, 1);
   static const Color red = Color.fromRGBO(238, 48, 38, 1);
   static const Color shadow = Color.fromRGBO(0, 0, 0, 0.2);
+
+  // application colors
+  static const Color backgroundColor = Color(0xFF2D2B41);
+  static const Color textColorLoginForm = Color(0xFFACACB4);
+  static const Color textColorBlue = Color(0xFF31A6DC);
+  static const Color greenTextColor = Color(0xFF34D2C1);
+  static const Color redBackgroundColor = Color(0xFFE74C3C);
 }
