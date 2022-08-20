@@ -3,6 +3,7 @@ import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -32,40 +33,44 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: Text("Exerlog"),
-        backgroundColor: backgroundColor.withOpacity(0.75),
-        actions: [
-          LogoutButton(),
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CalendarWidget(),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: RaisedGradientButton(
-                child: Text(
-                  "START NEW WORKOUT",
-                  style: buttonTextSmall,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => WorkoutPage(null),
+    return ThemeProvider(
+      builder: (context, theme) {
+        return Scaffold(
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
+          appBar: AppBar(
+            title: Text("Exerlog"),
+            backgroundColor: theme.colorTheme.backgroundColorVariation.withOpacity(0.75),
+            actions: [
+              LogoutButton(),
+            ],
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CalendarWidget(),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: RaisedGradientButton(
+                    child: Text(
+                      "START NEW WORKOUT",
+                      style: buttonTextSmall,
                     ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => WorkoutPage(null),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

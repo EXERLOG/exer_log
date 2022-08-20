@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class RaisedGradientButton extends StatefulWidget {
@@ -28,32 +29,36 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height,
-      width: widget.width,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: widget.gradient ??
-              LinearGradient(
-                colors: <Color>[
-                  Color(0xFF34D1C2),
-                  Color(0xFF31A6DC),
-                ],
-              ),
-          borderRadius: BorderRadius.circular(widget.radius),
-        ),
-        child: TextButton(
-          onPressed: _onPressed,
-          child: _isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+    return ThemeProvider(
+      builder: (context, theme) {
+        return SizedBox(
+          height: widget.height,
+          width: widget.width,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: widget.gradient ??
+                  LinearGradient(
+                    colors: <Color>[
+                      theme.colorTheme.primaryColor,
+                      theme.colorTheme.secondaryColor,
+                    ],
                   ),
-                )
-              : widget.child,
-        ),
-      ),
+              borderRadius: BorderRadius.circular(widget.radius),
+            ),
+            child: TextButton(
+              onPressed: _onPressed,
+              child: _isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : widget.child,
+            ),
+          ),
+        );
+      },
     );
   }
 
