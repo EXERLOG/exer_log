@@ -1,13 +1,13 @@
 import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
 import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../../src/widgets/SnackBars/noNetworkConnectionSnackBar.dart';
 
 class CalendarPage extends StatefulWidget {
   @override
