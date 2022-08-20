@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/feature/authentication/view/authentication_wrapper.dart';
+import 'package:exerlog/main.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +21,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
-      if (mounted) _navigateToAuthWrapper();
+      if (SharedPref.getBoolAsync(IS_LOGGED_IN, defaultValue: false)) {
+        /// TODO: Remove later
+        userID = SharedPref.getStringAsync(USER_UID);
+        if (mounted) _navigateToCalendarScreen();
+      } else {
+        if (mounted) _navigateToLandingScreen();
+      }
     });
   }
 
@@ -41,11 +50,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     );
   }
 
-  void _navigateToAuthWrapper() {
+  void _navigateToLandingScreen() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => AuthenticationWrapper(),
+        builder: (context) => LandingScreen(),
+      ),
+    );
+  }
+
+  void _navigateToCalendarScreen() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => CalendarPage(),
       ),
     );
   }
