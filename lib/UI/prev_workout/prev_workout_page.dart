@@ -1,25 +1,17 @@
-
-import 'package:exerlog/Bloc/exercise_bloc.dart';
-import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/prev_workout_data.dart';
-import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
-import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
-import 'package:exerlog/UI/exercise/exercise_card.dart';
-import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
 import 'package:exerlog/UI/prev_workout/delete_prev_workout_dialog.dart';
-import 'package:exerlog/UI/workout/add_new_workout_alert.dart';
 import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
-import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import '../../src/widgets/gradient_button.dart';
 import '../global.dart';
@@ -53,14 +45,18 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       false,
       0,
       0.0,
-      0
+      0,
     );
 
     newWorkout.id = widget.workout.id;
 
     // TODO: implement initState
     workoutData = new PrevWorkoutData(
-        newWorkout, new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+      newWorkout,
+      new WorkoutTotals(0, 0, 0, 0, 0),
+      updateTotals,
+      addNewSet,
+    );
 
     super.initState();
   }
@@ -74,54 +70,66 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     screenWidth = MediaQuery.of(context).size.width;
     //workoutData.workout = workout;
     workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        leading: BackButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).push(
+    return ThemeProvider(
+      builder: (context, theme) {
+        return ThemeProvider(
+          builder: (context, theme) {
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: theme.colorTheme.backgroundColorVariation,
+                leading: BackButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => CalendarPage(
-                        ),
+                        builder: (context) => CalendarPage(),
                       ),
                     );
-          },
-          color: greenTextColor
-        ),
-        actions: [
-          TextButton(onPressed: () {
-            showDeleteWorkoutAlertDialog(context);
-          }, 
-          child: Icon(Icons.delete,color: greenTextColor,))
-        ], 
-      ),
-      body: firstLoad
-          ? Container(
-              color: backgroundColor,
-            )
-          : GestureDetector(
-              child: Container(
-                color: backgroundColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    WorkoutTotalsWidget(
-                      totals: workoutData.totals,
+                  },
+                  color: theme.colorTheme.primaryColor,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      showDeleteWorkoutAlertDialog(context);
+                    },
+                    child: Icon(
+                      Icons.delete,
+                      color: theme.colorTheme.primaryColor,
                     ),
-                    Expanded(
+                  )
+                ],
+              ),
+              body: firstLoad
+                  ? Container(
+                      color: theme.colorTheme.backgroundColorVariation,
+                    )
+                  : GestureDetector(
                       child: Container(
-                        //height: screenHeight * 0.5,
-                        child: ListView(
-                          addAutomaticKeepAlives: true,
-                          children: workoutData.exerciseWidgets,
+                        color: theme.colorTheme.backgroundColorVariation,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            WorkoutTotalsWidget(
+                              totals: workoutData.totals,
+                            ),
+                            Expanded(
+                              child: Container(
+                                //height: screenHeight * 0.5,
+                                child: ListView(
+                                  addAutomaticKeepAlives: true,
+                                  children: workoutData.exerciseWidgets,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -144,15 +152,11 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
   }
 
   showAlertDialogExercise(BuildContext context) {
-    ExerciseNameSelectionWidget exerciseNameSelectionWidget =
-        new ExerciseNameSelectionWidget(
+    ExerciseNameSelectionWidget exerciseNameSelectionWidget = new ExerciseNameSelectionWidget(
       setExercisename: setExercisename,
     );
     // set up the button
     RaisedGradientButton okButton = RaisedGradientButton(
-      gradient: LinearGradient(
-        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-      ),
       radius: 30,
       child: Text(
         "ADD",
@@ -170,8 +174,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
 
     // set up the AlertDialog
-    AddExerciseAlert alert =
-        AddExerciseAlert(okButton, exerciseNameSelectionWidget);
+    AddExerciseAlert alert = AddExerciseAlert(okButton, exerciseNameSelectionWidget);
 
     // show the dialog
     showDialog(
@@ -190,9 +193,6 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   showSaveWorkoutAlertDialog(BuildContext context) {
     RaisedGradientButton okButton = RaisedGradientButton(
-      gradient: LinearGradient(
-        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-      ),
       radius: 30,
       child: Text(
         "SAVE",
@@ -203,10 +203,11 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
         setState(() {
           firstLoad = true;
           workoutData = new PrevWorkoutData(
-              new Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
-              new WorkoutTotals(0, 0, 0, 0, 0),
-              updateTotals,
-              addNewSet);
+            new Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
+            new WorkoutTotals(0, 0, 0, 0, 0),
+            updateTotals,
+            addNewSet,
+          );
         });
       },
     );
@@ -224,11 +225,8 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
   }
 
-showDeleteWorkoutAlertDialog(BuildContext context) {
+  showDeleteWorkoutAlertDialog(BuildContext context) {
     RaisedGradientButton okButton = RaisedGradientButton(
-      gradient: LinearGradient(
-        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-      ),
       radius: 30,
       child: Text(
         "DELETE",
@@ -237,13 +235,11 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
       onPressed: () {
         deleteWorkout(workoutData.workout);
         Navigator.of(context).pop();
-          Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CalendarPage(
-                      ),
-                    ),
-                  );
-
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CalendarPage(),
+          ),
+        );
       },
     );
 
@@ -260,16 +256,18 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
     );
   }
 
-
-
   setWorkoutName(name) {
     workoutData.workout.name = name;
   }
 
   addExercises(new_workout) {
     setState(() {
-      PrevWorkoutData newWorkoutData = new PrevWorkoutData(new_workout,
-          new WorkoutTotals(0, 0, 0, 0, 0), updateTotals, addNewSet);
+      PrevWorkoutData newWorkoutData = new PrevWorkoutData(
+        new_workout,
+        new WorkoutTotals(0, 0, 0, 0, 0),
+        updateTotals,
+        addNewSet,
+      );
       firstLoad = false;
       workoutData = newWorkoutData;
       newWorkout = newWorkoutData.workout;
@@ -279,9 +277,6 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
 
   showAlertDialogWorkout(BuildContext context) {
     RaisedGradientButton viewButton = RaisedGradientButton(
-      gradient: LinearGradient(
-        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-      ),
       radius: 30,
       child: Text(
         "VIEW",
@@ -296,9 +291,6 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
     GradientBorderButton redoButton = GradientBorderButton(
       addButton: false,
       borderSize: 2,
-      gradient: LinearGradient(
-        colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-      ),
       radius: 30,
       child: Text(
         "REDO",
@@ -307,18 +299,16 @@ showDeleteWorkoutAlertDialog(BuildContext context) {
       onPressed: () {
         Navigator.pop(context);
         Navigator.of(context).pop();
-          Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => WorkoutPage(widget.workout
-                      ),
-                    ),
-                  );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WorkoutPage(widget.workout),
+          ),
+        );
       },
     );
 
     // set up the AlertDialog
-    RedoWorkoutAlert alert =
-        RedoWorkoutAlert(viewButton, redoButton);
+    RedoWorkoutAlert alert = RedoWorkoutAlert(viewButton, redoButton);
 
     // show the dialog
     showDialog(

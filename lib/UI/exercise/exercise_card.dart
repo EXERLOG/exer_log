@@ -1,13 +1,10 @@
-import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
-import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/widgets/gradient_button.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseCard extends StatefulWidget {
@@ -22,31 +19,29 @@ class ExerciseCard extends StatefulWidget {
   WorkoutData workoutData;
   ExerciseTotalsWidget totalsWidget;
 
-  ExerciseCard(
-      {
-      required this.key,
-      required this.name,
-      required this.exercise,
-      required this.addExercise,
-      required this.updateExisitingExercise,
-      required this.removeExercise,
-      required this.removeSet,
-      required this.isTemplate,
-      required this.workoutData,
-      required this.totalsWidget});
+  ExerciseCard({
+    required this.key,
+    required this.name,
+    required this.exercise,
+    required this.addExercise,
+    required this.updateExisitingExercise,
+    required this.removeExercise,
+    required this.removeSet,
+    required this.isTemplate,
+    required this.workoutData,
+    required this.totalsWidget,
+  });
   @override
   _ExerciseCardState createState() => _ExerciseCardState();
 }
 
-class _ExerciseCardState extends State<ExerciseCard>
-    with AutomaticKeepAliveClientMixin {
-      static int counter = 0;
-        List<SetWidget> setList = [];
+class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClientMixin {
+  static int counter = 0;
+  List<SetWidget> setList = [];
   static int index = 0;
   double originalHeight = screenHeight * 0.23;
   double height = 0;
-  TotalsData totalData =
-      new TotalsData(0, 0, 0.0, 0.0);
+  TotalsData totalData = new TotalsData(0, 0, 0.0, 0.0);
   late ValueNotifier<TotalsData> _notifier;
 
   @override
@@ -68,21 +63,20 @@ class _ExerciseCardState extends State<ExerciseCard>
         updateTotal: updateTotal,
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
-    }
-
-    else if (widget.exercise.sets.length > 0) {
+    } else if (widget.exercise.sets.length > 0) {
       int i = 0;
       for (Sets sets in widget.exercise.sets) {
         setList.add(new SetWidget(
-            name: widget.exercise.name,
-            exercise: widget.exercise,
-            addNewSet: widget.workoutData.addSet,
-            removeSet: removeSet,
-            counter: counter,
-            id: i,
-            isTemplate: widget.isTemplate,
-            updateTotal: updateTotal,));
-            counter++;
+          name: widget.exercise.name,
+          exercise: widget.exercise,
+          addNewSet: widget.workoutData.addSet,
+          removeSet: removeSet,
+          counter: counter,
+          id: i,
+          isTemplate: widget.isTemplate,
+          updateTotal: updateTotal,
+        ));
+        counter++;
         i++;
       }
     }
@@ -93,146 +87,160 @@ class _ExerciseCardState extends State<ExerciseCard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height + screenHeight*0.06,
-      child: Stack(children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: backgroundColor,
-              boxShadow: [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.2),
-                    offset: Offset(0, 3),
-                    blurRadius: 5,
-                    spreadRadius: 5),
-              ]),
-          margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-          padding: EdgeInsets.all(20),
-          height: height,
-          child: Column(
+    super.build(context);
+    return ThemeProvider(
+      builder: (context, theme) {
+        return Container(
+          height: height + screenHeight * 0.06,
+          child: Stack(
             children: [
               Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: theme.colorTheme.backgroundColorVariation,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.2),
+                      offset: Offset(0, 3),
+                      blurRadius: 5,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                padding: EdgeInsets.all(20),
+                height: height,
+                child: Column(
                   children: [
                     Container(
-                      height: getHeight(),
-                      width: screenWidth *0.45,
-                      child: Text(
-                        widget.name,
-                        style: mediumTitleStyleWhite,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: getHeight(),
+                            width: screenWidth * 0.45,
+                            child: Text(
+                              widget.name,
+                              style: mediumTitleStyleWhite,
+                            ),
+                          ),
+                          Container(
+                            child: ValueListenableBuilder(
+                              valueListenable: _notifier,
+                              builder: (BuildContext context, TotalsData value, Widget? child) {
+                                return ExerciseTotalsWidget(
+                                  totals: value,
+                                  index: index,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Container(
-                child: ValueListenableBuilder(
-                valueListenable: _notifier,
-                builder: (BuildContext context, TotalsData value, Widget? child) {
-                  return ExerciseTotalsWidget(totals: value, index: index,);
-                } 
-              ), 
-                
-              ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: screenHeight * 0.04,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: screenWidth * 0.08,
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Text(
+                                    "Reps",
+                                    style: smallTitleStyleWhite,
+                                  ),
+                                ),
+                                width: screenWidth * 0.15,
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Text(
+                                    "Sets",
+                                    style: smallTitleStyleWhite,
+                                  ),
+                                ),
+                                width: screenWidth * 0.15,
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Text(
+                                    "Weight",
+                                    style: smallTitleStyleWhite,
+                                  ),
+                                ),
+                                width: screenWidth * 0.15,
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Text(
+                                    "Rest",
+                                    style: smallTitleStyleWhite,
+                                  ),
+                                ),
+                                width: screenWidth * 0.15,
+                              ),
+                              Container(
+                                width: screenWidth * 0.1,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: setList,
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
-              Divider(
-                thickness: 1,
-                color: Colors.white.withOpacity(0.2),
-              ),
-              Column(
-                children: [
-                  Container(
-                    height: screenHeight * 0.04,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: screenWidth * 0.08,
+              Positioned(
+                right: screenWidth * 0.43,
+                left: screenWidth * 0.43,
+                top: height - 15,
+                child: Container(
+                  height: screenHeight * 0.07,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            theme.colorTheme.primaryColor,
+                            theme.colorTheme.secondaryColor,
+                          ],
                         ),
-                        Container(
-                          child: Center(
-                            child: Text(
-                              "Reps",
-                              style: smallTitleStyleWhite,
-                            ),
-                          ),
-                          width: screenWidth * 0.15,
-                        ),
-                        Container(
-                          child: Center(
-                            child: Text(
-                              "Sets",
-                              style: smallTitleStyleWhite,
-                            ),
-                          ),
-                          width: screenWidth * 0.15,
-                        ),
-                        Container(
-                          child: Center(
-                            child: Text(
-                              "Weight",
-                              style: smallTitleStyleWhite,
-                            ),
-                          ),
-                          width: screenWidth * 0.15,
-                        ),
-                        Container(
-                          child: Center(
-                            child: Text(
-                              "Rest",
-                              style: smallTitleStyleWhite,
-                            ),
-                          ),
-                          width: screenWidth * 0.15,
-                        ),
-                        Container(
-                          width: screenWidth * 0.1,
-                        ),
-                      ],
+                        borderRadius: BorderRadius.circular(30)),
+                    child: FloatingActionButton(
+                      heroTag: null,
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.add,
+                        size: 50,
+                        color: theme.colorTheme.backgroundColorVariation,
+                      ),
+                      onPressed: addSet,
                     ),
                   ),
-                  Column(
-                    children: setList,
-                  )
-                ],
+                ),
               )
             ],
           ),
-        ),
-        Positioned(
-          right: screenWidth * 0.43,
-          left: screenWidth * 0.43,
-          top: height - 15,
-          child: Container(
-            height: screenHeight * 0.07,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-                  ),
-                  borderRadius: BorderRadius.circular(30)),
-              child: FloatingActionButton(
-                heroTag: null,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                child: Icon(
-                  Icons.add,
-                  size: 50,
-                  color: backgroundColor,
-                ),
-                onPressed: addSet,
-              ),
-            ),
-          ),
-        )
-      ]),
+        );
+      },
     );
   }
 
   void addSet() {
     counter++;
-     setState(() {
+    setState(() {
       setList.add(new SetWidget(
         name: widget.name,
         exercise: widget.exercise,
@@ -245,8 +253,8 @@ class _ExerciseCardState extends State<ExerciseCard>
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
       widget.addExercise(widget.exercise);
-      });
-      setHeight();
+    });
+    setHeight();
   }
 
   void removeSet(exercise, sets, id) {
@@ -278,17 +286,22 @@ class _ExerciseCardState extends State<ExerciseCard>
   }
 
   void updateTotal() {
-    _notifier.value = new TotalsData(widget.exercise.totalReps, widget.exercise.totalSets, widget.exercise.totalWeight, (widget.exercise.totalWeight / widget.exercise.totalReps).roundToDouble());
+    _notifier.value = new TotalsData(
+      widget.exercise.totalReps,
+      widget.exercise.totalSets,
+      widget.exercise.totalWeight,
+      (widget.exercise.totalWeight / widget.exercise.totalReps).roundToDouble(),
+    );
   }
 
-   void setHeight() {
-     setState(() {
-       height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
-     });
+  void setHeight() {
+    setState(() {
+      height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
+    });
   }
 
   double getHeight() {
-    double length = (widget.exercise.name.length/16);
+    double length = (widget.exercise.name.length / 16);
     if (length.toInt() == 0 || length == 1.0) {
       return 25;
     } else {

@@ -6,6 +6,7 @@ import 'package:exerlog/main.dart';
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/utils/assets.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,20 +34,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              Assets.appLogoWhite,
-              height: 300,
-              width: 300,
-            ),
+    return ThemeProvider(
+      builder: (context, theme) {
+        return Scaffold(
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Image.asset(
+                  Assets.appLogoWhite,
+                  height: 300,
+                  width: 300,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
