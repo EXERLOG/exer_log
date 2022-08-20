@@ -1,8 +1,6 @@
 <p align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-  
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
- 
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
 <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
@@ -74,6 +72,7 @@ Thank you so much to everyone who has been contributing to this project:
     <td align="center"><a href="https://github.com/ckelwin"><img src="https://avatars.githubusercontent.com/u/5429312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chan Kelwin Hillary</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=ckelwin" title="Code">💻</a></td>
     <td align="center"><a href="http://suzanpradhan.com.np/"><img src="https://avatars.githubusercontent.com/u/74817169?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sujan Pradhan</b></sub></a><br /><a href="#projectManagement-suzanpradhan" title="Project Management">📆</a> <a href="#ideas-suzanpradhan" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/jorre127"><img src="https://avatars.githubusercontent.com/u/44479965?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jorre127</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/issues?q=author%3Ajorre127" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
   </tr>
 </table>
 
