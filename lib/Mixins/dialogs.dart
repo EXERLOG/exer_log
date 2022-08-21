@@ -28,7 +28,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     );
   }
 
-  Future<void> showSignoutConfirmationDialog() async {
+  Future<void> signOutConfirmationDialog() async {
     void _navigateToLandingScreen(BuildContext context) {
       Navigator.pushAndRemoveUntil(
         context,
@@ -40,9 +40,9 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     await showDialog(
       context: context,
       builder: (context) => _dialog(
-        title: 'Sign Out Attempt',
+        title: 'Sign Out',
         description:
-            'You have attempted to sign out of ExerLog. Are you sure you want to sign out?',
+            'Are you sure you want to sign out?',
         actions: [
           TextButton(
             onPressed: () {

@@ -1,5 +1,4 @@
 import 'package:exerlog/Mixins/dialogs.dart';
-import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:flutter/material.dart';
 
 class LogoutButton extends StatefulWidget {
@@ -12,17 +11,13 @@ class LogoutButton extends StatefulWidget {
 }
 
 class _LogoutButtonState extends State<LogoutButton> with Dialogs {
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: InkWell(
-        onTap: _isLoading ? showSignoutConfirmationDialog : null,
-        child: _isLoading
-            ? Center(child: CircularProgressIndicator(strokeWidth: 2))
-            : Icon(Icons.logout),
+        onTap: signOutConfirmationDialog,
+        child: Icon(Icons.logout),
       ),
     );
   }
