@@ -1,3 +1,4 @@
+import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
@@ -64,12 +65,10 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
     final _controller = ref.read(AuthenticationController.controller);
 
     ref.listen(AuthenticationController.provider, (_, state) {
-      if (state is SuccessState) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => WorkoutPage(null),
-          ),
-        );
+      if (state is SignUpSuccessState) {
+        _navigateToWorkoutScreen();
+      } else if (state is LoginSuccessState) {
+        _navigateToCalendarScreen();
       } else if (state is ErrorState) {
         context.showSnackBar("Something went wrong");
       }
@@ -139,6 +138,22 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
           ),
         );
       },
+    );
+  }
+
+  void _navigateToCalendarScreen() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => CalendarPage(),
+      ),
+    );
+  }
+
+  Future<dynamic> _navigateToWorkoutScreen() {
+    return Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => WorkoutPage(null),
+      ),
     );
   }
 }
