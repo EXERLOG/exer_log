@@ -1,0 +1,62 @@
+# Configuration for mergeable - https://github.com/mergeability/mergeable
+
+version: 2
+mergeable:
+  - when: pull_request.*, pull_request_review.*
+    name: 'Validate Pull Request Description'
+    validate:
+      - do: description
+        no_empty:
+          enabled: true
+    fail:
+      - do: comment
+        payload:
+          body: 'Description is necessary and should not be empty. Kindly provide details with **what** was changed, **why** it was changed, and **how** it was changed.'
+  - when: pull_request.*, pull_request_review.*
+    name: 'Validate Pull Request Title'
+    validate:
+      - do: title
+        no_empty:
+          enabled: true
+    fail:
+      - do: comment
+        payload:
+          body: 'Title is necessary and should not be empty.'
+  - when: pull_request.*, pull_request_review.*
+    name: 'Validate Pull Request Size'
+    validate:
+      - do: size
+        ignore:
+          - '*.lock'
+          - '*-lock.json'
+        lines:
+          max:
+            count: 500
+    fail:
+      - do: comment
+        payload:
+          body: 'Lines of code have too many changes. It should be under 500 lines of addtions and deletions.'
+  - when: pull_request.*, pull_request_review.*
+    name: 'Validate Pull Request to be approved'
+    validate:
+      - do: approvals
+        min:
+          count: 1
+  - when: pull_request.*, pull_request_review.*
+    validate:
+      - do: dependent
+        changed:
+          file: 'pubspec.yaml'
+          required: ['pubspec.lock']
+  - when: pull_request.*, pull_request_review.*
+    validate:
+      - do: title
+        # Enforce semantic release convention.
+        must_include:
+          regex: ^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$
+          message: Semantic release conventions must be followed.
+        # All todo check boxes must be checked.
+      - do: description
+        must_exclude:
+          regex: \[ \]
+          message: There are incomplete TODO task(s) unchecked.

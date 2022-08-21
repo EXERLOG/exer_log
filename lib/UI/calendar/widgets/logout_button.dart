@@ -1,6 +1,5 @@
-import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/Mixins/dialogs.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LogoutButton extends StatefulWidget {
@@ -12,7 +11,7 @@ class LogoutButton extends StatefulWidget {
   State<LogoutButton> createState() => _LogoutButtonState();
 }
 
-class _LogoutButtonState extends State<LogoutButton> {
+class _LogoutButtonState extends State<LogoutButton> with Dialogs {
   bool _isLoading = false;
 
   @override
@@ -20,27 +19,11 @@ class _LogoutButtonState extends State<LogoutButton> {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: InkWell(
-        onTap: () async {
-          if (!_isLoading) {
-            setState(() => _isLoading = true);
-            await FirebaseAuth.instance.signOut();
-            SharedPref.setValue(IS_LOGGED_IN, false);
-            setState(() => _isLoading = false);
-            _navigateToLandingScreen(context);
-          }
-        },
+        onTap: _isLoading ? showSignoutConfirmationDialog : null,
         child: _isLoading
             ? Center(child: CircularProgressIndicator(strokeWidth: 2))
             : Icon(Icons.logout),
       ),
-    );
-  }
-
-  void _navigateToLandingScreen(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => LandingScreen()),
-      (route) => false,
     );
   }
 }
