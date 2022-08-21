@@ -99,14 +99,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                   ),
                 ),
 
-                /// Google Sign In button
-                if (_tabIndex == 0) ...[
-                  GoogleSignInButton(
-                    onPressed: () async {
-                      await _controller.signInWithGoogle();
-                    },
-                  ),
-                ],
                 SizedBox(height: 20),
 
                 /// Login / Sign up button

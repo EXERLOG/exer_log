@@ -3,6 +3,7 @@ import 'package:exerlog/src/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/text_field.dart';
+import 'google_signin_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm(this.controller);
@@ -12,8 +13,9 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        Spacer(),
         OutlinedTextField(
           hinText: "Email",
           leadingIcon: Icons.email,
@@ -27,6 +29,15 @@ class LoginForm extends StatelessWidget {
           textEditingController: controller.passwordTextEditingController,
           obscureText: true,
         ),
+        Spacer(),
+
+        /// Google Sign In button
+        GoogleSignInButton(
+          onPressed: () async {
+            await controller.signInWithGoogle();
+          },
+        ),
+
       ],
     );
   }
