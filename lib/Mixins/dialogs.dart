@@ -1,4 +1,5 @@
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,6 +53,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
+              SharedPref.setValue(IS_LOGGED_IN, false);
               await FirebaseAuth.instance.signOut();
               _navigateToLandingScreen(context);
             },
