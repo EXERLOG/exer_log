@@ -5,9 +5,9 @@ import 'package:exerlog/src/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm(this.controller);
+  const LoginForm(this._controller);
 
-  final AuthenticationController controller;
+  final AuthenticationController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +19,17 @@ class LoginForm extends StatelessWidget {
           hinText: "Email",
           leadingIcon: Icons.email,
           validator: (value) => Validators.requiredField(value),
-          textEditingController: controller.emailTextEditingController,
+          textEditingController: _controller.emailTextEditingController,
         ),
         OutlinedTextField(
           hinText: "Password",
           leadingIcon: Icons.lock,
           validator: (value) => Validators.requiredField(value),
-          textEditingController: controller.passwordTextEditingController,
+          textEditingController: _controller.passwordTextEditingController,
           obscureText: true,
         ),
         Spacer(),
-        
-        GoogleSignInButton(onPressed: controller.signInWithGoogle)
-
+        GoogleSignInButton(onPressed: _controller.signInWithGoogle)
       ],
     );
   }

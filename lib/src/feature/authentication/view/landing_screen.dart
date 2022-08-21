@@ -98,7 +98,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                     ],
                   ),
                 ),
-
                 SizedBox(height: 20),
 
                 /// Login / Sign up button
