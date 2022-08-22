@@ -1,7 +1,7 @@
 <div align="center">
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </div>
@@ -81,6 +81,9 @@ Thank you so much to everyone who has been contributing to this project:
     <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/PickleNik"><img src="https://avatars.githubusercontent.com/u/31113245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikita Krupin</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=PickleNik" title="Code">💻</a> <a href="#maintenance-PickleNik" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/TheAmanM"><img src="https://avatars.githubusercontent.com/u/75181008?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TheAmanM</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=TheAmanM" title="Code">💻</a> <a href="#maintenance-TheAmanM" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
