@@ -1,8 +1,8 @@
 <div align="center">
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-  [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors)
-  <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </div>
 
@@ -80,6 +80,7 @@ Thank you so much to everyone who has been contributing to this project:
     <td align="center"><a href="https://github.com/jorre127"><img src="https://avatars.githubusercontent.com/u/44479965?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jorre127</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/issues?q=author%3Ajorre127" title="Bug reports">🐛</a></td>
     <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/PickleNik"><img src="https://avatars.githubusercontent.com/u/31113245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikita Krupin</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=PickleNik" title="Code">💻</a> <a href="#maintenance-PickleNik" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
