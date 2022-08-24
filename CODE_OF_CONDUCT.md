@@ -7,7 +7,7 @@ Pull Request Process
 
     1. Find yourself an issue you want to work on, see if anybody is working on it, if not, then assign it to yourself
     2. Fork the repo, create a branch for your issue
-    3. Make changes, commit and open a pull request into the [alpha](https://github.com/KalleHallden/exer_log/tree/alpha) branch
+    3. Make changes, commit and open a pull request into the [alpha](https://github.com/EXERLOG/exer_log/tree/alpha) branch
     4. Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) while creating new commit
     5. Request review from a contributor
     6. If your pr was approved, rebase and squash your commits, then merge it.
