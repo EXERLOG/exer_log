@@ -8,8 +8,8 @@
 
 <!-- Logo -->
 <p align="center">
-  <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-dark.png?raw=true#gh-light-mode-only">
-  <img width="300" src="https://github.com/KalleHallden/exer_log/blob/master/assets/logo-light.png?raw=true#gh-dark-mode-only">
+  <img width="300" src="/assets/logo-dark.png?raw=true#gh-light-mode-only">
+  <img width="300" src="/assets/logo-light.png?raw=true#gh-dark-mode-only">
 </p>
 
 ---
