@@ -63,7 +63,7 @@ See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
-![Issues](https://img.shields.io/github/issues/KalleHallden/exer_log)
+![Issues](https://img.shields.io/github/issues/EXERLOG/exer_log)
 
 ## Contributors 
 
@@ -74,17 +74,17 @@ Thank you so much to everyone who has been contributing to this project:
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://bit.ly/dinurymomshad"><img src="https://avatars.githubusercontent.com/u/26508767?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Momshad Dinury</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=dinurymomshad" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/ckelwin"><img src="https://avatars.githubusercontent.com/u/5429312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chan Kelwin Hillary</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=ckelwin" title="Code">💻</a></td>
+    <td align="center"><a href="http://bit.ly/dinurymomshad"><img src="https://avatars.githubusercontent.com/u/26508767?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Momshad Dinury</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=dinurymomshad" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ckelwin"><img src="https://avatars.githubusercontent.com/u/5429312?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chan Kelwin Hillary</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=ckelwin" title="Code">💻</a></td>
     <td align="center"><a href="http://suzanpradhan.com.np/"><img src="https://avatars.githubusercontent.com/u/74817169?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sujan Pradhan</b></sub></a><br /><a href="#projectManagement-suzanpradhan" title="Project Management">📆</a> <a href="#ideas-suzanpradhan" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/jorre127"><img src="https://avatars.githubusercontent.com/u/44479965?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jorre127</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/issues?q=author%3Ajorre127" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/PickleNik"><img src="https://avatars.githubusercontent.com/u/31113245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikita Krupin</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=PickleNik" title="Code">💻</a> <a href="#maintenance-PickleNik" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/jorre127"><img src="https://avatars.githubusercontent.com/u/44479965?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jorre127</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/issues?q=author%3Ajorre127" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/PickleNik"><img src="https://avatars.githubusercontent.com/u/31113245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikita Krupin</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=PickleNik" title="Code">💻</a> <a href="#maintenance-PickleNik" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/TheAmanM"><img src="https://avatars.githubusercontent.com/u/75181008?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TheAmanM</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=TheAmanM" title="Code">💻</a> <a href="#maintenance-TheAmanM" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/lukelavery"><img src="https://avatars.githubusercontent.com/u/60143172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lukelavery</b></sub></a><br /><a href="https://github.com/KalleHallden/exer_log/commits?author=lukelavery" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TheAmanM"><img src="https://avatars.githubusercontent.com/u/75181008?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TheAmanM</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=TheAmanM" title="Code">💻</a> <a href="#maintenance-TheAmanM" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/lukelavery"><img src="https://avatars.githubusercontent.com/u/60143172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lukelavery</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=lukelavery" title="Code">💻</a></td>
   </tr>
 </table>
 
@@ -104,7 +104,7 @@ Install the Flutter SDK from the official [flutter.dev](https://docs.flutter.dev
 Clone this project
 
 ```
-  git clone https://github.com/KalleHallden/exer_log.git
+  git clone https://github.com/EXERLOG/exer_log.git
 ```
 
 CD into the project
