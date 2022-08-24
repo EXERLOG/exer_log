@@ -1,7 +1,38 @@
 # Configuration for mergeable - https://github.com/mergeability/mergeable
 
+defaults:
+  checks_failure_payload: &checks_failure_payload
+    title: 'Mergeable Run have been Completed!'
+    summary: |
+      ### Status: {{toUpperCase validationStatus}}
+          Here are some stats of the run:
+          {{validationCount}} validations were ran.
+          {{passCount}} PASSED
+          {{failCount}} FAILED
+    text: "{{#each validationSuites}}\n
+          #### {{{statusIcon status}}} Validator: {{toUpperCase name}}\n
+          {{#each validations }} * {{{statusIcon status}}} ***{{{ description }}}***\n
+                  Input : {{{details.input}}}\n
+                  Settings : {{{displaySettings details.settings}}}\n
+                  {{/each}}\n
+          {{/each}}"
+
 version: 2
 mergeable:
+  - when: pull_request.opened
+    name: "When pull_request.opened"
+    validate: []
+    pass:
+      - do: assign
+        assignees: [ '@author' ]
+      - do: request_review
+        reviewers: [ 'KalleHallden' ]
+  - when: issues.opened
+    name: "When issues.opened"
+    validate: []
+    pass:
+      - do: assign
+        assignees: [ 'KalleHallden' ]
   - when: pull_request.*, pull_request_review.*
     name: 'Validate Pull Request Description'
     validate:
@@ -9,19 +40,13 @@ mergeable:
         no_empty:
           enabled: true
     fail:
+      - do: checks
+        status: 'failure'
+        payload: *checks_failure_payload
       - do: comment
         payload:
-          body: 'Description is necessary and should not be empty. Kindly provide details with **what** was changed, **why** it was changed, and **how** it was changed.'
-  - when: pull_request.*, pull_request_review.*
-    name: 'Validate Pull Request Title'
-    validate:
-      - do: title
-        no_empty:
-          enabled: true
-    fail:
-      - do: comment
-        payload:
-          body: 'Title is necessary and should not be empty.'
+          body: >
+            Description is necessary and should not be empty. Kindly provide details with **what** was changed, **why** it was changed, and **how** it was changed.
   - when: pull_request.*, pull_request_review.*
     name: 'Validate Pull Request Size'
     validate:
@@ -33,15 +58,13 @@ mergeable:
           max:
             count: 500
     fail:
+      - do: checks
+        status: 'failure'
+        payload: *checks_failure_payload
       - do: comment
         payload:
-          body: 'Lines of code have too many changes. It should be under 500 lines of addtions and deletions.'
-  - when: pull_request.*, pull_request_review.*
-    name: 'Validate Pull Request to be approved'
-    validate:
-      - do: approvals
-        min:
-          count: 1
+          body: >
+            Lines of code have too many changes. It should be under 500 lines of addtions and deletions.
   - when: pull_request.*, pull_request_review.*
     validate:
       - do: dependent
@@ -60,3 +83,9 @@ mergeable:
         must_exclude:
           regex: \[ \]
           message: There are incomplete TODO task(s) unchecked.
+      - do: approvals
+        min:
+          count: 1
+        and:
+          - required:
+              reviewers: [ 'KalleHallden' ]
