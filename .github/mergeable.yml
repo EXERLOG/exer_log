@@ -19,6 +19,20 @@ defaults:
 
 version: 2
 mergeable:
+  - when: pull_request.opened
+    name: "When pull_request.opened"
+    validate: []
+    pass:
+      - do: assign
+        assignees: [ '@author' ]
+      - do: request_review
+        reviewers: [ 'KalleHallden' ]
+  - when: issues.opened
+    name: "When issues.opened"
+    validate: []
+    pass:
+      - do: assign
+        assignees: [ 'KalleHallden' ]
   - when: pull_request.*, pull_request_review.*
     name: 'Validate Pull Request Description'
     validate:
@@ -73,8 +87,5 @@ mergeable:
         min:
           count: 1
         and:
-          - block:
-            changes_requested: true
-          - limit:
-              reviewers: [ 'EXERLOG/maintainers' ]
-              owners: true
+          - required:
+              reviewers: [ 'KalleHallden' ]
