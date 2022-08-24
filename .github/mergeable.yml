@@ -80,10 +80,10 @@ mergeable:
           count: 1
         and:
           - required:
-            reviewers: [ 'KalleHallden' ]
+              reviewers: [ 'KalleHallden' ]
           - required:
-            reviewers: [ 'tenshiAMD' ]
+              reviewers: [ 'tenshiAMD' ]
           - required:
-            reviewers: [ 'jorre127' ]
+              reviewers: [ 'jorre127' ]
           - required:
-            reviewers: [ 'dinurymomshad' ]
+              reviewers: [ 'dinurymomshad' ]
