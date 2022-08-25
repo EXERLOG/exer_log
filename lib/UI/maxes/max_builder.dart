@@ -11,8 +11,12 @@ class MaxInformation extends StatefulWidget {
   Function? setMax;
   Function? setPercentage;
 
-  MaxInformation(
-      {required this.id, required this.sets, this.setMax, this.setPercentage});
+  MaxInformation({
+    required this.id,
+    required this.sets,
+    this.setMax,
+    this.setPercentage,
+  });
   @override
   _MaxInformationState createState() => _MaxInformationState();
 }
@@ -25,21 +29,22 @@ class _MaxInformationState extends State<MaxInformation> {
     return FutureBuilder<Max>(
       future: getOneRepMax(widget.id),
       builder: (BuildContext context, AsyncSnapshot<Max> snapshot) {
+        Sets sets = widget.sets;
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(),
           );
         } else {
           if (snapshot.hasError) {
-            if (minimumOneWeightRep(widget.sets)) {
-              oneRepMax = widget.sets.weight / maxTable[widget.sets.reps - 1];
+            if (minimumOneWeightRep(sets)) {
+              oneRepMax = sets.weight / maxTable[sets.reps - 1];
               widget.setMax!(Max(oneRepMax, 1, 0, widget.id));
-              widget.setPercentage!(widget.sets.weight / oneRepMax);
+              widget.setPercentage!(sets.weight / oneRepMax);
             }
 
             return Center(
               child: Text(
-                oneRepMaxPercentLabel(widget.sets.weight, oneRepMax),
+                oneRepMaxPercentLabel(sets.weight, oneRepMax),
                 style: setStyle,
               ),
             );
@@ -51,12 +56,12 @@ class _MaxInformationState extends State<MaxInformation> {
             }
             if (widget.setMax != null) {
               widget.setMax!(snapshot.data);
-              widget.setPercentage!(widget.sets.weight / oneRepMax);
+              widget.setPercentage!(sets.weight / oneRepMax);
             }
 
             return Center(
               child: Text(
-                oneRepMaxPercentLabel(widget.sets.weight, oneRepMax),
+                oneRepMaxPercentLabel(sets.weight, oneRepMax),
                 style: setStyle,
               ),
             );
