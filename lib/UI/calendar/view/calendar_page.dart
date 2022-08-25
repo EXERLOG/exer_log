@@ -69,7 +69,7 @@ class _CalendarPageState extends ConsumerState<CalendarPage> {
   }
 
   void _navigateToWorkoutScreen() {
-    Navigator.of(context).pushReplacement(
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => WorkoutPage(null),
       ),

@@ -119,6 +119,7 @@ List<Widget> _getDates() {
       Text(
         weekdayNames[i],
         style: setStyle,
+        textScaleFactor: 1,
       ),
     );
     for (int j = 0; j < weekList[i].length; j++) {
