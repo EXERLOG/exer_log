@@ -149,48 +149,44 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                width: screenWidth * 0.08,
-                              ),
-                              Container(
+                              Spacer(flex: 8),
+                              Expanded(
                                 child: Center(
                                   child: Text(
                                     "Reps",
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
+                                flex: 15,
                               ),
-                              Container(
+                              Expanded(
                                 child: Center(
                                   child: Text(
                                     "Sets",
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
+                                flex: 15,
                               ),
-                              Container(
+                              Expanded(
                                 child: Center(
                                   child: Text(
                                     "Weight",
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
+                                flex: 15,
                               ),
-                              Container(
+                              Expanded(
                                 child: Center(
                                   child: Text(
                                     "Rest",
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
+                                flex: 15,
                               ),
-                              Container(
-                                width: screenWidth * 0.1,
-                              ),
+                              Spacer(flex: 10)
                             ],
                           ),
                         ),

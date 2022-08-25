@@ -94,38 +94,38 @@ class _SetWidgetState extends State<SetWidget>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              Expanded(
                 child: Center(
                     child: Text(
                   "#" + (widget.id + 1).toString(),
                   style: setStyle,
                 )),
-                width: screenWidth * 0.08,
+                flex: 8,
               ),
-              Container(
+              Expanded(
                 child: getTextField(0),
-                width: screenWidth * 0.145,
+                flex: 15,
               ),
-              Container(
+              Expanded(
                 child: getTextField(1),
-                width: screenWidth * 0.145,
+                flex: 15,
               ),
-              Container(
+              Expanded(
                 child: getTextField(2),
-                width: screenWidth * 0.145,
+                flex: 15,
               ),
-              Container(
+              Expanded(
                 child: getTextField(3),
-                width: screenWidth * 0.145,
+                flex: 15,
               ),
-              Container(
+              Expanded(
                 child: ValueListenableBuilder(
                 valueListenable: _notifier,
                 builder: (BuildContext context, SetData value, Widget? child) {
                   return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id], setMax: setOneRepMax, setPercentage: setPercentage);
                 } 
               ), 
-                width: screenWidth * 0.11,
+                flex: 10,
               ),
             ],
           ),
