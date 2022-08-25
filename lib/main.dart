@@ -1,4 +1,5 @@
 // @dart = 2.9
+import 'package:exerlog/src/core/theme/theme_color.dart';
 import 'package:exerlog/src/feature/onboarding/splash/view/splash_screen.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/utils/logger/riverpod_logger.dart';
