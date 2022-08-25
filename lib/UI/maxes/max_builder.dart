@@ -68,7 +68,7 @@ class _MaxInformationState extends State<MaxInformation> {
 
   String oneRepMaxPercentLabel(double weight, double oneRepMax) {
     if (oneRepMax > 0.0) {
-      text = ((weight / oneRepMax) * 100).round().toString() + "%";
+      this.text = ((weight / oneRepMax) * 100).round().toString() + "%";
     }
 
     return this.text;
