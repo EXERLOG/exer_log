@@ -3,6 +3,8 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/prev_workout/prev_workout_page.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class DateWidget extends StatelessWidget {
@@ -35,65 +37,65 @@ class DateWidget extends StatelessWidget {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: getWorkoutOnDate(after, before),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return _buildDayContainer();
-        } else if (snapshot.hasData) {
-          Workout? workout;
-          try {
-            workout = Workout.fromJsonQuerySnapshot(snapshot.data!);
-          } catch (_) {
-            /// This results in bad state, due to parsing error
-            // Log.error(e.toString(), stackTrace: stackTrace);
-          }
-          return GestureDetector(
-            onTap: () {
-              if (workout != null)
-                _navigateToPreviousWorkoutScreen(
-                  context,
-                  workout,
-                );
-            },
-            child: _buildDayContainer(hasWorkout: workout != null),
-          );
-        } else {
+        if (!snapshot.hasData) {
           return _buildDayContainer();
         }
+        Workout? workout;
+        try {
+          workout = Workout.fromJsonQuerySnapshot(snapshot.data!);
+        } catch (_) {
+          /// FIXME: This results in bad state, due to parsing error
+          // Log.error(e.toString(), stackTrace: stackTrace);
+        }
+        return GestureDetector(
+          onTap: () => _navigateToPreviousWorkoutScreen(
+            context,
+            workout,
+          ),
+          child: _buildDayContainer(hasWorkout: workout != null),
+        );
       },
     );
   }
 
-  Container _buildDayContainer({bool hasWorkout = false}) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(10),
-      decoration: hasWorkout ? _hasWorkoutDecoration() : null,
-      child: Center(
-        child: Text(
-          date.day.toString(),
-          textScaleFactor: 1,
-          style: hasWorkout ? buttonTextSmall : whiteTextStyleSmall,
-        ),
-      ),
+  Widget _buildDayContainer({bool hasWorkout = false}) {
+    return ThemeProvider(
+      builder: (context, theme) {
+        return Container(
+          margin: EdgeInsets.all(5),
+          padding: EdgeInsets.all(10),
+          decoration:
+              hasWorkout ? _hasWorkoutDecoration(theme.colorTheme) : null,
+          child: Center(
+            child: Text(
+              date.day.toString(),
+              textScaleFactor: 1,
+              style: hasWorkout ? buttonTextSmall : whiteTextStyleSmall,
+            ),
+          ),
+        );
+      },
     );
   }
 
-  BoxDecoration _hasWorkoutDecoration() {
+  BoxDecoration _hasWorkoutDecoration(ColorTheme color) {
     return BoxDecoration(
       gradient: LinearGradient(
         colors: <Color>[
-          Color(0xFF34D1C2),
-          Color(0xFF31A6DC),
+          color.primaryColor,
+          color.secondaryColor,
         ],
       ),
       borderRadius: BorderRadius.circular(5),
     );
   }
 
-  void _navigateToPreviousWorkoutScreen(context, Workout workout) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => PrevWorkoutPage(workout),
-      ),
-    );
+  void _navigateToPreviousWorkoutScreen(context, Workout? workout) {
+    if (workout != null)
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PrevWorkoutPage(workout),
+        ),
+      );
   }
 }

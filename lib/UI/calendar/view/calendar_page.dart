@@ -45,7 +45,7 @@ class _CalendarPageState extends ConsumerState<CalendarPage> {
             ],
           ),
           body: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -56,9 +56,7 @@ class _CalendarPageState extends ConsumerState<CalendarPage> {
                     style: buttonTextSmall,
                   ),
                   width: context.width * .8,
-                  onPressed: () {
-                    _navigateToWorkoutScreen();
-                  },
+                  onPressed: _navigateToWorkoutScreen,
                 )
               ],
             ),

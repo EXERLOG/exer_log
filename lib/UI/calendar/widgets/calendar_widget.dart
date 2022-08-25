@@ -1,5 +1,6 @@
 import 'package:exerlog/UI/calendar/widgets/date_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -21,48 +22,53 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(builder: (context, theme) {
-      return Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.2),
-              offset: Offset(0, 3),
-              blurRadius: 5,
-              spreadRadius: 5,
+    return FittedBox(
+      child: ThemeProvider(
+        builder: (context, theme) {
+          ColorTheme colorTheme = theme.colorTheme;
+          return Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: colorTheme.shadow,
+                  offset: Offset(0, 3),
+                  blurRadius: 5,
+                  spreadRadius: 5,
+                ),
+              ],
+              color: colorTheme.backgroundColorVariation,
             ),
-          ],
-          color: theme.colorTheme.backgroundColorVariation,
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Text(
-                _getCurrentMonth(),
-                style: mediumTitleStyleWhite,
-              ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    _getCurrentMonth,
+                    style: mediumTitleStyleWhite,
+                  ),
+                ),
+                Divider(
+                  color: colorTheme.white.withOpacity(0.75),
+                  thickness: 1,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: _getDateColumns(),
+                )
+              ],
             ),
-            Divider(
-              color: Colors.white.withOpacity(0.75),
-              thickness: 1,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: _getDates(),
-            )
-          ],
-        ),
-      );
-    });
+          );
+        },
+      ),
+    );
   }
 
-  String _getCurrentMonth() => monthNames[DateTime.now().month - 1];
+  String get _getCurrentMonth => monthNames[DateTime.now().month - 1];
 }
 
-List<Widget> _getDates() {
+List<Widget> _getDateColumns() {
   List weekdayNames = [
     'MON',
     'TUE',
@@ -77,8 +83,9 @@ List<Widget> _getDates() {
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   DateTime now = DateTime.now();
+  const int daysInAWeek = 7;
 
-  List weekList = [[], [], [], [], [], [], []];
+  List<List<DateTime>> weekList = List.generate(daysInAWeek, (index) => []);
 
   /// Month could span 4-6 weeks which is 4-6 columns
   /// which day of the week does the first fall on
@@ -91,8 +98,9 @@ List<Widget> _getDates() {
   /// Calculate how many days and weeks should be shown in the calendar
   DateTime previousMonth = first.subtract(Duration(days: first.weekday));
 
-  int daysToShow = last.day + (first.weekday - 1) + (7 - last.weekday);
-  double weeks = daysToShow / 7;
+  int daysToShow =
+      last.day + (first.weekday - 1) + (daysInAWeek - last.weekday);
+  double weeks = daysToShow / daysInAWeek;
   if (weeks is! int) {
     /// If the weeks is not an int then we need to add an extra week
     weeks = weeks.toInt() + 1;
@@ -101,7 +109,7 @@ List<Widget> _getDates() {
   int currentDay = 0;
   int j = 0;
   while (currentDay != daysToShow) {
-    if (j == 7) {
+    if (j == daysInAWeek) {
       j = 0;
     }
 
@@ -111,7 +119,7 @@ List<Widget> _getDates() {
     currentDay++;
   }
 
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < daysInAWeek; i++) {
     List<Widget> _dates = [];
 
     /// Add all weekdays name

@@ -8,6 +8,7 @@ extension ContextExtension on BuildContext {
   double get width => MediaQuery.of(this).size.width;
 
   /// Snack bar
+  /// TODO: Handle action button and theme
   ScaffoldFeatureController showSnackBar(String text) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(content: Text(text)),
