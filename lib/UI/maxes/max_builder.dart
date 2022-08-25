@@ -11,10 +11,10 @@ class MaxInformation extends StatefulWidget {
   Function? setMax;
   Function? setPercentage;
 
-  MaxInformation({required this.id, required this.sets, this.setMax, this.setPercentage});
+  MaxInformation(
+      {required this.id, required this.sets, this.setMax, this.setPercentage});
   @override
   _MaxInformationState createState() => _MaxInformationState();
-
 }
 
 class _MaxInformationState extends State<MaxInformation> {
@@ -31,17 +31,25 @@ class _MaxInformationState extends State<MaxInformation> {
           );
         } else {
           if (snapshot.hasError) {
-            if (widget.sets.weight != 0.0 && widget.sets.reps < 30 && widget.sets.reps > 0) {
+            if (widget.sets.weight != 0.0 &&
+                widget.sets.reps < 30 &&
+                widget.sets.reps > 0) {
               oneRepMax = widget.sets.weight / maxTable[widget.sets.reps - 1];
               widget.setMax!(Max(oneRepMax, 1, 0, widget.id));
               widget.setPercentage!(widget.sets.weight / oneRepMax);
-              text = ((widget.sets.weight / oneRepMax) * 100).round().toString() + "%";
+              text =
+                  ((widget.sets.weight / oneRepMax) * 100).round().toString() +
+                      "%";
             }
             return Center(
-              child: Text(text, style: setStyle,),
+              child: Text(
+                text,
+                style: setStyle,
+              ),
             );
           } else {
-            oneRepMax = snapshot.data!.weight / maxTable[snapshot.data!.reps -1];
+            oneRepMax =
+                snapshot.data!.weight / maxTable[snapshot.data!.reps - 1];
             if (snapshot.data!.weight == 0.0) {
               print("No max");
             }
@@ -50,17 +58,21 @@ class _MaxInformationState extends State<MaxInformation> {
               widget.setPercentage!(widget.sets.weight / oneRepMax);
             }
 
-            if (oneRepMax > 0.0){
-              text = ((widget.sets.weight / oneRepMax) * 100).round().toString() + "%";
+            if (oneRepMax > 0.0) {
+              text =
+                  ((widget.sets.weight / oneRepMax) * 100).round().toString() +
+                      "%";
             }
 
             return Center(
-              child: Text(text, style: setStyle,),
+              child: Text(
+                text,
+                style: setStyle,
+              ),
             );
           }
         }
       },
     );
   }
-
 }
