@@ -1,9 +1,6 @@
-import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Bloc/max_bloc.dart';
-import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
-import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +40,7 @@ class _MaxInformationState extends State<MaxInformation> {
             return Center(
               child: Text(text, style: setStyle,),
             );
-          } else { 
+          } else {
             oneRepMax = snapshot.data!.weight / maxTable[snapshot.data!.reps -1];
             if (snapshot.data!.weight == 0.0) {
               print("No max");
@@ -52,7 +49,11 @@ class _MaxInformationState extends State<MaxInformation> {
               widget.setMax!(snapshot.data);
               widget.setPercentage!(widget.sets.weight / oneRepMax);
             }
-            text = ((widget.sets.weight / oneRepMax) * 100).round().toString() + "%";
+
+            if (oneRepMax > 0.0){
+              text = ((widget.sets.weight / oneRepMax) * 100).round().toString() + "%";
+            }
+
             return Center(
               child: Text(text, style: setStyle,),
             );
