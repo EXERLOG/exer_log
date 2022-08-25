@@ -89,8 +89,8 @@ class DateWidget extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _navigateToPreviousWorkoutScreen(context, Workout workout) {
-    return Navigator.of(context).push(
+  void _navigateToPreviousWorkoutScreen(context, Workout workout) {
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PrevWorkoutPage(workout),
       ),
