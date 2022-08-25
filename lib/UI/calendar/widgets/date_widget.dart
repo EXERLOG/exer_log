@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/prev_workout/prev_workout_page.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class DateWidget extends StatefulWidget {

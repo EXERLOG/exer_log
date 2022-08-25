@@ -1,6 +1,6 @@
 import 'package:exerlog/UI/global.dart';
-import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 

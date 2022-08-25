@@ -1,6 +1,5 @@
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
-import 'package:exerlog/Models/workout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

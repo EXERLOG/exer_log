@@ -2,9 +2,6 @@ import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
-import 'package:exerlog/UI/exercise/exercise_card.dart';
-import 'package:exerlog/UI/exercise/set_widget.dart';
-import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/prev_workout/prev_exercise_card.dart';
 import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
@@ -18,7 +15,7 @@ class PrevWorkoutData {
 
   PrevWorkoutData(this.workout, this.totals, this.updateTotals, this.addNewSet) {
     workout = this.workout;
-    
+
       loadWorkoutData().then((value) {
         workout = value;
         setExerciseWidgets();

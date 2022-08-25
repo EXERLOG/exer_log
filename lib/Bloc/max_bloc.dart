@@ -3,8 +3,6 @@ import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
-import 'package:exerlog/Models/workout.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import '../main.dart';
 
