@@ -1,6 +1,5 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
-import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 
 class ExerciseTotalsWidget extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/exercise_card.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
-import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,7 +16,7 @@ class WorkoutData {
 
   WorkoutData(this.workout, this.totals, this.updateTotals) {
     workout = this.workout;
-  
+
       loadWorkoutData().then((value) {
         workout = value;
         setExerciseWidgets();
@@ -118,7 +117,7 @@ class WorkoutData {
   updateExisitingExercise() {
     try {
       totals = new WorkoutTotals(0, 0, 0, 0, 0);
-      for (Exercise oldexercise in workout.exercises) {  
+      for (Exercise oldexercise in workout.exercises) {
         totals.exercises++;
         for (Sets sets in oldexercise.sets) {
           totals.sets += sets.sets;
@@ -162,7 +161,7 @@ class WorkoutData {
       }
     } catch (Exception) {
       print(Exception);
-      if (exercise.name != '') { 
+      if (exercise.name != '') {
         workout.exercises.add(exercise);
         setExerciseWidgets();
       }
