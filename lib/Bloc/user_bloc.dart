@@ -1,8 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Models/user.dart';
-import 'package:exerlog/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 
 final firestoreInstance = FirebaseFirestore.instance;
@@ -31,6 +29,6 @@ Future<UserClass> getUser(String userID) async {
   var data;
   firestoreInstance.collection("users").doc(userID).get().then((value){
       data = value.data();
-    }); 
+    });
   return UserClass.fromJson(data);
 }

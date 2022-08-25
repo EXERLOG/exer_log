@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'src/core/base/shared_preference/shared_preference_b.dart';
 
 /// TODO: Remove global instances and use shared pref keys
