@@ -31,19 +31,15 @@ class _MaxInformationState extends State<MaxInformation> {
           );
         } else {
           if (snapshot.hasError) {
-            if (widget.sets.weight != 0.0 &&
-                widget.sets.reps < 30 &&
-                widget.sets.reps > 0) {
+            if (minimumOneWeightRep(widget.sets)) {
               oneRepMax = widget.sets.weight / maxTable[widget.sets.reps - 1];
               widget.setMax!(Max(oneRepMax, 1, 0, widget.id));
               widget.setPercentage!(widget.sets.weight / oneRepMax);
-              text =
-                  ((widget.sets.weight / oneRepMax) * 100).round().toString() +
-                      "%";
             }
+
             return Center(
               child: Text(
-                text,
+                oneRepMaxPercentLabel(widget.sets.weight, oneRepMax),
                 style: setStyle,
               ),
             );
@@ -58,15 +54,9 @@ class _MaxInformationState extends State<MaxInformation> {
               widget.setPercentage!(widget.sets.weight / oneRepMax);
             }
 
-            if (oneRepMax > 0.0) {
-              text =
-                  ((widget.sets.weight / oneRepMax) * 100).round().toString() +
-                      "%";
-            }
-
             return Center(
               child: Text(
-                text,
+                oneRepMaxPercentLabel(widget.sets.weight, oneRepMax),
                 style: setStyle,
               ),
             );
@@ -74,5 +64,17 @@ class _MaxInformationState extends State<MaxInformation> {
         }
       },
     );
+  }
+
+  String oneRepMaxPercentLabel(double weight, double oneRepMax) {
+    if (oneRepMax > 0.0) {
+      text = ((weight / oneRepMax) * 100).round().toString() + "%";
+    }
+
+    return this.text;
+  }
+
+  bool minimumOneWeightRep(Sets sets) {
+    return sets.weight != 0.0 && sets.reps < 30 && sets.reps > 0;
   }
 }
