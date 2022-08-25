@@ -6,17 +6,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MaxInformation extends StatefulWidget {
-  final String id;
-  Sets sets;
-  Function? setMax;
-  Function? setPercentage;
-
   MaxInformation({
     required this.id,
     required this.sets,
     this.setMax,
     this.setPercentage,
   });
+
+  final String id;
+  Sets sets;
+  Function? setMax;
+  Function? setPercentage;
+
   @override
   _MaxInformationState createState() => _MaxInformationState();
 }
@@ -24,6 +25,7 @@ class MaxInformation extends StatefulWidget {
 class _MaxInformationState extends State<MaxInformation> {
   double oneRepMax = 0.0;
   String text = "0%";
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Max>(
