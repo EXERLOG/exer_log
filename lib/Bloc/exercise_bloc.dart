@@ -3,7 +3,6 @@ import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
-import 'package:exerlog/Models/workout.dart';
 
 import '../main.dart';
 

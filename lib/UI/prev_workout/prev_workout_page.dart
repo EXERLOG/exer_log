@@ -13,6 +13,7 @@ import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+
 import '../../src/widgets/gradient_button.dart';
 import '../global.dart';
 

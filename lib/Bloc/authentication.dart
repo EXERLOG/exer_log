@@ -1,10 +1,4 @@
-import 'package:exerlog/Bloc/user_bloc.dart';
-import 'package:exerlog/Bloc/workout_bloc.dart';
-import 'package:exerlog/Models/user.dart';
-import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
-import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/main.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,7 +26,7 @@ class Authentication {
       //     ),
       //   ),
       // );
-    } 
+    }
 
     return firebaseApp;
   }

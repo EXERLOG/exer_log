@@ -1,9 +1,8 @@
 import 'package:exerlog/Bloc/exercise_bloc.dart';
-import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ExerciseNameSelectionWidget extends StatefulWidget {
   Function(String) setExercisename;
