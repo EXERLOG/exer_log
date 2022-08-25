@@ -6,6 +6,7 @@ import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/dependency.dart';
+import 'package:exerlog/src/utils/text_constants.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/snack_bars/no_network_connection_snackbar.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
