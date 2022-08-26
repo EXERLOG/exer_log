@@ -1,4 +1,4 @@
-import 'package:exerlog/Mixins/dialogs.dart';
+import 'package:exerlog/src/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 
 class LogoutButton extends StatefulWidget {

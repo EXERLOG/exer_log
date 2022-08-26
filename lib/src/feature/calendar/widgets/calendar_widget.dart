@@ -1,9 +1,10 @@
-import 'package:exerlog/UI/calendar/widgets/date_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'date_widget.dart';
 
 class CalendarWidget extends StatelessWidget {
   final List<String> monthNames = [
