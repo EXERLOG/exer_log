@@ -94,9 +94,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
             leading: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: Navigator.of(context).pop,
               color: theme.colorTheme.primaryColor,
             ),
             actions: [
@@ -261,8 +259,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
       ),
       onPressed: () {
         saveWorkout(workoutData.workout);
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
+        Navigator.of(context)
+          ..pop()
+          ..pop();
       },
     );
 

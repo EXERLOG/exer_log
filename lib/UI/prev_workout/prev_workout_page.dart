@@ -79,9 +79,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
               appBar: AppBar(
                 backgroundColor: theme.colorTheme.backgroundColorVariation,
                 leading: BackButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: Navigator.of(context).pop,
                   color: theme.colorTheme.primaryColor,
                 ),
                 actions: [
@@ -233,8 +231,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       ),
       onPressed: () {
         deleteWorkout(workoutData.workout);
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
+        Navigator.of(context)
+          ..pop()
+          ..pop();
       },
     );
 
@@ -292,12 +291,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
         style: whiteTextStyleSmall,
       ),
       onPressed: () {
-        Navigator.pop(context);
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => WorkoutPage(widget.workout),
-          ),
-        );
+        Navigator.of(context)
+          ..pop()
+          ..pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => WorkoutPage(widget.workout),
+            ),
+          );
       },
     );
 
