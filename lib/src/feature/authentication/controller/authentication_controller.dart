@@ -1,4 +1,3 @@
-import 'package:exerlog/main.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 import 'package:exerlog/src/dependency.dart';
@@ -79,14 +78,12 @@ class AuthenticationController extends StateNotifier<BaseState> {
     User? user = ref!.read(Dependency.firebaseAuth).currentUser;
     if (user != null) {
       this.user = user;
+
       SharedPref.setValue(USER_UID, this.user.uid);
       SharedPref.setValue(IS_LOGGED_IN, true);
 
       Log.info(this.user.uid);
 
-      /// TODO: Remove later
-      userID = this.user.uid;
-      the_user = this.user;
       if (isSignUp) {
         state = SignUpSuccessState();
       } else {
