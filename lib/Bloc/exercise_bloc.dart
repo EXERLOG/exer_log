@@ -69,14 +69,14 @@ Future<Exercise> getExerciseByName(String exercise) async {
       .orderBy('created', descending: false)
       .get();
 
-  Exercise the_exercise = Exercise.fromJson(ref.docs.last.data());
+  Exercise theExercise = Exercise.fromJson(ref.docs.last.data());
   List<Sets> setList = [];
-  for (int i = 0; i < the_exercise.sets.length; i++) {
-    Sets set_ = Sets.fromString(the_exercise.sets[i]);
+  for (int i = 0; i < theExercise.sets.length; i++) {
+    Sets set_ = Sets.fromString(theExercise.sets[i]);
     setList.add(set_);
   }
-  the_exercise.sets = setList;
-  return the_exercise;
+  theExercise.sets = setList;
+  return theExercise;
 }
 
 Future<String> saveExercise(Exercise exercise) async {

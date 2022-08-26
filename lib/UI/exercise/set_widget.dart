@@ -72,10 +72,10 @@ class _SetWidgetState extends State<SetWidget>
         endActionPane: ActionPane(
           // A motion is a widget used to control how the pane animates.
           motion: ScrollMotion(),
-    
+
           // A pane can dismiss the Slidable.
           //dismissible: DismissiblePane(onDismissed: () {}),
-    
+
           // All actions are defined in the children parameter.
           children: [
             // A SlidableAction can have an icon and/or a label.
@@ -88,7 +88,7 @@ class _SetWidgetState extends State<SetWidget>
             ),
           ],
         ),
-    
+
         child: Container(
           height: screenHeight * 0.05,
           child: Row(
@@ -123,8 +123,8 @@ class _SetWidgetState extends State<SetWidget>
                 valueListenable: _notifier,
                 builder: (BuildContext context, SetData value, Widget? child) {
                   return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id], setMax: setOneRepMax, setPercentage: setPercentage);
-                } 
-              ), 
+                }
+              ),
                 flex: 10,
               ),
             ],
@@ -198,7 +198,7 @@ class _SetWidgetState extends State<SetWidget>
       } else {
         return double.parse(text);
       }
-    } catch (Exception) {
+    } catch (e) {
       if (type == 0) {
         return 0;
       } else {
@@ -223,7 +223,7 @@ class _SetWidgetState extends State<SetWidget>
     String returnText = '';
     try {
       returnText = listType[type].toString();
-    } catch (Exception) {}
+    } catch (e) {}
     return returnText;
   }
 

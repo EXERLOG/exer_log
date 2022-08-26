@@ -29,17 +29,17 @@ class Exercise {
     totalWidget.totals.totalReps = totalReps;
     totalWidget.totals.totalSets = totalSets;
     totalWidget.totals.totalWeight = totalWeight;
-    totalWidget.totals.avg_weight = totalWeight / totalReps; 
+    totalWidget.totals.avgWeight = totalWeight / totalReps;
   }
 
   Map<String, dynamic> toJson() {
-    List the_sets = [];
+    List theSets = [];
     for (Sets set in sets) {
-      the_sets.add(set.toJson());
+      theSets.add(set.toJson());
     }
     return {
       "name": name,
-      "sets": the_sets,
+      "sets": theSets,
       "body_parts": bodyParts,
       "total_reps" : totalReps,
       "total_weight" : totalWeight,

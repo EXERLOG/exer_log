@@ -143,7 +143,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     workoutData.workout.template = template;
   }
 
-  updateTotals(new_workout) {
+  updateTotals(newWorkout) {
     setState(() {
       firstLoad = false;
       //workoutData.workout = new_workout;
@@ -261,10 +261,10 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     workoutData.workout.name = name;
   }
 
-  addExercises(new_workout) {
+  addExercises(newWorkout) {
     setState(() {
       PrevWorkoutData newWorkoutData = new PrevWorkoutData(
-        new_workout,
+        newWorkout,
         new WorkoutTotals(0, 0, 0, 0, 0),
         updateTotals,
         addNewSet,

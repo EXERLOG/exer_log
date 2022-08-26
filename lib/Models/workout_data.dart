@@ -42,14 +42,14 @@ class WorkoutData {
 
 
   Future<Workout> loadWorkoutData() async {
-    Workout loaded_workout =
+    Workout loadedWorkout =
         new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
-        loaded_workout.id = workout.id;
+        loadedWorkout.id = workout.id;
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
     try {
-      for (String exercise_id in workout.exercises) {
-        await getSpecificExercise(exercise_id)
+      for (String exerciseId in workout.exercises) {
+        await getSpecificExercise(exerciseId)
             .then((value) async => {exerciseList.add(value)});
       }
       Future.delayed(Duration(seconds: 3));
@@ -72,13 +72,13 @@ class WorkoutData {
               newExerciseList.add(newexercise)
             });
       }
-      loaded_workout.exercises = newExerciseList;
+      loadedWorkout.exercises = newExerciseList;
       //workout = loaded_workout;
     } catch (Exception) {
       print("Helloooo");
       print(Exception);
     }
-    return loaded_workout;
+    return loadedWorkout;
     //updateTotals(loaded_workout);
     //print(loaded_workout.exercises[0]);
   }
@@ -104,9 +104,9 @@ class WorkoutData {
       for (Sets sets in exercise.sets) {
 
         totals.sets += sets.sets;
-        int reps_set = sets.sets * sets.reps;
-        totals.weight += reps_set * sets.weight;
-        totals.reps += reps_set;
+        int repsSet = sets.sets * sets.reps;
+        totals.weight += repsSet * sets.weight;
+        totals.reps += repsSet;
         totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
         i++;
       }
@@ -121,18 +121,18 @@ class WorkoutData {
         totals.exercises++;
         for (Sets sets in oldexercise.sets) {
           totals.sets += sets.sets;
-          int reps_set = sets.sets * sets.reps;
-          totals.weight += reps_set * sets.weight;
-          totals.reps += reps_set;
+          int repsSet = sets.sets * sets.reps;
+          totals.weight += repsSet * sets.weight;
+          totals.reps += repsSet;
         }
         totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
         oldexercise.setExerciseTotals();
       }
       //setTotals(exercise);
       updateTotals(workout);
-    } catch (Exception) {
+    } catch (exception) {
       print("problem");
-      print(Exception);
+      print(exception);
     }
   }
 
@@ -159,8 +159,8 @@ class WorkoutData {
           setExerciseWidgets()
         });
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (e) {
+      print(e);
       if (exercise.name != '') {
         workout.exercises.add(exercise);
         setExerciseWidgets();
