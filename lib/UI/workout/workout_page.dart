@@ -10,7 +10,6 @@ import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
-import 'package:exerlog/src/feature/calendar/view/calendar_screen.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
