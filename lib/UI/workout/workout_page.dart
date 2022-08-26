@@ -80,6 +80,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
         screenWidth = MediaQuery.of(context).size.width;
         workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
         return Scaffold(
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
           floatingActionButton: FloatingActionButton(
             backgroundColor: theme.colorTheme.primaryColor,
             child: Icon(
