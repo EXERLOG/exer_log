@@ -1,11 +1,11 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:exerlog/UI/calendar/widgets/calendar_widget.dart';
-import 'package:exerlog/UI/calendar/widgets/logout_button.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/dependency.dart';
+import 'package:exerlog/src/feature/calendar/widgets/calendar_widget.dart';
+import 'package:exerlog/src/feature/calendar/widgets/logout_button.dart';
 import 'package:exerlog/src/utils/text_constants.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/snack_bars/no_network_connection_snackbar.dart';
@@ -13,12 +13,12 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CalendarPage extends ConsumerStatefulWidget {
+class CalendarScreen extends ConsumerStatefulWidget {
   @override
-  ConsumerState<CalendarPage> createState() => _CalendarPageState();
+  ConsumerState<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-class _CalendarPageState extends ConsumerState<CalendarPage> {
+class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   @override
   void initState() {
     super.initState();
