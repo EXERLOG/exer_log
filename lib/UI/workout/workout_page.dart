@@ -96,11 +96,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
             backgroundColor: theme.colorTheme.backgroundColorVariation,
             leading: BackButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => CalendarScreen(),
-                  ),
-                );
+                Navigator.pop(context);
               },
               color: theme.colorTheme.primaryColor,
             ),
@@ -267,11 +263,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
       onPressed: () {
         saveWorkout(workoutData.workout);
         Navigator.of(context).pop();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CalendarScreen(),
-          ),
-        );
+        Navigator.of(context).pop();
       },
     );
 
