@@ -93,7 +93,6 @@ Future<String> saveExercise(Exercise exercise) async {
 }
 
 void deleteExercise(Exercise exercise) async {
-  //checkRemoveMax(exercise);
   await firestoreInstance
       .collection("users")
       .doc(SharedPref.getStringAsync(USER_UID))

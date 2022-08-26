@@ -3,8 +3,7 @@ import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
-
-import '../src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance

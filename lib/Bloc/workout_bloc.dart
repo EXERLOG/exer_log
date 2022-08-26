@@ -3,8 +3,7 @@ import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/workout.dart';
-
-import '../src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 
 Future<Workout> getSpecificWorkout(String id) async {
   final data = FirebaseFirestore.instance
