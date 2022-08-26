@@ -20,7 +20,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(milliseconds: 2000), () {
-      if (SharedPref.getBoolAsync(IS_LOGGED_IN, defaultValue: false)) {
+      if (SharedPref.getBoolAsync('IS_LOGGED_IN', defaultValue: false)) {
         if (mounted) _navigateToCalendarScreen();
       } else {
         if (mounted) _navigateToLandingScreen();

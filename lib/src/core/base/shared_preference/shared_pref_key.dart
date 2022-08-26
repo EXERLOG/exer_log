@@ -1,2 +1,2 @@
 const String USER_UID = '';
-const String IS_LOGGED_IN = '';
+const bool IS_LOGGED_IN = false;
