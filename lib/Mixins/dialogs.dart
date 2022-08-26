@@ -53,7 +53,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
-              SharedPref.setValue('IS_LOGGED_IN', false);
+              SharedPref.setValue(IS_LOGGED_IN, false);
               await FirebaseAuth.instance.signOut();
               _navigateToLandingScreen(context);
             },

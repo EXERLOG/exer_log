@@ -1,11 +1,9 @@
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import '../src/core/base/shared_preference/shared_preference_b.dart';
-import '../src/utils/logger/logger.dart';
 
 class Authentication {
 
@@ -18,18 +16,7 @@ class Authentication {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-
-      Log.info("USER EXISTS");
-      Log.info(user.uid);
-
-      SharedPref.setValue('USER_UID',user.uid);
-      //replaceWorkouts();
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => WorkoutPage(
-      //     ),
-      //   ),
-      // );
+      SharedPref.setValue(USER_UID, user.uid);
     }
 
     return firebaseApp;

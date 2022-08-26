@@ -9,7 +9,7 @@ import '../src/core/base/shared_preference/shared_preference_b.dart';
 Future<Workout> getSpecificWorkout(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .doc(id)
       .withConverter<Workout>(
@@ -24,7 +24,7 @@ Future<Workout> getSpecificWorkout(String id) async {
 Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDate) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .where('date', isGreaterThanOrEqualTo: startDate).where('date', isLessThanOrEqualTo: endDate).get();
 
@@ -40,7 +40,7 @@ Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDat
 Stream<QuerySnapshot<Map<String, dynamic>>> getWorkoutOnDate(DateTime after, DateTime before) {
   return FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .where('date', isLessThan: after)
       .where('date', isGreaterThan: before)
@@ -60,7 +60,7 @@ Future<Workout> loadWorkout(Workout workout) async {
 Future<List<Workout>> getWorkoutTemplates() async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("workouts")
       .where('template', isEqualTo: true)
       .get();
@@ -69,7 +69,7 @@ Future<List<Workout>> getWorkoutTemplates() async {
   for (int i = 0; i < ref.docs.length; i++) {
     final data = FirebaseFirestore.instance
         .collection('users')
-        .doc(SharedPref.getStringAsync('USER_UID'))
+        .doc(SharedPref.getStringAsync(USER_UID))
         .collection('workouts')
         .doc(ref.docs[i].id)
         .withConverter<Workout>(
@@ -96,7 +96,7 @@ void saveWorkout(Workout workout) async {
   Map<String, Object?> jsonWorkout = workout.toJson();
   firestoreInstance
       .collection("users")
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("workouts")
       .add(jsonWorkout)
       .then((value) {
@@ -112,7 +112,7 @@ void deleteWorkout(Workout workout) async {
   }
   await firestoreInstance
       .collection("users")
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("workouts")
       .doc(workout.id)
       .delete();

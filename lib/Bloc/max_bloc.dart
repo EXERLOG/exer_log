@@ -9,7 +9,7 @@ import '../src/core/base/shared_preference/shared_preference_b.dart';
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
       .where('exercise', isEqualTo: exercise)
       .where('reps', isEqualTo: reps)
@@ -26,14 +26,14 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
 void deleteMax(Exercise exercise) async {
   final ref = await firestoreInstance
       .collection("users")
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("maxes")
       .where('exerciseID', isEqualTo: exercise.id)
       .get();
   for (int i = 0; i < ref.docs.length; i++) {
       firestoreInstance
     .collection('users')
-    .doc(SharedPref.getStringAsync('USER_UID'))
+    .doc(SharedPref.getStringAsync(USER_UID))
     .collection('maxes')
     .doc(ref.docs[i].id)
     .delete();
@@ -44,7 +44,7 @@ Future<Max> getOneRepMax(String exercise) async {
   QuerySnapshot<Map<String, dynamic>>? ref;
   ref = await FirebaseFirestore.instance
         .collection('users')
-        .doc(SharedPref.getStringAsync('USER_UID'))
+        .doc(SharedPref.getStringAsync(USER_UID))
         .collection('maxes')
         .where('exercise', isEqualTo: exercise)
         .orderBy('weight', descending: true)
@@ -63,7 +63,7 @@ void saveMax(Max max) {
   Map<String, Object?> jsonMax = max.toJson();
   firestoreInstance
       .collection("users")
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("maxes")
       .add(jsonMax)
       .then((value) {
@@ -74,7 +74,7 @@ void checkMax(Exercise exercise) async {
   // check if max already exists otherwise save
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(SharedPref.getStringAsync('USER_UID'))
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
       .where('exercise', isEqualTo: exercise.name)
       .get();

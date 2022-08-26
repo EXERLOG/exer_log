@@ -79,8 +79,8 @@ class AuthenticationController extends StateNotifier<BaseState> {
     if (user != null) {
       this.user = user;
 
-      SharedPref.setValue('USER_UID', this.user.uid);
-      SharedPref.setValue('IS_LOGGED_IN', true);
+      SharedPref.setValue(USER_UID, this.user.uid);
+      SharedPref.setValue(IS_LOGGED_IN, true);
 
       Log.info(this.user.uid);
 
