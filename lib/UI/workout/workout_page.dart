@@ -10,6 +10,7 @@ import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -80,16 +81,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
         workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
         return Scaffold(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: theme.colorTheme.primaryColor,
-            child: Icon(
-              Icons.add,
-              color: theme.colorTheme.backgroundColorVariation,
-            ),
-            onPressed: () {
-              showAlertDialogExercise(context);
-            },
-          ),
+          floatingActionButton: CustomFloatingActionButton(
+                        icon: Icons.add,
+                        // showAlertDialogExercise(context);
+                      ),
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
@@ -102,28 +97,24 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 margin: EdgeInsets.only(right: 5),
                 height: 30,
                 width: 30,
-                child: FloatingActionButton(
-                  backgroundColor: theme.colorTheme.primaryColor,
-                  onPressed: () {
-                    for (Exercise exercise in workoutData.workout.exercises) {
-                      for (int i = 0; i < exercise.sets.length; i++) {
-                        if (exercise.sets[i].reps == 0) {
-                          exercise.sets.remove(exercise.sets[i]);
-                        }
-                      }
-                      if (exercise.sets.length == 0) {
-                        workoutData.workout.exercises.remove(exercise);
-                      }
-                    }
-                    if (workoutData.workout.exercises.length > 0) {
-                      showSaveWorkoutAlertDialog(context);
-                    }
-                  },
-                  child: Icon(
-                    Icons.done,
-                    color: theme.colorTheme.backgroundColorVariation,
-                  ),
-                ),
+                child: CustomFloatingActionButton(
+                  icon: Icons.done,
+                ), 
+                  // onPressed: () {
+                  //   for (Exercise exercise in workoutData.workout.exercises) {
+                  //     for (int i = 0; i < exercise.sets.length; i++) {
+                  //       if (exercise.sets[i].reps == 0) {
+                  //         exercise.sets.remove(exercise.sets[i]);
+                  //       }
+                  //     }
+                  //     if (exercise.sets.length == 0) {
+                  //       workoutData.workout.exercises.remove(exercise);
+                  //     }
+                  //   }
+                  //   if (workoutData.workout.exercises.length > 0) {
+                  //     showSaveWorkoutAlertDialog(context);
+                  //   }
+                  // },
               ),
             ],
           ),

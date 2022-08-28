@@ -1,13 +1,15 @@
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
+// @todo: noch Funktion hinzufügen
+
 class CustomFloatingActionButton extends StatelessWidget {
   final IconData? icon;
   final double? size;
 
   CustomFloatingActionButton({
     this.icon,
-    this.size = 40.0,
+    this.size = 50.0,
   });
 
   @override
@@ -37,7 +39,7 @@ class CustomFloatingActionButton extends StatelessWidget {
                   child: Icon(
                     icon,
                     color: theme.colorTheme.backgroundColorVariation,
-                    size: size! * 0.8,
+                    size: size! * 0.4,
                   ),
                 ),
               ),
