@@ -74,9 +74,9 @@ class WorkoutData {
       }
       loadedWorkout.exercises = newExerciseList;
       //workout = loaded_workout;
-    } catch (e) {
+    } catch (exception) {
       print("Helloooo");
-      print(e);
+      print(exception);
     }
     return loadedWorkout;
     //updateTotals(loaded_workout);
@@ -159,8 +159,8 @@ class WorkoutData {
           setExerciseWidgets()
         });
       }
-    } catch (e) {
-      print(e);
+    } catch (exception) {
+      print(exception);
       if (exercise.name != '') {
         workout.exercises.add(exercise);
         setExerciseWidgets();

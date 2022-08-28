@@ -198,7 +198,7 @@ class _SetWidgetState extends State<SetWidget>
       } else {
         return double.parse(text);
       }
-    } catch (e) {
+    } catch (exception) {
       if (type == 0) {
         return 0;
       } else {
@@ -223,7 +223,7 @@ class _SetWidgetState extends State<SetWidget>
     String returnText = '';
     try {
       returnText = listType[type].toString();
-    } catch (e) {}
+    } catch (exception) {}
     return returnText;
   }
 
