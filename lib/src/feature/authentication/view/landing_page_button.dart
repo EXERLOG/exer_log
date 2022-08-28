@@ -28,7 +28,6 @@ class LandingPageButton extends ConsumerWidget {
       ),
       isLoading: loginState is Loading || signUpState is Loading,
       onPressed: () {
-        print('updated state');
         buttonNotifier.state = index == 0
             ? LandingButtonEvents.login
             : LandingButtonEvents.signUp;

@@ -7,6 +7,5 @@ enum LandingButtonEvents {
 }
 
 final landingButtonEventsProvider =
-    StateProvider.autoDispose<LandingButtonEvents>((ref) {
-  return LandingButtonEvents.none;
-});
+    StateProvider.autoDispose<LandingButtonEvents>(
+        (ref) => LandingButtonEvents.none);

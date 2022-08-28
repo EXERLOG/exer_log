@@ -27,7 +27,6 @@ class LoginForm extends HookConsumerWidget {
       ),
     );
     ref.listen(landingButtonEventsProvider, (previous, next) {
-      print('should login.. $next');
       if (next == LandingButtonEvents.login) {
         if (formKey.currentState!.validate()) {
           controller.login();
