@@ -74,9 +74,9 @@ class WorkoutData {
       }
       loadedWorkout.exercises = newExerciseList;
       //workout = loaded_workout;
-    } catch (Exception) {
+    } catch (e) {
       print("Helloooo");
-      print(Exception);
+      print(e);
     }
     return loadedWorkout;
     //updateTotals(loaded_workout);
