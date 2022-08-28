@@ -83,8 +83,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           floatingActionButton: CustomFloatingActionButton(
                         icon: Icons.add,
-                        // showAlertDialogExercise(context);
-                      ),
+                        onTap: () {
+                          showAlertDialogExercise(context);
+                        },
+                    ),
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
@@ -99,22 +101,22 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 width: 30,
                 child: CustomFloatingActionButton(
                   icon: Icons.done,
+                  onTap: () {
+                    for (Exercise exercise in workoutData.workout.exercises) {
+                      for (int i = 0; i < exercise.sets.length; i++) {
+                        if (exercise.sets[i].reps == 0) {
+                          exercise.sets.remove(exercise.sets[i]);
+                        }
+                      }
+                      if (exercise.sets.length == 0) {
+                        workoutData.workout.exercises.remove(exercise);
+                      }
+                    }
+                    if (workoutData.workout.exercises.length > 0) {
+                      showSaveWorkoutAlertDialog(context);
+                    }
+                  },
                 ), 
-                  // onPressed: () {
-                  //   for (Exercise exercise in workoutData.workout.exercises) {
-                  //     for (int i = 0; i < exercise.sets.length; i++) {
-                  //       if (exercise.sets[i].reps == 0) {
-                  //         exercise.sets.remove(exercise.sets[i]);
-                  //       }
-                  //     }
-                  //     if (exercise.sets.length == 0) {
-                  //       workoutData.workout.exercises.remove(exercise);
-                  //     }
-                  //   }
-                  //   if (workoutData.workout.exercises.length > 0) {
-                  //     showSaveWorkoutAlertDialog(context);
-                  //   }
-                  // },
               ),
             ],
           ),

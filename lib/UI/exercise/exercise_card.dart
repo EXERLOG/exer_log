@@ -216,7 +216,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                         borderRadius: BorderRadius.circular(30)),
                     child: CustomFloatingActionButton(
                         icon: Icons.add,
-                        // addSet
+                        onTap: addSet,
                       ),
                   ),
                 ),
