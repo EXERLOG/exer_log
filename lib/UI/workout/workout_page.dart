@@ -82,11 +82,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
         return Scaffold(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           floatingActionButton: CustomFloatingActionButton(
-                        icon: Icons.add,
-                        onTap: () {
-                          showAlertDialogExercise(context);
-                        },
-                    ),
+            icon: Icons.add,
+            onTap: () => showAlertDialogExercise(context),
+          ),
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
@@ -116,7 +114,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                       showSaveWorkoutAlertDialog(context);
                     }
                   },
-                ), 
+                ),
               ),
             ],
           ),
