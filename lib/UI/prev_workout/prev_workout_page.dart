@@ -2,7 +2,6 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/prev_workout_data.dart';
 import 'package:exerlog/Models/workout.dart';
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
@@ -19,6 +18,7 @@ import '../global.dart';
 
 class PrevWorkoutPage extends StatefulWidget {
   Workout workout;
+
   PrevWorkoutPage(this.workout);
 
   @override
@@ -79,14 +79,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
               appBar: AppBar(
                 backgroundColor: theme.colorTheme.backgroundColorVariation,
                 leading: BackButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CalendarPage(),
-                      ),
-                    );
-                  },
+                  onPressed: Navigator.of(context).pop,
                   color: theme.colorTheme.primaryColor,
                 ),
                 actions: [
@@ -153,7 +146,8 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
   }
 
   showAlertDialogExercise(BuildContext context) {
-    ExerciseNameSelectionWidget exerciseNameSelectionWidget = new ExerciseNameSelectionWidget(
+    ExerciseNameSelectionWidget exerciseNameSelectionWidget =
+        new ExerciseNameSelectionWidget(
       setExercisename: setExercisename,
     );
     // set up the button
@@ -166,7 +160,8 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
-            workoutData.addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
+            workoutData
+                .addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
             workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
@@ -175,7 +170,8 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
 
     // set up the AlertDialog
-    AddExerciseAlert alert = AddExerciseAlert(okButton, exerciseNameSelectionWidget);
+    AddExerciseAlert alert =
+        AddExerciseAlert(okButton, exerciseNameSelectionWidget);
 
     // show the dialog
     showDialog(
@@ -235,12 +231,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       ),
       onPressed: () {
         deleteWorkout(workoutData.workout);
-        Navigator.of(context).pop();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CalendarPage(),
-          ),
-        );
+        Navigator.of(context)
+          ..pop()
+          ..pop();
       },
     );
 
@@ -298,13 +291,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
         style: whiteTextStyleSmall,
       ),
       onPressed: () {
-        Navigator.pop(context);
-        Navigator.of(context).pop();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WorkoutPage(widget.workout),
-          ),
-        );
+        Navigator.of(context)
+          ..pop()
+          ..pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => WorkoutPage(widget.workout),
+            ),
+          );
       },
     );
 

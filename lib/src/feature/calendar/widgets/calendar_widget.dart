@@ -1,8 +1,10 @@
-import 'package:exerlog/UI/calendar/widgets/date_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/base/extensions/context_extension.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+
+import 'date_widget.dart';
 
 class CalendarWidget extends StatelessWidget {
   final List<String> monthNames = [
@@ -22,12 +24,13 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: ThemeProvider(
-        builder: (context, theme) {
-          ColorTheme colorTheme = theme.colorTheme;
-          return Container(
+    return ThemeProvider(
+      builder: (context, theme) {
+        ColorTheme colorTheme = theme.colorTheme;
+        return FittedBox(
+          child: Container(
             padding: EdgeInsets.all(20),
+            width: context.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
@@ -59,9 +62,9 @@ class CalendarWidget extends StatelessWidget {
                 )
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

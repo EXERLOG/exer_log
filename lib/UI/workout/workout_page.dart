@@ -2,7 +2,6 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/global.dart';
@@ -80,6 +79,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
         screenWidth = MediaQuery.of(context).size.width;
         workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
         return Scaffold(
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
           floatingActionButton: FloatingActionButton(
             backgroundColor: theme.colorTheme.primaryColor,
             child: Icon(
@@ -94,13 +94,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
             leading: BackButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => CalendarPage(),
-                  ),
-                );
-              },
+              onPressed: Navigator.of(context).pop,
               color: theme.colorTheme.primaryColor,
             ),
             actions: [
@@ -265,12 +259,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
       ),
       onPressed: () {
         saveWorkout(workoutData.workout);
-        Navigator.of(context).pop();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CalendarPage(),
-          ),
-        );
+        Navigator.of(context)
+          ..pop()
+          ..pop();
       },
     );
 

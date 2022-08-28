@@ -1,4 +1,3 @@
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
@@ -7,6 +6,7 @@ import 'package:exerlog/src/feature/authentication/controller/authentication_con
 import 'package:exerlog/src/feature/authentication/widgets/elevated_container.dart';
 import 'package:exerlog/src/feature/authentication/widgets/login_form.dart';
 import 'package:exerlog/src/feature/authentication/widgets/signup_form.dart';
+import 'package:exerlog/src/feature/calendar/view/calendar_screen.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +134,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
   void _navigateToCalendarScreen() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => CalendarPage(),
+        builder: (context) => CalendarScreen(),
       ),
     );
   }

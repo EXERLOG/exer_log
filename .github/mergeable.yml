@@ -78,7 +78,7 @@ mergeable:
       - do: approvals
         min:
           count: 1
-        and:
+        or:
           - required:
               reviewers: [ 'KalleHallden' ]
           - required:
