@@ -9,6 +9,8 @@ class OutlinedTextField extends StatelessWidget {
     required this.validator,
     required this.leadingIcon,
     required this.textEditingController,
+    this.textInputAction,
+    this.keyboardType,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -17,6 +19,9 @@ class OutlinedTextField extends StatelessWidget {
   final IconData leadingIcon;
   final TextEditingController textEditingController;
   final bool obscureText;
+
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,8 @@ class OutlinedTextField extends StatelessWidget {
             validator: validator,
             style: mediumTitleStyleWhite,
             obscureText: obscureText,
+            textInputAction: textInputAction,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hinText,
               hintStyle: setHintStyle.copyWith(

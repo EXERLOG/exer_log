@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 abstract class Dependency {
   static Provider<FirebaseAuth> get firebaseAuth => _firebaseAuthProvider;
 
-  static Provider<GoogleSignIn?> get googleSignIn => _googleSignInProvider;
+  static Provider<GoogleSignIn> get googleSignIn => _googleSignInProvider;
 
   static StreamProvider<ConnectivityResult> get connectivityResult =>
       _onConnectivityChangedStreamProvider;
@@ -15,7 +15,7 @@ abstract class Dependency {
 final _firebaseAuthProvider =
     Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
-final _googleSignInProvider = Provider<GoogleSignIn?>((ref) => GoogleSignIn());
+final _googleSignInProvider = Provider<GoogleSignIn>((ref) => GoogleSignIn());
 
 /// Connectivity
 final _connectivityProvider = Provider<Connectivity>((ref) => Connectivity());

@@ -4,6 +4,7 @@ import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 mixin Dialogs<T extends StatefulWidget> on State<T> {
   // Made to adjust according to decided design in the future.
@@ -55,6 +56,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
               Navigator.pop(context);
               SharedPref.setValue(IS_LOGGED_IN, false);
               await FirebaseAuth.instance.signOut();
+              await GoogleSignIn().signOut();
               _navigateToLandingScreen(context);
             },
             child: Text('Sign Out'),

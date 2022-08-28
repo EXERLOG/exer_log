@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +6,14 @@ class RaisedGradientButton extends StatefulWidget {
     required this.onPressed,
     required this.child,
     this.width = double.infinity,
+    this.isLoading = false,
     this.height = 50.0,
     this.radius = 30,
     this.gradient,
   });
 
-  final FutureOr Function() onPressed;
+  final VoidCallback onPressed;
+  final bool isLoading;
   final Widget child;
   final double width;
   final double height;
@@ -25,8 +25,6 @@ class RaisedGradientButton extends StatefulWidget {
 }
 
 class _RaisedGradientButtonState extends State<RaisedGradientButton> {
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
@@ -46,8 +44,8 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
               borderRadius: BorderRadius.circular(widget.radius),
             ),
             child: TextButton(
-              onPressed: _onPressed,
-              child: _isLoading
+              onPressed: widget.onPressed,
+              child: widget.isLoading
                   ? Center(
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
@@ -60,12 +58,5 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
         );
       },
     );
-  }
-
-  Future<void> _onPressed() async {
-    if (_isLoading) return;
-    setState(() => _isLoading = true);
-    await widget.onPressed();
-    setState(() => _isLoading = false);
   }
 }
