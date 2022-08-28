@@ -4,17 +4,16 @@ import 'package:exerlog/Models/prev_workout_data.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
+import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
 import 'package:exerlog/UI/prev_workout/delete_prev_workout_dialog.dart';
 import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
-
-import '../../src/widgets/gradient_button.dart';
-import '../global.dart';
 
 class PrevWorkoutPage extends StatefulWidget {
   Workout workout;

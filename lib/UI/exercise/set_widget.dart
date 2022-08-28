@@ -209,8 +209,8 @@ class _SetWidgetState extends State<SetWidget>
 
   double getWeightFromMax(String percentage) {
     var result = oneRepMax!.weight / maxTable[oneRepMax!.reps -1];
-    double the_percent = double.parse(percentage) / 100;
-    return (result * the_percent).roundToDouble();
+    double thePercent = double.parse(percentage) / 100;
+    return (result * thePercent).roundToDouble();
   }
 
   String getHintText(int type) {
