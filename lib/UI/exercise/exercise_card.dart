@@ -4,6 +4,7 @@ import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -213,20 +214,13 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                           ],
                         ),
                         borderRadius: BorderRadius.circular(30)),
-                    child: FloatingActionButton(
-                      heroTag: null,
-                      elevation: 0,
-                      backgroundColor: Colors.transparent,
-                      child: Icon(
-                        Icons.add,
-                        size: 50,
-                        color: theme.colorTheme.backgroundColorVariation,
+                    child: CustomFloatingActionButton(
+                        icon: Icons.add,
+                        onTap: addSet,
                       ),
-                      onPressed: addSet,
-                    ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );
