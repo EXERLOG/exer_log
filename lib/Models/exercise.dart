@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 
 class Exercise {
