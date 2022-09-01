@@ -89,12 +89,21 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MhouneyLH",
+      "name": "Lucas Hünniger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78447003?v=4",
+      "profile": "https://github.com/MhouneyLH",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
   "contributorsPerLine": 7,
   "projectName": "exer_log",
-  "projectOwner": "KalleHallden",
+  "projectOwner": "EXERLOG",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true
