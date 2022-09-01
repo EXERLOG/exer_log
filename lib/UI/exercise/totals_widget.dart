@@ -20,7 +20,7 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
     widget.totals.totalReps,
     widget.totals.totalSets,
     widget.totals.totalWeight,
-    widget.totals.avg_weight
+    widget.totals.avgWeight
   ];
     return Container(
       height: screenHeight * 0.04,
@@ -50,7 +50,7 @@ class TotalsData {
   int totalReps;
   int totalSets;
   double totalWeight;
-  double avg_weight;
+  double avgWeight;
 
-  TotalsData(this.totalReps, this.totalSets, this.totalWeight, this.avg_weight);
+  TotalsData(this.totalReps, this.totalSets, this.totalWeight, this.avgWeight);
 }
