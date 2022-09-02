@@ -1,7 +1,7 @@
 <div align="center">
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </div>
@@ -86,6 +86,7 @@ Thank you so much to everyone who has been contributing to this project:
     <td align="center"><a href="https://github.com/TheAmanM"><img src="https://avatars.githubusercontent.com/u/75181008?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TheAmanM</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=TheAmanM" title="Code">💻</a> <a href="#maintenance-TheAmanM" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/lukelavery"><img src="https://avatars.githubusercontent.com/u/60143172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lukelavery</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=lukelavery" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/MhouneyLH"><img src="https://avatars.githubusercontent.com/u/78447003?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lucas Hünniger</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=MhouneyLH" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mfederowicz"><img src="https://avatars.githubusercontent.com/u/57678185?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mfederowicz</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/issues?q=author%3Amfederowicz" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
