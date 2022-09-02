@@ -20,9 +20,9 @@ void main() async {
   /// Initialize shared preference
   try {
     await SharedPref.initializeSharedPreference();
-  } catch (e, stackTrace) {
-    Log.error(e.toString(), stackTrace: stackTrace);
-    throw ErrorDescription(e);
+  } catch (exception, stackTrace) {
+    Log.error(exception.toString(), stackTrace: stackTrace);
+    throw ErrorDescription(exception);
   }
 
   /// Initialize firebase

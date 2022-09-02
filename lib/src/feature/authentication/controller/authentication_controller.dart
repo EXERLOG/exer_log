@@ -63,12 +63,12 @@ class AuthenticationController extends StateNotifier<BaseState> {
       state = LoadingState();
       await _repository.signInWithGoogle();
       authStateChangeStatus();
-    } on FirebaseAuthException catch (e) {
-      Log.error(e.code);
-      Log.error(e.message);
-      state = ErrorState(message: e.message);
-    } catch (e, stackTrace) {
-      Log.error(e.toString(), stackTrace: stackTrace);
+    } on FirebaseAuthException catch (exception) {
+      Log.error(exception.code);
+      Log.error(exception.message);
+      state = ErrorState(message: exception.message);
+    } catch (exception, stackTrace) {
+      Log.error(exception.toString(), stackTrace: stackTrace);
 
       state = ErrorState(message: "Something went wrong");
     }
