@@ -68,7 +68,10 @@
       "profile": "https://tenshiamd.com",
       "contributions": [
         "code",
-        "maintenance"
+        "maintenance",
+        "doc",
+        "data",
+        "test"
       ]
     },
     {
