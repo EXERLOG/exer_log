@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v3
+      -
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      -
+        name: Install dependencies
+        run: |
+          flutter pub get
+      -
+        run: flutter analyze || true # TODO: Remove this after solving all issues
+      -
+        run: flutter test || true # TODO: Remove this after having decent unit tests
+  build_apk:
+    continue-on-error: false
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v3
+      -
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      -
+        name: Install dependencies
+        run: |
+          flutter pub get
+      -
+        run: flutter build apk
+      -
+        run: flutter build appbundle
+  build_ios:
+    continue-on-error: true
+    runs-on: macos-latest
+    steps:
+      -
+        uses: actions/checkout@v3
+      -
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      -
+        name: Install dependencies
+        run: |
+          flutter pub get
+      -
+        run: flutter build ios --release --no-codesign
+  build_web:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v3
+      -
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      -
+        name: Install dependencies
+        run: |
+          flutter pub get
+      -
+        run: flutter build web
