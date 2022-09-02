@@ -42,7 +42,7 @@ jobs:
       -
         run: flutter build appbundle
   build_ios:
-    continue-on-error: true
+    continue-on-error: false
     runs-on: macos-latest
     steps:
       -
