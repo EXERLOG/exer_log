@@ -107,6 +107,17 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "doc",
+      "name": "Mark",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40158?v=4",
+      "profile": "https://github.com/doc",
+      "contributions": [
+        "doc",
+        "data",
+        "test"
+      ]
     }
   ],
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
