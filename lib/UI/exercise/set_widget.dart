@@ -237,5 +237,4 @@ class SetData {
   int reps;
 
   SetData(this.weight, this.reps);
-<<<<<<< HEAD
 }
