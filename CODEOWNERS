@@ -13,3 +13,4 @@
 
 *                          @EXERLOG/maintainers
 .github/mergeable.yml      @tenshiAMD
+.github/workflows/ci.yml   @tenshiAMD
