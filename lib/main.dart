@@ -1,4 +1,3 @@
-// @dart = 2.9
 import 'package:exerlog/src/feature/onboarding/splash/view/splash_screen.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/utils/logger/riverpod_logger.dart';
@@ -22,7 +21,7 @@ void main() async {
     await SharedPref.initializeSharedPreference();
   } catch (exception, stackTrace) {
     Log.error(exception.toString(), stackTrace: stackTrace);
-    throw ErrorDescription(exception);
+    throw ErrorDescription(exception.toString());
   }
 
   /// Initialize firebase
