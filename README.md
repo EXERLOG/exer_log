@@ -16,7 +16,7 @@
 
 # ExerLog 
 
-ExerLog is a simple and easy-to-use exercise journal app developed in conjunction with sports science that focuses on providing you with all the essential data without all the irrelevant information that you don't need. An app that keeps track of your exercises, body measurements, and offers you access to relevant workout information. The goal is to give you the freedom of a analog exercise journal with the analytical abilities of excel.  
+ExerLog is a simple and easy-to-use exercise journal app developed in conjunction with sports science that focuses on providing you with all the essential data without all the irrelevant information that you don't need. An app that keeps track of your exercises, body measurements, and offers you access to relevant workout information. The goal is to give you the freedom of an analog exercise journal with the analytical abilities of Excel.  
 
 Create workouts and keep track of your reps, sets, weight, total weight, total reps, total sets, maxes and more. Track important physical measurements including bodyweight, waist size, arm size, and more. Then, visualize all of these measurements in bar charts and graphs that show your advancement over time. 
 
