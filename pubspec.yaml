@@ -50,6 +50,7 @@ flutter_icons:
   image_path: "assets/app-logo.png"
 
 dev_dependencies:
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
 
