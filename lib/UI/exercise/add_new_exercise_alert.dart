@@ -4,8 +4,9 @@ import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
+@Deprecated('This is going to be removed soon')
 class AddExerciseAlert extends StatelessWidget {
-  final ExerciseNameSelectionWidget nameWidget;
+  final ExerciseInputField nameWidget;
   final RaisedGradientButton addExercise;
 
   const AddExerciseAlert(

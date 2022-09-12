@@ -3,13 +3,13 @@ import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
-import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/add_new_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/widgets/alert_dialogs/alert_dialogs.dart';
 import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
@@ -83,7 +83,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           floatingActionButton: CustomFloatingActionButton(
             icon: Icons.add,
-            onTap: () => showAlertDialogExercise(context),
+            onTap: () => _showAddNewExerciseDialog(context),
           ),
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
@@ -136,7 +136,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                         if (snapshot.data!.isEmpty) {
                           firstLoad = false;
                           Future.delayed(Duration.zero,
-                              () => showAlertDialogExercise(context));
+                              () => _showAddNewExerciseDialog(context));
                           return getPage(theme);
                         } else {
                           firstLoad = false;
@@ -198,6 +198,15 @@ class _WorkoutPageState extends State<WorkoutPage> {
     setState(() {});
   }
 
+  void _showAddNewExerciseDialog(BuildContext context) async {
+    ExerciseInputField exerciseNameSelectionWidget =
+        ExerciseInputField(setExerciseName: setExerciseName);
+
+    if (await showAddNewExerciseDialog(context, exerciseNameSelectionWidget)) {
+      addExercise();
+    }
+  }
+
   void addExercise() {
     if (exerciseName != '') {
       workoutData.addExercise(
@@ -210,36 +219,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
           0.0,
         ),
       );
-      Navigator.pop(context);
     }
-  }
-
-  void showAlertDialogExercise(BuildContext context) {
-    ExerciseNameSelectionWidget exerciseNameSelectionWidget =
-        ExerciseNameSelectionWidget(
-      setExercisename: setExerciseName,
-    );
-    // set up the button
-    RaisedGradientButton okButton = RaisedGradientButton(
-      child: Text(
-        "ADD",
-        style: buttonTextSmall,
-      ),
-      onPressed: addExercise,
-    );
-
-    /// Set up the AlertDialog
-    AddExerciseAlert alert = AddExerciseAlert(
-      okButton,
-      exerciseNameSelectionWidget,
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
   }
 
   void showSaveWorkoutAlertDialog(BuildContext context) {
