@@ -25,8 +25,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   @override
   void initState() {
+    _prefillWorkoutData();
+    super.initState();
+  }
+
+  void _prefillWorkoutData() {
     firstLoad = true;
-    newWorkout = new Workout(
+    newWorkout = Workout(
       [],
       '',
       '',
@@ -41,14 +46,12 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
     newWorkout.id = widget.workout.id;
 
-    workoutData = new PrevWorkoutData(
+    workoutData = PrevWorkoutData(
       newWorkout,
-      new WorkoutTotals(0, 0, 0, 0, 0),
+      WorkoutTotals(0, 0, 0, 0, 0),
       updateTotals,
       addNewSet,
     );
-
-    super.initState();
   }
 
   @override
@@ -56,59 +59,52 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     if (firstLoad) {
       Future.delayed(Duration.zero, () => _showViewOrRedoAlertDialog(context));
     }
-    screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.width;
-    workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
     return ThemeProvider(
       builder: (context, theme) {
-        return ThemeProvider(
-          builder: (context, theme) {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: theme.colorTheme.backgroundColorVariation,
-                leading: BackButton(
-                  onPressed: Navigator.of(context).pop,
+        screenHeight = MediaQuery.of(context).size.height;
+        screenWidth = MediaQuery.of(context).size.width;
+        workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
+        return Scaffold(
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
+          appBar: AppBar(
+            backgroundColor: theme.colorTheme.backgroundColorVariation,
+            leading: BackButton(
+              onPressed: Navigator.of(context).pop,
+              color: theme.colorTheme.primaryColor,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  _showDeleteWorkoutDialog(context);
+                },
+                child: Icon(
+                  Icons.delete,
                   color: theme.colorTheme.primaryColor,
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      _showDeleteWorkoutDialog(context);
-                    },
-                    child: Icon(
-                      Icons.delete,
-                      color: theme.colorTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              body: firstLoad
-                  ? Container(
-                      color: theme.colorTheme.backgroundColorVariation,
-                    )
-                  : GestureDetector(
-                      child: Container(
-                        color: theme.colorTheme.backgroundColorVariation,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            WorkoutTotalsWidget(
-                              totals: workoutData.totals,
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: ListView(
-                                  addAutomaticKeepAlives: true,
-                                  children: workoutData.exerciseWidgets,
-                                ),
-                              ),
-                            ),
-                          ],
+              )
+            ],
+          ),
+          body: firstLoad
+              ? Container(color: theme.colorTheme.backgroundColorVariation)
+              : GestureDetector(
+                  child: Container(
+                    color: theme.colorTheme.backgroundColorVariation,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        WorkoutTotalsWidget(
+                          totals: workoutData.totals,
                         ),
-                      ),
+                        Expanded(
+                          child: ListView(
+                            addAutomaticKeepAlives: true,
+                            children: workoutData.exerciseWidgets,
+                          ),
+                        ),
+                      ],
                     ),
-            );
-          },
+                  ),
+                ),
         );
       },
     );
@@ -124,18 +120,11 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     workoutData.addSet(exercise, newSet, id);
   }
 
-  void _showDeleteWorkoutDialog(BuildContext context) async {
-    if (await showDeleteWorkoutDialog(context)) {
-      deleteWorkout(workoutData.workout);
-      Navigator.of(context).pop();
-    }
-  }
-
   void addExercises(newWorkout) {
     setState(() {
-      PrevWorkoutData newWorkoutData = new PrevWorkoutData(
+      PrevWorkoutData newWorkoutData = PrevWorkoutData(
         newWorkout,
-        new WorkoutTotals(0, 0, 0, 0, 0),
+        WorkoutTotals(0, 0, 0, 0, 0),
         updateTotals,
         addNewSet,
       );
@@ -154,6 +143,13 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       );
     } else {
       addExercises(widget.workout);
+    }
+  }
+
+  Future<void> _showDeleteWorkoutDialog(BuildContext context) async {
+    if (await showDeleteWorkoutDialog(context)) {
+      deleteWorkout(workoutData.workout);
+      Navigator.of(context).pop();
     }
   }
 }
