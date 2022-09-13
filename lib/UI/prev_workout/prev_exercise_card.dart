@@ -4,6 +4,7 @@ import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -171,7 +172,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
   }
 
   double getHeight() {
-    print("REMAINDER " + widget.name + (widget.exercise.name.length).toString());
+    Log.info("REMAINDER " + widget.name + (widget.exercise.name.length).toString());
     double length = (widget.exercise.name.length / 17);
     if (length.toInt() == 0 || length == 1.0) {
       return 25;

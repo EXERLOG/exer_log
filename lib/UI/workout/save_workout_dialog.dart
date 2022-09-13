@@ -1,4 +1,5 @@
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                         value: this.template,
                         onChanged: (bool? value) {
                           setState(() {
-                            print(value);
+                            Log.info(value.toString());
                             template = value;
                             widget.setWorkout(name, template!);
                           });

@@ -5,6 +5,7 @@ import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/prev_workout/prev_exercise_card.dart';
 import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 
 class PrevWorkoutData {
   Function(Workout) updateTotals;
@@ -34,15 +35,11 @@ class PrevWorkoutData {
     Workout loadedWorkout =
         new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
     loadedWorkout.id = workout.id;
-    List<Sets> setList = [];
     List<Exercise> exerciseList = [];
-    List<Exercise> newExerciseList = [];
-    Exercise newExercise;
     int totalSets = 0;
     int totalReps = 0;
     double totalKgs = 0;
     int reps = 0;
-    double avgKgs = 0;
     try {
       for (String exerciseId in workout.exercises) {
         await loadExercise(exerciseId)
@@ -55,18 +52,14 @@ class PrevWorkoutData {
                   totalReps += reps,
                   totalKgs += reps * sets.weight,
                 },
-              avgKgs = (totalKgs / totalReps).roundToDouble(),
               });
       }
       loadedWorkout.exercises = exerciseList;
 
-      //workout = loaded_workout;
     } catch (exception) {
-      print(exception);
+      Log.debug(exception.toString());
     }
     return loadedWorkout;
-    //updateTotals(loaded_workout);
-    //print(loaded_workout.exercises[0]);
   }
 
   List<PrevExerciseCard> setExerciseWidgets() {
@@ -74,7 +67,7 @@ class PrevWorkoutData {
     for (Exercise exercise in workout.exercises) {
       List<PrevSetWidget> setList = [];
       int i = 0;
-      for (Sets sets in exercise.sets) {
+      for (Sets _ in exercise.sets) {
         setList.add(new PrevSetWidget(
             name: exercise.name,
             exercise: exercise,
@@ -112,11 +105,9 @@ class PrevWorkoutData {
         }
         totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
       }
-      //setTotals(exercise);
       updateTotals(workout);
     } catch (exception) {
-      print("problem");
-      print(exception);
+      Log.debug("problem:"+exception.toString());
     }
   }
 
@@ -133,7 +124,7 @@ class PrevWorkoutData {
         workout.exercises.add(exercise);
       }
     } catch (exception) {
-      print(exception);
+      Log.debug(exception.toString());
     }
     updateTotals(workout);
   }

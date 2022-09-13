@@ -5,6 +5,8 @@ import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 
+import 'package:exerlog/src/utils/logger/logger.dart';
+
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
@@ -48,9 +50,11 @@ Future<Max> getOneRepMax(String exercise) async {
         .where('exercise', isEqualTo: exercise)
         .orderBy('weight', descending: true)
         .get();
-  print(ref.docs.first.data());
+
+  Log.info(ref.docs.first.data().toString());
+
   Max returnMax;
-  if (ref != null) {
+  if (ref.docs.length > 0) {
     returnMax = Max.fromJson(ref.docs.first.data());
   } else {
     returnMax = new Max(0, 0, 0, '');

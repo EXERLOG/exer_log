@@ -2,7 +2,7 @@ import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/global.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 
 class MaxInformation extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MaxInformationState extends State<MaxInformation> {
             oneRepMax =
                 snapshot.data!.weight / maxTable[snapshot.data!.reps - 1];
             if (snapshot.data!.weight == 0.0) {
-              print("No max");
+              Log.info("No max");
             }
             if (widget.setMax != null) {
               widget.setMax!(snapshot.data);

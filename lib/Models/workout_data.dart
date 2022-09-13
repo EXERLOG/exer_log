@@ -3,8 +3,8 @@ import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/exercise_card.dart';
-import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:flutter/widgets.dart';
 
 class WorkoutData {
@@ -57,7 +57,6 @@ class WorkoutData {
       int totalReps = 0;
       double totalKgs = 0;
       int reps = 0;
-      double avgKgs = 0;
       for (Exercise exercise in exerciseList) {
         await getExerciseByName(exercise.name).then((newexercise) => {
               for (Sets sets in newexercise.sets)
@@ -67,27 +66,20 @@ class WorkoutData {
                   totalReps += reps,
                   totalKgs += reps * sets.weight
                 },
-              avgKgs = (totalKgs / totalReps).roundToDouble(),
               updateExisitingExercise(),
               newExerciseList.add(newexercise)
             });
       }
       loadedWorkout.exercises = newExerciseList;
-      //workout = loaded_workout;
     } catch (exception) {
-      print("Helloooo");
-      print(exception);
+      Log.debug(exception.toString());
     }
     return loadedWorkout;
-    //updateTotals(loaded_workout);
-    //print(loaded_workout.exercises[0]);
   }
 
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
     for (Exercise exercise in workout.exercises) {
-      List<SetWidget> setList = [];
-      int i = 0;
       exerciseWidgets.add(new ExerciseCard(
         name: exercise.name,
         exercise: exercise,
@@ -102,13 +94,11 @@ class WorkoutData {
       ));
       key++;
       for (Sets sets in exercise.sets) {
-
         totals.sets += sets.sets;
         int repsSet = sets.sets * sets.reps;
         totals.weight += repsSet * sets.weight;
         totals.reps += repsSet;
         totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
-        i++;
       }
     }
     return exerciseWidgets;
@@ -117,22 +107,23 @@ class WorkoutData {
   updateExisitingExercise() {
     try {
       totals = new WorkoutTotals(0, 0, 0, 0, 0);
-      for (Exercise oldexercise in workout.exercises) {
-        totals.exercises++;
-        for (Sets sets in oldexercise.sets) {
-          totals.sets += sets.sets;
-          int repsSet = sets.sets * sets.reps;
-          totals.weight += repsSet * sets.weight;
-          totals.reps += repsSet;
+
+      if (workout.exercises is List<Exercise>) {
+        for (Exercise oldexercise in workout.exercises) {
+          totals.exercises++;
+          for (Sets sets in oldexercise.sets) {
+            totals.sets += sets.sets;
+            int repsSet = sets.sets * sets.reps;
+            totals.weight += repsSet * sets.weight;
+            totals.reps += repsSet;
+          }
+          totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
+          oldexercise.setExerciseTotals();
         }
-        totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
-        oldexercise.setExerciseTotals();
+        updateTotals(workout);
       }
-      //setTotals(exercise);
-      updateTotals(workout);
     } catch (exception) {
-      print("problem");
-      print(exception);
+      Log.debug("problem:"+exception.toString());
     }
   }
 
@@ -151,8 +142,6 @@ class WorkoutData {
         }
       }
 
-      List exercises = workout.exercises;
-
       if (exercise.name != '') {
         await getExerciseByName(exercise.name).then((value) => {
           workout.exercises.add(value),
@@ -160,7 +149,7 @@ class WorkoutData {
         });
       }
     } catch (exception) {
-      print(exception);
+      Log.debug(exception.toString());
       if (exercise.name != '') {
         workout.exercises.add(exercise);
         setExerciseWidgets();
