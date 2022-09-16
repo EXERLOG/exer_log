@@ -30,7 +30,7 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
             } else {
               if (snapshot.hasError) {
                 return Center(
-                  child: Text("Error"),
+                  child: Text('Error'),
                 );
               } else {
                 return Center(

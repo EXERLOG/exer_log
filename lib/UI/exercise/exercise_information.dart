@@ -24,11 +24,11 @@ class _ExerciseInformationState extends State<ExerciseInformation> {
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("Error"),
+              child: Text('Error'),
             );
           } else {
             return Center(
-              child: Text('${snapshot.data!.name}'),
+              child: Text(snapshot.data!.name),
             );
           }
         }

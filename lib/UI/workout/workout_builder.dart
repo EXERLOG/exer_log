@@ -27,7 +27,7 @@ class _WorkoutInformationState extends State<WorkoutInformation> {
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("Error"),
+              child: Text('Error'),
             );
           } else {
             return Center(

@@ -34,7 +34,7 @@ class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Are you sure you want to delete this workout?",
+                'Are you sure you want to delete this workout?',
                 style: mediumTitleStyleWhite,
                 textAlign: TextAlign.center,
               ),

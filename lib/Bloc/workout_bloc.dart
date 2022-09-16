@@ -60,7 +60,7 @@ Future<List<Workout>> getWorkoutTemplates() async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("workouts")
+      .collection('workouts')
       .where('template', isEqualTo: true)
       .get();
   List<Workout> workoutTemplates = [];
@@ -94,9 +94,9 @@ void saveWorkout(Workout workout) async {
   workout.exercises = exerciseList;
   Map<String, Object?> jsonWorkout = workout.toJson();
   firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("workouts")
+      .collection('workouts')
       .add(jsonWorkout)
       .then((value) {
   });
@@ -110,9 +110,9 @@ void deleteWorkout(Workout workout) async {
     deleteExercise(exercise);
   }
   await firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("workouts")
+      .collection('workouts')
       .doc(workout.id)
       .delete();
 }

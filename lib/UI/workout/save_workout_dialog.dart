@@ -42,7 +42,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Save Workout",
+                  'Save Workout',
                   style: mediumTitleStyleWhite,
                   textAlign: TextAlign.center,
                 ),

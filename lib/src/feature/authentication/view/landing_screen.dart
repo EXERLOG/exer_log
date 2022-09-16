@@ -30,7 +30,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
   List<Tab> tabs = <Tab>[
     Tab(
       child: Text(
-        "Login",
+        'Login',
 
         /// TODO: Handle text style properly (applies everywhere)
         style: loginOptionTextStyle,
@@ -38,7 +38,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
     ),
     Tab(
       child: Text(
-        "Sign up",
+        'Sign up',
         style: loginOptionTextStyle,
       ),
     ),
@@ -69,7 +69,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
       } else if (state is LoginSuccessState) {
         _navigateToCalendarScreen();
       } else if (state is ErrorState) {
-        context.showSnackBar("Something went wrong");
+        context.showSnackBar('Something went wrong');
       }
     });
 
@@ -102,7 +102,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                 /// Login / Sign up button
                 RaisedGradientButton(
                   child: Text(
-                    _tabIndex > 0 ? "Sign up" : "Login",
+                    _tabIndex > 0 ? 'Sign up' : 'Login',
                     style: buttonText,
                   ),
                   width: context.width * .65,
@@ -116,7 +116,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                         if (_controller.isSamePassword()) {
                           await _controller.signUp();
                         } else {
-                          context.showSnackBar("Password should match");
+                          context.showSnackBar('Password should match');
                         }
                       }
                     }

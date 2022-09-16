@@ -56,7 +56,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
                 items: widget.workoutList.map<DropdownMenuItem<String>>((element) {
                   dropDownValue = element.name;
                   workoutMap[element.name] = element;
-                  Log.info("NAME " + element.name);
+                  Log.info('NAME ${element.name}');
                   return DropdownMenuItem<String>(
                     value: element.name,
                     child: Text(element.name),

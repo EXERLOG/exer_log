@@ -31,7 +31,7 @@ Future<List<String>> getExerciseNames() async {
   List<String> exerciseNames = [];
 
   for (int i = 0; i < ref.docs.length; i++) {
-    String name = ref.docs[i].get("name");
+    String name = ref.docs[i].get('name');
     if (!exerciseNames.contains(name)) {
       exerciseNames.add(name);
     }
@@ -82,9 +82,9 @@ Future<Exercise> getExerciseByName(String exercise) async {
 Future<String> saveExercise(Exercise exercise) async {
   Map<String, Object?> jsonExercise = exercise.toJson();
   final ref = await firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("exercises")
+      .collection('exercises')
       .doc();
   await ref.set(jsonExercise);
   exercise.id = ref.id;
@@ -94,9 +94,9 @@ Future<String> saveExercise(Exercise exercise) async {
 
 void deleteExercise(Exercise exercise) async {
   await firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("exercises")
+      .collection('exercises')
       .doc(exercise.id)
       .delete();
   deleteMax(exercise);

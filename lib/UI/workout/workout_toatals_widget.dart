@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class WorkoutTotalsWidget extends StatefulWidget {
   final WorkoutTotals totals;
-  
+
   const WorkoutTotalsWidget({required this.totals});
 
   @override
@@ -50,7 +50,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "sets",
+                          'sets',
                           style: setStyle,
                         ),
                       ),
@@ -66,7 +66,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "reps",
+                          'reps',
                           style: setStyle,
                         ),
                       ),
@@ -82,7 +82,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "load",
+                          'load',
                           style: setStyle,
                         ),
                       ),
@@ -98,7 +98,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "kg/rep",
+                          'kg/rep',
                           style: setStyle,
                         ),
                       ),
@@ -114,7 +114,7 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     children: [
                       Container(
                         child: Text(
-                          "exercises",
+                          'exercises',
                           style: setStyle,
                         ),
                       ),

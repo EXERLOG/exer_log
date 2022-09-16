@@ -16,13 +16,13 @@ class LoginForm extends StatelessWidget {
       children: [
         Spacer(),
         OutlinedTextField(
-          hinText: "Email",
+          hinText: 'Email',
           leadingIcon: Icons.email,
           validator: (value) => Validators.requiredField(value),
           textEditingController: controller.emailTextEditingController,
         ),
         OutlinedTextField(
-          hinText: "Password",
+          hinText: 'Password',
           leadingIcon: Icons.lock,
           validator: (value) => Validators.requiredField(value),
           textEditingController: controller.passwordTextEditingController,

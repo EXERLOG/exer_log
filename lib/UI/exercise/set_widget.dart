@@ -97,7 +97,7 @@ class _SetWidgetState extends State<SetWidget>
               Expanded(
                 child: Center(
                     child: Text(
-                  "#" + (widget.id + 1).toString(),
+                  '#${widget.id + 1}',
                   style: setStyle,
                 )),
                 flex: 8,
