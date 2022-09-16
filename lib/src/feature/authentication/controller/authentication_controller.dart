@@ -70,7 +70,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
     } catch (exception, stackTrace) {
       Log.error(exception.toString(), stackTrace: stackTrace);
 
-      state = ErrorState(message: "Something went wrong");
+      state = ErrorState(message: 'Something went wrong');
     }
   }
 
@@ -90,7 +90,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
         state = LoginSuccessState();
       }
     } else {
-      state = ErrorState(message: "Something went wrong");
+      state = ErrorState(message: 'Something went wrong');
     }
   }
 

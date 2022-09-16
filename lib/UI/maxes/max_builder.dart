@@ -24,7 +24,7 @@ class MaxInformation extends StatefulWidget {
 
 class _MaxInformationState extends State<MaxInformation> {
   double oneRepMax = 0.0;
-  String text = "0%";
+  String text = '0%';
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _MaxInformationState extends State<MaxInformation> {
             oneRepMax =
                 snapshot.data!.weight / maxTable[snapshot.data!.reps - 1];
             if (snapshot.data!.weight == 0.0) {
-              Log.info("No max");
+              Log.info('No max');
             }
             if (widget.setMax != null) {
               widget.setMax!(snapshot.data);
@@ -75,7 +75,7 @@ class _MaxInformationState extends State<MaxInformation> {
 
   String oneRepMaxPercentLabel(double weight, double oneRepMax) {
     if (oneRepMax > 0.0) {
-      this.text = ((weight / oneRepMax) * 100).round().toString() + "%";
+      this.text = '${((weight / oneRepMax) * 100).round()}%';
     }
 
     return this.text;

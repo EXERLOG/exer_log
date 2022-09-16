@@ -29,11 +29,11 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
   int percent = 0;
   double oneRepMax = 0.0;
   Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
-  String setsController = "";
-  String repsController = "";
-  String weightController = "";
-  String restController = "";
-  String percentageController = "";
+  String setsController = '';
+  String repsController = '';
+  String weightController = '';
+  String restController = '';
+  String percentageController = '';
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   List setList = [0, 0, 0.0, 0.0];
 
@@ -58,7 +58,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
           Container(
             child: Center(
                 child: Text(
-              "#" + (widget.id + 1).toString(),
+              '#${widget.id + 1}',
               style: setStyle,
             )),
             width: screenWidth * 0.08,

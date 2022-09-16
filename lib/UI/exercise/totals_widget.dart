@@ -7,41 +7,44 @@ class ExerciseTotalsWidget extends StatefulWidget {
   int index;
 
   ExerciseTotalsWidget({required this.totals, required this.index});
+
   @override
   _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();
 }
 
 class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
   List _list = [];
-  List endings = [" reps", " sets", " kgs", " kgs/rep"];
+  List endings = [' reps', ' sets', ' kgs', ' kgs/rep'];
+
   @override
   Widget build(BuildContext context) {
-   _list = [
-    widget.totals.totalReps,
-    widget.totals.totalSets,
-    widget.totals.totalWeight,
-    widget.totals.avgWeight
-  ];
+    _list = [
+      widget.totals.totalReps,
+      widget.totals.totalSets,
+      widget.totals.totalWeight,
+      widget.totals.avgWeight
+    ];
     return Container(
       height: screenHeight * 0.04,
       width: screenWidth * 0.3,
       child: RaisedGradientButton(
-          child: Text(
-            _list[widget.index].toString() + endings[widget.index],
-            style: buttonTextSmall,
-          ),
-          gradient: LinearGradient(
-            colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
-          ),
-          onPressed: () {
-            setState(() {
-              widget.index += 1;
-              if (widget.index == 4) {
-                widget.index = 0;
-              }
-            });
-          },
-          radius: 30,),
+        child: Text(
+          _list[widget.index].toString() + endings[widget.index],
+          style: buttonTextSmall,
+        ),
+        gradient: LinearGradient(
+          colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
+        ),
+        onPressed: () {
+          setState(() {
+            widget.index += 1;
+            if (widget.index == 4) {
+              widget.index = 0;
+            }
+          });
+        },
+        radius: 30,
+      ),
     );
   }
 }

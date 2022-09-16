@@ -39,7 +39,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
   @override
   void initState() {
     height += getHeight() - 20;
-    if (widget.setList.length < 1) {
+    if (widget.setList.isEmpty) {
       widget.setList.add(
         new PrevSetWidget(
           name: widget.name,
@@ -117,7 +117,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                               Container(
                                 child: Center(
                                   child: Text(
-                                    "Reps",
+                                    'Reps',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -126,7 +126,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                               Container(
                                 child: Center(
                                   child: Text(
-                                    "Sets",
+                                    'Sets',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -135,7 +135,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                               Container(
                                 child: Center(
                                   child: Text(
-                                    "Weight",
+                                    'Weight',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -144,7 +144,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                               Container(
                                 child: Center(
                                   child: Text(
-                                    "Rest",
+                                    'Rest',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -172,7 +172,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
   }
 
   double getHeight() {
-    Log.info("REMAINDER " + widget.name + (widget.exercise.name.length).toString());
+    Log.info('REMAINDER ${widget.name}${widget.exercise.name.length}');
     double length = (widget.exercise.name.length / 17);
     if (length.toInt() == 0 || length == 1.0) {
       return 25;

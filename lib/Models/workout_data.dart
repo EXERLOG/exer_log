@@ -123,7 +123,7 @@ class WorkoutData {
         updateTotals(workout);
       }
     } catch (exception) {
-      Log.debug("problem:"+exception.toString());
+      Log.debug('problem:$exception');
     }
   }
 

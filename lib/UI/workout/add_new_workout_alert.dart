@@ -26,7 +26,7 @@ class AddWorkoutAlert extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "New Workout",
+                  'New Workout',
                   style: mediumTitleStyleWhite,
                   textAlign: TextAlign.center,
                 ),

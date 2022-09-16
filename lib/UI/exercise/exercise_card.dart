@@ -51,7 +51,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
     setList = [];
     originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
-    if (widget.exercise.sets.length < 1) {
+    if (widget.exercise.sets.isEmpty) {
       setList.add(new SetWidget(
         name: widget.name,
         exercise: widget.exercise,
@@ -64,7 +64,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         updateTotal: updateTotal,
       ));
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
-    } else if (widget.exercise.sets.length > 0) {
+    } else if (widget.exercise.sets.isNotEmpty) {
       int i = 0;
       for (Sets _ in widget.exercise.sets) {
         setList.add(new SetWidget(
@@ -154,7 +154,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                    "Reps",
+                                    'Reps',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -163,7 +163,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                    "Sets",
+                                    'Sets',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -172,7 +172,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                    "Weight",
+                                    'Weight',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -181,7 +181,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                    "Rest",
+                                    'Rest',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
@@ -250,7 +250,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   void removeSet(exercise, sets, id) {
     setState(() {
       setList.removeAt(id);
-      if (setList.length == 0) {
+      if (setList.isEmpty) {
         widget.removeExercise(exercise);
       } else {
         widget.exercise.sets.remove(sets);

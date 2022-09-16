@@ -106,11 +106,11 @@ class _WorkoutPageState extends State<WorkoutPage> {
                           exercise.sets.remove(exercise.sets[i]);
                         }
                       }
-                      if (exercise.sets.length == 0) {
+                      if (exercise.sets.isEmpty) {
                         workoutData.workout.exercises.remove(exercise);
                       }
                     }
-                    if (workoutData.workout.exercises.length > 0) {
+                    if (workoutData.workout.exercises.isNotEmpty) {
                       showSaveWorkoutAlertDialog(context);
                     }
                   },
@@ -130,7 +130,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                     } else {
                       if (snapshot.hasError) {
                         return Center(
-                          child: Text("Something went wrong"),
+                          child: Text('Something went wrong'),
                         );
                       } else {
                         if (snapshot.data!.isEmpty) {
@@ -222,7 +222,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     // set up the button
     RaisedGradientButton okButton = RaisedGradientButton(
       child: Text(
-        "ADD",
+        'ADD',
         style: buttonTextSmall,
       ),
       onPressed: addExercise,
@@ -245,7 +245,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
   void showSaveWorkoutAlertDialog(BuildContext context) {
     RaisedGradientButton okButton = RaisedGradientButton(
       child: Text(
-        "SAVE",
+        'SAVE',
         style: buttonTextSmall,
       ),
       onPressed: () {
@@ -292,7 +292,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
     RaisedGradientButton okButton = RaisedGradientButton(
       child: Text(
-        "START",
+        'START',
         style: buttonTextSmall,
       ),
       onPressed: () {

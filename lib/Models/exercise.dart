@@ -10,10 +10,11 @@ class Exercise {
   int totalReps;
   double totalWeight;
   int totalSets;
-  ExerciseTotalsWidget totalWidget =
-      new ExerciseTotalsWidget(totals: new TotalsData(0, 0, 0.0, 0.0), index: 0);
+  ExerciseTotalsWidget totalWidget = new ExerciseTotalsWidget(
+      totals: new TotalsData(0, 0, 0.0, 0.0), index: 0);
 
-  Exercise(this.name, this.sets, this.bodyParts, this.totalSets, this.totalReps, this.totalWeight);
+  Exercise(this.name, this.sets, this.bodyParts, this.totalSets, this.totalReps,
+      this.totalWeight);
 
   void setExerciseTotals() {
     totalReps = 0;
@@ -37,13 +38,13 @@ class Exercise {
       theSets.add(set.toJson());
     }
     return {
-      "name": name,
-      "sets": theSets,
-      "body_parts": bodyParts,
-      "total_reps" : totalReps,
-      "total_weight" : totalWeight,
-      "total_sets" : totalSets,
-      "created": FieldValue.serverTimestamp()
+      'name': name,
+      'sets': theSets,
+      'body_parts': bodyParts,
+      'total_reps': totalReps,
+      'total_weight': totalWeight,
+      'total_sets': totalSets,
+      'created': FieldValue.serverTimestamp()
     };
   }
 

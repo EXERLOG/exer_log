@@ -24,7 +24,7 @@ class RedoWorkoutAlert extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Do you wanna view or redo?",
+                'Do you wanna view or redo?',
                 style: mediumTitleStyleWhite,
                 textAlign: TextAlign.center,
               ),
