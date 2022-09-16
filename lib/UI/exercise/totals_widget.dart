@@ -3,10 +3,11 @@ import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 
 class ExerciseTotalsWidget extends StatefulWidget {
+
+  ExerciseTotalsWidget({required this.totals, required this.index,Key? key}) : super(key: key);
+
   TotalsData totals;
   int index;
-
-  ExerciseTotalsWidget({required this.totals, required this.index});
 
   @override
   _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();
@@ -14,7 +15,7 @@ class ExerciseTotalsWidget extends StatefulWidget {
 
 class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
   List _list = [];
-  List endings = [' reps', ' sets', ' kgs', ' kgs/rep'];
+  List<String> endings = [' reps', ' sets', ' kgs', ' kgs/rep'];
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,7 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
       height: screenHeight * 0.04,
       width: screenWidth * 0.3,
       child: RaisedGradientButton(
-        child: Text(
-          _list[widget.index].toString() + endings[widget.index],
-          style: buttonTextSmall,
-        ),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: <Color>[Color(0xFF34D1C2), Color(0xFF31A6DC)],
         ),
         onPressed: () {
@@ -44,16 +41,20 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
           });
         },
         radius: 30,
+        child: Text(
+          _list[widget.index].toString() + endings[widget.index],
+          style: buttonTextSmall,
+        ),
       ),
     );
   }
 }
 
 class TotalsData {
+  TotalsData(this.totalReps, this.totalSets, this.totalWeight, this.avgWeight);
+
   int totalReps;
   int totalSets;
   double totalWeight;
   double avgWeight;
-
-  TotalsData(this.totalReps, this.totalSets, this.totalWeight, this.avgWeight);
 }

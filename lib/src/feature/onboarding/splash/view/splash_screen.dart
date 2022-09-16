@@ -19,7 +19,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2000), () {
       if (SharedPref.getBoolAsync(IS_LOGGED_IN, defaultValue: false)) {
         if (mounted) _navigateToCalendarScreen();
       } else {
@@ -55,7 +55,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => LandingScreen(),
+        builder: (context) => const LandingScreen(),
       ),
     );
   }
@@ -63,7 +63,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void _navigateToCalendarScreen() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => CalendarScreen(),
+        builder: (context) => const CalendarScreen(),
       ),
     );
   }

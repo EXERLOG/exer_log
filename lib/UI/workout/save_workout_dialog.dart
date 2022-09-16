@@ -5,13 +5,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class SaveWorkoutAlert extends StatefulWidget {
-  final Function(String, bool) setWorkout;
-  final RaisedGradientButton saveWorkout;
 
   const SaveWorkoutAlert(
     this.saveWorkout,
     this.setWorkout,
-  );
+      {Key? key,}
+  ) : super(key: key);
+  final Function(String, bool) setWorkout;
+  final RaisedGradientButton saveWorkout;
   @override
   _SaveWorkoutAlertState createState() => _SaveWorkoutAlertState();
 }
@@ -36,7 +37,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             height: screenHeight * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,27 +48,33 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    child: TextField(
-                      style: setStyle,
-                      onChanged: (value) {
-                        name = value;
-                        widget.setWorkout(name, template!);
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'name your workout',
-                        hintStyle: setHintStyle,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: theme.colorTheme.primaryColor),
-                          //  when the TextFormField in unfocused
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: theme.colorTheme.primaryColor),
-                          //  when the TextFormField in focused
-                        ),
-                        border: UnderlineInputBorder(borderSide: BorderSide(color: theme.colorTheme.primaryColor)),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: TextField(
+                    style: setStyle,
+                    onChanged: (value) {
+                      name = value;
+                      widget.setWorkout(name, template!);
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'name your workout',
+                      hintStyle: setHintStyle,
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: theme.colorTheme.primaryColor),
+                        //  when the TextFormField in unfocused
                       ),
-                    )),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: theme.colorTheme.primaryColor),
+                        //  when the TextFormField in focused
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: theme.colorTheme.primaryColor),
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

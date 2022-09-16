@@ -6,7 +6,7 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class GoogleSignInButton extends StatefulWidget {
-  GoogleSignInButton({required this.onPressed});
+  GoogleSignInButton({Key? key, required this.onPressed}) : super(key: key);
 
   final FutureOr Function() onPressed;
 
@@ -26,6 +26,14 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
           width: context.width * .65,
           child: OutlinedButton(
             onPressed: _onPressed,
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(theme.colorTheme.white),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
             child: _isLoading
                 ? Center(
                     child: CircularProgressIndicator(
@@ -37,12 +45,12 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image(
+                      const Image(
                         image: AssetImage(Assets.googleLogo),
                         height: 20.0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10),
                         child: Text(
                           'Sign in with Google',
                           style: TextStyle(
@@ -54,17 +62,9 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                       )
                     ],
                   ),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(theme.colorTheme.white),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
           ),
         );
-      }
+      },
     );
   }
 

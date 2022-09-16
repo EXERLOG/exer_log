@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CalendarScreen extends ConsumerStatefulWidget {
+  const CalendarScreen({Key? key}) : super(key: key);
+
   @override
   ConsumerState<CalendarScreen> createState() => _CalendarScreenState();
 }
@@ -37,26 +39,26 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         return Scaffold(
           backgroundColor: colorTheme.backgroundColorVariation,
           appBar: AppBar(
-            title: Text(Texts.appName),
+            title: const Text(Texts.appName),
             backgroundColor:
                 colorTheme.backgroundColorVariation.withOpacity(0.75),
             actions: [
-              LogoutButton(),
+              const LogoutButton(),
             ],
           ),
           body: Padding(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CalendarWidget(),
                 RaisedGradientButton(
+                  width: context.width * .8,
+                  onPressed: _navigateToWorkoutScreen,
                   child: Text(
                     Texts.startNewWorkout.toUpperCase(),
                     style: buttonTextSmall,
                   ),
-                  width: context.width * .8,
-                  onPressed: _navigateToWorkoutScreen,
                 )
               ],
             ),

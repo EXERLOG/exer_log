@@ -4,9 +4,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class DeleteWorkoutAlert extends StatefulWidget {
-  final RaisedGradientButton deleteWorkoutButton;
 
-  const DeleteWorkoutAlert(this.deleteWorkoutButton);
+  const DeleteWorkoutAlert(this.deleteWorkoutButton, {Key? key}) : super(key: key);
+  final RaisedGradientButton deleteWorkoutButton;
   @override
   _DeleteWorkoutAlertState createState() => _DeleteWorkoutAlertState();
 }
@@ -28,7 +28,7 @@ class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
         backgroundColor: theme.colorTheme.backgroundColorVariation,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           height: screenHeight * 0.4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,6 +47,6 @@ class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
           ),
         ),
       );
-    });
+    },);
   }
 }

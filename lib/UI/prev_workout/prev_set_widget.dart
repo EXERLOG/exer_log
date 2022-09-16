@@ -6,20 +6,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrevSetWidget extends StatefulWidget {
+
+  PrevSetWidget({
+    required this.name,
+    required this.exercise,
+    required this.addNewSet,
+    required this.id,
+    required this.isTemplate,
+    Key? key,
+  }) : super(key: key);
+
   final String name;
   final Exercise exercise;
-  Function(Exercise, Sets, int) addNewSet;
-  //Function(Sets, int) createNewSet;
   final bool isTemplate;
   int id;
 
-  PrevSetWidget(
-      {required this.name,
-      required this.exercise,
-      required this.addNewSet,
-      //required this.createNewSet,
-      required this.id,
-      required this.isTemplate});
+  Function(Exercise, Sets, int) addNewSet;
+
   @override
   _PrevSetWidgetState createState() => _PrevSetWidgetState();
 }
@@ -28,7 +31,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
     with AutomaticKeepAliveClientMixin {
   int percent = 0;
   double oneRepMax = 0.0;
-  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
+  Sets sets = Sets(0, 0.0, 0.0, 0, 0.0);
   String setsController = '';
   String repsController = '';
   String weightController = '';
@@ -56,32 +59,33 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
+            width: screenWidth * 0.08,
             child: Center(
-                child: Text(
-              '#${widget.id + 1}',
-              style: setStyle,
-            )),
-            width: screenWidth * 0.08,
+              child: Text(
+                '#${widget.id + 1}',
+                style: setStyle,
+              ),
+            ),
           ),
           Container(
+            width: screenWidth * 0.145,
             child: getText(0),
-            width: screenWidth * 0.145,
           ),
           Container(
+            width: screenWidth * 0.145,
             child: getText(1),
-            width: screenWidth * 0.145,
           ),
           Container(
+            width: screenWidth * 0.145,
             child: getText(2),
-            width: screenWidth * 0.145,
           ),
           Container(
+            width: screenWidth * 0.145,
             child: getText(3),
-            width: screenWidth * 0.145,
           ),
           Container(
-            child: getText(4),
             width: screenWidth * 0.08,
+            child: getText(4),
           ),
         ],
       ),

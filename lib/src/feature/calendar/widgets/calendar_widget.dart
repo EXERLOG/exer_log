@@ -25,18 +25,18 @@ class CalendarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         ColorTheme colorTheme = theme.colorTheme;
         return FittedBox(
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             width: context.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
                   color: colorTheme.shadow,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                   blurRadius: 5,
                   spreadRadius: 5,
                 ),
@@ -88,12 +88,12 @@ List<Widget> _getDateColumns() {
   DateTime now = DateTime.now();
   const int daysInAWeek = 7;
 
-  List<List<DateTime>> weekList = List.generate(daysInAWeek, (index) => []);
+  List<List<DateTime>> weekList = List.generate(daysInAWeek, (int index) => []);
 
   /// Month could span 4-6 weeks which is 4-6 columns
   /// which day of the week does the first fall on
   DateTime first = now.subtract(Duration(days: today - 1));
-  DateTime last = new DateTime(year, month + 1, 0);
+  DateTime last = DateTime(year, month + 1, 0);
 
   /// If the first of the month falls anywhere else than on a monday
   /// then get the dates before the first as well

@@ -17,14 +17,14 @@ class ElevatedContainer extends StatelessWidget {
         return Center(
           child: Container(
             height: context.height * 0.50,
-            margin: EdgeInsets.symmetric(horizontal: 30),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
             decoration: BoxDecoration(
               color: theme.colorTheme.backgroundColorVariation,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
                   color: theme.colorTheme.shadow,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                   blurRadius: 10,
                   spreadRadius: 10,
                 )

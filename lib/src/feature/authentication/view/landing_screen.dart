@@ -97,14 +97,10 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 /// Login / Sign up button
                 RaisedGradientButton(
-                  child: Text(
-                    _tabIndex > 0 ? 'Sign up' : 'Login',
-                    style: buttonText,
-                  ),
                   width: context.width * .65,
                   onPressed: () async {
                     if (_tabIndex == 0) {
@@ -121,8 +117,12 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                       }
                     }
                   },
+                  child: Text(
+                    _tabIndex > 0 ? 'Sign up' : 'Login',
+                    style: buttonText,
+                  ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -134,7 +134,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
   void _navigateToCalendarScreen() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => CalendarScreen(),
+        builder: (context) => const CalendarScreen(),
       ),
     );
   }

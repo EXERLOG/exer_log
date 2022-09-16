@@ -105,7 +105,6 @@ void saveWorkout(Workout workout) async {
 }
 
 void deleteWorkout(Workout workout) async {
-
   for (Exercise exercise in workout.exercises) {
     deleteExercise(exercise);
   }

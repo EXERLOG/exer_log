@@ -8,7 +8,7 @@ import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart
 import 'package:exerlog/src/utils/logger/logger.dart';
 
 Future<List<Max>> getSpecificMax(String exercise, double reps) async {
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
@@ -26,9 +26,9 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
 
 void deleteMax(Exercise exercise) async {
   final ref = await firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("maxes")
+      .collection('maxes')
       .where('exerciseID', isEqualTo: exercise.id)
       .get();
   for (int i = 0; i < ref.docs.length; i++) {
@@ -54,10 +54,10 @@ Future<Max> getOneRepMax(String exercise) async {
   Log.info(ref.docs.first.data().toString());
 
   Max returnMax;
-  if (ref.docs.length > 0) {
+  if (ref.docs.isNotEmpty) {
     returnMax = Max.fromJson(ref.docs.first.data());
   } else {
-    returnMax = new Max(0, 0, 0, '');
+    returnMax = Max(0, 0, 0, '');
   }
   return returnMax;
 }
@@ -65,9 +65,9 @@ Future<Max> getOneRepMax(String exercise) async {
 void saveMax(Max max) {
   Map<String, Object?> jsonMax = max.toJson();
   firestoreInstance
-      .collection("users")
+      .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
-      .collection("maxes")
+      .collection('maxes')
       .add(jsonMax)
       .then((value) {
   });
@@ -75,18 +75,18 @@ void saveMax(Max max) {
 
 void checkMax(Exercise exercise) async {
   // check if max already exists otherwise save
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
       .where('exercise', isEqualTo: exercise.name)
       .get();
 
-  if (ref.docs.length == 0) {
+  if (ref.docs.isEmpty) {
     List setList = [];
     for (Sets set in exercise.sets) {
       // check which ones are maxes and which aren't
-      if (setList.length > 0) {
+      if (setList.isNotEmpty) {
         bool shouldUpdate = true;
         for (Sets newSet in setList) {
           if (newSet.reps == set.reps && newSet.weight == set.weight) {

@@ -16,7 +16,7 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutPage extends StatefulWidget {
-  WorkoutPage(this.workout);
+  WorkoutPage(this.workout, {Key? key}) : super(key: key);
 
   Workout? workout;
 
@@ -75,7 +75,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         screenHeight = MediaQuery.of(context).size.height;
         screenWidth = MediaQuery.of(context).size.width;
         workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
@@ -94,7 +94,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
             ),
             actions: [
               Container(
-                margin: EdgeInsets.only(right: 5),
+                margin: const EdgeInsets.only(right: 5),
                 height: 30,
                 width: 30,
                 child: CustomFloatingActionButton(
@@ -110,6 +110,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                         workoutData.workout.exercises.remove(exercise);
                       }
                     }
+
                     if (workoutData.workout.exercises.isNotEmpty) {
                       showSaveWorkoutAlertDialog(context);
                     }
@@ -121,33 +122,40 @@ class _WorkoutPageState extends State<WorkoutPage> {
           body: firstLoad
               ? FutureBuilder(
                   future: getWorkoutTemplates(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Workout>> snapshot) {
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<List<Workout>> snapshot,
+                  ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else {
                       if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                           child: Text('Something went wrong'),
                         );
                       } else {
                         if (snapshot.data!.isEmpty) {
                           firstLoad = false;
-                          Future.delayed(Duration.zero,
-                              () => showAlertDialogExercise(context));
+                          Future.delayed(
+                            Duration.zero,
+                            () => showAlertDialogExercise(context),
+                          );
                           return getPage(theme);
                         } else {
                           firstLoad = false;
                           workoutList = snapshot.data!;
-                          Future.delayed(Duration.zero,
-                              () => showAlertDialogWorkout(context));
+                          Future.delayed(
+                            Duration.zero,
+                            () => showAlertDialogWorkout(context),
+                          );
                           return getPage(theme);
                         }
                       }
                     }
-                  })
+                  },
+                )
               : getPage(theme),
         );
       },
@@ -157,7 +165,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
   Widget getPage(AppTheme theme) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
       },
       child: firstLoad
           ? Container(
@@ -221,11 +229,11 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
     // set up the button
     RaisedGradientButton okButton = RaisedGradientButton(
+      onPressed: addExercise,
       child: Text(
         'ADD',
         style: buttonTextSmall,
       ),
-      onPressed: addExercise,
     );
 
     /// Set up the AlertDialog

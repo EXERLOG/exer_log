@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 typedef ThemeBuilder = Widget Function(BuildContext context, AppTheme theme);
 
 class ThemeProvider extends StatefulWidget {
-  final ThemeBuilder builder;
 
   const ThemeProvider({
     required this.builder,
     Key? key,
   }) : super(key: key);
+  final ThemeBuilder builder;
 
   @override
   State<ThemeProvider> createState() => _ThemeProviderState();

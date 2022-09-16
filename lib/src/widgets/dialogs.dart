@@ -13,7 +13,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     required List<Widget> actions,
   }) {
     return ThemeProvider(
-      builder: (context, theme) => new AlertDialog(
+      builder: (context, theme) => AlertDialog(
         backgroundColor: theme.colorTheme.backgroundColorVariation,
         title: Text(
           title,
@@ -32,7 +32,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     void _navigateToLandingScreen(BuildContext context) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => LandingScreen()),
+        MaterialPageRoute(builder: (context) => const LandingScreen()),
         (route) => false,
       );
     }
@@ -48,7 +48,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () async {
@@ -57,7 +57,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
               await FirebaseAuth.instance.signOut();
               _navigateToLandingScreen(context);
             },
-            child: Text('Sign Out'),
+            child: const Text('Sign Out'),
           ),
         ],
       ),

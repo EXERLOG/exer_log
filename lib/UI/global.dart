@@ -6,38 +6,38 @@ double screenHeight = 0.0;
 double screenWidth = 0.0;
 
 // text styles
-TextStyle whiteTextStyleSmall = TextStyle(
+TextStyle whiteTextStyleSmall = const TextStyle(
   color: Colors.white,
   fontFamily: 'Avenir',
   fontSize: 12,
 );
-TextStyle buttonTextSmall = TextStyle(
+TextStyle buttonTextSmall = const TextStyle(
   color: ThemeColor.darkBlueVariation,
   fontFamily: 'Avenir',
   fontWeight: FontWeight.w800,
   fontSize: 12,
 );
-TextStyle buttonText = TextStyle(
+TextStyle buttonText = const TextStyle(
   color: ThemeColor.darkBlueVariation,
   fontFamily: 'Avenir',
   fontWeight: FontWeight.w800,
   fontSize: 18,
 );
-TextStyle loginOptionTextStyle = TextStyle(
+TextStyle loginOptionTextStyle = const TextStyle(
   letterSpacing: 1,
   color: ThemeColor.grey,
   fontFamily: 'Avenir',
   fontWeight: FontWeight.w300,
   fontSize: 18,
 );
-TextStyle loginOptionTextStyleSelected = TextStyle(
+TextStyle loginOptionTextStyleSelected = const TextStyle(
   letterSpacing: 1,
   color: ThemeColor.secondary,
   fontFamily: 'Avenir',
   fontWeight: FontWeight.w400,
   fontSize: 18,
 );
-TextStyle mediumTitleStyleWhite = TextStyle(
+TextStyle mediumTitleStyleWhite = const TextStyle(
   letterSpacing: 1,
   color: Colors.white,
   fontFamily: 'Avenir',
@@ -50,20 +50,20 @@ TextStyle setHintStyle = TextStyle(
   fontFamily: 'Avenir',
   fontSize: 15,
 );
-TextStyle setStyle = TextStyle(
+TextStyle setStyle = const TextStyle(
   letterSpacing: 1,
   color: ThemeColor.primary,
   fontFamily: 'Avenir',
   fontSize: 15,
 );
-TextStyle greenButtonTextThin = TextStyle(
+TextStyle greenButtonTextThin = const TextStyle(
   letterSpacing: 1,
   color: ThemeColor.primary,
   fontFamily: 'Avenir',
   fontWeight: FontWeight.w300,
   fontSize: 18,
 );
-TextStyle smallTitleStyleWhite = TextStyle(
+TextStyle smallTitleStyleWhite = const TextStyle(
   letterSpacing: 1,
   color: Colors.white,
   fontFamily: 'Avenir',
@@ -72,7 +72,7 @@ TextStyle smallTitleStyleWhite = TextStyle(
 );
 
 // Dialog styles
-TextStyle dialogTitleStyle = new TextStyle(
+TextStyle dialogTitleStyle = const TextStyle(
   color: Colors.white,
   letterSpacing: 1,
   fontFamily: 'Avenir',
@@ -80,7 +80,7 @@ TextStyle dialogTitleStyle = new TextStyle(
   fontSize: 16,
 );
 
-TextStyle dialogDescriptionStyle = new TextStyle(
+TextStyle dialogDescriptionStyle = const TextStyle(
   color: Colors.white,
   letterSpacing: 1,
   fontFamily: 'Avenir',

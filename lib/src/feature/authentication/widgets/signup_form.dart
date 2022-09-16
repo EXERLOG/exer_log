@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../widgets/text_field.dart';
 
 class SignupForm extends StatelessWidget {
-  SignupForm(this.controller);
+  SignupForm(this.controller, {Key? key}) : super(key: key);
 
   final AuthenticationController controller;
 
