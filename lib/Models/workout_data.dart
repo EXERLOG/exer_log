@@ -43,7 +43,7 @@ class WorkoutData {
 
   Future<Workout> loadWorkoutData() async {
     Workout loadedWorkout =
-        new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
+        Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
         loadedWorkout.id = workout.id;
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
@@ -80,7 +80,7 @@ class WorkoutData {
   List<ExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
     for (Exercise exercise in workout.exercises) {
-      exerciseWidgets.add(new ExerciseCard(
+      exerciseWidgets.add(ExerciseCard(
         name: exercise.name,
         exercise: exercise,
         addExercise: addExercise,
@@ -106,7 +106,7 @@ class WorkoutData {
 
   updateExisitingExercise() {
     try {
-      totals = new WorkoutTotals(0, 0, 0, 0, 0);
+      totals = WorkoutTotals(0, 0, 0, 0, 0);
 
       if (workout.exercises is List<Exercise>) {
         for (Exercise oldexercise in workout.exercises) {

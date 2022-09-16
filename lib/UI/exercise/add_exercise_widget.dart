@@ -4,13 +4,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseNameSelectionWidget extends StatefulWidget {
-  Function(String) setExercisename;
 
   ExerciseNameSelectionWidget({
+    Key? key,
     required this.setExercisename,
-  }) {
+  }) : super(key: key) {
     setExercisename = this.setExercisename;
   }
+  Function(String) setExercisename;
   @override
   _ExerciseNameSelectionWidgetState createState() => _ExerciseNameSelectionWidgetState();
 }
@@ -36,7 +37,7 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
                 return Center(
                   child: Theme(
                     data: ThemeData(
-                        inputDecorationTheme: new InputDecorationTheme(
+                        inputDecorationTheme: InputDecorationTheme(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: theme.colorTheme.primaryColor,

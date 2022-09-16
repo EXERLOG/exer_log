@@ -6,11 +6,11 @@ class CustomFloatingActionButton extends StatelessWidget {
   final VoidCallback onTap;
   final double size;
 
-  CustomFloatingActionButton({
+  CustomFloatingActionButton({Key? key,
     required this.icon,
     required this.onTap,
     this.size = 50.0,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ThemeProvider(

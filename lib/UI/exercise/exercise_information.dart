@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ExerciseInformation extends StatefulWidget {
   final String id;
 
-  ExerciseInformation({required this.id});
+  ExerciseInformation({Key? key, required this.id}) : super(key: key);
   @override
   _ExerciseInformationState createState() => _ExerciseInformationState();
 

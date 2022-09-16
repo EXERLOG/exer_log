@@ -3,10 +3,11 @@ import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:flutter/cupertino.dart';
 
 class ExerciseTotalsWidget extends StatefulWidget {
+
+  ExerciseTotalsWidget({Key? key, required this.totals, required this.index}) : super(key: key);
+
   TotalsData totals;
   int index;
-
-  ExerciseTotalsWidget({required this.totals, required this.index});
 
   @override
   _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();

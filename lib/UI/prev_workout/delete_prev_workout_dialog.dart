@@ -4,9 +4,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class DeleteWorkoutAlert extends StatefulWidget {
-  final RaisedGradientButton deleteWorkoutButton;
 
-  const DeleteWorkoutAlert(this.deleteWorkoutButton);
+  const DeleteWorkoutAlert(this.deleteWorkoutButton, {Key? key}) : super(key: key);
+  final RaisedGradientButton deleteWorkoutButton;
   @override
   _DeleteWorkoutAlertState createState() => _DeleteWorkoutAlertState();
 }

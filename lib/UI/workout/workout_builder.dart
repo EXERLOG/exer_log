@@ -6,9 +6,10 @@ import 'package:exerlog/UI/exercise/exercise_information.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutInformation extends StatefulWidget {
-  final String id;
 
-  WorkoutInformation({required this.id});
+  WorkoutInformation({Key? key, required this.id}) : super(key: key);
+
+  final String id;
   @override
   _WorkoutInformationState createState() => _WorkoutInformationState();
 

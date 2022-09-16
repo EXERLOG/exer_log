@@ -5,13 +5,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class SaveWorkoutAlert extends StatefulWidget {
-  final Function(String, bool) setWorkout;
-  final RaisedGradientButton saveWorkout;
 
   const SaveWorkoutAlert(
     this.saveWorkout,
     this.setWorkout,
-  );
+      {Key? key}
+  ) : super(key: key);
+  final Function(String, bool) setWorkout;
+  final RaisedGradientButton saveWorkout;
   @override
   _SaveWorkoutAlertState createState() => _SaveWorkoutAlertState();
 }

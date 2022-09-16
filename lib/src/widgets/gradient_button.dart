@@ -4,14 +4,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class RaisedGradientButton extends StatefulWidget {
-  RaisedGradientButton({
+  const RaisedGradientButton({Key? key,
     required this.onPressed,
     required this.child,
     this.width = double.infinity,
     this.height = 50.0,
     this.radius = 30,
     this.gradient,
-  });
+  }) : super(key: key);
 
   final FutureOr Function() onPressed;
   final Widget child;

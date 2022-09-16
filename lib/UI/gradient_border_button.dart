@@ -11,7 +11,7 @@ class GradientBorderButton extends StatefulWidget {
   final double radius;
   final double borderSize;
 
-  GradientBorderButton({
+  GradientBorderButton({Key? key,
     required this.child,
     required this.onPressed,
     required this.radius,
@@ -20,7 +20,7 @@ class GradientBorderButton extends StatefulWidget {
     this.gradient,
     this.width = double.infinity,
     this.height = 50.0,
-  });
+  }) : super(key: key);
   @override
   _GradientBorderButtonState createState() => _GradientBorderButtonState();
 }

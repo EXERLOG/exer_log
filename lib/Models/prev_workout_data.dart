@@ -20,9 +20,12 @@ class PrevWorkoutData {
       loadWorkoutData().then((value) {
         workout = value;
         setExerciseWidgets();
-        for (Exercise exercise in this.workout.exercises) {
-          updateExisitingExercise(exercise);
+        if (workout.exercises is List<Exercise>) {
+          for (Exercise exercise in workout.exercises) {
+            updateExisitingExercise(exercise);
+          }
         }
+
       });
   }
 
@@ -33,7 +36,7 @@ class PrevWorkoutData {
 
   Future<Workout> loadWorkoutData() async {
     Workout loadedWorkout =
-        new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
+        Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
     loadedWorkout.id = workout.id;
     List<Exercise> exerciseList = [];
     int totalSets = 0;
@@ -42,6 +45,7 @@ class PrevWorkoutData {
     int reps = 0;
     try {
       for (String exerciseId in workout.exercises) {
+
         await loadExercise(exerciseId)
             .then((value) async => {
               exerciseList.add(value),
@@ -64,34 +68,39 @@ class PrevWorkoutData {
 
   List<PrevExerciseCard> setExerciseWidgets() {
     exerciseWidgets = [];
-    for (Exercise exercise in workout.exercises) {
-      List<PrevSetWidget> setList = [];
-      int i = 0;
-      for (Sets _ in exercise.sets) {
-        setList.add(new PrevSetWidget(
-            name: exercise.name,
-            exercise: exercise,
-            addNewSet: addSet,
-            id: i,
-            isTemplate: workout.template));
-        i++;
+    if (workout.exercises is List<Exercise>) {
+
+      for (Exercise exercise in workout.exercises) {
+        List<PrevSetWidget> setList = [];
+        int i = 0;
+        for (Sets _ in exercise.sets) {
+          setList.add(PrevSetWidget(
+              name: exercise.name,
+              exercise: exercise,
+              addNewSet: addSet,
+              id: i,
+              isTemplate: workout.template));
+          i++;
+        }
+        exerciseWidgets.add(PrevExerciseCard(
+          name: exercise.name,
+          exercise: exercise,
+          addExercise: addExercise,
+          updateExisitingExercise: updateExisitingExercise,
+          isTemplate: workout.template,
+          setList: setList,
+          prevworkoutData: this,
+        ));
       }
-      exerciseWidgets.add(new PrevExerciseCard(
-        name: exercise.name,
-        exercise: exercise,
-        addExercise: addExercise,
-        updateExisitingExercise: updateExisitingExercise,
-        isTemplate: workout.template,
-        setList: setList,
-        prevworkoutData: this,
-      ));
+
     }
+
     return exerciseWidgets;
   }
 
   updateExisitingExercise(exercise) {
     try {
-      totals = new WorkoutTotals(0, 0, 0, 0, 0);
+      totals = WorkoutTotals(0, 0, 0, 0, 0);
       for (Exercise oldexercise in workout.exercises) {
         totals.exercises++;
         if (oldexercise.name == exercise.name) {
@@ -107,7 +116,7 @@ class PrevWorkoutData {
       }
       updateTotals(workout);
     } catch (exception) {
-      Log.debug("problem:"+exception.toString());
+      Log.debug('problem:$exception');
     }
   }
 

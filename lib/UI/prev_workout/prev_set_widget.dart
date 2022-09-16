@@ -6,20 +6,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrevSetWidget extends StatefulWidget {
+
+  PrevSetWidget(
+      {Key? key,
+      required this.name,
+      required this.exercise,
+      required this.addNewSet,
+      //required this.createNewSet,
+      required this.id,
+      required this.isTemplate})
+      : super(key: key);
   final String name;
   final Exercise exercise;
   Function(Exercise, Sets, int) addNewSet;
   //Function(Sets, int) createNewSet;
   final bool isTemplate;
   int id;
-
-  PrevSetWidget(
-      {required this.name,
-      required this.exercise,
-      required this.addNewSet,
-      //required this.createNewSet,
-      required this.id,
-      required this.isTemplate});
   @override
   _PrevSetWidgetState createState() => _PrevSetWidgetState();
 }
@@ -28,7 +30,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
     with AutomaticKeepAliveClientMixin {
   int percent = 0;
   double oneRepMax = 0.0;
-  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
+  Sets sets = Sets(0, 0.0, 0.0, 0, 0.0);
   String setsController = '';
   String repsController = '';
   String weightController = '';

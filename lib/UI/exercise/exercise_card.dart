@@ -42,7 +42,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   static int index = 0;
   double originalHeight = screenHeight * 0.23;
   double height = 0;
-  TotalsData totalData = new TotalsData(0, 0, 0.0, 0.0);
+  TotalsData totalData = TotalsData(0, 0, 0.0, 0.0);
   late ValueNotifier<TotalsData> _notifier;
 
   @override
@@ -52,7 +52,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
     originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
     if (widget.exercise.sets.isEmpty) {
-      setList.add(new SetWidget(
+      setList.add(SetWidget(
         name: widget.name,
         exercise: widget.exercise,
         addNewSet: widget.workoutData.addSet,
@@ -63,11 +63,11 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         isTemplate: widget.isTemplate,
         updateTotal: updateTotal,
       ));
-      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
+      widget.exercise.sets.add(Sets(0, 0.0, 0.0, 0, 0.0));
     } else if (widget.exercise.sets.isNotEmpty) {
       int i = 0;
       for (Sets _ in widget.exercise.sets) {
-        setList.add(new SetWidget(
+        setList.add(SetWidget(
           name: widget.exercise.name,
           exercise: widget.exercise,
           addNewSet: widget.workoutData.addSet,
@@ -231,7 +231,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   void addSet() {
     counter++;
     setState(() {
-      setList.add(new SetWidget(
+      setList.add(SetWidget(
         name: widget.name,
         exercise: widget.exercise,
         addNewSet: widget.workoutData.addSet,
@@ -241,7 +241,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         isTemplate: false,
         updateTotal: updateTotal,
       ));
-      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
+      widget.exercise.sets.add(Sets(0, 0.0, 0.0, 0, 0.0));
       widget.addExercise(widget.exercise);
     });
     setHeight();
@@ -259,7 +259,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         setList = [];
         int i = 0;
         for (Sets _ in widget.exercise.sets) {
-          setList.add(new SetWidget(
+          setList.add(SetWidget(
               name: widget.exercise.name,
               exercise: widget.exercise,
               addNewSet: widget.workoutData.addSet,
@@ -276,7 +276,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   }
 
   void updateTotal() {
-    _notifier.value = new TotalsData(
+    _notifier.value = TotalsData(
       widget.exercise.totalReps,
       widget.exercise.totalSets,
       widget.exercise.totalWeight,

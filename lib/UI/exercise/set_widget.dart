@@ -3,11 +3,26 @@ import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/maxes/max_builder.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SetWidget extends StatefulWidget {
+
+  SetWidget(
+      {Key? key,
+      required this.name,
+      required this.exercise,
+      required this.addNewSet,
+      required this.removeSet,
+      //required this.createNewSet,
+      required this.counter,
+      required this.id,
+      required this.isTemplate,
+      this.updateExercise,
+      required this.updateTotal})
+      : super(key: key);
   final String name;
   final Exercise exercise;
   Function(Exercise, Sets, int) addNewSet;
@@ -18,19 +33,6 @@ class SetWidget extends StatefulWidget {
   //Function(Sets, int) createNewSet;
   final bool isTemplate;
   int id;
-
-  SetWidget(
-      {required this.name,
-      required this.exercise,
-      required this.addNewSet,
-      required this.removeSet,
-      //required this.createNewSet,
-      required this.counter,
-      required this.id,
-      required this.isTemplate,
-      this.updateExercise,
-      required this.updateTotal
-      });
   @override
   _SetWidgetState createState() => _SetWidgetState();
 }
@@ -39,15 +41,15 @@ class _SetWidgetState extends State<SetWidget>
   with AutomaticKeepAliveClientMixin {
   int percent = 0;
   Max? oneRepMax;
-  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
+  Sets sets = Sets(0, 0.0, 0.0, 0, 0.0);
   String percentageController = '0%';
-  TextEditingController setsController = new TextEditingController();
-  TextEditingController repsController = new TextEditingController();
-  TextEditingController weightController = new TextEditingController();
-  TextEditingController restController = new TextEditingController();
+  TextEditingController setsController = TextEditingController();
+  TextEditingController repsController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController restController = TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
-  ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
+  ValueNotifier<SetData> _notifier = ValueNotifier(SetData(0.0, 0));
 
   @override
   void initState() {
@@ -174,7 +176,7 @@ class _SetWidgetState extends State<SetWidget>
         sets.sets = getInfo(setsController.text, 0);
         if (weightController.text.contains('%')) {
           // set weight to be percentage of max
-          var regex = new RegExp(r'\D');
+          var regex = RegExp(r'\D');
           sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
           weightController.text = sets.weight.toString();
         }
@@ -184,7 +186,7 @@ class _SetWidgetState extends State<SetWidget>
           sets.sets = 1;
         }
         widget.addNewSet(widget.exercise, sets, widget.id);
-        _notifier.value = new SetData(sets.weight, sets.reps);
+        _notifier.value = SetData(sets.weight, sets.reps);
         widget.updateTotal();
         //percent = (sets.weight / oneRepMax).round();
       },
@@ -223,7 +225,9 @@ class _SetWidgetState extends State<SetWidget>
     String returnText = '';
     try {
       returnText = listType[type].toString();
-    } catch (exception) {}
+    } catch (exception) {
+      Log.debug('hint error: $exception');
+    }
     return returnText;
   }
 

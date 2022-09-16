@@ -16,7 +16,7 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutPage extends StatefulWidget {
-  WorkoutPage(this.workout);
+  WorkoutPage(this.workout, {Key? key}) : super(key: key);
 
   Workout? workout;
 
@@ -157,7 +157,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
   Widget getPage(AppTheme theme) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
       },
       child: firstLoad
           ? Container(

@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 
 class MaxInformation extends StatefulWidget {
   MaxInformation({
+    Key? key,
     required this.id,
     required this.sets,
     this.setMax,
     this.setPercentage,
-  });
+  }) : super(key: key);
 
   final String id;
   Sets sets;

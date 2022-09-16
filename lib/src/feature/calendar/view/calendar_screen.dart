@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CalendarScreen extends ConsumerStatefulWidget {
+  const CalendarScreen({Key? key}) : super(key: key);
+
   @override
   ConsumerState<CalendarScreen> createState() => _CalendarScreenState();
 }

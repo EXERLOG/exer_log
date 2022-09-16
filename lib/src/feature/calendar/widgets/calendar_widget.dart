@@ -93,7 +93,7 @@ List<Widget> _getDateColumns() {
   /// Month could span 4-6 weeks which is 4-6 columns
   /// which day of the week does the first fall on
   DateTime first = now.subtract(Duration(days: today - 1));
-  DateTime last = new DateTime(year, month + 1, 0);
+  DateTime last = DateTime(year, month + 1, 0);
 
   /// If the first of the month falls anywhere else than on a monday
   /// then get the dates before the first as well

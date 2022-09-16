@@ -8,9 +8,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class DateWidget extends StatelessWidget {
-  final DateTime date;
 
-  DateWidget(this.date);
+  const DateWidget(this.date, {Key? key}) : super(key: key);
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +91,12 @@ class DateWidget extends StatelessWidget {
   }
 
   void _navigateToPreviousWorkoutScreen(context, Workout? workout) {
-    if (workout != null)
+    if (workout != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PrevWorkoutPage(workout),
         ),
       );
+    }
   }
 }

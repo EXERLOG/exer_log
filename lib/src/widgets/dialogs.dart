@@ -13,7 +13,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     required List<Widget> actions,
   }) {
     return ThemeProvider(
-      builder: (context, theme) => new AlertDialog(
+      builder: (context, theme) => AlertDialog(
         backgroundColor: theme.colorTheme.backgroundColorVariation,
         title: Text(
           title,

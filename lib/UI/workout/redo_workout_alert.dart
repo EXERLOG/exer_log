@@ -5,12 +5,13 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class RedoWorkoutAlert extends StatelessWidget {
-  final RaisedGradientButton viewWorkout;
-  final GradientBorderButton redoWorkout;
   const RedoWorkoutAlert(
     this.viewWorkout,
     this.redoWorkout,
-  );
+      {Key? key}
+  ) : super(key: key);
+  final RaisedGradientButton viewWorkout;
+  final GradientBorderButton redoWorkout;
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(builder: (context, theme) {

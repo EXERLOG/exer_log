@@ -3,9 +3,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutTotalsWidget extends StatefulWidget {
-  final WorkoutTotals totals;
 
-  const WorkoutTotalsWidget({required this.totals});
+  const WorkoutTotalsWidget({Key? key, required this.totals}) : super(key: key);
+  final WorkoutTotals totals;
 
   @override
   _WorkoutTotalsWidgetState createState() => _WorkoutTotalsWidgetState();

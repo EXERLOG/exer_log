@@ -6,7 +6,7 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class GoogleSignInButton extends StatefulWidget {
-  GoogleSignInButton({required this.onPressed});
+  GoogleSignInButton({Key? key, required this.onPressed}) : super(key: key);
 
   final FutureOr Function() onPressed;
 

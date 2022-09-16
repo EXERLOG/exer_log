@@ -9,15 +9,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class PrevExerciseCard extends StatefulWidget {
-  final String name;
-  final Exercise exercise;
-  Function(Exercise) addExercise;
-  Function(Exercise) updateExisitingExercise;
-  final bool isTemplate;
-  List<PrevSetWidget> setList;
-  PrevWorkoutData prevworkoutData;
 
   PrevExerciseCard({
+    Key? key,
     required this.name,
     required this.exercise,
     required this.addExercise,
@@ -25,7 +19,14 @@ class PrevExerciseCard extends StatefulWidget {
     required this.isTemplate,
     required this.setList,
     required this.prevworkoutData,
-  });
+  }) : super(key: key);
+  final String name;
+  final Exercise exercise;
+  Function(Exercise) addExercise;
+  Function(Exercise) updateExisitingExercise;
+  final bool isTemplate;
+  List<PrevSetWidget> setList;
+  PrevWorkoutData prevworkoutData;
   @override
   _PrevExerciseCardState createState() => _PrevExerciseCardState();
 }
@@ -33,7 +34,7 @@ class PrevExerciseCard extends StatefulWidget {
 class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepAliveClientMixin {
   int index = 0;
   double height = screenHeight * 0.23;
-  TotalsData totalData = new TotalsData(0, 0, 0.0, 0.0);
+  TotalsData totalData = TotalsData(0, 0, 0.0, 0.0);
   late ExerciseTotalsWidget totalWidget;
 
   @override
@@ -41,7 +42,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
     height += getHeight() - 20;
     if (widget.setList.isEmpty) {
       widget.setList.add(
-        new PrevSetWidget(
+        PrevSetWidget(
           name: widget.name,
           exercise: widget.exercise,
           addNewSet: widget.prevworkoutData.addNewSet,
@@ -49,7 +50,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
           isTemplate: widget.isTemplate,
         ),
       );
-      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
+      widget.exercise.sets.add(Sets(0, 0.0, 0.0, 0, 0.0));
     }
     totalWidget = widget.exercise.totalWidget;
     height += (screenHeight * 0.05) * (widget.setList.length - 1);
@@ -59,7 +60,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    totalWidget = new ExerciseTotalsWidget(totals: totalData, index: index);
+    totalWidget = ExerciseTotalsWidget(totals: totalData, index: index);
     return ThemeProvider(
       builder: (context, theme) {
         return Container(

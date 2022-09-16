@@ -5,13 +5,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class AddWorkoutAlert extends StatelessWidget {
-  final WorkoutTemplateSelectionWidget nameWidget;
-  final RaisedGradientButton addWorkout;
 
-  AddWorkoutAlert(
+  const AddWorkoutAlert(
     this.addWorkout,
     this.nameWidget,
-  );
+      {Key? key}
+  ) : super(key: key);
+  final WorkoutTemplateSelectionWidget nameWidget;
+  final RaisedGradientButton addWorkout;
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(

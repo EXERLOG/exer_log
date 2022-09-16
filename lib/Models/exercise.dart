@@ -10,8 +10,8 @@ class Exercise {
   int totalReps;
   double totalWeight;
   int totalSets;
-  ExerciseTotalsWidget totalWidget = new ExerciseTotalsWidget(
-      totals: new TotalsData(0, 0, 0.0, 0.0), index: 0);
+  ExerciseTotalsWidget totalWidget = ExerciseTotalsWidget(
+      totals: TotalsData(0, 0, 0.0, 0.0), index: 0);
 
   Exercise(this.name, this.sets, this.bodyParts, this.totalSets, this.totalReps,
       this.totalWeight);

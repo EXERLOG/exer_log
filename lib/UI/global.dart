@@ -72,7 +72,7 @@ TextStyle smallTitleStyleWhite = TextStyle(
 );
 
 // Dialog styles
-TextStyle dialogTitleStyle = new TextStyle(
+TextStyle dialogTitleStyle = TextStyle(
   color: Colors.white,
   letterSpacing: 1,
   fontFamily: 'Avenir',
@@ -80,7 +80,7 @@ TextStyle dialogTitleStyle = new TextStyle(
   fontSize: 16,
 );
 
-TextStyle dialogDescriptionStyle = new TextStyle(
+TextStyle dialogDescriptionStyle = TextStyle(
   color: Colors.white,
   letterSpacing: 1,
   fontFamily: 'Avenir',

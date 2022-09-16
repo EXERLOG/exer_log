@@ -5,12 +5,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutTemplateSelectionWidget extends StatefulWidget {
-  Function(Workout) setWorkout;
-  List workoutList;
 
-  WorkoutTemplateSelectionWidget({required this.setWorkout, required this.workoutList}) {
+  WorkoutTemplateSelectionWidget(
+      {Key? key, required this.setWorkout, required this.workoutList})
+      : super(key: key) {
     setWorkout = this.setWorkout;
   }
+  Function(Workout) setWorkout;
+  List workoutList;
   @override
   _WorkoutNameSelectionWidgetState createState() => _WorkoutNameSelectionWidgetState();
 }
@@ -25,7 +27,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
         return Center(
           child: Theme(
             data: ThemeData(
-                inputDecorationTheme: new InputDecorationTheme(
+                inputDecorationTheme: InputDecorationTheme(
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: theme.colorTheme.primaryColor),
                     //  when the TextFormField in unfocused
