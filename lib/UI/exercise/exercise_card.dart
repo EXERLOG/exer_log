@@ -66,7 +66,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
       widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
     } else if (widget.exercise.sets.length > 0) {
       int i = 0;
-      for (Sets sets in widget.exercise.sets) {
+      for (Sets _ in widget.exercise.sets) {
         setList.add(new SetWidget(
           name: widget.exercise.name,
           exercise: widget.exercise,
@@ -258,7 +258,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
         setList = [];
         int i = 0;
-        for (Sets sets in widget.exercise.sets) {
+        for (Sets _ in widget.exercise.sets) {
           setList.add(new SetWidget(
               name: widget.exercise.name,
               exercise: widget.exercise,

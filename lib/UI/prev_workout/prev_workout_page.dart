@@ -11,6 +11,7 @@ import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   @override
   void initState() {
-    print("init");
+    Log.info("init");
     firstLoad = true;
     newWorkout = new Workout(
       [],
@@ -138,9 +139,6 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
   updateTotals(newWorkout) {
     setState(() {
       firstLoad = false;
-      //workoutData.workout = new_workout;
-      //workout = new_workout;
-      //print(workoutData.exerciseWidgets[0].setList.length);
     });
   }
 
@@ -264,7 +262,6 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       firstLoad = false;
       workoutData = newWorkoutData;
       newWorkout = newWorkoutData.workout;
-      //print(workoutData.workout.exercises[0]);
     });
   }
 

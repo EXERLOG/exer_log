@@ -3,7 +3,6 @@
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/exercise_information.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutInformation extends StatefulWidget {

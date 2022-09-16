@@ -1,5 +1,6 @@
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
                 onChanged: (String? value) {
                   setState(() {
                     dropDownValue = value!;
-                    print(value);
+                    Log.info(value);
                   });
                   widget.setWorkout(workoutMap[dropDownValue]);
                   Navigator.pop(context);
@@ -55,7 +56,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
                 items: widget.workoutList.map<DropdownMenuItem<String>>((element) {
                   dropDownValue = element.name;
                   workoutMap[element.name] = element;
-                  print("NAME " + element.name);
+                  Log.info("NAME " + element.name);
                   return DropdownMenuItem<String>(
                     value: element.name,
                     child: Text(element.name),
