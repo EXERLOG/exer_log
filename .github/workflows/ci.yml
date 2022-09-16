@@ -21,7 +21,7 @@ jobs:
       -
         run: flutter analyze || true # TODO: Remove this after solving all issues
       -
-        run: flutter test || true # TODO: Remove this after having decent unit tests
+        run: flutter test
   build_apk:
     continue-on-error: false
     runs-on: ubuntu-latest
