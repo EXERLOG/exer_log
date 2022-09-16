@@ -1,7 +1,7 @@
 <div align="center">
 
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </div>
@@ -16,7 +16,7 @@
 
 # ExerLog 
 
-ExerLog is a simple and easy-to-use exercise journal app developed in conjunction with sports science that focuses on providing you with all the essential data without all the irrelevant information that you don't need. An app that keeps track of your exercises, body measurements, and offers you access to relevant workout information. The goal is to give you the freedom of a analog exercise journal with the analytical abilities of excel.  
+ExerLog is a simple and easy-to-use exercise journal app developed in conjunction with sports science that focuses on providing you with all the essential data without all the irrelevant information that you don't need. An app that keeps track of your exercises, body measurements, and offers you access to relevant workout information. The goal is to give you the freedom of an analog exercise journal with the analytical abilities of Excel.  
 
 Create workouts and keep track of your reps, sets, weight, total weight, total reps, total sets, maxes and more. Track important physical measurements including bodyweight, waist size, arm size, and more. Then, visualize all of these measurements in bar charts and graphs that show your advancement over time. 
 
@@ -80,11 +80,13 @@ Thank you so much to everyone who has been contributing to this project:
     <td align="center"><a href="https://github.com/jorre127"><img src="https://avatars.githubusercontent.com/u/44479965?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jorre127</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/issues?q=author%3Ajorre127" title="Bug reports">🐛</a></td>
     <td align="center"><a href="http://readlax.web.app"><img src="https://avatars.githubusercontent.com/u/86024158?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0RaMsY0</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=0RaMsY0" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/PickleNik"><img src="https://avatars.githubusercontent.com/u/31113245?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikita Krupin</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=PickleNik" title="Code">💻</a> <a href="#maintenance-PickleNik" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=tenshiAMD" title="Code">💻</a> <a href="#maintenance-tenshiAMD" title="Maintenance">🚧</a> <a href="https://github.com/EXERLOG/exer_log/commits?author=tenshiAMD" title="Documentation">📖</a> <a href="#data-tenshiAMD" title="Data">🔣</a> <a href="https://github.com/EXERLOG/exer_log/commits?author=tenshiAMD" title="Tests">⚠️</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/TheAmanM"><img src="https://avatars.githubusercontent.com/u/75181008?v=4?s=100" width="100px;" alt=""/><br /><sub><b>TheAmanM</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=TheAmanM" title="Code">💻</a> <a href="#maintenance-TheAmanM" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/lukelavery"><img src="https://avatars.githubusercontent.com/u/60143172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>lukelavery</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=lukelavery" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/MhouneyLH"><img src="https://avatars.githubusercontent.com/u/78447003?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lucas Hünniger</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/commits?author=MhouneyLH" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mfederowicz"><img src="https://avatars.githubusercontent.com/u/57678185?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mfederowicz</b></sub></a><br /><a href="https://github.com/EXERLOG/exer_log/issues?q=author%3Amfederowicz" title="Bug reports">🐛</a> <a href="https://github.com/EXERLOG/exer_log/commits?author=mfederowicz" title="Code">💻</a></td>
   </tr>
 </table>
 

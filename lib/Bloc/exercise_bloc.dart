@@ -3,13 +3,13 @@ import 'package:exerlog/Bloc/max_bloc.dart';
 import 'package:exerlog/Bloc/user_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/sets.dart';
+import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 
-import '../main.dart';
 
 Future<Exercise> getSpecificExercise(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .doc(id)
       .withConverter<Exercise>(
@@ -25,7 +25,7 @@ Future<Exercise> getSpecificExercise(String id) async {
 Future<List<String>> getExerciseNames() async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .get();
   List<String> exerciseNames = [];
@@ -42,7 +42,7 @@ Future<List<String>> getExerciseNames() async {
 Future<Exercise> loadExercise(String id) async {
   final data = FirebaseFirestore.instance
       .collection('users')
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .doc(id)
       .withConverter<Exercise>(
@@ -63,27 +63,27 @@ Future<Exercise> loadExercise(String id) async {
 Future<Exercise> getExerciseByName(String exercise) async {
   final ref = await FirebaseFirestore.instance
       .collection('users')
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .where('name', isEqualTo: exercise)
       .orderBy('created', descending: false)
       .get();
 
-  Exercise the_exercise = Exercise.fromJson(ref.docs.last.data());
+  Exercise theExercise = Exercise.fromJson(ref.docs.last.data());
   List<Sets> setList = [];
-  for (int i = 0; i < the_exercise.sets.length; i++) {
-    Sets set_ = Sets.fromString(the_exercise.sets[i]);
+  for (int i = 0; i < theExercise.sets.length; i++) {
+    Sets set_ = Sets.fromString(theExercise.sets[i]);
     setList.add(set_);
   }
-  the_exercise.sets = setList;
-  return the_exercise;
+  theExercise.sets = setList;
+  return theExercise;
 }
 
 Future<String> saveExercise(Exercise exercise) async {
   Map<String, Object?> jsonExercise = exercise.toJson();
   final ref = await firestoreInstance
       .collection("users")
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("exercises")
       .doc();
   await ref.set(jsonExercise);
@@ -93,10 +93,9 @@ Future<String> saveExercise(Exercise exercise) async {
 }
 
 void deleteExercise(Exercise exercise) async {
-  //checkRemoveMax(exercise);
   await firestoreInstance
       .collection("users")
-      .doc(userID)
+      .doc(SharedPref.getStringAsync(USER_UID))
       .collection("exercises")
       .doc(exercise.id)
       .delete();

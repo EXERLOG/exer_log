@@ -31,9 +31,9 @@ class PrevWorkoutData {
   }
 
   Future<Workout> loadWorkoutData() async {
-    Workout loaded_workout =
+    Workout loadedWorkout =
         new Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
-    loaded_workout.id = workout.id;
+    loadedWorkout.id = workout.id;
     List<Sets> setList = [];
     List<Exercise> exerciseList = [];
     List<Exercise> newExerciseList = [];
@@ -44,8 +44,8 @@ class PrevWorkoutData {
     int reps = 0;
     double avgKgs = 0;
     try {
-      for (String exercise_id in workout.exercises) {
-        await loadExercise(exercise_id)
+      for (String exerciseId in workout.exercises) {
+        await loadExercise(exerciseId)
             .then((value) async => {
               exerciseList.add(value),
               for (Sets sets in value.sets)
@@ -58,13 +58,13 @@ class PrevWorkoutData {
               avgKgs = (totalKgs / totalReps).roundToDouble(),
               });
       }
-      loaded_workout.exercises = exerciseList;
+      loadedWorkout.exercises = exerciseList;
 
       //workout = loaded_workout;
-    } catch (Exception) {
-      print(Exception);
+    } catch (exception) {
+      print(exception);
     }
-    return loaded_workout;
+    return loadedWorkout;
     //updateTotals(loaded_workout);
     //print(loaded_workout.exercises[0]);
   }
@@ -106,17 +106,17 @@ class PrevWorkoutData {
         }
         for (Sets sets in oldexercise.sets) {
           totals.sets += sets.sets;
-          int reps_set = sets.sets * sets.reps;
-          totals.weight += reps_set * sets.weight;
-          totals.reps += reps_set;
+          int repsSet = sets.sets * sets.reps;
+          totals.weight += repsSet * sets.weight;
+          totals.reps += repsSet;
         }
         totals.avgKgs = (totals.weight / totals.reps).roundToDouble();
       }
       //setTotals(exercise);
       updateTotals(workout);
-    } catch (Exception) {
+    } catch (exception) {
       print("problem");
-      print(Exception);
+      print(exception);
     }
   }
 
@@ -132,8 +132,8 @@ class PrevWorkoutData {
       if (exercise.name != '') {
         workout.exercises.add(exercise);
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (exception) {
+      print(exception);
     }
     updateTotals(workout);
   }

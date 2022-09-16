@@ -2,7 +2,6 @@ import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/Models/workout_data.dart';
-import 'package:exerlog/UI/calendar/view/calendar_page.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
 import 'package:exerlog/UI/global.dart';
@@ -11,6 +10,7 @@ import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -80,27 +80,16 @@ class _WorkoutPageState extends State<WorkoutPage> {
         screenWidth = MediaQuery.of(context).size.width;
         workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
         return Scaffold(
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: theme.colorTheme.primaryColor,
-            child: Icon(
-              Icons.add,
-              color: theme.colorTheme.backgroundColorVariation,
-            ),
-            onPressed: () {
-              showAlertDialogExercise(context);
-            },
+          backgroundColor: theme.colorTheme.backgroundColorVariation,
+          floatingActionButton: CustomFloatingActionButton(
+            icon: Icons.add,
+            onTap: () => showAlertDialogExercise(context),
           ),
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
             leading: BackButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => CalendarPage(),
-                  ),
-                );
-              },
+              onPressed: Navigator.of(context).pop,
               color: theme.colorTheme.primaryColor,
             ),
             actions: [
@@ -108,9 +97,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
                 margin: EdgeInsets.only(right: 5),
                 height: 30,
                 width: 30,
-                child: FloatingActionButton(
-                  backgroundColor: theme.colorTheme.primaryColor,
-                  onPressed: () {
+                child: CustomFloatingActionButton(
+                  icon: Icons.done,
+                  onTap: () {
                     for (Exercise exercise in workoutData.workout.exercises) {
                       for (int i = 0; i < exercise.sets.length; i++) {
                         if (exercise.sets[i].reps == 0) {
@@ -125,10 +114,6 @@ class _WorkoutPageState extends State<WorkoutPage> {
                       showSaveWorkoutAlertDialog(context);
                     }
                   },
-                  child: Icon(
-                    Icons.done,
-                    color: theme.colorTheme.backgroundColorVariation,
-                  ),
                 ),
               ),
             ],
@@ -265,12 +250,9 @@ class _WorkoutPageState extends State<WorkoutPage> {
       ),
       onPressed: () {
         saveWorkout(workoutData.workout);
-        Navigator.of(context).pop();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CalendarPage(),
-          ),
-        );
+        Navigator.of(context)
+          ..pop()
+          ..pop();
       },
     );
 
