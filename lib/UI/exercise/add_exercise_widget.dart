@@ -4,73 +4,71 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ExerciseNameSelectionWidget extends StatefulWidget {
-  Function(String) setExercisename;
+class ExerciseInputField extends StatefulWidget {
+  ExerciseInputField({
+    required this.setExerciseName,
+  });
 
-  ExerciseNameSelectionWidget({
-    required this.setExercisename,
-  }) {
-    setExercisename = this.setExercisename;
-  }
+  final Function(String) setExerciseName;
+
   @override
-  _ExerciseNameSelectionWidgetState createState() => _ExerciseNameSelectionWidgetState();
+  _ExerciseInputFieldState createState() => _ExerciseInputFieldState();
 }
 
-class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidget> {
+class _ExerciseInputFieldState extends State<ExerciseInputField> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
       builder: (context, theme) {
         return FutureBuilder<List<String>>(
           future: getExerciseNames(),
-          builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(child: CircularProgressIndicator());
             } else {
               if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error"),
-                );
+                return Center(child: Text("Error"));
               } else {
                 return Center(
-                  child: Theme(
-                    data: ThemeData(
-                        inputDecorationTheme: new InputDecorationTheme(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: theme.colorTheme.primaryColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Theme(
+                        data: ThemeData(
+                          inputDecorationTheme: InputDecorationTheme(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: theme.colorTheme.primaryColor,
+                              ),
                             ),
-                            //  when the TextFormField in unfocused
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: theme.colorTheme.primaryColor,
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: theme.colorTheme.primaryColor,
+                              ),
                             ),
-                            //  when the TextFormField in focused
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: theme.colorTheme.primaryColor,
+                              ),
+                            ),
                           ),
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: theme.colorTheme.primaryColor),
-                          ),
+                          textTheme: TextTheme(subtitle1: setStyle),
                         ),
-                        textTheme: TextTheme(
-                          subtitle1: setStyle,
-                        )),
-                    child: Container(
-                      child: Autocomplete<String>(
-                        optionsMaxHeight: 100,
-                        onSelected: (value) {
-                          widget.setExercisename(value);
-                        },
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                          widget.setExercisename(textEditingValue.text);
-                          return snapshot.data!.where((String name) => name.toLowerCase().startsWith(
-                                textEditingValue.text.toLowerCase(),
-                              ));
-                        },
+                        child: Autocomplete<String>(
+                          optionsMaxHeight: 100,
+                          onSelected: widget.setExerciseName,
+                          optionsBuilder: (TextEditingValue textEditingValue) {
+                            widget.setExerciseName(textEditingValue.text);
+                            return snapshot.data!.where(
+                              (String name) => name.toLowerCase().startsWith(
+                                    textEditingValue.text.toLowerCase(),
+                                  ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 );
               }
