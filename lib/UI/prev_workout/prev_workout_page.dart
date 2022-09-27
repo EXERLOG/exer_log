@@ -17,9 +17,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class PrevWorkoutPage extends StatefulWidget {
-  Workout workout;
 
-  PrevWorkoutPage(this.workout);
+  PrevWorkoutPage(this.workout, {Key? key}) : super(key: key);
+  Workout workout;
 
   @override
   _PrevWorkoutPageState createState() => _PrevWorkoutPageState();
@@ -34,9 +34,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   @override
   void initState() {
-    Log.info("init");
+    Log.info('init');
     firstLoad = true;
-    newWorkout = new Workout(
+    newWorkout = Workout(
       [],
       '',
       '',
@@ -52,9 +52,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     newWorkout.id = widget.workout.id;
 
     // TODO: implement initState
-    workoutData = new PrevWorkoutData(
+    workoutData = PrevWorkoutData(
       newWorkout,
-      new WorkoutTotals(0, 0, 0, 0, 0),
+      WorkoutTotals(0, 0, 0, 0, 0),
       updateTotals,
       addNewSet,
     );
@@ -70,7 +70,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     //workoutData.workout = workout;
-    workoutTotalsWidget = new WorkoutTotalsWidget(totals: workoutData.totals);
+    workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
     return ThemeProvider(
       builder: (context, theme) {
         return ThemeProvider(
@@ -144,21 +144,21 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   showAlertDialogExercise(BuildContext context) {
     ExerciseNameSelectionWidget exerciseNameSelectionWidget =
-        new ExerciseNameSelectionWidget(
+        ExerciseNameSelectionWidget(
       setExercisename: setExercisename,
     );
     // set up the button
     RaisedGradientButton okButton = RaisedGradientButton(
       radius: 30,
       child: Text(
-        "ADD",
+        'ADD',
         style: buttonTextSmall,
       ),
       onPressed: () {
         if (exerciseName != '') {
           setState(() {
             workoutData
-                .addExercise(new Exercise(exerciseName, [], [], 0, 0, 0.0));
+                .addExercise(Exercise(exerciseName, [], [], 0, 0, 0.0));
             workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
@@ -189,16 +189,16 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     RaisedGradientButton okButton = RaisedGradientButton(
       radius: 30,
       child: Text(
-        "SAVE",
+        'SAVE',
         style: buttonTextSmall,
       ),
       onPressed: () {
         saveWorkout(workoutData.workout);
         setState(() {
           firstLoad = true;
-          workoutData = new PrevWorkoutData(
-            new Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
-            new WorkoutTotals(0, 0, 0, 0, 0),
+          workoutData = PrevWorkoutData(
+            Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
+            WorkoutTotals(0, 0, 0, 0, 0),
             updateTotals,
             addNewSet,
           );
@@ -223,7 +223,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     RaisedGradientButton okButton = RaisedGradientButton(
       radius: 30,
       child: Text(
-        "DELETE",
+        'DELETE',
         style: buttonTextSmall,
       ),
       onPressed: () {
@@ -253,9 +253,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
 
   addExercises(newWorkout) {
     setState(() {
-      PrevWorkoutData newWorkoutData = new PrevWorkoutData(
+      PrevWorkoutData newWorkoutData = PrevWorkoutData(
         newWorkout,
-        new WorkoutTotals(0, 0, 0, 0, 0),
+        WorkoutTotals(0, 0, 0, 0, 0),
         updateTotals,
         addNewSet,
       );
@@ -269,7 +269,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
     RaisedGradientButton viewButton = RaisedGradientButton(
       radius: 30,
       child: Text(
-        "VIEW",
+        'VIEW',
         style: buttonTextSmall,
       ),
       onPressed: () {
@@ -283,7 +283,7 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
       borderSize: 2,
       radius: 30,
       child: Text(
-        "REDO",
+        'REDO',
         style: whiteTextStyleSmall,
       ),
       onPressed: () {

@@ -13,7 +13,7 @@ final _authenticationProvider =
 );
 
 class AuthenticationController extends StateNotifier<BaseState> {
-  AuthenticationController({this.ref}) : super(InitialState()) {
+  AuthenticationController({this.ref}) : super(const InitialState()) {
     _repository = ref!.watch(AuthenticationRepository.provider);
   }
 
@@ -29,7 +29,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
 
   Future<void> signIn() async {
     try {
-      state = LoadingState();
+      state = const LoadingState();
       await _repository.signIn(
         email: emailTextEditingController.text,
         password: passwordTextEditingController.text,
@@ -44,7 +44,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
 
   Future<void> signUp() async {
     try {
-      state = LoadingState();
+      state = const LoadingState();
       await _repository.signUp(
         email: emailTextEditingController.text,
         password: passwordTextEditingController.text,
@@ -60,7 +60,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
   /// TODO: Need to decide if it's signIn / signUp
   Future<void> signInWithGoogle() async {
     try {
-      state = LoadingState();
+      state = const LoadingState();
       await _repository.signInWithGoogle();
       authStateChangeStatus();
     } on FirebaseAuthException catch (exception) {
@@ -70,7 +70,7 @@ class AuthenticationController extends StateNotifier<BaseState> {
     } catch (exception, stackTrace) {
       Log.error(exception.toString(), stackTrace: stackTrace);
 
-      state = ErrorState(message: 'Something went wrong');
+      state = const ErrorState(message: 'Something went wrong');
     }
   }
 
@@ -85,12 +85,12 @@ class AuthenticationController extends StateNotifier<BaseState> {
       Log.info(this.user.uid);
 
       if (isSignUp) {
-        state = SignUpSuccessState();
+        state = const SignUpSuccessState();
       } else {
-        state = LoginSuccessState();
+        state = const LoginSuccessState();
       }
     } else {
-      state = ErrorState(message: 'Something went wrong');
+      state = const ErrorState(message: 'Something went wrong');
     }
   }
 

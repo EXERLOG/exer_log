@@ -3,34 +3,37 @@ import 'package:exerlog/Models/maxes.dart';
 import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/maxes/max_builder.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SetWidget extends StatefulWidget {
+
+  SetWidget({
+    required this.name,
+    required this.exercise,
+    required this.addNewSet,
+    required this.removeSet,
+    required this.counter,
+    required this.id,
+    required this.isTemplate,
+    this.updateExercise,
+    required this.updateTotal,
+    Key? key,
+  }) : super(key: key);
+
   final String name;
   final Exercise exercise;
+  final counter;
+  final bool isTemplate;
+  int id;
+
   Function(Exercise, Sets, int) addNewSet;
   Function(Exercise, Sets, int) removeSet;
   Function? updateExercise;
   Function updateTotal;
-  final counter;
-  //Function(Sets, int) createNewSet;
-  final bool isTemplate;
-  int id;
 
-  SetWidget(
-      {required this.name,
-      required this.exercise,
-      required this.addNewSet,
-      required this.removeSet,
-      //required this.createNewSet,
-      required this.counter,
-      required this.id,
-      required this.isTemplate,
-      this.updateExercise,
-      required this.updateTotal
-      });
   @override
   _SetWidgetState createState() => _SetWidgetState();
 }
@@ -39,15 +42,15 @@ class _SetWidgetState extends State<SetWidget>
   with AutomaticKeepAliveClientMixin {
   int percent = 0;
   Max? oneRepMax;
-  Sets sets = new Sets(0, 0.0, 0.0, 0, 0.0);
+  Sets sets = Sets(0, 0.0, 0.0, 0, 0.0);
   String percentageController = '0%';
-  TextEditingController setsController = new TextEditingController();
-  TextEditingController repsController = new TextEditingController();
-  TextEditingController weightController = new TextEditingController();
-  TextEditingController restController = new TextEditingController();
+  TextEditingController setsController = TextEditingController();
+  TextEditingController repsController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController restController = TextEditingController();
   List types = ['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
-  ValueNotifier<SetData> _notifier = ValueNotifier(new SetData(0.0, 0));
+  ValueNotifier<SetData> _notifier = ValueNotifier(SetData(0.0, 0));
 
   @override
   void initState() {
@@ -71,7 +74,7 @@ class _SetWidgetState extends State<SetWidget>
         key: ValueKey(widget.counter),
         endActionPane: ActionPane(
           // A motion is a widget used to control how the pane animates.
-          motion: ScrollMotion(),
+          motion: const ScrollMotion(),
 
           // A pane can dismiss the Slidable.
           //dismissible: DismissiblePane(onDismissed: () {}),
@@ -83,8 +86,8 @@ class _SetWidgetState extends State<SetWidget>
               onPressed: () {
                   widget.removeSet(widget.exercise, sets, widget.id);
               },
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color(0xFFFE4A49))),
-              child: Icon(Icons.delete, color: Colors.white,),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color(0xFFFE4A49))),
+              child: const Icon(Icons.delete, color: Colors.white,),
             ),
           ],
         ),
@@ -95,37 +98,44 @@ class _SetWidgetState extends State<SetWidget>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Center(
-                    child: Text(
-                  '#${widget.id + 1}',
-                  style: setStyle,
-                )),
                 flex: 8,
+                child: Center(
+                  child: Text(
+                    '#${widget.id + 1}',
+                    style: setStyle,
+                  ),
+                ),
               ),
               Expanded(
+                flex: 15,
                 child: getTextField(0),
-                flex: 15,
               ),
               Expanded(
+                flex: 15,
                 child: getTextField(1),
-                flex: 15,
               ),
               Expanded(
+                flex: 15,
                 child: getTextField(2),
-                flex: 15,
               ),
               Expanded(
+                flex: 15,
                 child: getTextField(3),
-                flex: 15,
               ),
               Expanded(
-                child: ValueListenableBuilder(
-                valueListenable: _notifier,
-                builder: (BuildContext context, SetData value, Widget? child) {
-                  return MaxInformation(id: widget.exercise.name, sets: widget.exercise.sets[widget.id], setMax: setOneRepMax, setPercentage: setPercentage);
-                }
-              ),
                 flex: 10,
+                child: ValueListenableBuilder(
+                  valueListenable: _notifier,
+                  builder:
+                      (BuildContext context, SetData value, Widget? child) {
+                    return MaxInformation(
+                      id: widget.exercise.name,
+                      sets: widget.exercise.sets[widget.id],
+                      setMax: setOneRepMax,
+                      setPercentage: setPercentage,
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -163,7 +173,7 @@ class _SetWidgetState extends State<SetWidget>
           : [FilteringTextInputFormatter.digitsOnly],
       controller: controllers[type],
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
         hintText: getHintText(type),
@@ -174,7 +184,7 @@ class _SetWidgetState extends State<SetWidget>
         sets.sets = getInfo(setsController.text, 0);
         if (weightController.text.contains('%')) {
           // set weight to be percentage of max
-          var regex = new RegExp(r'\D');
+          var regex = RegExp(r'\D');
           sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
           weightController.text = sets.weight.toString();
         }
@@ -184,7 +194,7 @@ class _SetWidgetState extends State<SetWidget>
           sets.sets = 1;
         }
         widget.addNewSet(widget.exercise, sets, widget.id);
-        _notifier.value = new SetData(sets.weight, sets.reps);
+        _notifier.value = SetData(sets.weight, sets.reps);
         widget.updateTotal();
         //percent = (sets.weight / oneRepMax).round();
       },
@@ -223,7 +233,9 @@ class _SetWidgetState extends State<SetWidget>
     String returnText = '';
     try {
       returnText = listType[type].toString();
-    } catch (exception) {}
+    } catch (exception) {
+      Log.debug('hint error: $exception');
+    }
     return returnText;
   }
 
@@ -233,8 +245,8 @@ class _SetWidgetState extends State<SetWidget>
 }
 
 class SetData {
+  SetData(this.weight, this.reps);
+
   double weight;
   int reps;
-
-  SetData(this.weight, this.reps);
 }

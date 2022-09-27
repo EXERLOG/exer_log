@@ -6,9 +6,10 @@ import 'package:exerlog/UI/exercise/exercise_information.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutInformation extends StatefulWidget {
-  final String id;
 
-  WorkoutInformation({required this.id});
+  const WorkoutInformation({required this.id,Key? key}) : super(key: key);
+
+  final String id;
   @override
   _WorkoutInformationState createState() => _WorkoutInformationState();
 
@@ -21,12 +22,12 @@ class _WorkoutInformationState extends State<WorkoutInformation> {
       future: getSpecificWorkout(widget.id),
       builder: (BuildContext context, AsyncSnapshot<Workout> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text('Error'),
             );
           } else {

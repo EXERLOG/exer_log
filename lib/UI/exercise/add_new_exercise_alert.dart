@@ -5,13 +5,14 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class AddExerciseAlert extends StatelessWidget {
-  final ExerciseNameSelectionWidget nameWidget;
-  final RaisedGradientButton addExercise;
 
   const AddExerciseAlert(
     this.addExercise,
     this.nameWidget,
-  );
+      {Key? key,}
+  ) : super(key: key);
+  final ExerciseNameSelectionWidget nameWidget;
+  final RaisedGradientButton addExercise;
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
@@ -20,7 +21,7 @@ class AddExerciseAlert extends StatelessWidget {
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             height: screenHeight * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +32,7 @@ class AddExerciseAlert extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: nameWidget,
                 ),
                 Container(

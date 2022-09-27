@@ -17,7 +17,7 @@ class _LogoutButtonState extends State<LogoutButton> with Dialogs {
       padding: const EdgeInsets.only(right: 16.0),
       child: InkWell(
         onTap: signOutConfirmationDialog,
-        child: Icon(Icons.logout),
+        child: const Icon(Icons.logout),
       ),
     );
   }

@@ -5,7 +5,7 @@ import 'package:exerlog/src/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm(this.controller);
+  const LoginForm(this.controller, {Key? key}) : super(key: key);
 
   final AuthenticationController controller;
 
@@ -14,7 +14,7 @@ class LoginForm extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Spacer(),
+        const Spacer(),
         OutlinedTextField(
           hinText: 'Email',
           leadingIcon: Icons.email,
@@ -28,7 +28,7 @@ class LoginForm extends StatelessWidget {
           textEditingController: controller.passwordTextEditingController,
           obscureText: true,
         ),
-        Spacer(),
+        const Spacer(),
         GoogleSignInButton(onPressed: controller.signInWithGoogle)
       ],
     );

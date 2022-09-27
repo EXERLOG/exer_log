@@ -3,18 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'exercise.dart';
 
 class Workout {
-  List exercises;
-  String notes;
-  String rating;
-  double time;
-  String type;
-  String name;
-  bool template;
-  DateTime? date;
-  String? id;
-  int totalReps;
-  double totalWeight;
-  int totalSets;
 
   Workout(
       this.exercises,
@@ -26,31 +14,7 @@ class Workout {
       this.template,
       this.totalReps,
       this.totalWeight,
-      this.totalSets);
-
-  void setWorkoutTotals() {
-    for (Exercise exercise in exercises) {
-      totalReps += exercise.totalReps;
-      totalSets += exercise.totalSets;
-      totalWeight += exercise.totalWeight;
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'date': FieldValue.serverTimestamp(),
-      'exercises': exercises,
-      'notes': notes,
-      'rating': rating,
-      'time': time,
-      'type': type,
-      'total_reps': totalReps,
-      'total_weight': totalWeight,
-      'total_sets': totalSets,
-      'template': template,
-      'name': name
-    };
-  }
+      this.totalSets,);
 
   Workout.fromJson(Map<String, Object?> workout)
       : this.exercises = workout['exercises']! as List,
@@ -89,6 +53,41 @@ class Workout {
         this.name = workout.docs.last['name']! as String,
         this.type = workout.docs.last['type']! as String,
         this.template = workout.docs.last['template']! as bool;
-// getVolume()
-// getLoad()
+
+  List exercises;
+  String notes;
+  String rating;
+  double time;
+  String type;
+  String name;
+  bool template;
+  DateTime? date;
+  String? id;
+  int totalReps;
+  double totalWeight;
+  int totalSets;
+
+  void setWorkoutTotals() {
+    for (Exercise exercise in exercises) {
+      totalReps += exercise.totalReps;
+      totalSets += exercise.totalSets;
+      totalWeight += exercise.totalWeight;
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'date': FieldValue.serverTimestamp(),
+      'exercises': exercises,
+      'notes': notes,
+      'rating': rating,
+      'time': time,
+      'type': type,
+      'total_reps': totalReps,
+      'total_weight': totalWeight,
+      'total_sets': totalSets,
+      'template': template,
+      'name': name
+    };
+  }
 }

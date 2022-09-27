@@ -18,12 +18,12 @@ class AuthenticationRepository {
 
   Future signIn({required String email, password}) async {
     await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+        email: email, password: password,);
   }
 
   Future<void> signUp({required String email, password}) async {
     await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+        email: email, password: password,);
   }
 
   Future<void> signInWithGoogle() async {

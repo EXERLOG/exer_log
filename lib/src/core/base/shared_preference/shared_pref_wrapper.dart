@@ -34,7 +34,7 @@ class SharedPref {
       return await sharedPreferences.setStringList(key, value);
     } else {
       throw ArgumentError(
-          'Invalid value ${value.runtimeType} - Must be a String, int, bool, double, Map<String, dynamic> or StringList');
+          'Invalid value ${value.runtimeType} - Must be a String, int, bool, double, Map<String, dynamic> or StringList',);
     }
   }
 
@@ -65,7 +65,7 @@ class SharedPref {
 
   /// Returns a JSON if exists in SharedPref
   static Map<String, dynamic> getJSONAsync(String key,
-      {Map<String, dynamic>? defaultValue}) {
+      {Map<String, dynamic>? defaultValue,}) {
     if (sharedPreferences.containsKey(key) &&
         sharedPreferences.getString(key)!.validate().isNotEmpty) {
       return jsonDecode(sharedPreferences.getString(key)!);

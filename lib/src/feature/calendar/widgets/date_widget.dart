@@ -8,9 +8,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class DateWidget extends StatelessWidget {
-  final DateTime date;
 
-  DateWidget(this.date);
+  const DateWidget(this.date, {Key? key}) : super(key: key);
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class DateWidget extends StatelessWidget {
     );
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: getWorkoutOnDate(after, before),
-      builder: (context, snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
         if (!snapshot.hasData) {
           return _buildDayContainer();
         }
@@ -60,10 +60,10 @@ class DateWidget extends StatelessWidget {
 
   Widget _buildDayContainer({bool hasWorkout = false}) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Container(
-          margin: EdgeInsets.all(5),
-          padding: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(10),
           decoration:
               hasWorkout ? _hasWorkoutDecoration(theme.colorTheme) : null,
           child: Center(
@@ -91,11 +91,11 @@ class DateWidget extends StatelessWidget {
   }
 
   void _navigateToPreviousWorkoutScreen(context, Workout? workout) {
-    if (workout != null)
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => PrevWorkoutPage(workout),
-        ),
-      );
+    if (workout == null) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => PrevWorkoutPage(workout),
+      ),
+    );
   }
 }

@@ -11,7 +11,8 @@ class MaxInformation extends StatefulWidget {
     required this.sets,
     this.setMax,
     this.setPercentage,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final String id;
   Sets sets;
@@ -33,7 +34,7 @@ class _MaxInformationState extends State<MaxInformation> {
       builder: (BuildContext context, AsyncSnapshot<Max> snapshot) {
         Sets sets = widget.sets;
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else {

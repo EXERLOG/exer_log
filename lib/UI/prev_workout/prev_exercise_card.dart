@@ -9,13 +9,6 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class PrevExerciseCard extends StatefulWidget {
-  final String name;
-  final Exercise exercise;
-  Function(Exercise) addExercise;
-  Function(Exercise) updateExisitingExercise;
-  final bool isTemplate;
-  List<PrevSetWidget> setList;
-  PrevWorkoutData prevworkoutData;
 
   PrevExerciseCard({
     required this.name,
@@ -25,7 +18,15 @@ class PrevExerciseCard extends StatefulWidget {
     required this.isTemplate,
     required this.setList,
     required this.prevworkoutData,
-  });
+    Key? key,
+  }) : super(key: key);
+  final String name;
+  final Exercise exercise;
+  Function(Exercise) addExercise;
+  Function(Exercise) updateExisitingExercise;
+  final bool isTemplate;
+  List<PrevSetWidget> setList;
+  PrevWorkoutData prevworkoutData;
   @override
   _PrevExerciseCardState createState() => _PrevExerciseCardState();
 }
@@ -33,7 +34,7 @@ class PrevExerciseCard extends StatefulWidget {
 class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepAliveClientMixin {
   int index = 0;
   double height = screenHeight * 0.23;
-  TotalsData totalData = new TotalsData(0, 0, 0.0, 0.0);
+  TotalsData totalData = TotalsData(0, 0, 0.0, 0.0);
   late ExerciseTotalsWidget totalWidget;
 
   @override
@@ -41,7 +42,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
     height += getHeight() - 20;
     if (widget.setList.isEmpty) {
       widget.setList.add(
-        new PrevSetWidget(
+        PrevSetWidget(
           name: widget.name,
           exercise: widget.exercise,
           addNewSet: widget.prevworkoutData.addNewSet,
@@ -49,7 +50,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
           isTemplate: widget.isTemplate,
         ),
       );
-      widget.exercise.sets.add(new Sets(0, 0.0, 0.0, 0, 0.0));
+      widget.exercise.sets.add(Sets(0, 0.0, 0.0, 0, 0.0));
     }
     totalWidget = widget.exercise.totalWidget;
     height += (screenHeight * 0.05) * (widget.setList.length - 1);
@@ -59,7 +60,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    totalWidget = new ExerciseTotalsWidget(totals: totalData, index: index);
+    totalWidget = ExerciseTotalsWidget(totals: totalData, index: index);
     return ThemeProvider(
       builder: (context, theme) {
         return Container(
@@ -68,10 +69,10 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
             children: [
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: theme.colorTheme.backgroundColorVariation,
                   boxShadow: [
-                    BoxShadow(
+                    const BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.2),
                       offset: Offset(0, 3),
                       blurRadius: 5,
@@ -79,8 +80,8 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                     ),
                   ],
                 ),
-                margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-                padding: EdgeInsets.all(20),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                padding: const EdgeInsets.all(20),
                 height: height,
                 child: Column(
                   children: [
@@ -115,40 +116,40 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                                 width: screenWidth * 0.08,
                               ),
                               Container(
+                                width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
                                     'Reps',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
                               ),
                               Container(
+                                width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
                                     'Sets',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
                               ),
                               Container(
+                                width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
                                     'Weight',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
                               ),
                               Container(
+                                width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
                                     'Rest',
                                     style: smallTitleStyleWhite,
                                   ),
                                 ),
-                                width: screenWidth * 0.15,
                               ),
                               Container(
                                 width: screenWidth * 0.1,

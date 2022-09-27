@@ -45,7 +45,7 @@ class OutlinedTextField extends StatelessWidget {
                   color: theme.colorTheme.primaryColor,
                 ),
               ),
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               focusedErrorBorder: _outlineInputBorder,
               focusedBorder: _outlineInputBorder,
               errorBorder: _outlineInputBorder,

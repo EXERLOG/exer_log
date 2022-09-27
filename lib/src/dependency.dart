@@ -21,4 +21,4 @@ final _googleSignInProvider = Provider<GoogleSignIn?>((ref) => GoogleSignIn());
 final _connectivityProvider = Provider<Connectivity>((ref) => Connectivity());
 
 final _onConnectivityChangedStreamProvider = StreamProvider<ConnectivityResult>(
-    (ref) => ref.read(_connectivityProvider).onConnectivityChanged);
+    (ref) => ref.read(_connectivityProvider).onConnectivityChanged,);

@@ -34,33 +34,37 @@ void main() async {
   runApp(
     ProviderScope(
       observers: [RiverpodLogger()],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends ConsumerWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'EXERLOG',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          snackBarTheme: SnackBarThemeData(
-              backgroundColor: ThemeColor.red,
-              contentTextStyle: TextStyle(color: ThemeColor.secondary)),
-          scaffoldBackgroundColor: ThemeColor.darkBlueVariation,
-          dialogBackgroundColor: ThemeColor.darkBlueVariation,
-          appBarTheme: AppBarTheme(
-              backgroundColor: ThemeColor.darkBlue.withOpacity(0.75)),
-          colorScheme: ColorScheme.light().copyWith(
-            primary: ThemeColor.primary,
-            secondary: ThemeColor.secondary,
-            error: ThemeColor.red,
-            background: ThemeColor.darkBlueVariation,
-          )),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: ThemeColor.red,
+          contentTextStyle: TextStyle(color: ThemeColor.secondary),
+        ),
+        scaffoldBackgroundColor: ThemeColor.darkBlueVariation,
+        dialogBackgroundColor: ThemeColor.darkBlueVariation,
+        appBarTheme:
+            AppBarTheme(backgroundColor: ThemeColor.darkBlue.withOpacity(0.75)),
+        colorScheme: const ColorScheme.light().copyWith(
+          primary: ThemeColor.primary,
+          secondary: ThemeColor.secondary,
+          error: ThemeColor.red,
+          background: ThemeColor.darkBlueVariation,
+        ),
+      ),
       darkTheme: ThemeData(),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

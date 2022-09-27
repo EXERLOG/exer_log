@@ -4,14 +4,15 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class RaisedGradientButton extends StatefulWidget {
-  RaisedGradientButton({
+  const RaisedGradientButton({
     required this.onPressed,
     required this.child,
+    Key? key,
     this.width = double.infinity,
     this.height = 50.0,
     this.radius = 30,
     this.gradient,
-  });
+  }) : super(key: key);
 
   final FutureOr Function() onPressed;
   final Widget child;
@@ -48,7 +49,7 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
             child: TextButton(
               onPressed: _onPressed,
               child: _isLoading
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),

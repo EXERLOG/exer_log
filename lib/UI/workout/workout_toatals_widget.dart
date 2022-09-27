@@ -3,9 +3,9 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutTotalsWidget extends StatefulWidget {
-  final WorkoutTotals totals;
 
-  const WorkoutTotalsWidget({required this.totals});
+  const WorkoutTotalsWidget({Key? key, required this.totals}) : super(key: key);
+  final WorkoutTotals totals;
 
   @override
   _WorkoutTotalsWidgetState createState() => _WorkoutTotalsWidgetState();
@@ -19,15 +19,15 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
         return Container(
           height: screenHeight * 0.13,
           decoration: BoxDecoration(color: theme.colorTheme.backgroundColorVariation, boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.2),
               offset: Offset(0, 3),
               blurRadius: 5,
               spreadRadius: 5,
             ),
-          ]),
-          margin: EdgeInsets.only(bottom: 10),
-          padding: EdgeInsets.all(10),
+          ],),
+          margin: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Row(
@@ -137,11 +137,6 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
 }
 
 class WorkoutTotals {
-  int sets;
-  int reps;
-  double weight;
-  double avgKgs;
-  int exercises;
 
   WorkoutTotals(this.sets, this.reps, this.weight, this.avgKgs, this.exercises) {
     sets = this.sets;
@@ -150,4 +145,10 @@ class WorkoutTotals {
     avgKgs = this.avgKgs;
     exercises = this.exercises;
   }
+
+  int sets;
+  int reps;
+  double weight;
+  double avgKgs;
+  int exercises;
 }

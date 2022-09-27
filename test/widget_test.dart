@@ -11,9 +11,9 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           title: 'EXERLOG',
           home: Container(
-            child: Text('EXERLOG'),
+            child: const Text('EXERLOG'),
           ),
-        ));
+        ),);
       });
     }
 

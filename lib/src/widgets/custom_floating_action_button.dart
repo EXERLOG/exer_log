@@ -2,15 +2,15 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
-  final double size;
-
-  CustomFloatingActionButton({
+  const CustomFloatingActionButton({
+    Key? key,
     required this.icon,
     required this.onTap,
     this.size = 50.0,
-  });
+  }) : super(key: key);
+  final IconData icon;
+  final VoidCallback onTap;
+  final double size;
 
   @override
   Widget build(BuildContext context) => ThemeProvider(
@@ -23,7 +23,7 @@ class CustomFloatingActionButton extends StatelessWidget {
                 color: theme.colorTheme.shadow,
                 blurRadius: 10,
                 spreadRadius: 2,
-                offset: Offset(0, 0),
+                offset: const Offset(0, 0),
               ),
             ],
           ),

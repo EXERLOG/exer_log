@@ -4,13 +4,12 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseNameSelectionWidget extends StatefulWidget {
-  Function(String) setExercisename;
 
-  ExerciseNameSelectionWidget({
-    required this.setExercisename,
-  }) {
+  ExerciseNameSelectionWidget({required this.setExercisename, Key? key})
+      : super(key: key) {
     setExercisename = this.setExercisename;
   }
+  Function(String) setExercisename;
   @override
   _ExerciseNameSelectionWidgetState createState() => _ExerciseNameSelectionWidgetState();
 }
@@ -24,19 +23,19 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
           future: getExerciseNames(),
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
               if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text('Error'),
                 );
               } else {
                 return Center(
                   child: Theme(
                     data: ThemeData(
-                        inputDecorationTheme: new InputDecorationTheme(
+                        inputDecorationTheme: InputDecorationTheme(
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: theme.colorTheme.primaryColor,
@@ -53,9 +52,10 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
                             borderSide: BorderSide(color: theme.colorTheme.primaryColor),
                           ),
                         ),
-                        textTheme: TextTheme(
-                          subtitle1: setStyle,
-                        )),
+                      textTheme: TextTheme(
+                        subtitle1: setStyle,
+                      ),
+                    ),
                     child: Container(
                       child: Autocomplete<String>(
                         optionsMaxHeight: 100,
@@ -64,9 +64,11 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
                         },
                         optionsBuilder: (TextEditingValue textEditingValue) {
                           widget.setExercisename(textEditingValue.text);
-                          return snapshot.data!.where((String name) => name.toLowerCase().startsWith(
-                                textEditingValue.text.toLowerCase(),
-                              ));
+                          return snapshot.data!.where(
+                            (String name) => name.toLowerCase().startsWith(
+                                  textEditingValue.text.toLowerCase(),
+                                ),
+                          );
                         },
                       ),
                     ),

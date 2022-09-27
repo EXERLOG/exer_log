@@ -2,9 +2,9 @@ import 'package:exerlog/src/core/theme/theme_color.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  final ColorTheme colorTheme;
-
   const AppTheme._({required this.colorTheme});
+
+  final ColorTheme colorTheme;
 
   static const _darkInstance = AppTheme._(
     colorTheme: ColorTheme(
@@ -34,20 +34,13 @@ class AppTheme {
 
   static AppTheme of(BuildContext context) {
     final platformBrightness = MediaQuery.of(context).platformBrightness;
-    return platformBrightness == Brightness.dark ? _darkInstance : _lightInstance;
+    return platformBrightness == Brightness.dark
+        ? _darkInstance
+        : _lightInstance;
   }
 }
 
 class ColorTheme {
-  final Color primaryColor;
-  final Color secondaryColor;
-  final Color backgroundColor;
-  final Color backgroundColorVariation;
-  final Color error;
-  final Color disabled;
-  final Color white;
-  final Color shadow;
-
   const ColorTheme({
     required this.primaryColor,
     required this.secondaryColor,
@@ -58,4 +51,13 @@ class ColorTheme {
     required this.white,
     required this.shadow,
   });
+
+  final Color primaryColor;
+  final Color secondaryColor;
+  final Color backgroundColor;
+  final Color backgroundColorVariation;
+  final Color error;
+  final Color disabled;
+  final Color white;
+  final Color shadow;
 }
