@@ -1,4 +1,5 @@
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class ElevatedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Center(
           child: Container(
             height: context.height * 0.50,
@@ -21,7 +22,7 @@ class ElevatedContainer extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.colorTheme.backgroundColorVariation,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: theme.colorTheme.shadow,
                   offset: const Offset(0, 3),

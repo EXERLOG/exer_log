@@ -7,9 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final _authenticationProvider =
+final AutoDisposeStateNotifierProvider<AuthenticationController, BaseState> _authenticationProvider =
     StateNotifierProvider.autoDispose<AuthenticationController, BaseState>(
-  (ref) => AuthenticationController(ref: ref),
+  (AutoDisposeStateNotifierProviderRef<AuthenticationController, BaseState> ref) => AuthenticationController(ref: ref),
 );
 
 class AuthenticationController extends StateNotifier<BaseState> {

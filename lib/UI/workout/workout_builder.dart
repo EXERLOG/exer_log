@@ -33,7 +33,7 @@ class _WorkoutInformationState extends State<WorkoutInformation> {
           } else {
             return Center(
               child: Column(
-                children: [
+                children: <Widget>[
                   Text(snapshot.data!.type),
                   ExerciseInformation(id: snapshot.data!.exercises[0])
                 ],

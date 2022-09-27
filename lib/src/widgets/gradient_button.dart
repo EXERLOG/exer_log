@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class RaisedGradientButton extends StatefulWidget {
     this.gradient,
   }) : super(key: key);
 
-  final FutureOr Function() onPressed;
+  final FutureOr<void> Function() onPressed;
   final Widget child;
   final double width;
   final double height;
@@ -31,7 +32,7 @@ class _RaisedGradientButtonState extends State<RaisedGradientButton> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return SizedBox(
           height: widget.height,
           width: widget.width,

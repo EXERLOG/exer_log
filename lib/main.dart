@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Device orientation locked to portrait up
-  SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
   ]);
 
@@ -33,7 +33,7 @@ void main() async {
   /// the root of their widget tree
   runApp(
     ProviderScope(
-      observers: [RiverpodLogger()],
+      observers: <ProviderObserver>[RiverpodLogger()],
       child: const MyApp(),
     ),
   );

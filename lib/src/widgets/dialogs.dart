@@ -1,5 +1,6 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     required List<Widget> actions,
   }) {
     return ThemeProvider(
-      builder: (context, theme) => AlertDialog(
+      builder: (BuildContext context, AppTheme theme) => AlertDialog(
         backgroundColor: theme.colorTheme.backgroundColorVariation,
         title: Text(
           title,
@@ -32,18 +33,18 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
     void _navigateToLandingScreen(BuildContext context) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const LandingScreen()),
-        (route) => false,
+        MaterialPageRoute<void>(builder: (BuildContext context) => const LandingScreen()),
+        (Route<dynamic> route) => false,
       );
     }
 
     await showDialog(
       context: context,
-      builder: (context) => _dialog(
+      builder: (BuildContext context) => _dialog(
         title: 'Sign Out',
         description:
             'Are you sure you want to sign out?',
-        actions: [
+        actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.pop(context);

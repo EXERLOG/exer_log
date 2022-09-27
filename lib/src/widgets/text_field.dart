@@ -1,4 +1,5 @@
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class OutlinedTextField extends StatelessWidget {
   }) : super(key: key);
 
   final String hinText;
-  final FormFieldValidator validator;
+  final FormFieldValidator<String> validator;
   final IconData leadingIcon;
   final TextEditingController textEditingController;
   final bool obscureText;
@@ -21,7 +22,7 @@ class OutlinedTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorTheme.primaryColor),
           borderRadius: BorderRadius.circular(30),

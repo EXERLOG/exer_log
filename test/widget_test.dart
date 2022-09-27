@@ -18,7 +18,7 @@ void main() {
     }
 
     testWidgets('when init up home container', (WidgetTester tester) async {
-      var homeContainer = find.text('EXERLOG');
+      Finder homeContainer = find.text('EXERLOG');
       await _initOnlyApp(tester);
       await tester.pump();
       expect(homeContainer, findsOneWidget);

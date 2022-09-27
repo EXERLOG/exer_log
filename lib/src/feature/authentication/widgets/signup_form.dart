@@ -13,24 +13,24 @@ class SignupForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget> [
         OutlinedTextField(
           hinText: 'Email',
           leadingIcon: Icons.email,
-          validator: (value) => Validators.requiredField(value),
+          validator: (String? value) => Validators.requiredField(value),
           textEditingController: controller.emailTextEditingController,
         ),
         OutlinedTextField(
           hinText: 'Password',
           leadingIcon: Icons.lock,
-          validator: (value) => Validators.requiredField(value),
+          validator: (String? value) => Validators.requiredField(value),
           textEditingController: controller.passwordTextEditingController,
           obscureText: true,
         ),
         OutlinedTextField(
           hinText: 'Repeat Password',
           leadingIcon: Icons.lock,
-          validator: (value) => Validators.requiredField(value),
+          validator: (String? value) => Validators.requiredField(value),
           textEditingController:
               controller.confirmPasswordTextEditingController,
           obscureText: true,

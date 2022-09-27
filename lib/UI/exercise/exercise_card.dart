@@ -4,6 +4,7 @@ import 'package:exerlog/Models/workout_data.dart';
 import 'package:exerlog/UI/exercise/set_widget.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class ExerciseCard extends StatefulWidget {
     required this.totalsWidget,
   });
 
-  final ValueKey key;
+  final ValueKey<dynamic> key;
   final String name;
   final bool isTemplate;
 
@@ -42,7 +43,7 @@ class ExerciseCard extends StatefulWidget {
 
 class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClientMixin {
   static int counter = 0;
-  List<SetWidget> setList = [];
+  List<SetWidget> setList = <SetWidget>[];
   static int index = 0;
   double originalHeight = screenHeight * 0.23;
   double height = 0;
@@ -52,7 +53,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   @override
   void initState() {
     widget.exercise.setExerciseTotals();
-    setList = [];
+    setList = <SetWidget>[];
     originalHeight += getHeight() - 20;
     // widget.workoutData.addNewSet = addTheNewSet;
     if (widget.exercise.sets.isEmpty) {
@@ -89,7 +90,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         i++;
       }
     }
-    _notifier = ValueNotifier(widget.totalsWidget.totals);
+    _notifier = ValueNotifier<TotalsData>(widget.totalsWidget.totals);
     height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
     super.initState();
   }
@@ -98,16 +99,16 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
   Widget build(BuildContext context) {
     super.build(context);
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Container(
           height: height + screenHeight * 0.06,
           child: Stack(
-            children: [
+            children: <Widget> [
               Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: theme.colorTheme.backgroundColorVariation,
-                  boxShadow: [
+                  boxShadow: <BoxShadow>[
                     const BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.2),
                       offset: Offset(0, 3),
@@ -120,11 +121,11 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                 padding: const EdgeInsets.all(20),
                 height: height,
                 child: Column(
-                  children: [
+                  children: <Widget> [
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: <Widget> [
                           Container(
                             height: getHeight(),
                             width: screenWidth * 0.45,
@@ -134,9 +135,10 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                             ),
                           ),
                           Container(
-                            child: ValueListenableBuilder(
+                            child: ValueListenableBuilder<TotalsData>(
                               valueListenable: _notifier,
-                              builder: (BuildContext context, TotalsData value, Widget? child) {
+                              builder: (BuildContext context, TotalsData value,
+                                  Widget? child) {
                                 return ExerciseTotalsWidget(
                                   totals: value,
                                   index: index,
@@ -152,12 +154,12 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                       color: Colors.white.withOpacity(0.2),
                     ),
                     Column(
-                      children: [
+                      children: <Widget> [
                         Container(
                           height: screenHeight * 0.04,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: <Widget> [
                               const Spacer(flex: 8),
                               Expanded(
                                 flex: 15,
@@ -258,7 +260,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
     setHeight();
   }
 
-  void removeSet(exercise, sets, id) {
+  void removeSet(Exercise exercise, Sets sets, int id) {
     setState(() {
       setList.removeAt(id);
       if (setList.isEmpty) {
@@ -267,7 +269,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
         widget.exercise.sets.remove(sets);
         widget.exercise = widget.removeSet(exercise, sets, id);
         height = originalHeight + ((screenHeight * 0.05) * (setList.length - 1));
-        setList = [];
+        setList = <SetWidget>[];
         int i = 0;
         for (Sets _ in widget.exercise.sets) {
           setList.add(

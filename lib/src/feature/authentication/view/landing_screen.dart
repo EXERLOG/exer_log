@@ -2,6 +2,7 @@ import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/src/core/base/base_state.dart';
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/feature/authentication/controller/authentication_controller.dart';
 import 'package:exerlog/src/feature/authentication/widgets/elevated_container.dart';
 import 'package:exerlog/src/feature/authentication/widgets/login_form.dart';
@@ -21,8 +22,8 @@ class LandingScreen extends ConsumerStatefulWidget {
 
 class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTickerProviderStateMixin {
   /// Form Keys
-  final _loginFormKey = GlobalKey<FormState>();
-  final _signUpFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
 
   /// Tab
   late TabController _tabController;
@@ -61,9 +62,9 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    final _controller = ref.read(AuthenticationController.controller);
+    final AuthenticationController _controller = ref.read(AuthenticationController.controller);
 
-    ref.listen(AuthenticationController.provider, (_, state) {
+    ref.listen(AuthenticationController.provider, (_, BaseState? state) {
       if (state is SignUpSuccessState) {
         _navigateToWorkoutScreen();
       } else if (state is LoginSuccessState) {
@@ -74,13 +75,13 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
     });
 
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Scaffold(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           body: ElevatedContainer(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Container(
                   height: 40,
                   child: TabBar(
@@ -91,7 +92,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [
+                    children: <Widget> [
                       Form(key: _loginFormKey, child: LoginForm(_controller)),
                       Form(key: _signUpFormKey, child: SignupForm(_controller)),
                     ],
@@ -133,16 +134,16 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
 
   void _navigateToCalendarScreen() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const CalendarScreen(),
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const CalendarScreen(),
       ),
     );
   }
 
   Future<dynamic> _navigateToWorkoutScreen() {
     return Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => WorkoutPage(null),
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => WorkoutPage(null),
       ),
     );
   }
