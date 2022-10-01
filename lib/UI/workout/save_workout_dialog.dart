@@ -75,29 +75,25 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                     ),
                   ),
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text(
-                          'Save as template',
-                          style: mediumTitleStyleWhite,
-                        ),
-                      ),
-                      Checkbox(
-                        fillColor: MaterialStateProperty.all<Color>(theme.colorTheme.primaryColor),
-                        value: this.template,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            Log.info(value.toString());
-                            template = value;
-                            widget.setWorkout(name, template!);
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Save as template',
+                      style: mediumTitleStyleWhite,
+                    ),
+                    Checkbox(
+                      fillColor: MaterialStateProperty.all<Color>(theme.colorTheme.primaryColor),
+                      value: this.template,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          Log.info(value.toString());
+                          template = value;
+                          widget.setWorkout(name, template!);
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 Container(
                   height: screenHeight * 0.05,

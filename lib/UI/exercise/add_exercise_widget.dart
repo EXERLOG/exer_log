@@ -56,21 +56,19 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
                         subtitle1: setStyle,
                       ),
                     ),
-                    child: Container(
-                      child: Autocomplete<String>(
-                        optionsMaxHeight: 100,
-                        onSelected: (value) {
-                          widget.setExercisename(value);
-                        },
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                          widget.setExercisename(textEditingValue.text);
-                          return snapshot.data!.where(
-                            (String name) => name.toLowerCase().startsWith(
-                                  textEditingValue.text.toLowerCase(),
-                                ),
-                          );
-                        },
-                      ),
+                    child: Autocomplete<String>(
+                      optionsMaxHeight: 100,
+                      onSelected: (value) {
+                        widget.setExercisename(value);
+                      },
+                      optionsBuilder: (TextEditingValue textEditingValue) {
+                        widget.setExercisename(textEditingValue.text);
+                        return snapshot.data!.where(
+                          (String name) => name.toLowerCase().startsWith(
+                                textEditingValue.text.toLowerCase(),
+                              ),
+                        );
+                      },
                     ),
                   ),
                 );

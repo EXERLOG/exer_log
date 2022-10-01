@@ -121,31 +121,27 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                 height: height,
                 child: Column(
                   children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: getHeight(),
-                            width: screenWidth * 0.45,
-                            child: Text(
-                              widget.name,
-                              style: mediumTitleStyleWhite,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: getHeight(),
+                          width: screenWidth * 0.45,
+                          child: Text(
+                            widget.name,
+                            style: mediumTitleStyleWhite,
                           ),
-                          Container(
-                            child: ValueListenableBuilder(
-                              valueListenable: _notifier,
-                              builder: (BuildContext context, TotalsData value, Widget? child) {
-                                return ExerciseTotalsWidget(
-                                  totals: value,
-                                  index: index,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        ValueListenableBuilder(
+                          valueListenable: _notifier,
+                          builder: (BuildContext context, TotalsData value, Widget? child) {
+                            return ExerciseTotalsWidget(
+                              totals: value,
+                              index: index,
+                            );
+                          },
+                        ),
+                      ],
                     ),
                     Divider(
                       thickness: 1,

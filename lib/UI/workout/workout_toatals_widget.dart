@@ -32,11 +32,9 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
             children: [
               Row(
                 children: [
-                  Container(
-                    child: Text(
-                      'Totals',
-                      style: mediumTitleStyleWhite,
-                    ),
+                  Text(
+                    'Totals',
+                    style: mediumTitleStyleWhite,
                   )
                 ],
               ),
@@ -48,81 +46,61 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                 children: [
                   Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'sets',
-                          style: setStyle,
-                        ),
+                      Text(
+                        'sets',
+                        style: setStyle,
                       ),
-                      Container(
-                        child: Text(
-                          widget.totals.sets.toString(),
-                          style: setStyle,
-                        ),
+                      Text(
+                        widget.totals.sets.toString(),
+                        style: setStyle,
                       )
                     ],
                   ),
                   Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'reps',
-                          style: setStyle,
-                        ),
+                      Text(
+                        'reps',
+                        style: setStyle,
                       ),
-                      Container(
-                        child: Text(
-                          widget.totals.reps.toString(),
-                          style: setStyle,
-                        ),
+                      Text(
+                        widget.totals.reps.toString(),
+                        style: setStyle,
                       )
                     ],
                   ),
                   Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'load',
-                          style: setStyle,
-                        ),
+                      Text(
+                        'load',
+                        style: setStyle,
                       ),
-                      Container(
-                        child: Text(
-                          widget.totals.weight.toString(),
-                          style: setStyle,
-                        ),
+                      Text(
+                        widget.totals.weight.toString(),
+                        style: setStyle,
                       )
                     ],
                   ),
                   Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'kg/rep',
-                          style: setStyle,
-                        ),
+                      Text(
+                        'kg/rep',
+                        style: setStyle,
                       ),
-                      Container(
-                        child: Text(
-                          widget.totals.avgKgs.toString(),
-                          style: setStyle,
-                        ),
+                      Text(
+                        widget.totals.avgKgs.toString(),
+                        style: setStyle,
                       )
                     ],
                   ),
                   Column(
                     children: [
-                      Container(
-                        child: Text(
-                          'exercises',
-                          style: setStyle,
-                        ),
+                      Text(
+                        'exercises',
+                        style: setStyle,
                       ),
-                      Container(
-                        child: Text(
-                          widget.totals.exercises.toString(),
-                          style: setStyle,
-                        ),
+                      Text(
+                        widget.totals.exercises.toString(),
+                        style: setStyle,
                       )
                     ],
                   ),

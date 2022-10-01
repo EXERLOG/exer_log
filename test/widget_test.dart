@@ -10,9 +10,7 @@ void main() {
       await tester.runAsync(() async {
         await tester.pumpWidget(MaterialApp(
           title: 'EXERLOG',
-          home: Container(
-            child: const Text('EXERLOG'),
-          ),
+          home: const Text('EXERLOG'),
         ),);
       });
     }

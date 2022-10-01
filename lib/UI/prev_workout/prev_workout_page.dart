@@ -108,12 +108,9 @@ class _PrevWorkoutPageState extends State<PrevWorkoutPage> {
                               totals: workoutData.totals,
                             ),
                             Expanded(
-                              child: Container(
-                                //height: screenHeight * 0.5,
-                                child: ListView(
-                                  addAutomaticKeepAlives: true,
-                                  children: workoutData.exerciseWidgets,
-                                ),
+                              child: ListView(
+                                addAutomaticKeepAlives: true,
+                                children: workoutData.exerciseWidgets,
                               ),
                             ),
                           ],
