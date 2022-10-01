@@ -9,7 +9,7 @@ class WorkoutTemplateSelectionWidget extends StatefulWidget {
   WorkoutTemplateSelectionWidget(
       {required this.setWorkout, required this.workoutList, Key? key,})
       : super(key: key) {
-    setWorkout = this.setWorkout;
+    setWorkout = setWorkout;
   }
   Function(Workout) setWorkout;
   List workoutList;

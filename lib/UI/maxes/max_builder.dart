@@ -76,10 +76,10 @@ class _MaxInformationState extends State<MaxInformation> {
 
   String oneRepMaxPercentLabel(double weight, double oneRepMax) {
     if (oneRepMax > 0.0) {
-      this.text = '${((weight / oneRepMax) * 100).round()}%';
+      text = '${((weight / oneRepMax) * 100).round()}%';
     }
 
-    return this.text;
+    return text;
   }
 
   bool minimumOneWeightRep(Sets sets) {

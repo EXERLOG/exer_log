@@ -8,12 +8,12 @@ class Exercise {
       this.totalWeight,);
 
   Exercise.fromJson(Map<String, Object?> exercise)
-      : this.name = exercise['name']! as String,
-        this.sets = exercise['sets']! as List,
-        this.bodyParts = exercise['body_parts']! as List,
-        this.totalReps = exercise['total_reps']! as int,
-        this.totalWeight = exercise['total_weight']! as double,
-        this.totalSets = exercise['total_sets']! as int;
+      : name = exercise['name']! as String,
+        sets = exercise['sets']! as List,
+        bodyParts = exercise['body_parts']! as List,
+        totalReps = exercise['total_reps']! as int,
+        totalWeight = exercise['total_weight']! as double,
+        totalSets = exercise['total_sets']! as int;
 
   String name;
   List sets;

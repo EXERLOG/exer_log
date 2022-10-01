@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 class WorkoutData {
 
   WorkoutData(this.workout, this.totals, this.updateTotals) {
-    workout = this.workout;
+    workout = workout;
 
       loadWorkoutData().then((Workout value) {
         workout = value;

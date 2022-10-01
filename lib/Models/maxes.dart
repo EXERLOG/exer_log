@@ -5,11 +5,11 @@ class Max {
   Max(this.weight, this.reps, this.sets, this.exercise,);
 
   Max.fromJson(Map<String, Object?> max)
-      : this.sets = max['sets']! as int,
-        this.reps = max['reps']! as int,
-        this.weight = max['weight']! as double,
-        this.exercise = max['exercise']! as String,
-        this.exerciseID = max['exerciseID']! as String;
+      : sets = max['sets']! as int,
+        reps = max['reps']! as int,
+        weight = max['weight']! as double,
+        exercise = max['exercise']! as String,
+        exerciseID = max['exerciseID']! as String;
 
   int reps;
   int sets;

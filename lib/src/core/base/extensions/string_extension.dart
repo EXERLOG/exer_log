@@ -7,7 +7,7 @@ extension StringExtension on String? {
 
   // Check null string, return given value if null
   String validate({String value = ''}) {
-    if (this.isEmptyOrNull) {
+    if (isEmptyOrNull) {
       return value;
     } else {
       return this!;

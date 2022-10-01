@@ -139,11 +139,11 @@ class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
 class WorkoutTotals {
 
   WorkoutTotals(this.sets, this.reps, this.weight, this.avgKgs, this.exercises) {
-    sets = this.sets;
-    reps = this.reps;
-    weight = this.weight;
-    avgKgs = this.avgKgs;
-    exercises = this.exercises;
+    sets = sets;
+    reps = reps;
+    weight = weight;
+    avgKgs = avgKgs;
+    exercises = exercises;
   }
 
   int sets;

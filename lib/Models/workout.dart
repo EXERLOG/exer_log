@@ -17,42 +17,42 @@ class Workout {
       this.totalSets,);
 
   Workout.fromJson(Map<String, Object?> workout)
-      : this.exercises = workout['exercises']! as List,
-        this.notes = workout['notes']! as String,
-        this.rating = workout['rating']! as String,
-        this.time = workout['time']! as double,
-        this.totalReps = workout['total_reps']! as int,
-        this.totalWeight = workout['total_weight']! as double,
-        this.totalSets = workout['total_sets']! as int,
-        this.name = workout['name']! as String,
-        this.type = workout['type']! as String,
-        this.template = workout['template']! as bool;
+      : exercises = workout['exercises']! as List,
+        notes = workout['notes']! as String,
+        rating = workout['rating']! as String,
+        time = workout['time']! as double,
+        totalReps = workout['total_reps']! as int,
+        totalWeight = workout['total_weight']! as double,
+        totalSets = workout['total_sets']! as int,
+        name = workout['name']! as String,
+        type = workout['type']! as String,
+        template = workout['template']! as bool;
 
   Workout.fromJsonQuery(QueryDocumentSnapshot<Map<String, dynamic>> workout)
-      : this.exercises = workout['exercises']! as List,
-        this.notes = workout['notes']! as String,
-        this.rating = workout['rating']! as String,
-        this.time = workout['time']! as double,
-        this.totalReps = workout['total_reps']! as int,
-        this.totalWeight = workout['total_weight']! as double,
-        this.totalSets = workout['total_sets']! as int,
-        this.name = workout['name']! as String,
-        this.type = workout['type']! as String,
-        this.template = workout['template']! as bool;
+      : exercises = workout['exercises']! as List,
+        notes = workout['notes']! as String,
+        rating = workout['rating']! as String,
+        time = workout['time']! as double,
+        totalReps = workout['total_reps']! as int,
+        totalWeight = workout['total_weight']! as double,
+        totalSets = workout['total_sets']! as int,
+        name = workout['name']! as String,
+        type = workout['type']! as String,
+        template = workout['template']! as bool;
 
   Workout.fromJsonQuerySnapshot(QuerySnapshot<Map<String, dynamic>> workout)
-      : this.exercises = workout.docs.last['exercises']! as List,
-        this.notes = workout.docs.last['notes']! as String,
-        this.date =
+      : exercises = workout.docs.last['exercises']! as List,
+        notes = workout.docs.last['notes']! as String,
+        date =
             DateTime.parse(workout.docs.last['date']!.toDate().toString()),
-        this.rating = workout.docs.last['rating']! as String,
-        this.time = workout.docs.last['time']! as double,
-        this.totalReps = workout.docs.last['total_reps']! as int,
-        this.totalWeight = workout.docs.last['total_weight']! as double,
-        this.totalSets = workout.docs.last['total_sets']! as int,
-        this.name = workout.docs.last['name']! as String,
-        this.type = workout.docs.last['type']! as String,
-        this.template = workout.docs.last['template']! as bool;
+        rating = workout.docs.last['rating']! as String,
+        time = workout.docs.last['time']! as double,
+        totalReps = workout.docs.last['total_reps']! as int,
+        totalWeight = workout.docs.last['total_weight']! as double,
+        totalSets = workout.docs.last['total_sets']! as int,
+        name = workout.docs.last['name']! as String,
+        type = workout.docs.last['type']! as String,
+        template = workout.docs.last['template']! as bool;
 
   List exercises;
   String notes;

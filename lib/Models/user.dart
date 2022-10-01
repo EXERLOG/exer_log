@@ -6,16 +6,16 @@ class UserClass {
       this.firstname, this.lastname, this.system, this.userID,);
 
   UserClass.fromJson(Map<String, Object?> user)
-      : this.username = user['username']! as String,
-        this.height = user['height']! as double,
-        this.weight = user['weight']! as double,
-        this.age = user['age']! as int,
-        this.email = user['email']! as String,
-        this.firstname = user['firstname']! as String,
-        this.lastname = user['lastname'] as String,
-        this.system = user['system']! as String,
-        this.userID = user['userID']! as String;
-  
+      : username = user['username']! as String,
+        height = user['height']! as double,
+        weight = user['weight']! as double,
+        age = user['age']! as int,
+        email = user['email']! as String,
+        firstname = user['firstname']! as String,
+        lastname = user['lastname'] as String,
+        system = user['system']! as String,
+        userID = user['userID']! as String;
+
   String username;
   double weight;
   double height;
@@ -41,6 +41,6 @@ class UserClass {
   }
 
   void setUserID(String id) {
-    this.userID = id;
+    userID = id;
   }
 }
