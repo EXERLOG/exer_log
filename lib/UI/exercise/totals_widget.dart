@@ -25,7 +25,7 @@ class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
       widget.totals.totalWeight,
       widget.totals.avgWeight
     ];
-    return Container(
+    return SizedBox(
       height: screenHeight * 0.04,
       width: screenWidth * 0.3,
       child: RaisedGradientButton(

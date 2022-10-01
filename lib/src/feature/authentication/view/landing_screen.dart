@@ -81,7 +81,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   height: 40,
                   child: TabBar(
                     tabs: tabs,

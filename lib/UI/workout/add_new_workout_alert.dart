@@ -36,7 +36,7 @@ class AddWorkoutAlert extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: nameWidget,
                 ),
-                Container(
+                SizedBox(
                   height: screenHeight * 0.05,
                   width: screenWidth * 0.5,
                   child: addWorkout,

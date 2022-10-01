@@ -32,7 +32,7 @@ class CustomFloatingActionButton extends StatelessWidget {
             child: InkWell(
               onTap: onTap,
               borderRadius: BorderRadius.circular(size),
-              child: Container(
+              child: SizedBox(
                 width: size,
                 height: size,
                 child: Center(

@@ -52,13 +52,13 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
     return getSetWidget();
   }
 
-  Container getSetWidget() {
-    return Container(
+  SizedBox getSetWidget() {
+    return SizedBox(
       height: screenHeight * 0.05,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: screenWidth * 0.08,
             child: Center(
               child: Text(
@@ -67,23 +67,23 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: screenWidth * 0.145,
             child: getText(0),
           ),
-          Container(
+          SizedBox(
             width: screenWidth * 0.145,
             child: getText(1),
           ),
-          Container(
+          SizedBox(
             width: screenWidth * 0.145,
             child: getText(2),
           ),
-          Container(
+          SizedBox(
             width: screenWidth * 0.145,
             child: getText(3),
           ),
-          Container(
+          SizedBox(
             width: screenWidth * 0.08,
             child: getText(4),
           ),
