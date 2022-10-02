@@ -108,8 +108,8 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: theme.colorTheme.backgroundColorVariation,
-                  boxShadow: <BoxShadow>[
-                    const BoxShadow(
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.2),
                       offset: Offset(0, 3),
                       blurRadius: 5,
