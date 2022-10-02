@@ -62,7 +62,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
 
   @override
   Widget build(BuildContext context) {
-    final AuthenticationController _controller = ref.read(AuthenticationController.controller);
+    final AuthenticationController authController = ref.read(AuthenticationController.controller);
 
     ref.listen(AuthenticationController.provider, (_, BaseState? state) {
       if (state is SignUpSuccessState) {
@@ -93,8 +93,8 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                   child: TabBarView(
                     controller: _tabController,
                     children: <Widget> [
-                      Form(key: _loginFormKey, child: LoginForm(_controller)),
-                      Form(key: _signUpFormKey, child: SignupForm(_controller)),
+                      Form(key: _loginFormKey, child: LoginForm(authController)),
+                      Form(key: _signUpFormKey, child: SignupForm(authController)),
                     ],
                   ),
                 ),
@@ -106,12 +106,12 @@ class _LandingScreenState extends ConsumerState<LandingScreen> with SingleTicker
                   onPressed: () async {
                     if (_tabIndex == 0) {
                       if (_loginFormKey.currentState!.validate()) {
-                        await _controller.signIn();
+                        await authController.signIn();
                       }
                     } else {
                       if (_signUpFormKey.currentState!.validate()) {
-                        if (_controller.isSamePassword()) {
-                          await _controller.signUp();
+                        if (authController.isSamePassword()) {
+                          await authController.signUp();
                         } else {
                           context.showSnackBar('Password should match');
                         }

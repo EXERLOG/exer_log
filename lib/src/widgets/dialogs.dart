@@ -30,7 +30,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
   }
 
   Future<void> signOutConfirmationDialog() async {
-    void _navigateToLandingScreen(BuildContext context) {
+    void navigateToLandingScreen(BuildContext context) {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute<void>(builder: (BuildContext context) => const LandingScreen()),
@@ -56,7 +56,7 @@ mixin Dialogs<T extends StatefulWidget> on State<T> {
               Navigator.pop(context);
               SharedPref.setValue(IS_LOGGED_IN, false);
               await FirebaseAuth.instance.signOut();
-              _navigateToLandingScreen(context);
+              navigateToLandingScreen(context);
             },
             child: const Text('Sign Out'),
           ),

@@ -82,7 +82,7 @@ List<Widget> _getDateColumns() {
     'SAT',
     'SUN',
   ];
-  List<Widget> dates = <Widget>[];
+  List<Widget> datesColumns = <Widget>[];
   int today = DateTime.now().day;
   int month = DateTime.now().month;
   int year = DateTime.now().year;
@@ -97,7 +97,7 @@ List<Widget> _getDateColumns() {
   DateTime last = DateTime(year, month + 1, 0);
 
   /// If the first of the month falls anywhere else than on a monday
-  /// then get the dates before the first as well
+  /// then get the datesColumns before the first as well
 
   /// Calculate how many days and weeks should be shown in the calendar
   DateTime previousMonth = first.subtract(Duration(days: first.weekday));
@@ -125,10 +125,10 @@ List<Widget> _getDateColumns() {
 
   for (int i = 0; i < daysInAWeek; i++) {
 
-    List<Widget> _dates = <Widget>[];
+    List<Widget> datesWidgets = <Widget>[];
 
     /// Add all weekdays name
-    _dates.add(
+    datesWidgets.add(
       Text(
         weekdayNames[i],
         style: setStyle,
@@ -136,17 +136,17 @@ List<Widget> _getDateColumns() {
       ),
     );
     for (int j = 0; j < weekList[i].length; j++) {
-      _dates.add(
+      datesWidgets.add(
         DateWidget(weekList[i][j]),
       );
     }
-    dates.add(
+    datesColumns.add(
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _dates,
+        children: datesWidgets,
       ),
     );
   }
 
-  return dates;
+  return datesColumns;
 }

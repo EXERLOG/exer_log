@@ -23,7 +23,7 @@ class OutlinedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return ThemeProvider(
       builder: (BuildContext context, AppTheme theme) {
-        OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
+        OutlineInputBorder outlineInputBorder = OutlineInputBorder(
           borderSide: BorderSide(color: theme.colorTheme.primaryColor),
           borderRadius: BorderRadius.circular(30),
         );
@@ -47,10 +47,10 @@ class OutlinedTextField extends StatelessWidget {
                 ),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedErrorBorder: _outlineInputBorder,
-              focusedBorder: _outlineInputBorder,
-              errorBorder: _outlineInputBorder,
-              enabledBorder: _outlineInputBorder,
+              focusedErrorBorder: outlineInputBorder,
+              focusedBorder: outlineInputBorder,
+              errorBorder: outlineInputBorder,
+              enabledBorder: outlineInputBorder,
             ),
           ),
         );

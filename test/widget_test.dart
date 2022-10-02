@@ -6,7 +6,7 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group('init tests', () {
-    Future<void> _initOnlyApp(WidgetTester tester) async {
+    Future<void> initOnlyApp(WidgetTester tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(MaterialApp(
           title: 'EXERLOG',
@@ -19,7 +19,7 @@ void main() {
 
     testWidgets('when init up home container', (WidgetTester tester) async {
       Finder homeContainer = find.text('EXERLOG');
-      await _initOnlyApp(tester);
+      await initOnlyApp(tester);
       await tester.pump();
       expect(homeContainer, findsOneWidget);
     });
