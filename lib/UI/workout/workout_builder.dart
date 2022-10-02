@@ -11,11 +11,11 @@ class WorkoutInformation extends StatefulWidget {
 
   final String id;
   @override
-  _WorkoutInformationState createState() => _WorkoutInformationState();
+  WorkoutInformationState createState() => WorkoutInformationState();
 
 }
 
-class _WorkoutInformationState extends State<WorkoutInformation> {
+class WorkoutInformationState extends State<WorkoutInformation> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Workout>(

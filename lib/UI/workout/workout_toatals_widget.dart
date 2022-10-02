@@ -8,10 +8,10 @@ class WorkoutTotalsWidget extends StatefulWidget {
   final WorkoutTotals totals;
 
   @override
-  _WorkoutTotalsWidgetState createState() => _WorkoutTotalsWidgetState();
+  WorkoutTotalsWidgetState createState() => WorkoutTotalsWidgetState();
 }
 
-class _WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
+class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(

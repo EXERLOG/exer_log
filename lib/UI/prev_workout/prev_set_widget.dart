@@ -24,10 +24,10 @@ class PrevSetWidget extends StatefulWidget {
   Function(Exercise, Sets, int) addNewSet;
 
   @override
-  _PrevSetWidgetState createState() => _PrevSetWidgetState();
+  PrevSetWidgetState createState() => PrevSetWidgetState();
 }
 
-class _PrevSetWidgetState extends State<PrevSetWidget>
+class PrevSetWidgetState extends State<PrevSetWidget>
     with AutomaticKeepAliveClientMixin {
   int percent = 0;
   double oneRepMax = 0.0;

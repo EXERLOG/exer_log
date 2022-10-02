@@ -21,10 +21,10 @@ class WorkoutPage extends StatefulWidget {
   Workout? workout;
 
   @override
-  _WorkoutPageState createState() => _WorkoutPageState();
+  WorkoutPageState createState() => WorkoutPageState();
 }
 
-class _WorkoutPageState extends State<WorkoutPage> {
+class WorkoutPageState extends State<WorkoutPage> {
   late WorkoutTotalsWidget workoutTotalsWidget;
   late WorkoutData workoutData;
   String exerciseName = '';

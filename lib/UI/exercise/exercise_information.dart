@@ -7,10 +7,10 @@ class ExerciseInformation extends StatefulWidget {
   final String id;
 
   @override
-  _ExerciseInformationState createState() => _ExerciseInformationState();
+  ExerciseInformationState createState() => ExerciseInformationState();
 }
 
-class _ExerciseInformationState extends State<ExerciseInformation> {
+class ExerciseInformationState extends State<ExerciseInformation> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Exercise>(

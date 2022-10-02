@@ -24,10 +24,10 @@ class GradientBorderButton extends StatefulWidget {
   final double radius;
   final double borderSize;
   @override
-  _GradientBorderButtonState createState() => _GradientBorderButtonState();
+  GradientBorderButtonState createState() => GradientBorderButtonState();
 }
 
-class _GradientBorderButtonState extends State<GradientBorderButton> {
+class GradientBorderButtonState extends State<GradientBorderButton> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(

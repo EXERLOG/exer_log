@@ -8,10 +8,10 @@ class DeleteWorkoutAlert extends StatefulWidget {
   const DeleteWorkoutAlert(this.deleteWorkoutButton, {Key? key}) : super(key: key);
   final RaisedGradientButton deleteWorkoutButton;
   @override
-  _DeleteWorkoutAlertState createState() => _DeleteWorkoutAlertState();
+  DeleteWorkoutAlertState createState() => DeleteWorkoutAlertState();
 }
 
-class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
+class DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
   String name = '';
   bool? template;
 

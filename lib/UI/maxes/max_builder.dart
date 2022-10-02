@@ -20,10 +20,10 @@ class MaxInformation extends StatefulWidget {
   Function? setPercentage;
 
   @override
-  _MaxInformationState createState() => _MaxInformationState();
+  MaxInformationState createState() => MaxInformationState();
 }
 
-class _MaxInformationState extends State<MaxInformation> {
+class MaxInformationState extends State<MaxInformation> {
   double oneRepMax = 0.0;
   String text = '0%';
 

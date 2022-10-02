@@ -11,10 +11,10 @@ class GoogleSignInButton extends StatefulWidget {
   final FutureOr Function() onPressed;
 
   @override
-  _GoogleSignInButtonState createState() => _GoogleSignInButtonState();
+  GoogleSignInButtonState createState() => GoogleSignInButtonState();
 }
 
-class _GoogleSignInButtonState extends State<GoogleSignInButton> {
+class GoogleSignInButtonState extends State<GoogleSignInButton> {
   bool _isLoading = false;
 
   @override

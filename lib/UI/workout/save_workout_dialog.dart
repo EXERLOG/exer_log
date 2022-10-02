@@ -14,10 +14,10 @@ class SaveWorkoutAlert extends StatefulWidget {
   final Function(String, bool) setWorkout;
   final RaisedGradientButton saveWorkout;
   @override
-  _SaveWorkoutAlertState createState() => _SaveWorkoutAlertState();
+  SaveWorkoutAlertState createState() => SaveWorkoutAlertState();
 }
 
-class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
+class SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
   String name = '';
   bool? template;
 

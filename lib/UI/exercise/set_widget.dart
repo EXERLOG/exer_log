@@ -35,10 +35,10 @@ class SetWidget extends StatefulWidget {
   Function updateTotal;
 
   @override
-  _SetWidgetState createState() => _SetWidgetState();
+  SetWidgetState createState() => SetWidgetState();
 }
 
-class _SetWidgetState extends State<SetWidget>
+class SetWidgetState extends State<SetWidget>
   with AutomaticKeepAliveClientMixin {
   int percent = 0;
   Max? oneRepMax;
