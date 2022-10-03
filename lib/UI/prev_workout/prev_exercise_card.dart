@@ -4,6 +4,7 @@ import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/UI/exercise/totals_widget.dart';
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/prev_workout/prev_set_widget.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -62,17 +63,17 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
     super.build(context);
     totalWidget = ExerciseTotalsWidget(totals: totalData, index: index);
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Container(
           height: height + screenHeight * 0.06,
           child: Stack(
-            children: [
+            children: <Widget>[
               Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   color: theme.colorTheme.backgroundColorVariation,
-                  boxShadow: [
-                    const BoxShadow(
+                  boxShadow: const <BoxShadow> [
+                    BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.2),
                       offset: Offset(0, 3),
                       blurRadius: 5,
@@ -84,11 +85,11 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                 padding: const EdgeInsets.all(20),
                 height: height,
                 child: Column(
-                  children: [
+                  children: <Widget> [
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: <Widget>[
                           Container(
                             height: getHeight(),
                             width: screenWidth * 0.45,
@@ -106,12 +107,12 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                       color: Colors.white.withOpacity(0.2),
                     ),
                     Column(
-                      children: [
+                      children: <Widget> [
                         Container(
                           height: screenHeight * 0.04,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                            children: <Widget> [
                               Container(
                                 width: screenWidth * 0.08,
                               ),

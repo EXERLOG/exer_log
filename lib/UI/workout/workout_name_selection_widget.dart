@@ -1,5 +1,6 @@
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +13,18 @@ class WorkoutTemplateSelectionWidget extends StatefulWidget {
     setWorkout = setWorkout;
   }
   Function(Workout) setWorkout;
-  List workoutList;
+  List <dynamic>workoutList;
   @override
   _WorkoutNameSelectionWidgetState createState() => _WorkoutNameSelectionWidgetState();
 }
 
 class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWidget> {
   String? dropDownValue;
-  Map workoutMap = {};
+  Map<String, dynamic> workoutMap = <String, dynamic>{};
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Center(
           child: Theme(
             data: ThemeData(
@@ -56,7 +57,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
                   widget.setWorkout(workoutMap[dropDownValue]);
                   Navigator.pop(context);
                 },
-                items: widget.workoutList.map<DropdownMenuItem<String>>((element) {
+                items: widget.workoutList.map<DropdownMenuItem<String>>((dynamic element) {
                   dropDownValue = element.name;
                   workoutMap[element.name] = element;
                   Log.info('NAME ${element.name}');

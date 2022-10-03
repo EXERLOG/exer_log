@@ -1,5 +1,6 @@
 import 'package:exerlog/Bloc/exercise_bloc.dart';
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return FutureBuilder<List<String>>(
           future: getExerciseNames(),
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
@@ -59,7 +60,7 @@ class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidge
                     child: Container(
                       child: Autocomplete<String>(
                         optionsMaxHeight: 100,
-                        onSelected: (value) {
+                        onSelected: (String value) {
                           widget.setExercisename(value);
                         },
                         optionsBuilder: (TextEditingValue textEditingValue) {

@@ -1,4 +1,5 @@
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
@@ -30,7 +31,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Dialog(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           shape: RoundedRectangleBorder(
@@ -41,7 +42,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
             height: screenHeight * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget> [
                 Text(
                   'Save Workout',
                   style: mediumTitleStyleWhite,
@@ -51,7 +52,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextField(
                     style: setStyle,
-                    onChanged: (value) {
+                    onChanged: (String value) {
                       name = value;
                       widget.setWorkout(name, template!);
                     },
@@ -78,7 +79,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: <Widget> [
                       Container(
                         child: Text(
                           'Save as template',

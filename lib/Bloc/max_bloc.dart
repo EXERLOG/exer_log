@@ -16,7 +16,7 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
       .where('reps', isEqualTo: reps)
       .orderBy('weight', descending: true)
       .get();
-  List<Max> maxList = [];
+  List<Max> maxList = <Max>[];
   for (int i = 0; i < ref.docs.length; i++) {
     Max max = Max.fromJson(ref.docs[i].data());
     maxList.add(max);
@@ -25,7 +25,7 @@ Future<List<Max>> getSpecificMax(String exercise, double reps) async {
 }
 
 void deleteMax(Exercise exercise) async {
-  final ref = await firestoreInstance
+  final QuerySnapshot<Map<String, dynamic>> ref = await firestoreInstance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
@@ -69,7 +69,7 @@ void saveMax(Max max) {
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('maxes')
       .add(jsonMax)
-      .then((value) {
+      .then((DocumentReference<Map<String, dynamic>> value) {
   });
 }
 
@@ -83,7 +83,7 @@ void checkMax(Exercise exercise) async {
       .get();
 
   if (ref.docs.isEmpty) {
-    List setList = [];
+    List<Sets> setList = <Sets>[];
     for (Sets set in exercise.sets) {
       // check which ones are maxes and which aren't
       if (setList.isNotEmpty) {
@@ -106,11 +106,12 @@ void checkMax(Exercise exercise) async {
       saveMax(max);
     }
   } else {
-    List setList = [];
+
+    List<Sets> setList = <Sets>[];
     for (Sets set in exercise.sets) {
       bool shouldUpdate = true;
       for (int i = 0; i < ref.docs.length; i++) {
-        var data = ref.docs[i];
+        QueryDocumentSnapshot<Map<String, dynamic>> data = ref.docs[i];
 
         if (data['reps'] == set.reps && data['weight'] == set.weight) {
           shouldUpdate = false;

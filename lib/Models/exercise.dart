@@ -9,15 +9,17 @@ class Exercise {
 
   Exercise.fromJson(Map<String, Object?> exercise)
       : name = exercise['name']! as String,
-        sets = exercise['sets']! as List,
-        bodyParts = exercise['body_parts']! as List,
+
+        sets = exercise['sets']! as List<dynamic>,
+
+        bodyParts = exercise['body_parts']! as List<dynamic>,
         totalReps = exercise['total_reps']! as int,
         totalWeight = exercise['total_weight']! as double,
         totalSets = exercise['total_sets']! as int;
 
   String name;
-  List sets;
-  List bodyParts;
+  List<dynamic> sets;
+  List<dynamic> bodyParts;
   String? id;
   int totalReps;
   double totalWeight;
@@ -43,11 +45,12 @@ class Exercise {
   }
 
   Map<String, dynamic> toJson() {
-    List theSets = [];
+
+    List<dynamic> theSets = <dynamic>[];
     for (Sets set in sets) {
       theSets.add(set.toJson());
     }
-    return {
+    return <String, dynamic> {
       'name': name,
       'sets': theSets,
       'body_parts': bodyParts,

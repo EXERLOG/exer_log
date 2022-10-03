@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'exercise.dart';
@@ -17,19 +19,19 @@ class Workout {
       this.totalSets,);
 
   Workout.fromJson(Map<String, Object?> workout)
-      : exercises = workout['exercises']! as List,
-        notes = workout['notes']! as String,
-        rating = workout['rating']! as String,
-        time = workout['time']! as double,
-        totalReps = workout['total_reps']! as int,
-        totalWeight = workout['total_weight']! as double,
-        totalSets = workout['total_sets']! as int,
-        name = workout['name']! as String,
-        type = workout['type']! as String,
-        template = workout['template']! as bool;
+      : this.exercises = workout['exercises']! as List,
+        this.notes = workout['notes']! as String,
+        this.rating = workout['rating']! as String,
+        this.time = workout['time']! as double,
+        this.totalReps = workout['total_reps']! as int,
+        this.totalWeight = workout['total_weight']! as double,
+        this.totalSets = workout['total_sets']! as int,
+        this.name = workout['name']! as String,
+        this.type = workout['type']! as String,
+        this.template = workout['template']! as bool;
 
   Workout.fromJsonQuery(QueryDocumentSnapshot<Map<String, dynamic>> workout)
-      : exercises = workout['exercises']! as List,
+      : exercises = workout['exercises']! as List<Exercise>,
         notes = workout['notes']! as String,
         rating = workout['rating']! as String,
         time = workout['time']! as double,
@@ -41,6 +43,7 @@ class Workout {
         template = workout['template']! as bool;
 
   Workout.fromJsonQuerySnapshot(QuerySnapshot<Map<String, dynamic>> workout)
+
       : exercises = workout.docs.last['exercises']! as List,
         notes = workout.docs.last['notes']! as String,
         date =

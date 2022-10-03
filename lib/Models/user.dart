@@ -15,7 +15,6 @@ class UserClass {
         lastname = user['lastname'] as String,
         system = user['system']! as String,
         userID = user['userID']! as String;
-
   String username;
   double weight;
   double height;
@@ -27,7 +26,8 @@ class UserClass {
   String userID;
 
   Map<String, Object?> toJson() {
-    return {
+
+    return <String, dynamic> {
       'username': username,
       'weight': weight,
       'height': height,

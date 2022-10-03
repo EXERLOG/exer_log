@@ -18,7 +18,8 @@ class Max {
   String? exerciseID;
 
   Map<String, dynamic> toJson() {
-    return {
+
+    return <String, dynamic> {
       'date': FieldValue.serverTimestamp(),
       'reps': reps,
       'sets': sets,
