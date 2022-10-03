@@ -12,13 +12,13 @@ abstract class Dependency {
       _onConnectivityChangedStreamProvider;
 }
 
-final _firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final Provider<FirebaseAuth> _firebaseAuthProvider =
+    Provider<FirebaseAuth>((ProviderRef<FirebaseAuth> ref) => FirebaseAuth.instance);
 
-final _googleSignInProvider = Provider<GoogleSignIn?>((ref) => GoogleSignIn());
+final Provider<GoogleSignIn?> _googleSignInProvider = Provider<GoogleSignIn?>((ProviderRef<GoogleSignIn?> ref) => GoogleSignIn());
 
 /// Connectivity
-final _connectivityProvider = Provider<Connectivity>((ref) => Connectivity());
+final Provider<Connectivity> _connectivityProvider = Provider<Connectivity>((ProviderRef<Connectivity> ref) => Connectivity());
 
-final _onConnectivityChangedStreamProvider = StreamProvider<ConnectivityResult>(
-    (ref) => ref.read(_connectivityProvider).onConnectivityChanged,);
+final StreamProvider<ConnectivityResult> _onConnectivityChangedStreamProvider = StreamProvider<ConnectivityResult>(
+    (StreamProviderRef<ConnectivityResult> ref) => ref.read(_connectivityProvider).onConnectivityChanged,);

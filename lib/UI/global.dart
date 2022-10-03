@@ -89,7 +89,7 @@ TextStyle dialogDescriptionStyle = const TextStyle(
 );
 
 // one rep max calculation table
-List<double> maxTable = [
+List<double> maxTable = <double>[
   1.0,
   0.97,
   0.94,

@@ -6,7 +6,7 @@ class AppTheme {
 
   final ColorTheme colorTheme;
 
-  static const _darkInstance = AppTheme._(
+  static const AppTheme _darkInstance = AppTheme._(
     colorTheme: ColorTheme(
       primaryColor: ThemeColor.primary,
       secondaryColor: ThemeColor.secondary,
@@ -19,7 +19,7 @@ class AppTheme {
     ),
   );
 
-  static const _lightInstance = AppTheme._(
+  static const AppTheme _lightInstance = AppTheme._(
     colorTheme: ColorTheme(
       primaryColor: ThemeColor.primary,
       secondaryColor: ThemeColor.secondary,
@@ -33,7 +33,7 @@ class AppTheme {
   );
 
   static AppTheme of(BuildContext context) {
-    final platformBrightness = MediaQuery.of(context).platformBrightness;
+    final Brightness platformBrightness = MediaQuery.of(context).platformBrightness;
     return platformBrightness == Brightness.dark
         ? _darkInstance
         : _lightInstance;

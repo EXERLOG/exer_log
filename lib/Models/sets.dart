@@ -11,10 +11,10 @@ class Sets {
   double percentage;
 
   Map<dynamic, dynamic> toJson() {
-    return { 'reps': reps, 'rest': rest, 'weight': weight, 'sets': sets, 'percentage': percentage};
+    return  <String, dynamic> { 'reps': reps, 'rest': rest, 'weight': weight, 'sets': sets, 'percentage': percentage};
   }
 
-  static Sets fromString(Map set) {
+  static Sets fromString(Map <dynamic, dynamic>set) {
     return Sets(
       set['reps'],
       set['rest'],

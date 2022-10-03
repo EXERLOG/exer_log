@@ -1,4 +1,5 @@
 import 'package:exerlog/UI/global.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +16,11 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Container(
           height: screenHeight * 0.13,
-          decoration: BoxDecoration(color: theme.colorTheme.backgroundColorVariation, boxShadow: [
-            const BoxShadow(
+          decoration: BoxDecoration(color: theme.colorTheme.backgroundColorVariation, boxShadow: const <BoxShadow>[
+            BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.2),
               offset: Offset(0, 3),
               blurRadius: 5,
@@ -29,9 +30,9 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.all(10),
           child: Column(
-            children: [
+            children: <Widget>[
               Row(
-                children: [
+                children: <Widget>[
                   Container(
                     child: Text(
                       'Totals',
@@ -45,9 +46,9 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: <Widget> [
                   Column(
-                    children: [
+                    children: <Widget> [
                       Container(
                         child: Text(
                           'sets',
@@ -63,7 +64,7 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     ],
                   ),
                   Column(
-                    children: [
+                    children: <Widget>[
                       Container(
                         child: Text(
                           'reps',
@@ -79,7 +80,7 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     ],
                   ),
                   Column(
-                    children: [
+                    children: <Widget> [
                       Container(
                         child: Text(
                           'load',
@@ -95,7 +96,7 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     ],
                   ),
                   Column(
-                    children: [
+                    children: <Widget> [
                       Container(
                         child: Text(
                           'kg/rep',
@@ -111,7 +112,7 @@ class WorkoutTotalsWidgetState extends State<WorkoutTotalsWidget> {
                     ],
                   ),
                   Column(
-                    children: [
+                    children: <Widget> [
                       Container(
                         child: Text(
                           'exercises',

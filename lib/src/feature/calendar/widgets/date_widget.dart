@@ -90,10 +90,10 @@ class DateWidget extends StatelessWidget {
     );
   }
 
-  void _navigateToPreviousWorkoutScreen(context, Workout? workout) {
+  void _navigateToPreviousWorkoutScreen(BuildContext context, Workout? workout) {
     if (workout == null) return;
     Navigator.of(context).push(
-      MaterialPageRoute(
+      MaterialPageRoute<void>(
         builder: (BuildContext context) => PrevWorkoutPage(workout),
       ),
     );

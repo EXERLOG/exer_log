@@ -14,12 +14,12 @@ class ExerciseTotalsWidget extends StatefulWidget {
 }
 
 class ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
-  List _list = [];
-  List<String> endings = [' reps', ' sets', ' kgs', ' kgs/rep'];
+  List<num> _list = <num>[];
+  List<String> endings = <String>[' reps', ' sets', ' kgs', ' kgs/rep'];
 
   @override
   Widget build(BuildContext context) {
-    _list = [
+    _list = <num>[
       widget.totals.totalReps,
       widget.totals.totalSets,
       widget.totals.totalWeight,

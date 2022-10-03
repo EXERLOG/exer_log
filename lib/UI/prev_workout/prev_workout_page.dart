@@ -1,6 +1,7 @@
 import 'package:exerlog/Bloc/workout_bloc.dart';
 import 'package:exerlog/Models/exercise.dart';
 import 'package:exerlog/Models/prev_workout_data.dart';
+import 'package:exerlog/Models/sets.dart';
 import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/UI/exercise/add_exercise_widget.dart';
 import 'package:exerlog/UI/exercise/add_new_exercise_alert.dart';
@@ -11,6 +12,7 @@ import 'package:exerlog/UI/workout/redo_workout_alert.dart';
 import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_page.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
@@ -37,7 +39,7 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
     Log.info('init');
     firstLoad = true;
     newWorkout = Workout(
-      [],
+      <Exercise>[],
       '',
       '',
       0,
@@ -65,16 +67,16 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
   @override
   Widget build(BuildContext context) {
     if (firstLoad) {
-      Future.delayed(Duration.zero, () => showAlertDialogWorkout(context));
+      Future<void>.delayed(Duration.zero, () => showAlertDialogWorkout(context));
     }
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     //workoutData.workout = workout;
     workoutTotalsWidget = WorkoutTotalsWidget(totals: workoutData.totals);
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return ThemeProvider(
-          builder: (context, theme) {
+          builder: (BuildContext context, AppTheme theme) {
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: theme.colorTheme.backgroundColorVariation,
@@ -82,7 +84,7 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
                   onPressed: Navigator.of(context).pop,
                   color: theme.colorTheme.primaryColor,
                 ),
-                actions: [
+                actions: <Widget> [
                   TextButton(
                     onPressed: () {
                       showDeleteWorkoutAlertDialog(context);
@@ -103,7 +105,7 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
                         color: theme.colorTheme.backgroundColorVariation,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: <Widget>[
                             WorkoutTotalsWidget(
                               totals: workoutData.totals,
                             ),
@@ -127,16 +129,16 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
   }
 
-  setExercisename(name) {
+  setExercisename(String name) {
     exerciseName = name;
   }
 
-  setWorkout(name, template) {
+  setWorkout(String name, bool template) {
     workoutData.workout.name = name;
     workoutData.workout.template = template;
   }
 
-  updateTotals(newWorkout) {
+  updateTotals(Workout newWorkout) {
     setState(() {
       firstLoad = false;
     });
@@ -158,7 +160,7 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
         if (exerciseName != '') {
           setState(() {
             workoutData
-                .addExercise(Exercise(exerciseName, [], [], 0, 0, 0.0));
+                .addExercise(Exercise(exerciseName, <Sets>[], <String>[], 0, 0, 0.0));
             workoutData.setExerciseWidgets();
           });
           Navigator.pop(context);
@@ -179,11 +181,11 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
   }
 
-  addNewSet(exercise, newSet, id) {
+  addNewSet(Exercise exercise, Sets newSet, int id) {
     workoutData.addSet(exercise, newSet, id);
   }
 
-  createNewSet(sets, id) {}
+  createNewSet(Sets sets, int id) {}
 
   showSaveWorkoutAlertDialog(BuildContext context) {
     RaisedGradientButton okButton = RaisedGradientButton(
@@ -197,7 +199,7 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
         setState(() {
           firstLoad = true;
           workoutData = PrevWorkoutData(
-            Workout([], '', '', 0, '', '', false, 0, 0.0, 0),
+            Workout(<Exercise>[], '', '', 0, '', '', false, 0, 0.0, 0),
             WorkoutTotals(0, 0, 0, 0, 0),
             updateTotals,
             addNewSet,
@@ -247,11 +249,11 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
     );
   }
 
-  setWorkoutName(name) {
+  setWorkoutName(String name) {
     workoutData.workout.name = name;
   }
 
-  addExercises(newWorkout) {
+  addExercises(Workout newWorkout) {
     setState(() {
       PrevWorkoutData newWorkoutData = PrevWorkoutData(
         newWorkout,
@@ -290,8 +292,8 @@ class PrevWorkoutPageState extends State<PrevWorkoutPage> {
         Navigator.of(context)
           ..pop()
           ..pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => WorkoutPage(widget.workout),
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => WorkoutPage(widget.workout),
             ),
           );
       },

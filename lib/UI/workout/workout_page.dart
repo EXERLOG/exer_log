@@ -10,6 +10,7 @@ import 'package:exerlog/UI/workout/save_workout_dialog.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
 import 'package:exerlog/UI/workout/workout_toatals_widget.dart';
 import 'package:exerlog/src/core/theme/app_theme.dart';
+import 'package:exerlog/src/utils/logger/logger.dart';
 import 'package:exerlog/src/widgets/custom_floating_action_button.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
@@ -29,7 +30,8 @@ class WorkoutPageState extends State<WorkoutPage> {
   late WorkoutData workoutData;
   String exerciseName = '';
   late bool firstLoad;
-  List workoutList = [];
+
+  List<Workout> workoutList = <Workout>[];
 
   @override
   void initState() {
@@ -44,7 +46,7 @@ class WorkoutPageState extends State<WorkoutPage> {
       String id = '';
 
       widget.workout = Workout(
-        [],
+        <Exercise>[],
         '',
         '',
         0,
@@ -92,7 +94,7 @@ class WorkoutPageState extends State<WorkoutPage> {
               onPressed: Navigator.of(context).pop,
               color: theme.colorTheme.primaryColor,
             ),
-            actions: [
+            actions: <Widget> [
               Container(
                 margin: const EdgeInsets.only(right: 5),
                 height: 30,
@@ -120,7 +122,7 @@ class WorkoutPageState extends State<WorkoutPage> {
             ],
           ),
           body: firstLoad
-              ? FutureBuilder(
+              ? FutureBuilder<List<Workout>>(
                   future: getWorkoutTemplates(),
                   builder: (
                     BuildContext context,
@@ -132,13 +134,14 @@ class WorkoutPageState extends State<WorkoutPage> {
                       );
                     } else {
                       if (snapshot.hasError) {
+                        Log.debug(snapshot.error.toString());
                         return const Center(
                           child: Text('Something went wrong'),
                         );
                       } else {
                         if (snapshot.data!.isEmpty) {
                           firstLoad = false;
-                          Future.delayed(
+                          Future<void>.delayed(
                             Duration.zero,
                             () => showAlertDialogExercise(context),
                           );
@@ -146,7 +149,7 @@ class WorkoutPageState extends State<WorkoutPage> {
                         } else {
                           firstLoad = false;
                           workoutList = snapshot.data!;
-                          Future.delayed(
+                          Future<void>.delayed(
                             Duration.zero,
                             () => showAlertDialogWorkout(context),
                           );
@@ -176,7 +179,7 @@ class WorkoutPageState extends State<WorkoutPage> {
                 color: theme.colorTheme.backgroundColorVariation,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     WorkoutTotalsWidget(
                       totals: workoutData.totals,
                     ),
@@ -193,16 +196,16 @@ class WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
-  void setExerciseName(name) {
+  void setExerciseName(String name) {
     exerciseName = name;
   }
 
-  void setWorkout(name, template) {
+  void setWorkout(String name, bool template) {
     workoutData.workout.name = name;
     workoutData.workout.template = template;
   }
 
-  void updateTotals(newWorkout) {
+  void updateTotals(Workout newWorkout) {
     setState(() {});
   }
 
@@ -211,8 +214,8 @@ class WorkoutPageState extends State<WorkoutPage> {
       workoutData.addExercise(
         Exercise(
           exerciseName,
-          [],
-          [],
+          <dynamic>[],
+          <dynamic>[],
           0,
           0,
           0.0,
@@ -275,11 +278,11 @@ class WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
-  void setWorkoutName(name) {
+  void setWorkoutName(String name) {
     workoutData.workout.name = name;
   }
 
-  void addExercises(newWorkout) {
+  void addExercises(dynamic newWorkout) {
     setState(() {
       WorkoutData newWorkoutData = WorkoutData(
         newWorkout,

@@ -1,3 +1,4 @@
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +32,10 @@ class GradientBorderButtonState extends State<GradientBorderButton> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
-        final gradient = widget.gradient ??
+      builder: (BuildContext context, AppTheme theme) {
+        final Gradient gradient = widget.gradient ??
             LinearGradient(
-              colors: [
+              colors: <Color>[
                 theme.colorTheme.primaryColor,
                 theme.colorTheme.secondaryColor,
               ],
@@ -93,7 +94,7 @@ class GradientBorderButtonState extends State<GradientBorderButton> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [cont2, widget.child, cont],
+                children: <Widget> [cont2, widget.child, cont],
               ),
             ),
           ),
