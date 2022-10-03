@@ -22,15 +22,15 @@ class WorkoutData {
   Function(Workout) updateTotals;
   Workout workout;
   WorkoutTotals totals;
-  List<ExerciseCard> exerciseWidgets = [];
+  List<ExerciseCard> exerciseWidgets = <ExerciseCard>[];
   static int key = 0;
 
-  addSet(exercise, newSet, id) {
+  addSet(Exercise exercise, Sets newSet, int id) {
     exercise.sets[id] = newSet;
     updateExisitingExercise();
   }
 
-  removeSet(exercise, setToRemove,id) {
+  removeSet(Exercise exercise, Sets setToRemove, int id) {
     exercise.sets.removeAt(id);
     exercise.setExerciseTotals();
     updateExisitingExercise();
@@ -44,23 +44,24 @@ class WorkoutData {
     Workout loadedWorkout =
         Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
         loadedWorkout.id = workout.id;
-    List<Exercise> exerciseList = [];
-    List<Exercise> newExerciseList = [];
+    List<Exercise> exerciseList = <Exercise> [];
+    List<Exercise> newExerciseList = <Exercise> [];
     try {
       for (String exerciseId in workout.exercises) {
         await getSpecificExercise(exerciseId)
-            .then((Exercise value) async => {exerciseList.add(value)});
+            .then((Exercise value) async => <void> {exerciseList.add(value)});
       }
-      Future.delayed(const Duration(seconds: 3));
+
+      Future<void>.delayed(const Duration(seconds: 3));
       int totalSets = 0;
       int totalReps = 0;
       double totalKgs = 0;
       int reps = 0;
       for (Exercise exercise in exerciseList) {
         await getExerciseByName(exercise.name).then(
-          (Exercise newexercise) => {
+          (Exercise newexercise) => <void> {
             for (Sets sets in newexercise.sets)
-              {
+              <void>{
                 totalSets += sets.sets,
                 reps = sets.sets * sets.reps,
                 totalReps += reps,
@@ -79,7 +80,7 @@ class WorkoutData {
   }
 
   List<ExerciseCard> setExerciseWidgets() {
-    exerciseWidgets = [];
+    exerciseWidgets = <ExerciseCard>[];
     for (Exercise exercise in workout.exercises) {
       exerciseWidgets.add(
         ExerciseCard(
@@ -91,7 +92,7 @@ class WorkoutData {
           removeSet: removeSet,
           isTemplate: workout.template,
           workoutData: this,
-          key: ValueKey(key),
+          key: ValueKey<dynamic>(key),
           totalsWidget: exercise.totalWidget,
         ),
       );
@@ -128,13 +129,13 @@ class WorkoutData {
     }
   }
 
-  removeExercise(exercise) async {
+  removeExercise(Exercise exercise) async {
     workout.exercises.remove(exercise);
     setExerciseWidgets();
     updateTotals(workout);
   }
 
-  addExercise(exercise) async {
+  addExercise(Exercise exercise) async {
     try {
       for (Exercise existingExercise in workout.exercises) {
         if (existingExercise.name == exercise.name) {
@@ -146,7 +147,7 @@ class WorkoutData {
       if (exercise.name != '') {
         await getExerciseByName(exercise.name).then(
           (Exercise value) =>
-              {workout.exercises.add(value), setExerciseWidgets()},
+              <void> {workout.exercises.add(value), setExerciseWidgets()},
         );
       }
     } catch (exception) {

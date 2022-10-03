@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-final _authRepoProvider = Provider((ref) => AuthenticationRepository(ref.read));
+final Provider<AuthenticationRepository> _authRepoProvider = Provider<AuthenticationRepository>((ProviderRef<AuthenticationRepository> ref) => AuthenticationRepository(ref.read));
 
 class AuthenticationRepository {
   AuthenticationRepository(this.reader) {
@@ -16,14 +16,18 @@ class AuthenticationRepository {
 
   static Provider<AuthenticationRepository> get provider => _authRepoProvider;
 
-  Future signIn({required String email, password}) async {
+  Future<void> signIn({required String email, required String password}) async {
     await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password,);
+      email: email,
+      password: password,
+    );
   }
 
-  Future<void> signUp({required String email, password}) async {
+  Future<void> signUp({required String email, required String password}) async {
     await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password,);
+      email: email,
+      password: password,
+    );
   }
 
   Future<void> signInWithGoogle() async {

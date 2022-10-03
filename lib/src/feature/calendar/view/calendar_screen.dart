@@ -24,7 +24,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(Dependency.connectivityResult.stream).listen((connectionResult) {
+    ref.read(Dependency.connectivityResult.stream).listen((ConnectivityResult connectionResult) {
       if (connectionResult == ConnectivityResult.none) {
         _showNoNetworkConnectionSnackBar();
       }
@@ -34,7 +34,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         ColorTheme colorTheme = theme.colorTheme;
         return Scaffold(
           backgroundColor: colorTheme.backgroundColorVariation,
@@ -42,15 +42,15 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
             title: const Text(Texts.appName),
             backgroundColor:
                 colorTheme.backgroundColorVariation.withOpacity(0.75),
-            actions: [
-              const LogoutButton(),
+            actions: const <Widget>[
+              LogoutButton(),
             ],
           ),
           body: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget> [
                 CalendarWidget(),
                 RaisedGradientButton(
                   width: context.width * .8,
@@ -70,8 +70,8 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
 
   void _navigateToWorkoutScreen() {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WorkoutPage(null),
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => WorkoutPage(null),
       ),
     );
   }

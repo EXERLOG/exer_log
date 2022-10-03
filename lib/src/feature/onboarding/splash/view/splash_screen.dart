@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/feature/authentication/view/landing_screen.dart';
 import 'package:exerlog/src/feature/calendar/view/calendar_screen.dart';
 import 'package:exerlog/src/utils/assets.dart';
@@ -31,12 +32,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Scaffold(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget> [
               Center(
                 child: Image.asset(
                   Assets.appLogoWhite,
@@ -54,16 +55,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void _navigateToLandingScreen() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => const LandingScreen(),
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const LandingScreen(),
       ),
     );
   }
 
   void _navigateToCalendarScreen() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const CalendarScreen(),
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const CalendarScreen(),
       ),
     );
   }
