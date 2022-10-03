@@ -13,7 +13,7 @@ class PrevWorkoutData {
 
     workout = this.workout;
 
-      loadWorkoutData().then((value) {
+      loadWorkoutData().then((Workout value) {
         workout = value;
         setExerciseWidgets();
         for (Exercise exercise in workout.exercises) {
@@ -26,9 +26,9 @@ class PrevWorkoutData {
   Workout workout;
   WorkoutTotals totals;
   Function(Exercise, Sets, int) addNewSet;
-  List<PrevExerciseCard> exerciseWidgets = [];
+  List<PrevExerciseCard> exerciseWidgets = <PrevExerciseCard>[];
 
-  addSet(exercise, newSet, id) {
+  addSet(Exercise exercise, Sets newSet, int id) {
     exercise.sets[id] = newSet;
     updateExisitingExercise(exercise);
   }
@@ -39,19 +39,20 @@ class PrevWorkoutData {
         Workout(workout.exercises, '', '', 0, '', '', true, 0, 0.0, 0);
 
     loadedWorkout.id = workout.id;
-    List<Exercise> exerciseList = [];
+    List<Exercise> exerciseList = <Exercise>[];
     int totalSets = 0;
     int totalReps = 0;
     double totalKgs = 0;
     int reps = 0;
-    List<String> toRemove = [];
+
+    List<String> toRemove = <String>[];
     for (String exerciseId in workout.exercises) {
       try {
         await loadExercise(exerciseId).then(
-          (Exercise value) async => {
+          (Exercise value) async => <void> {
             exerciseList.add(value),
             for (Sets sets in value.sets)
-              {
+              <void>{
                 totalSets += sets.sets,
                 reps = sets.reps * sets.sets,
                 totalReps += reps,
@@ -65,7 +66,7 @@ class PrevWorkoutData {
       }
     }
 
-    workout.exercises.removeWhere((e) => toRemove.contains(e));
+    workout.exercises.removeWhere((dynamic e) => toRemove.contains(e));
 
     loadedWorkout.exercises = exerciseList;
 
@@ -73,9 +74,9 @@ class PrevWorkoutData {
   }
 
   List<PrevExerciseCard> setExerciseWidgets() {
-    exerciseWidgets = [];
+    exerciseWidgets = <PrevExerciseCard> [];
     for (Exercise exercise in workout.exercises) {
-      List<PrevSetWidget> setList = [];
+      List<PrevSetWidget> setList = <PrevSetWidget>[];
       int i = 0;
       for (Sets _ in exercise.sets) {
         setList.add(
@@ -105,7 +106,7 @@ class PrevWorkoutData {
     return exerciseWidgets;
   }
 
-  updateExisitingExercise(exercise) {
+  updateExisitingExercise(Exercise exercise) {
     try {
       totals = WorkoutTotals(0, 0, 0, 0, 0);
       for (Exercise oldexercise in workout.exercises) {
@@ -127,7 +128,7 @@ class PrevWorkoutData {
     }
   }
 
-  addExercise(exercise) {
+  addExercise(Exercise exercise) {
     try {
       for (Exercise existingExercise in workout.exercises) {
         if (existingExercise.name == exercise.name) {

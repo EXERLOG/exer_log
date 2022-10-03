@@ -9,7 +9,7 @@ extension ContextExtension on BuildContext {
 
   /// Snack bar
   /// TODO: Handle action button and theme
-  ScaffoldFeatureController showSnackBar(String text) =>
+  ScaffoldFeatureController<Widget, dynamic> showSnackBar(String text) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(content: Text(text)),
       );

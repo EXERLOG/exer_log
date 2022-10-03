@@ -7,28 +7,29 @@ import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart
 
 
 Future<Exercise> getSpecificExercise(String id) async {
-  final data = FirebaseFirestore.instance
+  final DocumentReference<Exercise> data = FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .doc(id)
       .withConverter<Exercise>(
-        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
-        toFirestore: (exercise, _) => exercise.toJson(),
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> snapshot, _) => Exercise.fromJson(snapshot.data()!),
+        toFirestore: (Exercise exercise, _) => exercise.toJson(),
       );
-  Exercise exercise = await data.get().then((value) => value.data()!);
+  Exercise exercise = await data.get().then((DocumentSnapshot<Exercise> value) => value.data()!);
   exercise.id = data.id;
   return exercise;
 }
 
 
 Future<List<String>> getExerciseNames() async {
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .get();
-  List<String> exerciseNames = [];
+
+  List<String> exerciseNames = <String>[];
 
   for (int i = 0; i < ref.docs.length; i++) {
     String name = ref.docs[i].get('name');
@@ -40,18 +41,18 @@ Future<List<String>> getExerciseNames() async {
 }
 
 Future<Exercise> loadExercise(String id) async {
-  final data = FirebaseFirestore.instance
+  final DocumentReference<Exercise> data = FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
       .doc(id)
       .withConverter<Exercise>(
-        fromFirestore: (snapshot, _) => Exercise.fromJson(snapshot.data()!),
-        toFirestore: (exercise, _) => exercise.toJson(),
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> snapshot, _) => Exercise.fromJson(snapshot.data()!),
+        toFirestore: (Exercise exercise, _) => exercise.toJson(),
       );
-  Exercise exercise = await data.get().then((value) => value.data()!);
+  Exercise exercise = await data.get().then((DocumentSnapshot<Exercise> value) => value.data()!);
   exercise.id = data.id;
-  List<Sets> setList = [];
+  List<Sets> setList = <Sets>[];
   for (int i = 0; i < exercise.sets.length; i++) {
     Sets set_ = Sets.fromString(exercise.sets[i]);
     setList.add(set_);
@@ -61,7 +62,7 @@ Future<Exercise> loadExercise(String id) async {
 }
 
 Future<Exercise> getExerciseByName(String exercise) async {
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')
@@ -70,7 +71,7 @@ Future<Exercise> getExerciseByName(String exercise) async {
       .get();
 
   Exercise theExercise = Exercise.fromJson(ref.docs.last.data());
-  List<Sets> setList = [];
+  List<Sets> setList = <Sets>[];
   for (int i = 0; i < theExercise.sets.length; i++) {
     Sets set_ = Sets.fromString(theExercise.sets[i]);
     setList.add(set_);
@@ -81,7 +82,7 @@ Future<Exercise> getExerciseByName(String exercise) async {
 
 Future<String> saveExercise(Exercise exercise) async {
   Map<String, Object?> jsonExercise = exercise.toJson();
-  final ref = await firestoreInstance
+  final DocumentReference<Map<String, dynamic>> ref = await firestoreInstance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('exercises')

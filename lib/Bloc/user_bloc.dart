@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerlog/Models/user.dart';
 
-final firestoreInstance = FirebaseFirestore.instance;
+final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
 void createUser(UserClass user, String id) {
-  firestoreInstance.collection('users').doc(id).set({
+  firestoreInstance.collection('users').doc(id).set(<String, dynamic>{
     'username': user.username,
     'firstname': user.firstname,
     'lastname': user.lastname,
@@ -17,15 +17,15 @@ void createUser(UserClass user, String id) {
 
 void updateUser(UserClass user) {
   firestoreInstance.collection('users').withConverter<UserClass>(
-        fromFirestore: (snapshot, _) => UserClass.fromJson(snapshot.data()!),
-        toFirestore: (UserClass, _) => user.toJson(),
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> snapshot, _) => UserClass.fromJson(snapshot.data()!),
+        toFirestore: (UserClass UserClass, _) => user.toJson(),
       );
 }
 
 Future<UserClass> getUser(String userID) async {
-  var data;
-  firestoreInstance.collection('users').doc(userID).get().then((value) {
+  Map<String, dynamic>? data;
+  firestoreInstance.collection('users').doc(userID).get().then((DocumentSnapshot<Map<String, dynamic>> value) {
     data = value.data();
   });
-  return UserClass.fromJson(data);
+  return UserClass.fromJson(data!);
 }

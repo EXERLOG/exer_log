@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SetWidget extends StatefulWidget {
-
   SetWidget({
     required this.name,
     required this.exercise,
@@ -25,7 +24,7 @@ class SetWidget extends StatefulWidget {
 
   final String name;
   final Exercise exercise;
-  final counter;
+  final int counter;
   final bool isTemplate;
   int id;
 
@@ -39,7 +38,7 @@ class SetWidget extends StatefulWidget {
 }
 
 class _SetWidgetState extends State<SetWidget>
-  with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin {
   int percent = 0;
   Max? oneRepMax;
   Sets sets = Sets(0, 0.0, 0.0, 0, 0.0);
@@ -48,9 +47,9 @@ class _SetWidgetState extends State<SetWidget>
   TextEditingController repsController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController restController = TextEditingController();
-  List types = ['reps', 'sets', 'weight', 'rest', ''];
+  List<String> types = <String>['reps', 'sets', 'weight', 'rest', ''];
   MaxInformation? maxinfoWidget;
-  ValueNotifier<SetData> _notifier = ValueNotifier(SetData(0.0, 0));
+  ValueNotifier<SetData> _notifier = ValueNotifier<SetData>(SetData(0.0, 0));
 
   @override
   void initState() {
@@ -66,12 +65,11 @@ class _SetWidgetState extends State<SetWidget>
     return getSetWidget();
   }
 
-
   SlidableAutoCloseBehavior getSetWidget() {
     return SlidableAutoCloseBehavior(
       closeWhenTapped: true,
       child: Slidable(
-        key: ValueKey(widget.counter),
+        key: ValueKey<dynamic>(widget.counter),
         endActionPane: ActionPane(
           // A motion is a widget used to control how the pane animates.
           motion: const ScrollMotion(),
@@ -80,14 +78,19 @@ class _SetWidgetState extends State<SetWidget>
           //dismissible: DismissiblePane(onDismissed: () {}),
 
           // All actions are defined in the children parameter.
-          children: [
+          children: <Widget>[
             // A SlidableAction can have an icon and/or a label.
             TextButton(
               onPressed: () {
-                  widget.removeSet(widget.exercise, sets, widget.id);
+                widget.removeSet(widget.exercise, sets, widget.id);
               },
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color(0xFFFE4A49))),
-              child: const Icon(Icons.delete, color: Colors.white,),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(const Color(0xFFFE4A49))),
+              child: const Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -96,7 +99,7 @@ class _SetWidgetState extends State<SetWidget>
           height: screenHeight * 0.05,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: <Widget>[
               Expanded(
                 flex: 8,
                 child: Center(
@@ -124,7 +127,7 @@ class _SetWidgetState extends State<SetWidget>
               ),
               Expanded(
                 flex: 10,
-                child: ValueListenableBuilder(
+                child: ValueListenableBuilder<SetData>(
                   valueListenable: _notifier,
                   builder:
                       (BuildContext context, SetData value, Widget? child) {
@@ -144,7 +147,7 @@ class _SetWidgetState extends State<SetWidget>
     );
   }
 
-  void setPercentage(percent) {
+  void setPercentage(double percent) {
     widget.exercise.sets[widget.id].percentage = percent;
     sets.percentage = percent;
   }
@@ -154,23 +157,24 @@ class _SetWidgetState extends State<SetWidget>
   }
 
   Widget getTextField(int type) {
-    List controllers = [
+    List<TextEditingController> controllers = <TextEditingController>[
       repsController,
       setsController,
       weightController,
       restController
     ];
 
-
-      controllers[type].text = getHintText(type);
-      return TextField(
+    controllers[type].text = getHintText(type);
+    return TextField(
       cursorColor: Colors.white,
       style: setStyle,
       textAlign: TextAlign.center,
       keyboardType: type == 2 ? TextInputType.text : TextInputType.number,
-      inputFormatters: type == 2 ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}%?'))]
-          : type == 3 ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))]
-          : [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: type == 2
+          ? <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}%?'))]
+          : type == 3
+              ? <TextInputFormatter>[FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))]
+              : <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
       controller: controllers[type],
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(
@@ -179,13 +183,14 @@ class _SetWidgetState extends State<SetWidget>
         hintText: getHintText(type),
         hintStyle: setHintStyle,
       ),
-      onChanged: (value) {
+      onChanged: (String value) {
         sets.reps = getInfo(repsController.text, 0);
         sets.sets = getInfo(setsController.text, 0);
         if (weightController.text.contains('%')) {
           // set weight to be percentage of max
-          var regex = RegExp(r'\D');
-          sets.weight = getWeightFromMax(weightController.text.replaceAll(regex, ''));
+          RegExp regex = RegExp(r'\D');
+          sets.weight =
+              getWeightFromMax(weightController.text.replaceAll(regex, ''));
           weightController.text = sets.weight.toString();
         }
         sets.weight = getInfo(weightController.text, 1);
@@ -218,13 +223,13 @@ class _SetWidgetState extends State<SetWidget>
   }
 
   double getWeightFromMax(String percentage) {
-    var result = oneRepMax!.weight / maxTable[oneRepMax!.reps -1];
+    double result = oneRepMax!.weight / maxTable[oneRepMax!.reps - 1];
     double thePercent = double.parse(percentage) / 100;
     return (result * thePercent).roundToDouble();
   }
 
   String getHintText(int type) {
-    List listType = [
+    List<num> listType = <num>[
       widget.exercise.sets[widget.id].reps,
       widget.exercise.sets[widget.id].sets,
       widget.exercise.sets[widget.id].weight,

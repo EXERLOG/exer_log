@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'date_widget.dart';
 
 class CalendarWidget extends StatelessWidget {
-  final List<String> monthNames = [
+
+  final List<String> monthNames = <String>[
     'January',
     'February',
     'March',
@@ -33,7 +34,7 @@ class CalendarWidget extends StatelessWidget {
             width: context.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: colorTheme.shadow,
                   offset: const Offset(0, 3),
@@ -44,7 +45,7 @@ class CalendarWidget extends StatelessWidget {
               color: colorTheme.backgroundColorVariation,
             ),
             child: Column(
-              children: [
+              children: <Widget> [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
@@ -72,7 +73,7 @@ class CalendarWidget extends StatelessWidget {
 }
 
 List<Widget> _getDateColumns() {
-  List weekdayNames = [
+  List<String> weekdayNames = <String> [
     'MON',
     'TUE',
     'WED',
@@ -81,14 +82,14 @@ List<Widget> _getDateColumns() {
     'SAT',
     'SUN',
   ];
-  List<Widget> dates = [];
+  List<Widget> datesColumns = <Widget>[];
   int today = DateTime.now().day;
   int month = DateTime.now().month;
   int year = DateTime.now().year;
   DateTime now = DateTime.now();
   const int daysInAWeek = 7;
 
-  List<List<DateTime>> weekList = List.generate(daysInAWeek, (int index) => []);
+  List<List<DateTime>> weekList = List<List<DateTime>>.generate(daysInAWeek, (int index) => <DateTime>[]);
 
   /// Month could span 4-6 weeks which is 4-6 columns
   /// which day of the week does the first fall on
@@ -96,7 +97,7 @@ List<Widget> _getDateColumns() {
   DateTime last = DateTime(year, month + 1, 0);
 
   /// If the first of the month falls anywhere else than on a monday
-  /// then get the dates before the first as well
+  /// then get the datesColumns before the first as well
 
   /// Calculate how many days and weeks should be shown in the calendar
   DateTime previousMonth = first.subtract(Duration(days: first.weekday));
@@ -123,10 +124,11 @@ List<Widget> _getDateColumns() {
   }
 
   for (int i = 0; i < daysInAWeek; i++) {
-    List<Widget> _dates = [];
+
+    List<Widget> datesWidgets = <Widget>[];
 
     /// Add all weekdays name
-    _dates.add(
+    datesWidgets.add(
       Text(
         weekdayNames[i],
         style: setStyle,
@@ -134,17 +136,17 @@ List<Widget> _getDateColumns() {
       ),
     );
     for (int j = 0; j < weekList[i].length; j++) {
-      _dates.add(
+      datesWidgets.add(
         DateWidget(weekList[i][j]),
       );
     }
-    dates.add(
+    datesColumns.add(
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _dates,
+        children: datesWidgets,
       ),
     );
   }
 
-  return dates;
+  return datesColumns;
 }

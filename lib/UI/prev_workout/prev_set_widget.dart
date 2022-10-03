@@ -37,8 +37,8 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
   String weightController = '';
   String restController = '';
   String percentageController = '';
-  List types = ['reps', 'sets', 'weight', 'rest', ''];
-  List setList = [0, 0, 0.0, 0.0];
+  List<String> types = <String> ['reps', 'sets', 'weight', 'rest', ''];
+  List<num> setList = <num>[0, 0, 0.0, 0.0];
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
       height: screenHeight * 0.05,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: <Widget> [
           SizedBox(
             width: screenWidth * 0.08,
             child: Center(
@@ -93,7 +93,7 @@ class _PrevSetWidgetState extends State<PrevSetWidget>
   }
 
   Widget getText(int type) {
-    List controllers = [
+    List<String> controllers = <String>[
       widget.exercise.sets[widget.id].reps.toString(),
       widget.exercise.sets[widget.id].sets.toString(),
       widget.exercise.sets[widget.id].weight.toString(),
