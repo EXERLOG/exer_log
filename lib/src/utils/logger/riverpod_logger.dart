@@ -5,7 +5,7 @@ import 'logger.dart';
 class RiverpodLogger extends ProviderObserver {
   @override
   void didUpdateProvider(
-    ProviderBase provider,
+    ProviderBase<dynamic> provider,
     Object? previousValue,
     Object? newValue,
     ProviderContainer container,
@@ -18,7 +18,7 @@ class RiverpodLogger extends ProviderObserver {
   }
 
   @override
-  void didDisposeProvider(ProviderBase provider, ProviderContainer containers) {
+  void didDisposeProvider(ProviderBase<dynamic> provider, ProviderContainer containers) {
     Log.info('''
 {
   "disposed provider": "${provider.name ?? provider.runtimeType}",

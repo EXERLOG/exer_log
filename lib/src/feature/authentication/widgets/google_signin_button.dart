@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:exerlog/src/core/base/extensions/context_extension.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/utils/assets.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class GoogleSignInButton extends StatefulWidget {
-  GoogleSignInButton({Key? key, required this.onPressed}) : super(key: key);
+  const GoogleSignInButton({Key? key, required this.onPressed}) : super(key: key);
 
-  final FutureOr Function() onPressed;
+  final Future<void> Function() onPressed;
 
   @override
   _GoogleSignInButtonState createState() => _GoogleSignInButtonState();
@@ -20,7 +21,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return SizedBox(
           height: 50,
           width: context.width * .65,
@@ -44,12 +45,12 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 : Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const Image(
+                    children: const <Widget>[
+                      Image(
                         image: AssetImage(Assets.googleLogo),
                         height: 20.0,
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
                           'Sign in with Google',
