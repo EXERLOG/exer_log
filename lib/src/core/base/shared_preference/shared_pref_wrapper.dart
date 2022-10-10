@@ -70,7 +70,7 @@ class SharedPref {
         sharedPreferences.getString(key)!.validate().isNotEmpty) {
       return jsonDecode(sharedPreferences.getString(key)!);
     } else {
-      return defaultValue ?? {};
+      return defaultValue ?? <String, dynamic> {};
     }
   }
 

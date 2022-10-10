@@ -1,11 +1,11 @@
 class Texts {
-  static const appName = 'Exerlog';
+  static const String appName = 'Exerlog';
 
   /// Authentication
 
   /// Calendar Screen
-  static const startNewWorkout = 'Start new workout';
-  static const startFromTemplate = 'Start from template';
+  static const String startNewWorkout = 'Start new workout';
+  static const String startFromTemplate = 'Start from template';
   /// Workout Screen
 
 }

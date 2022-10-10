@@ -1,5 +1,6 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/gradient_border_button.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class RedoWorkoutAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Dialog(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           shape:
@@ -25,7 +26,7 @@ class RedoWorkoutAlert extends StatelessWidget {
             height: screenHeight * 0.2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Text(
                   'Do you wanna view or redo?',
                   style: mediumTitleStyleWhite,
@@ -35,7 +36,7 @@ class RedoWorkoutAlert extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: <Widget> [
                     Container(
                       height: screenHeight * 0.05,
                       width: screenWidth * 0.3,

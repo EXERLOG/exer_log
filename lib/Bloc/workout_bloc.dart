@@ -6,28 +6,28 @@ import 'package:exerlog/Models/workout.dart';
 import 'package:exerlog/src/core/base/shared_preference/shared_preference_b.dart';
 
 Future<Workout> getSpecificWorkout(String id) async {
-  final data = FirebaseFirestore.instance
+  final DocumentReference<Workout> data = FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .doc(id)
       .withConverter<Workout>(
-        fromFirestore: (snapshot, _) => Workout.fromJson(snapshot.data()!),
-        toFirestore: (workout, _) => workout.toJson(),
+        fromFirestore: (DocumentSnapshot<Map<String, dynamic>> snapshot, _) => Workout.fromJson(snapshot.data()!),
+        toFirestore: (Workout workout, _) => workout.toJson(),
       );
-  Workout workout = await data.get().then((value) => value.data()!);
+  Workout workout = await data.get().then((DocumentSnapshot<Workout> value) => value.data()!);
   workout.id = id;
   return workout;
 }
 
 Future<List<Workout>> getWorkoutsWithinDates(DateTime startDate, DateTime endDate) async {
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .where('date', isGreaterThanOrEqualTo: startDate).where('date', isLessThanOrEqualTo: endDate).get();
 
-  List<Workout> workoutList = [];
+  List<Workout> workoutList = <Workout> [];
   for (int i = 0; i < ref.docs.length; i++) {
     Workout workout = Workout.fromJsonQuery(ref.docs[i]);
     workout.id = ref.docs[i].id;
@@ -47,7 +47,7 @@ Stream<QuerySnapshot<Map<String, dynamic>>> getWorkoutOnDate(DateTime after, Dat
 }
 
 Future<Workout> loadWorkout(Workout workout) async {
-  List<Exercise> exerciseList = [];
+  List<Exercise> exerciseList = <Exercise>[];
   for (int i = 0; i < workout.exercises.length; i++) {
     Exercise exercise = await loadExercise(workout.exercises[i]);
     exerciseList.add(exercise);
@@ -57,25 +57,25 @@ Future<Workout> loadWorkout(Workout workout) async {
 }
 
 Future<List<Workout>> getWorkoutTemplates() async {
-  final ref = await FirebaseFirestore.instance
+  final QuerySnapshot<Map<String, dynamic>> ref = await FirebaseFirestore.instance
       .collection('users')
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .where('template', isEqualTo: true)
       .get();
-  List<Workout> workoutTemplates = [];
+  List<Workout> workoutTemplates = <Workout>[];
 
   for (int i = 0; i < ref.docs.length; i++) {
-    final data = FirebaseFirestore.instance
+    final DocumentReference<Workout> data = FirebaseFirestore.instance
         .collection('users')
         .doc(SharedPref.getStringAsync(USER_UID))
         .collection('workouts')
         .doc(ref.docs[i].id)
         .withConverter<Workout>(
-          fromFirestore: (snapshot, _) => Workout.fromJson(snapshot.data()!),
-          toFirestore: (max, _) => max.toJson(),
+          fromFirestore: (DocumentSnapshot<Map<String, dynamic>> snapshot, _) => Workout.fromJson(snapshot.data()!),
+          toFirestore: (Workout max, _) => max.toJson(),
         );
-    Workout workout = await data.get().then((value) => value.data()!);
+    Workout workout = await data.get().then((DocumentSnapshot<Workout> value) => value.data()!);
     workout.id = data.id;
     if (!workoutTemplates.contains(workout)) {
       workoutTemplates.add(workout);
@@ -85,7 +85,7 @@ Future<List<Workout>> getWorkoutTemplates() async {
 }
 
 void saveWorkout(Workout workout) async {
-  List exerciseList = [];
+  List<String> exerciseList = <String>[];
   for (Exercise exercise in workout.exercises) {
     exercise.setExerciseTotals();
     exerciseList.add(await saveExercise(exercise));
@@ -98,7 +98,7 @@ void saveWorkout(Workout workout) async {
       .doc(SharedPref.getStringAsync(USER_UID))
       .collection('workouts')
       .add(jsonWorkout)
-      .then((value) {
+      .then((DocumentReference<Map<String, dynamic>> value) {
   });
 
   //databaseRef.push().set(workout.toJson());

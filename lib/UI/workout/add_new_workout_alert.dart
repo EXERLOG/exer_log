@@ -1,5 +1,6 @@
 import 'package:exerlog/UI/global.dart';
 import 'package:exerlog/UI/workout/workout_name_selection_widget.dart';
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/gradient_button.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class AddWorkoutAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      builder: (context, theme) {
+      builder: (BuildContext context, AppTheme theme) {
         return Dialog(
           backgroundColor: theme.colorTheme.backgroundColorVariation,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -25,7 +26,7 @@ class AddWorkoutAlert extends StatelessWidget {
             height: screenHeight * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Text(
                   'New Workout',
                   style: mediumTitleStyleWhite,

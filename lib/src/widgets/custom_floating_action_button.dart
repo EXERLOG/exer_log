@@ -1,3 +1,4 @@
+import 'package:exerlog/src/core/theme/app_theme.dart';
 import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,11 @@ class CustomFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ThemeProvider(
-        builder: (context, theme) => Container(
+        builder: (BuildContext context, AppTheme theme) => Container(
           decoration: BoxDecoration(
             color: theme.colorTheme.primaryColor,
             borderRadius: BorderRadius.circular(size),
-            boxShadow: [
+            boxShadow: <BoxShadow>[
               BoxShadow(
                 color: theme.colorTheme.shadow,
                 blurRadius: 10,

@@ -10,7 +10,8 @@ class LogoutButton extends StatefulWidget {
   State<LogoutButton> createState() => _LogoutButtonState();
 }
 
-class _LogoutButtonState extends State<LogoutButton> with Dialogs {
+
+class _LogoutButtonState extends State<LogoutButton> with Dialogs<LogoutButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(

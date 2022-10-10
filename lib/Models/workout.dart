@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'exercise.dart';
@@ -17,6 +19,7 @@ class Workout {
       this.totalSets,);
 
   Workout.fromJson(Map<String, Object?> workout)
+
       : this.exercises = workout['exercises']! as List,
         this.notes = workout['notes']! as String,
         this.rating = workout['rating']! as String,
@@ -29,7 +32,7 @@ class Workout {
         this.template = workout['template']! as bool;
 
   Workout.fromJsonQuery(QueryDocumentSnapshot<Map<String, dynamic>> workout)
-      : this.exercises = workout['exercises']! as List,
+      : this.exercises = workout['exercises']! as List<Exercise>,
         this.notes = workout['notes']! as String,
         this.rating = workout['rating']! as String,
         this.time = workout['time']! as double,
@@ -41,6 +44,7 @@ class Workout {
         this.template = workout['template']! as bool;
 
   Workout.fromJsonQuerySnapshot(QuerySnapshot<Map<String, dynamic>> workout)
+
       : this.exercises = workout.docs.last['exercises']! as List,
         this.notes = workout.docs.last['notes']! as String,
         this.date =
