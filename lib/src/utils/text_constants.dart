@@ -5,6 +5,7 @@ class Texts {
 
   /// Calendar Screen
   static const startNewWorkout = 'Start new workout';
+  static const startFromTemplate = 'Start from template';
   /// Workout Screen
 
 }

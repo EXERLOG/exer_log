@@ -52,13 +52,28 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CalendarWidget(),
-                RaisedGradientButton(
-                  width: context.width * .8,
-                  onPressed: _navigateToWorkoutScreen,
-                  child: Text(
-                    Texts.startNewWorkout.toUpperCase(),
-                    style: buttonTextSmall,
-                  ),
+                Column(
+                  children: [
+                    RaisedGradientButton(
+                      width: context.width * .8,
+                      onPressed: _navigateToExerciseScreen,
+                      child: Text(
+                        Texts.startNewWorkout.toUpperCase(),
+                        style: buttonTextSmall,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    RaisedGradientButton(
+                      width: context.width * .8,
+                      onPressed: _navigateToWorkoutScreen,
+                      child: Text(
+                        Texts.startFromTemplate.toUpperCase(),
+                        style: buttonTextSmall,
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
@@ -68,10 +83,18 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
     );
   }
 
+  void _navigateToExerciseScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => WorkoutPage(null),
+      ),
+    );
+  }
+
   void _navigateToWorkoutScreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WorkoutPage(null),
+        builder: (BuildContext context) => WorkoutPage(null, isTemplateMode: true),
       ),
     );
   }

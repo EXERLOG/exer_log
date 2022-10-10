@@ -16,9 +16,10 @@ import 'package:exerlog/src/widgets/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutPage extends StatefulWidget {
-  WorkoutPage(this.workout, {Key? key}) : super(key: key);
+  WorkoutPage(this.workout, {Key? key, this.isTemplateMode = false}) : super(key: key);
 
   Workout? workout;
+  bool isTemplateMode;
 
   @override
   _WorkoutPageState createState() => _WorkoutPageState();
@@ -136,7 +137,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                           child: Text('Something went wrong'),
                         );
                       } else {
-                        if (snapshot.data!.isEmpty) {
+                        if (!widget.isTemplateMode) {
                           firstLoad = false;
                           Future.delayed(
                             Duration.zero,
