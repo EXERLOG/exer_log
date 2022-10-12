@@ -20,7 +20,10 @@ ExerLog is a simple and easy-to-use exercise journal app developed in conjunctio
 
 Create workouts and keep track of your reps, sets, weight, total weight, total reps, total sets, maxes and more. Track important physical measurements including bodyweight, waist size, arm size, and more. Then, visualize all of these measurements in bar charts and graphs that show your advancement over time. 
 
-Right now the project is in its infancy so there are a lot of features left to be added. If you want to follow the full buildout of this project then I (Kalle Hallden) have a YouTube channel where I document the progress every week: https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG
+Right now the project is in its infancy so there are a lot of features left to be added. If you want to follow the full buildout of this project then I (Kalle Hallden) have a YouTube channel where I document the progress every week:
+
+[![https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG](https://user-images.githubusercontent.com/80583308/195366816-f24c7ce3-57f8-4b98-b8fd-dd31c3b851df.svg)](https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG)
+
 
 ## Technologies used
 
