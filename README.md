@@ -22,7 +22,7 @@ Create workouts and keep track of your reps, sets, weight, total weight, total r
 
 Right now the project is in its infancy so there are a lot of features left to be added. If you want to follow the full buildout of this project then I (Kalle Hallden) have a YouTube channel where I document the progress every week:
 
-[![https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG](https://user-images.githubusercontent.com/80583308/195366816-f24c7ce3-57f8-4b98-b8fd-dd31c3b851df.svg)](https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG)
+[![https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG](assets/yt-embed.svg)](https://youtube.com/playlist?list=PL5tVJtjoxKzpxnc9ventef-1sgvoR8nqG)
 
 
 ## Technologies used
