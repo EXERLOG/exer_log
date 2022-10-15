@@ -91,10 +91,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
           appBar: AppBar(
             backgroundColor: theme.colorTheme.backgroundColorVariation,
             leading: BackButton(
-              onPressed: Navigator.of(context).pop,
+              onPressed: Navigator.of(context).maybePop,
               color: theme.colorTheme.primaryColor,
             ),
-            actions: <Widget> [
+            actions: <Widget>[
               Container(
                 margin: const EdgeInsets.only(right: 5),
                 height: 30,
