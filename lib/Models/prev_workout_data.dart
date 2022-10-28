@@ -11,7 +11,7 @@ class PrevWorkoutData {
 
   PrevWorkoutData(this.workout, this.totals, this.updateTotals, this.addNewSet) {
 
-    workout = this.workout;
+    workout = workout;
 
       loadWorkoutData().then((Workout value) {
         workout = value;

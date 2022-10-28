@@ -8,7 +8,7 @@ class ExerciseNameSelectionWidget extends StatefulWidget {
 
   ExerciseNameSelectionWidget({required this.setExercisename, Key? key})
       : super(key: key) {
-    setExercisename = this.setExercisename;
+    setExercisename = setExercisename;
   }
   Function(String) setExercisename;
   @override

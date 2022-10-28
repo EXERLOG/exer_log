@@ -88,7 +88,7 @@ class _SaveWorkoutAlertState extends State<SaveWorkoutAlert> {
                       ),
                       Checkbox(
                         fillColor: MaterialStateProperty.all<Color>(theme.colorTheme.primaryColor),
-                        value: this.template,
+                        value: template,
                         onChanged: (bool? value) {
                           setState(() {
                             Log.info(value.toString());
