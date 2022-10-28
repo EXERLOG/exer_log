@@ -12,10 +12,10 @@ class ExerciseNameSelectionWidget extends StatefulWidget {
   }
   Function(String) setExercisename;
   @override
-  _ExerciseNameSelectionWidgetState createState() => _ExerciseNameSelectionWidgetState();
+  ExerciseNameSelectionWidgetState createState() => ExerciseNameSelectionWidgetState();
 }
 
-class _ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidget> {
+class ExerciseNameSelectionWidgetState extends State<ExerciseNameSelectionWidget> {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(

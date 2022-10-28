@@ -10,10 +10,10 @@ class ExerciseTotalsWidget extends StatefulWidget {
   int index;
 
   @override
-  _ExerciseTotalsWidgetState createState() => _ExerciseTotalsWidgetState();
+  ExerciseTotalsWidgetState createState() => ExerciseTotalsWidgetState();
 }
 
-class _ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
+class ExerciseTotalsWidgetState extends State<ExerciseTotalsWidget> {
   List<num> _list = <num>[];
   List<String> endings = <String>[' reps', ' sets', ' kgs', ' kgs/rep'];
 

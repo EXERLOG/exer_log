@@ -15,10 +15,10 @@ class WorkoutTemplateSelectionWidget extends StatefulWidget {
   Function(Workout) setWorkout;
   List <dynamic>workoutList;
   @override
-  _WorkoutNameSelectionWidgetState createState() => _WorkoutNameSelectionWidgetState();
+  WorkoutNameSelectionWidgetState createState() => WorkoutNameSelectionWidgetState();
 }
 
-class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWidget> {
+class WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWidget> {
   String? dropDownValue;
   Map<String, dynamic> workoutMap = <String, dynamic>{};
   @override

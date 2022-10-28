@@ -29,10 +29,10 @@ class PrevExerciseCard extends StatefulWidget {
   List<PrevSetWidget> setList;
   PrevWorkoutData prevworkoutData;
   @override
-  _PrevExerciseCardState createState() => _PrevExerciseCardState();
+  PrevExerciseCardState createState() => PrevExerciseCardState();
 }
 
-class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepAliveClientMixin {
+class PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepAliveClientMixin {
   int index = 0;
   double height = screenHeight * 0.23;
   TotalsData totalData = TotalsData(0, 0, 0.0, 0.0);

@@ -38,10 +38,10 @@ class ExerciseCard extends StatefulWidget {
   Function(Exercise, Sets, int) removeSet;
 
   @override
-  _ExerciseCardState createState() => _ExerciseCardState();
+  ExerciseCardState createState() => ExerciseCardState();
 }
 
-class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClientMixin {
+class ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClientMixin {
   static int counter = 0;
   List<SetWidget> setList = <SetWidget>[];
   static int index = 0;

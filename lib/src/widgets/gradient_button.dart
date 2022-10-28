@@ -23,10 +23,10 @@ class RaisedGradientButton extends StatefulWidget {
   final Gradient? gradient;
 
   @override
-  _RaisedGradientButtonState createState() => _RaisedGradientButtonState();
+  RaisedGradientButtonState createState() => RaisedGradientButtonState();
 }
 
-class _RaisedGradientButtonState extends State<RaisedGradientButton> {
+class RaisedGradientButtonState extends State<RaisedGradientButton> {
   bool _isLoading = false;
 
   @override
