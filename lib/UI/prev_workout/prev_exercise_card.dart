@@ -86,21 +86,19 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                 height: height,
                 child: Column(
                   children: <Widget> [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            height: getHeight(),
-                            width: screenWidth * 0.45,
-                            child: Text(
-                              widget.name,
-                              style: mediumTitleStyleWhite,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          height: getHeight(),
+                          width: screenWidth * 0.45,
+                          child: Text(
+                            widget.name,
+                            style: mediumTitleStyleWhite,
                           ),
-                          totalWidget
-                        ],
-                      ),
+                        ),
+                        totalWidget
+                      ],
                     ),
                     Divider(
                       thickness: 1,
