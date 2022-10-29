@@ -45,7 +45,7 @@ class _WorkoutNameSelectionWidgetState extends State<WorkoutTemplateSelectionWid
                 subtitle1: setStyle,
               ),
             ),
-            child: Container(
+            child: SizedBox(
               width: screenWidth * 0.5,
               child: DropdownButton<String>(
                 value: dropDownValue,

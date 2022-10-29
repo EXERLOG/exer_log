@@ -64,7 +64,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
     totalWidget = ExerciseTotalsWidget(totals: totalData, index: index);
     return ThemeProvider(
       builder: (BuildContext context, AppTheme theme) {
-        return Container(
+        return SizedBox(
           height: height + screenHeight * 0.06,
           child: Stack(
             children: <Widget>[
@@ -90,7 +90,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
+                          SizedBox(
                             height: getHeight(),
                             width: screenWidth * 0.45,
                             child: Text(
@@ -116,7 +116,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                               Container(
                                 width: screenWidth * 0.08,
                               ),
-                              Container(
+                              SizedBox(
                                 width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
@@ -125,7 +125,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
@@ -134,7 +134,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(
@@ -143,7 +143,7 @@ class _PrevExerciseCardState extends State<PrevExerciseCard> with AutomaticKeepA
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width: screenWidth * 0.15,
                                 child: Center(
                                   child: Text(

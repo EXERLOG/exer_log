@@ -39,7 +39,7 @@ class OutlinedTextField extends StatelessWidget {
               hintStyle: setHintStyle.copyWith(
                 color: Colors.white.withOpacity(0.5),
               ),
-              prefixIcon: Container(
+              prefixIcon: SizedBox(
                 width: 40,
                 child: Icon(
                   leadingIcon,

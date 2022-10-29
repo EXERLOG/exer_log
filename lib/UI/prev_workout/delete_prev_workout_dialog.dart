@@ -39,7 +39,7 @@ class _DeleteWorkoutAlertState extends State<DeleteWorkoutAlert> {
                 style: mediumTitleStyleWhite,
                 textAlign: TextAlign.center,
               ),
-              Container(
+              SizedBox(
                 height: screenHeight * 0.05,
                 width: screenWidth * 0.5,
                 child: widget.deleteWorkoutButton,

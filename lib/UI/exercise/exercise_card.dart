@@ -100,7 +100,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
     super.build(context);
     return ThemeProvider(
       builder: (BuildContext context, AppTheme theme) {
-        return Container(
+        return SizedBox(
           height: height + screenHeight * 0.06,
           child: Stack(
             children: <Widget> [
@@ -126,7 +126,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget> [
-                          Container(
+                          SizedBox(
                             height: getHeight(),
                             width: screenWidth * 0.45,
                             child: Text(
@@ -213,7 +213,7 @@ class _ExerciseCardState extends State<ExerciseCard> with AutomaticKeepAliveClie
                 right: screenWidth * 0.43,
                 left: screenWidth * 0.43,
                 top: height - 15,
-                child: Container(
+                child: SizedBox(
                   height: screenHeight * 0.07,
                   child: DecoratedBox(
                     decoration: BoxDecoration(

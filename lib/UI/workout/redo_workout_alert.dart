@@ -37,12 +37,12 @@ class RedoWorkoutAlert extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget> [
-                    Container(
+                    SizedBox(
                       height: screenHeight * 0.05,
                       width: screenWidth * 0.3,
                       child: viewWorkout,
                     ),
-                    Container(
+                    SizedBox(
                       height: screenHeight * 0.05,
                       width: screenWidth * 0.3,
                       child: redoWorkout,

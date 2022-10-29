@@ -94,7 +94,8 @@ class _SetWidgetState extends State<SetWidget>
             ),
           ],
         ),
-        child: Container(
+
+        child: SizedBox(
           height: screenHeight * 0.05,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
